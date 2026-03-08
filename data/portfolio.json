@@ -3,189 +3,227 @@
     "name": "Kishore Kumar Sharma",
     "title": "Senior Full Stack Engineer",
     "experienceYears": "6+",
-    "location": "Bangalore, India",
+    "location": "Noida, UP",
     "email": "kishoresharma914@gmail.com",
-    "phone": "+91-9588219508",
+    "phone": "+91 8638099280",
     "linkedin": "https://www.linkedin.com/in/kishore-kumar-sharma-product-engineer/",
     "github": "https://github.com/kishore-kumar-sharma"
   },
-  "summary": "As a Senior Full Stack Engineer with over 6 years of experience, I specialize in architecting and developing robust, scalable, and performant full-stack web applications. My expertise spans across modern technologies including React, Node.js, Python, and cloud platforms like AWS and GCP. I have a proven track record of leading development teams, driving innovation, and delivering high-quality software solutions that meet business objectives. With a strong foundation in both front-end and back-end development, I am passionate about creating seamless user experiences and solving complex technical challenges. I am a proactive problem-solver and a strong advocate for agile methodologies, continuous integration, and test-driven development.",
+  "summary": "Results-driven Senior Full Stack Engineer (6+ years) with proven expertise in building and leading cloud-native microservice architectures using Java/Spring Boot, NodeJS/NestJS, MEAN/MERN stack and React/Angular. Experienced across Telecom, FinTech, GovTech, and EdTech domains with a strong focus on scalability, performance, and automation. Skilled in AWS Cloud, CI/CD pipelines, and system observability. Passionate about mentoring teams and driving full lifecycle delivery of enterprise-grade software that improves efficiency and customer experience.",
   "skills": {
     "backend": [
+      "Java",
+      "Spring Boot",
+      "Spring Cloud",
+      "Spring AOP",
+      "Microservices",
       "Node.js",
+      "Nest JS",
       "Express.js",
-      "Python",
-      "Flask",
-      "Django",
-      "RESTful APIs",
-      "GraphQL"
+      "REST APIs",
+      "JWT",
+      "OAuth2.0",
+      "Socket.io",
+      "Maven",
+      "NPM",
+      "Performance Optimization",
+      "Circuit Breaker",
+      "Retry Patterns",
+      "Rate Limiting"
     ],
     "databases": [
-      "MongoDB",
       "PostgreSQL",
       "MySQL",
-      "Redis",
-      "DynamoDB"
+      "MongoDB",
+      "Stored Procedures",
+      "Triggers",
+      "Redis"
     ],
     "cloudDevOps": [
-      "AWS (EC2, S3, Lambda, API Gateway, IAM)",
-      "GCP",
+      "AWS (S3, EC2, App runner, Code Build, Code Pipeline, IAM, ECR, Lambda, Secrets Manager, RDS, Cloud Watch)",
       "Docker",
-      "Kubernetes",
-      "CI/CD",
       "Jenkins",
-      "Terraform"
+      "SonarQube",
+      "Git/GitHub/GitLab",
+      "Grafana",
+      "Shell Scripting",
+      "CI/CD"
     ],
     "architecturePractices": [
-      "Microservices",
-      "Serverless Architecture",
-      "TDD",
-      "BDD",
-      "Domain-Driven Design"
+      "Microservices Architecture",
+      "API Security",
+      "OOP",
+      "DSA Fundamentals",
+      "ETL & Data Migration",
+      "Distributed Systems",
+      "Caching Strategies"
     ],
     "frontend": [
-      "React",
-      "Next.js",
+      "JavaScript (ES6)",
       "TypeScript",
-      "JavaScript",
-      "HTML5",
-      "CSS3",
-      "Tailwind CSS",
-      "Material-UI"
+      "React.js",
+      "Angular (10+)",
+      "React Native"
     ],
     "aiDeveloperProductivity": [
       "GitHub Copilot",
-      "Amazon CodeWhisperer",
-      "Google Gemini"
+      "Gemini",
+      "Claude",
+      "Cursor",
+      "AI assisted development",
+      "Prompt Engineering",
+      "Agentic Development workflows",
+      "Antigravity"
     ],
     "softwareEngineering": [
-      "Agile",
-      "Scrum",
-      "Jira",
-      "Git",
-      "Bitbucket"
+      "Clean Architecture",
+      "Agile/Scrum",
+      "Code Reviews",
+      "Technical Design"
     ],
     "softSkills": [
-      "Leadership",
-      "Team Collaboration",
-      "Problem-Solving",
-      "Communication",
-      "Mentorship"
+      "Technical Leadership",
+      "Mentoring",
+      "Client Communication",
+      "Problem Solving",
+      "Decision Making",
+      "Team Collaboration"
     ]
   },
   "experience": [
     {
-      "company": "Reliance Jio (Jio Platforms Ltd.)",
-      "role": "Senior Software Engineer",
-      "startDate": "2019",
+      "company": "Tata Consultancy Services Pvt Ltd",
+      "role": "Systems Engineer",
+      "startDate": "May 2023",
       "endDate": "Present",
       "description": [
-        "Led the design and development of a greenfield, cloud-native telecom network planning product, enabling the planning and deployment of 4G/5G networks across India.",
-        "Architected and implemented a microservices-based backend using Node.js and Python, deployed on AWS, handling over 1 million transactions per day.",
-        "Developed a highly interactive and performant frontend using React and Next.js, providing real-time data visualization and analytics.",
-        "Mentored and guided a team of 8 junior engineers, fostering a culture of collaboration and continuous learning."
+        "Designed and delivered scalable microservices using Java 17 and Spring Boot 3 for telecom enterprise platforms.",
+        "Built workflow automation solutions improving operational efficiency and system performance.",
+        "Optimized backend APIs and databases achieving up to 30 percent improvement in response time and throughput.",
+        "Led code quality, CI/CD governance, and secure API practices while mentoring junior engineers.",
+        "Developed shared core libraries and reusable modules to standardize services and improve maintainability.",
+        "Implemented observability with logging, monitoring, and performance metrics (Grafana, ELK).",
+        "Integrated and supported 35+ enterprise systems ensuring reliable and secure data exchange."
       ],
       "technologies": [
-        "React",
-        "Next.js",
-        "Node.js",
-        "Python",
+        "Java 17",
+        "Spring Boot 3",
+        "Node JS",
+        "Angular",
+        "React JS",
+        "Microservices",
+        "PostgreSQL",
         "AWS",
         "Docker",
-        "Kubernetes"
+        "CI/CD"
       ],
       "projects": [
         {
           "title": "DIA (Direct Internet Access)",
-          "duration": "1 year",
-          "description": "Developed a B2B portal for enterprise customers to manage their internet leased lines. The portal provided features for order management, billing, and real-time monitoring of network performance."
+          "duration": "Jan 2024 - Present",
+          "description": "Led the architectural design and development of a large-scale microservices platform supporting the DIA initiative and a Pan-India 4G network rollout, enabling seamless integration across more than 30 enterprise services. Optimized backend services to significantly enhance API response times."
         },
         {
           "title": "Network Planning Spectrum Lease",
-          "duration": "2 years",
-          "description": "Built a platform for managing spectrum leasing contracts with other telecom operators. The system automated the entire lifecycle of a contract, from creation to renewal and termination."
+          "duration": "Jun 2023 - Dec 2023",
+          "description": "Managed and maintained a microservices-based architecture for internal network planning portals, demonstrating strong expertise in distributed systems. Delivered end-to-end full-stack solutions prioritizing code optimization and performance tuning."
         }
       ]
     },
     {
-      "company": "Fintech Startup",
-      "role": "Full Stack Developer",
-      "startDate": "2017",
-      "endDate": "2019",
+      "company": "Credenc Web Technologies Pvt Ltd (A Capital India Group)",
+      "role": "Software Engineer",
+      "startDate": "October 2021",
+      "endDate": "May 2023",
       "description": [
-        "Developed and maintained a CRM and payment processing system for a fast-growing fintech startup.",
-        "Contributed to the development of both the front-end (React) and back-end (Node.js) of the application.",
-        "Implemented new features, fixed bugs, and improved the overall performance and scalability of the system."
+        "Modernized CRM and loan processing platforms, reducing manual effort by 70 percent.",
+        "Integrated third party financial APIs and automated workflows, cutting loan approval time by 50 percent.",
+        "Developed scalable backend APIs using Node.js, NestJS, PostgreSQL, and MongoDB.",
+        "Built mobile and B2B/B2C applications using React Native and Angular.",
+        "Implemented AWS based CI/CD pipelines, improving deployment efficiency by 60 percent."
       ],
       "technologies": [
-        "React",
         "Node.js",
+        "NestJS",
+        "React JS",
+        "React Native",
+        "Angular",
+        "PostgreSQL",
         "MongoDB",
-        "Express.js"
+        "AWS",
+        "Docker"
       ],
       "projects": [
         {
           "title": "FinTech CRM & Processing Systems",
-          "duration": "2 years",
-          "description": "Designed and implemented a comprehensive CRM for managing customer relationships and a payment gateway for processing online transactions."
+          "duration": "Oct 2021 - May 2023",
+          "description": "Spearheaded the modernization of legacy CRM and loan processing platforms. Reduced manual processing effort by over 70% through robust API integrations including automated bank statement analysis. Implemented AWS CI/CD pipelines and strengthened observability."
         }
       ]
     },
     {
-      "company": "Skaplink",
-      "role": "Software Engineer",
-      "startDate": "2016",
-      "endDate": "2017",
+      "company": "Skaplink Technologies Pvt Ltd",
+      "role": "Full Stack Software Developer",
+      "startDate": "March 2020",
+      "endDate": "September 2021",
       "description": [
-        "Co-founded and led the development of an online tutoring platform connecting students with qualified tutors.",
-        "Built the entire platform from scratch using the MERN stack.",
-        "Successfully launched the platform and acquired the first 1,000 users."
+        "Built a real-time online tutoring platform with live classrooms using Socket.io.",
+        "Developed responsive web and mobile applications using React, Angular, and React Native.",
+        "Integrated subscription-based payment systems with secure transaction handling.",
+        "Delivered government e-governance portals used at scale across multiple departments."
       ],
       "technologies": [
-        "React",
+        "React.js",
+        "Angular",
+        "React Native",
         "Node.js",
-        "MongoDB",
-        "Express.js"
+        "Socket.io",
+        "MySQL",
+        "WebRTC",
+        "PHP"
       ],
       "projects": [
         {
           "title": "Skaplink (Online Tutoring Platform)",
-          "duration": "1 year",
-          "description": "An online platform connecting students with tutors for live, interactive sessions. Features included video conferencing, whiteboarding, and session scheduling."
+          "duration": "Mar 2020 - Sep 2021",
+          "description": "Led the development of a real-time online tutoring platform connecting students and educators with live classroom collaboration features using Socket.io and secure payment gateways."
+        },
+        {
+          "title": "E-Governance Portals",
+          "duration": "Mar 2020 - Sep 2021",
+          "description": "Delivered end-to-end full-stack modules for e-governance systems used across multiple government departments. Built responsive dashboards and robust REST APIs."
         }
       ]
     },
     {
-      "company": "Freelance/Consultant",
+      "company": "S.S. Technologies Pvt Ltd",
       "role": "Software Developer",
-      "startDate": "2014",
-      "endDate": "2016",
+      "startDate": "August 2019",
+      "endDate": "March 2020",
       "description": [
-        "Worked on various freelance projects for clients across different domains.",
-        "Developed custom web applications, e-governance portals, and automation tools."
+        "Developed a college automation platform improving operational efficiency by 80 percent.",
+        "Built backend APIs and dashboards using PHP, Angular, and MySQL.",
+        "Developed Android applications for parental monitoring and tracking features.",
+        "Supported end-to-end delivery including development, testing, and production rollout."
       ],
       "technologies": [
         "PHP",
+        "Angular",
+        "React.js",
+        "Node.js",
         "MySQL",
-        "jQuery",
-        "HTML",
-        "CSS"
+        "HTML/CSS"
       ],
       "projects": [
         {
-          "title": "E-Governance Portals",
-          "duration": "Varies",
-          "description": "Developed and maintained several e-governance portals for government agencies, facilitating online public services."
-        },
-        {
           "title": "College Automation Tool",
-          "duration": "6 months",
-          "description": "An ERP solution for colleges to manage student admissions, attendance, grades, and other administrative tasks."
+          "duration": "Aug 2019 - Mar 2020",
+          "description": "Designed and implemented a comprehensive system to improve the efficiency of college admissions and fee management processes using PHP and Angular."
         },
         {
           "title": "App Monitoring Tool for Parents",
-          "duration": "4 months",
-          "description": "A mobile application for parents to monitor their children's smartphone usage and online activities."
+          "duration": "Aug 2019 - Mar 2020",
+          "description": "Developed a parental control application featuring geo-tracking and activity monitoring capabilities with scalable backend APIs."
         }
       ]
     }
@@ -199,27 +237,37 @@
         "React",
         "Tailwind CSS"
       ],
-      "githubUrl": "https://github.com/your-username/your-repo",
-      "liveUrl": "https://your-domain.com"
-    },
-    {
-      "title": "E-commerce Store",
-      "description": "A full-featured e-commerce store with a custom backend.",
-      "technologies": [
-        "React",
-        "Node.js",
-        "MongoDB"
-      ],
-      "githubUrl": "https://github.com/your-username/your-repo",
-      "liveUrl": "https://your-domain.com"
+      "githubUrl": "https://github.com/kishore-kumar-sharma",
+      "liveUrl": "https://kishore.dev"
     }
   ],
   "education": [
     {
-      "degree": "Bachelor of Engineering in Computer Science",
-      "institution": "University of Rajasthan",
-      "startDate": "2012",
-      "endDate": "2016"
+      "degree": "Master of Computer Applications - MCA, Computer Science",
+      "institution": "Manipal University Jaipur",
+      "startDate": "Aug 2021",
+      "endDate": "Jul 2023",
+      "description": "Focused on advanced software engineering, distributed systems, cloud computing, and full-stack application development. Completed multiple academic projects involving Java, Spring Boot, microservices architecture, database design, and DevOps automation, strengthening hands-on experience in building scalable, production-grade systems.",
+      "skills": [
+        "Java Basic",
+        "Database Design",
+        "Distributed Systems",
+        "Cloud Computing",
+        "Microservices"
+      ]
+    },
+    {
+      "degree": "Bachelor of Science - BS, Computer Science",
+      "institution": "Gauhati University, Guwahati",
+      "startDate": "Aug 2016",
+      "endDate": "Jul 2019",
+      "description": "Built a strong foundation in programming, data structures, algorithms, database systems, and web application development. Worked on practical projects involving backend APIs, frontend frameworks, and system design concepts that supported early full-stack engineering experience.",
+      "skills": [
+        "Algorithms",
+        "Data Structures",
+        "Web App Development",
+        "Programming"
+      ]
     }
   ],
   "languages": [
@@ -229,25 +277,126 @@
     },
     {
       "language": "Hindi",
-      "proficiency": "Native or Bilingual Proficiency"
+      "proficiency": "Native / Bilingual Proficiency"
+    },
+    {
+      "language": "Assamese",
+      "proficiency": "Native / Bilingual Proficiency"
+    },
+    {
+      "language": "Bengali",
+      "proficiency": "Limited Working Proficiency"
     }
   ],
   "awards": [
     {
-      "title": "Jio Excellence Award",
-      "year": "2021"
+      "title": "Best Employee Of The Year - Credenc",
+      "year": ""
     },
     {
-      "title": "Star Performer of the Quarter",
-      "year": "Q3 2020"
+      "title": "Star Performer of The Month - Credenc",
+      "year": ""
+    },
+    {
+      "title": "Star of the Month Award - TCS",
+      "year": ""
+    },
+    {
+      "title": "Technical Excellence Award - TCS",
+      "year": ""
+    },
+    {
+      "title": "Applause for Team Award - TCS",
+      "year": ""
+    },
+    {
+      "title": "On-The-Spot Award - TCS",
+      "year": ""
     }
   ],
   "certifications": [
     {
-      "title": "AWS Certified Developer - Associate"
+      "title": "Generative AI Foundation Curriculum"
     },
     {
-      "title": "Certified Kubernetes Application Developer (CKAD)"
+      "title": "Java 17 Masterclass"
+    },
+    {
+      "title": "IBM DevOps & Software Engineering Specialization"
+    },
+    {
+      "title": "IBM Full Stack Software Developer Specialization"
+    },
+    {
+      "title": "Application Development using Microservices & Serverless Containers with Docker, Kubernetes & OpenShift"
+    },
+    {
+      "title": "Network Security & Ethical Hacking Basics"
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Sudeep Dutta",
+      "title": "Senior Product Engineer @ iPaySmart | React Hooks, APIs",
+      "relationship": "Sudeep reported to Kishore Kumar directly",
+      "date": "April 19, 2023",
+      "content": "Highly skilled and experienced Software Engineer with a demonstrated track record of delivering complex software solutions for a diverse range of clients. Proficient in a wide range of programming languages, frameworks, and tools. Adept at leading development teams, providing technical guidance and mentorship, and driving project success. Experienced in architecting scalable and resilient systems that meet business requirements and user needs. A results-oriented problem-solver with excellent analytical and communication skills, and a strong commitment to continuous learning and professional development."
+    },
+    {
+      "name": "Abhinav Dhingra",
+      "title": "Product Manager | Transforming ideas into profitable products through agile methodologies and cross-functional collaboration.",
+      "relationship": "Abhinav was senior to Kishore Kumar but didn't manage Kishore Kumar directly",
+      "date": "April 19, 2023",
+      "content": "Kishore has a solid background in full-stack development and has demonstrated exceptional proficiency in a range of programming languages, including JavaScript and Python. He has a thorough understanding of front-end development technologies such as React and Angular as well as back-end frameworks such as Node.js and Nest.js. What sets Kishore apart from others is his ability to effectively collaborate with cross-functional teams and work in an agile environment. He has a deep understanding of design patterns and is well-versed in designing and implementing microservices architecture for web applications. I wholeheartedly recommend Kishore for the Full Stack Software Engineer position."
+    },
+    {
+      "name": "Mohit Sharma",
+      "title": "Senior Product Manager (PM II) | Marketplace & Platform Products | Logistics & Fintech",
+      "relationship": "Mohit worked with Kishore Kumar on the same team",
+      "date": "April 19, 2023",
+      "content": "Kishore Sharma is an accomplished Software Engineer with a proven history of delivering sophisticated software solutions to a variety of clients. His proficiency spans across several programming languages, frameworks, and tools. He has a talent for leading development teams, providing technical guidance and mentorship, and ensuring project success. He has extensive experience in designing adaptable and robust systems that meet both business objectives and user requirements. He is a results-driven problem-solver with exceptional analytical and communication skills and a steadfast commitment to ongoing learning and career advancement."
+    },
+    {
+      "name": "Gautam Sharma",
+      "title": "Technical Architect at LTIMindtree | Ex-Policybazaar | Ex-CarDekho",
+      "relationship": "Gautam managed Kishore Kumar directly",
+      "date": "April 19, 2023",
+      "content": "A skilled software developer with a keen interest in constructing efficient, creative, and user-friendly applications. Knowledgeable in various programming languages and frameworks, with a specific specialization in Full stack development. Dedicated to continuous education and professional advancement, keeping current with the most recent industry developments and finest practices. A team player who collaborates well, providing exceptional work and exceeding client expectations."
+    },
+    {
+      "name": "Kundan Kumar Sharma",
+      "title": "Senior QA Automation Engineer at Wizni | Cypress, Selenium & Java | AI & LLM Testing (RAG/MCP) | CI/CD & Docker | Remote | Ex-Cognizant",
+      "relationship": "Kundan Kumar worked with Kishore Kumar but on different teams",
+      "date": "April 19, 2023",
+      "content": "He's very enthusiastic and motivated. He always keep learning in order to be a better version of himself. He has indepth knowledge of JavaScript and its framework like React, Angular and Node. He even has knowledge of mobile app development using React Native. Apart from these, he's very cool person."
+    },
+    {
+      "name": "Manish Dhoundiyal",
+      "title": "Product Manager || Product Development || Technology || Fintech || Edtech || E-commerce",
+      "relationship": "Manish was senior to Kishore Kumar but didn't manage Kishore Kumar directly",
+      "date": "April 19, 2023",
+      "content": "He possesses both a strong work ethic and strategic thinking abilities, making him a smart and reliable team member. Additionally, I must commend his exceptional leadership skills, which were particularly impressive to me during our time working together."
+    },
+    {
+      "name": "Shailendra Singh",
+      "title": "Software Engineering",
+      "relationship": "Shailendra was senior to Kishore Kumar but didn't manage Kishore Kumar directly",
+      "date": "April 13, 2023",
+      "content": "Genuine person with sound technical skills, a true team player and hungry for learning new technical skills."
+    },
+    {
+      "name": "Pragyan deep Gogoi",
+      "title": "Full Stack Developer | Angular | Nodejs | Express | PostgreSQL | AWS",
+      "relationship": "Pragyan deep worked with Kishore Kumar on the same team",
+      "date": "April 13, 2023",
+      "content": "I have worked with kishore kumar and I would definitely like to say he is an asset to any team. He is not only a hard working guy but also a smart worker too. It will be incomplete to define him without praising his leadership skills. That was the thing I loved the most about him when I used to work with him."
+    },
+    {
+      "name": "Jiaul Haque",
+      "title": "Full Stack Developer | Java (Spring Boot) | Node.js (Express)",
+      "relationship": "Jiaul worked with Kishore Kumar on the same team",
+      "date": "October 10, 2021",
+      "content": "I have learnt many things under you. I like your way of teaching and how to think about logics. I'm very lucky having mentor like you. You are a hard working boy..."
     }
   ]
 }

@@ -10,7 +10,7 @@ export function About({ personal, summary }: { personal: any, summary: string })
       className="py-24 bg-background relative overflow-hidden"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
+      viewport={{ once: false, amount: 0.1 }}
       variants={sectionVariants}
     >
       <div className="container mx-auto px-6 relative z-10">

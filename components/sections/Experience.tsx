@@ -76,7 +76,7 @@ export function Experience({ experience }: { experience: any[] }) {
       className="py-24"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
+      viewport={{ once: false, amount: 0.1 }}
       variants={sectionVariants}
     >
       <div className="container mx-auto px-6">

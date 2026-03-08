@@ -52,7 +52,7 @@ export function Skills({ skills }: { skills: any }) {
       className="py-24 bg-secondary/30 dark:bg-black/20"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
+      viewport={{ once: false, amount: 0.1 }}
       variants={sectionVariants}
     >
       <div className="container mx-auto px-6">
@@ -70,7 +70,7 @@ export function Skills({ skills }: { skills: any }) {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: false, amount: 0.1 }}
           variants={{
             visible: { transition: { staggerChildren: 0.1 } }
           }}

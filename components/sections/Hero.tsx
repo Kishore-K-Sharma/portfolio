@@ -28,13 +28,33 @@ const itemVariants = {
   },
 };
 
+const typingContainer = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+      delayChildren: 0.5,
+    },
+  },
+};
+
+const typingLetter = {
+  hidden: { opacity: 0, display: "none" },
+  visible: {
+    opacity: 1,
+    display: "inline-block",
+  },
+};
+
 export function Hero() {
   return (
     <motion.section
       id="hero"
       className="relative min-h-screen flex flex-col justify-center items-center text-left md:text-center overflow-hidden pt-28 pb-16"
       initial="hidden"
-      animate="visible"
+      whileInView="visible"
+      viewport={{ once: false, amount: 0.1 }}
       variants={containerVariants}
     >
       <HeroBackground />
@@ -50,18 +70,32 @@ export function Hero() {
           </div>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="w-full text-left md:text-center">
-          <h1 className="font-space-grotesk text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-foreground mb-4">
-            {portfolioData.personal.name}
-          </h1>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-500 mb-6 pb-2">
+        <div className="w-full text-left md:text-center mb-6">
+          <motion.h1
+            className="font-space-grotesk text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-foreground mb-4 flex flex-wrap justify-start md:justify-center"
+            variants={typingContainer}
+          >
+            {portfolioData.personal.name.split("").map((char, index) => (
+              <motion.span key={index} variants={typingLetter}>
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
+            <motion.span
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: [0, 1, 0], transition: { repeat: Infinity, duration: 0.8, ease: "linear" } }
+              }}
+              className="inline-block w-[4px] h-[1em] bg-primary ml-1"
+            />
+          </motion.h1>
+          <motion.h2 variants={itemVariants} className="text-2xl sm:text-3xl md:text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-500 mb-6 pb-2">
             {portfolioData.personal.title}
-          </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+          </motion.h2>
+          <motion.p variants={itemVariants} className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-light">
             Architecting and building scalable cloud-native microservices and distributed systems.
             Over <strong className="font-medium text-foreground">{portfolioData.personal.experienceYears}</strong> of experience engineering high-performance applications for the modern web.
-          </p>
-        </motion.div>
+          </motion.p>
+        </div>
 
         <motion.div
           className="flex flex-col sm:flex-row items-start sm:items-center justify-center gap-4 mb-12 w-full md:w-auto"
