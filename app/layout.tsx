@@ -5,6 +5,8 @@ import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { ScrollToTop } from "@/components/ScrollToTop";
+import { FloatingActions } from "@/components/FloatingActions";
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"], variable: '--font-space-grotesk' });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "700"], variable: '--font-jetbrains-mono' });
@@ -124,6 +126,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <FloatingActions />
         </ThemeProvider>
       </body>
     </html>
