@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE, Editor and AI contexts
+.idx/
+.vscode/
+.gemini/
+.cursor/
+.idea/
+*.swp
+blueprint.md
+GEMINI.md
+firebase-debug.log
+.docs/

@@ -4,7 +4,7 @@ import { useFormState, useFormStatus } from 'react-dom';
 import { submitContactForm } from '@/app/actions';
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Send } from 'lucide-react';
+import { Send, Loader2, CheckCircle2 } from 'lucide-react';
 import { sectionVariants, cardVariants } from "@/styles/animations";
 
 const initialState = {
@@ -17,44 +17,40 @@ function SubmitButton() {
   const { pending } = useFormStatus();
 
   return (
-    <motion.button 
-      type="submit" 
-      disabled={pending} 
-      className="w-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-primary-foreground dark:text-white rounded-lg group bg-primary dark:bg-gradient-to-br dark:from-cyan-500 dark:to-blue-500 hover:bg-primary/90 dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-primary/50 dark:focus:ring-cyan-800 disabled:opacity-50 disabled:cursor-not-allowed"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+    <motion.button
+      type="submit"
+      disabled={pending}
+      className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-primary-foreground bg-primary rounded-md shadow-sm hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+      whileHover={{ y: -1 }}
+      whileTap={{ y: 1 }}
     >
-        <span className="w-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-primary dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-            <div className="flex items-center justify-center gap-2">
-                {pending ? (
-                    <>
-                        <div className="w-4 h-4 border-2 border-dashed rounded-full animate-spin border-white"></div>
-                        <span>Submitting...</span>
-                    </>
-                ) : (
-                    <>
-                        <Send className="w-4 h-4"/>
-                        <span>Send Inquiry</span>
-                    </>
-                )}
-            </div>
-        </span>
+      {pending ? (
+        <>
+          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+          <span>Sending out...</span>
+        </>
+      ) : (
+        <>
+          <Send className="w-4 h-4 mr-2" />
+          <span>Send Message</span>
+        </>
+      )}
     </motion.button>
   );
 }
 
 const InputField = ({ name, label, type = 'text', errors, ...props }: any) => (
-    <motion.div className="mb-6" variants={cardVariants}>
-        <label htmlFor={name} className="block mb-2 text-sm font-medium text-muted-foreground dark:text-primary/80">{label}</label>
-        <input 
-            name={name} 
-            id={name} 
-            type={type}
-            className={`w-full p-3 rounded-md bg-background dark:bg-background/70 border ${errors ? 'border-destructive' : 'border-border/30'} focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 shadow-inner`}
-            {...props}
-        />
-        {errors && <p className="text-destructive text-sm mt-1">{errors[0]}</p>}
-    </motion.div>
+  <motion.div className="mb-6" variants={cardVariants}>
+    <label htmlFor={name} className="block mb-2 text-sm font-medium text-foreground">{label}</label>
+    <input
+      name={name}
+      id={name}
+      type={type}
+      className={`w-full px-4 py-3 rounded-md bg-secondary/50 border ${errors ? 'border-destructive' : 'border-border/60'} focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 text-foreground placeholder:text-muted-foreground`}
+      {...props}
+    />
+    {errors && <p className="text-destructive text-sm mt-1.5">{errors[0]}</p>}
+  </motion.div>
 );
 
 export function Contact() {
@@ -70,47 +66,59 @@ export function Contact() {
   return (
     <motion.section
       id="contact"
-      className="py-32"
+      className="py-24"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.1 }}
       variants={sectionVariants}
     >
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold font-space-grotesk text-primary mb-4">Let&apos;s Build Together</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Have a project in mind, a question, or just want to connect? I&apos;m here to listen. Drop me a line and I&apos;ll get back to you soon.
+        <div className="max-w-3xl mb-16 mx-auto text-center">
+          <h2 className="text-sm font-bold tracking-widest text-primary uppercase mb-3">Get in Touch</h2>
+          <h3 className="text-3xl md:text-5xl font-bold font-space-grotesk text-foreground mb-6 tracking-tight">
+            Let's Build Something Great
+          </h3>
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            I'm currently open for new opportunities and consulting. Whether you have a question or just want to engineer a solution, I'll try my best to get back to you.
           </p>
         </div>
 
-        <motion.div 
-          className="relative max-w-2xl mx-auto"
-          variants={{ 
-              visible: { transition: { staggerChildren: 0.2 } } 
+        <motion.div
+          className="max-w-xl mx-auto"
+          variants={{
+            visible: { transition: { staggerChildren: 0.1 } }
           }}
         >
-          <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 dark:from-cyan-500 dark:to-blue-500 dark:opacity-25 dark:group-hover:opacity-75 animate-tilt"></div>
-          <motion.div className="relative bg-card dark:bg-background/80 backdrop-blur-xl border border-border/20 rounded-lg p-8 shadow-2xl" variants={cardVariants}>
+          <motion.div className="bg-card/50 border border-border/40 backdrop-blur-sm rounded-xl p-8 shadow-sm" variants={cardVariants}>
             <form ref={formRef} action={formAction}>
-              <InputField name="name" label="Your Name" errors={state.errors?.name} />
-              <InputField name="email" label="Your Email" type="email" errors={state.errors?.email} />
-              <motion.div className="mb-6" variants={cardVariants}>
-                <label htmlFor="message" className="block mb-2 text-sm font-medium text-muted-foreground dark:text-primary/80">Your Message</label>
-                <textarea 
-                  name="message" 
-                  id="message" 
-                  rows={5} 
-                  className={`w-full p-3 rounded-md bg-background dark:bg-background/70 border ${state.errors?.message ? 'border-destructive' : 'border-border/30'} focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 shadow-inner`}
+              <InputField name="name" label="Full Name" placeholder="John Doe" errors={state.errors?.name} />
+              <InputField name="email" label="Email Address" type="email" placeholder="john@example.com" errors={state.errors?.email} />
+              <motion.div className="mb-8" variants={cardVariants}>
+                <label htmlFor="message" className="block mb-2 text-sm font-medium text-foreground">Message</label>
+                <textarea
+                  name="message"
+                  id="message"
+                  rows={5}
+                  placeholder="Tell me about your project architecture..."
+                  className={`w-full px-4 py-3 rounded-md bg-secondary/50 border ${state.errors?.message ? 'border-destructive' : 'border-border/60'} focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 text-foreground placeholder:text-muted-foreground resize-none`}
                 />
-                {state.errors?.message && <p className="text-destructive text-sm mt-1">{state.errors.message[0]}</p>}
+                {state.errors?.message && <p className="text-destructive text-sm mt-1.5">{state.errors.message[0]}</p>}
               </motion.div>
-              <SubmitButton />
-              {state.message && (
-                <p className={`mt-4 text-center text-sm ${state.success ? 'text-green-400' : 'text-destructive'}`}>
-                  {state.message}
-                </p>
-              )}
+
+              <div className="flex flex-col sm:flex-row items-center gap-4 justify-between transition-all">
+                <SubmitButton />
+
+                {state.message && (
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className={`flex items-center text-sm font-medium ${state.success ? 'text-emerald-500' : 'text-destructive'}`}
+                  >
+                    {state.success && <CheckCircle2 className="w-4 h-4 mr-1.5" />}
+                    {state.message}
+                  </motion.div>
+                )}
+              </div>
             </form>
           </motion.div>
         </motion.div>

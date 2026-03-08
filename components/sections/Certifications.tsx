@@ -1,38 +1,55 @@
+'use client';
 import { Award } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { sectionVariants, cardVariants } from "@/styles/animations";
 
 const CertificationCard = ({ certification }: { certification: any }) => (
-  <div 
-    className="bg-card dark:bg-card/60 border border-border/20 rounded-lg p-6 flex items-center gap-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:border-primary/30"
+  <motion.div
+    variants={cardVariants}
+    className="bg-card/50 dark:bg-card/30 border border-border/40 backdrop-blur-md rounded-xl p-6 flex items-center gap-6 shadow-sm hover:shadow-md transition-all duration-300 hover:border-border/80 group"
   >
-    <div className="bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary/80 p-4 rounded-full">
+    <div className="bg-primary/10 text-primary p-4 rounded-lg group-hover:bg-primary/20 transition-colors">
       <Award className="w-8 h-8" />
     </div>
     <div>
-      <h3 className="text-lg font-bold font-space-grotesk text-primary">{certification.title}</h3>
+      <h3 className="text-xl font-bold font-space-grotesk text-foreground group-hover:text-primary transition-colors">{certification.title}</h3>
+      <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1.5 font-semibold text-primary/70">Certified Professional</p>
     </div>
-  </div>
+  </motion.div>
 );
 
 export function Certifications({ certifications }: { certifications: any[] }) {
   return (
-    <section 
+    <motion.section
       id="certifications"
-      className="py-32 bg-secondary/50 dark:bg-secondary/20"
+      className="py-24 bg-secondary/30 dark:bg-black/20"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={sectionVariants}
     >
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold font-space-grotesk text-primary mb-4">Licenses & Certifications</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Validation of my skills and knowledge through professional certifications.
+        <div className="max-w-3xl mb-16 mx-auto text-center">
+          <h2 className="text-sm font-bold tracking-widest text-primary uppercase mb-3">Validation</h2>
+          <h3 className="text-3xl md:text-5xl font-bold font-space-grotesk text-foreground mb-6 tracking-tight">
+            Licenses & Certifications
+          </h3>
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            Continuous learning and validation of technical expertise against industry standards.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {certifications.map((certification, index) => (
-                <CertificationCard key={index} certification={certification} />
-            ))}
-        </div>
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"
+          variants={{
+            visible: { transition: { staggerChildren: 0.15 } }
+          }}
+        >
+          {certifications.map((certification, index) => (
+            <CertificationCard key={index} certification={certification} />
+          ))}
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }

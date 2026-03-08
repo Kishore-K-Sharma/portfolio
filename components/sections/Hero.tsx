@@ -1,6 +1,6 @@
 'use client';
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, ArrowRight, Code } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowRight, Terminal } from 'lucide-react';
 import Link from 'next/link';
 import { HeroBackground } from '@/components/HeroBackground';
 
@@ -8,84 +8,103 @@ const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.3,
-      delayChildren: 0.3,
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 15 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       type: "spring",
-      stiffness: 100,
-      damping: 10,
+      stiffness: 80,
+      damping: 12,
     },
   },
 };
 
-
 export function Hero() {
   return (
     <motion.section
-      className="relative min-h-screen flex flex-col justify-center items-center text-center overflow-hidden pt-20"
+      id="hero"
+      className="relative min-h-screen flex flex-col justify-center items-center text-left md:text-center overflow-hidden pt-28 pb-16"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
     >
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background/50 z-0"></div>
       <HeroBackground />
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div variants={itemVariants}>
-          <div className="inline-block bg-secondary rounded-full px-4 py-1.5 text-sm mb-6 shadow-md">
-            <span className="flex items-center gap-2 font-medium text-secondary-foreground">
-                <Code className="w-4 h-4 text-accent-foreground" />
-                <span>Open for new opportunities</span>
+
+      <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">
+        <motion.div variants={itemVariants} className="w-full flex justify-center md:justify-center justify-start mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium shadow-sm transition-all hover:bg-primary/15">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
             </span>
+            <span>Available for Consulting Opportunities</span>
           </div>
-          <h1 className="font-space-grotesk text-5xl md:text-7xl font-bold text-primary mb-4 bg-clip-text text-transparent bg-gradient-to-b from-primary to-primary/60 dark:to-primary/60 py-2">
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="w-full text-left md:text-center">
+          <h1 className="font-space-grotesk text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-foreground mb-4">
             Kishore Kumar Sharma
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10">
-            Senior Full Stack Engineer with a passion for building beautiful, performant, and scalable web applications.
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-500 mb-6 pb-2">
+            Senior Full Stack Consultant
+          </h2>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+            Architecting and building scalable cloud-native microservices and distributed systems.
+            Over <strong className="font-medium text-foreground">6+ years</strong> of experience engineering high-performance applications for the modern web.
           </p>
         </motion.div>
 
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+          className="flex flex-col sm:flex-row items-start sm:items-center justify-center gap-4 mb-12 w-full md:w-auto"
           variants={itemVariants}
         >
           <Link
             href="#projects"
-            className="group relative inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg shadow-2xl shadow-primary/20 overflow-hidden transition-all duration-300 hover:scale-105"
+            className="group w-full sm:w-auto relative inline-flex items-center justify-center px-8 py-3.5 bg-primary text-primary-foreground font-semibold rounded-md shadow-md transition-all duration-300 hover:bg-primary/90 hover:-translate-y-0.5"
           >
-            <span className="relative z-10 flex items-center gap-2">
-                View My Work
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </span>
+            <span>View Case Studies</span>
+            <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link
             href="#contact"
-            className="px-6 py-3 bg-secondary text-secondary-foreground font-semibold rounded-lg hover:bg-secondary/80 transition-all duration-300 hover:scale-105"
+            className="w-full sm:w-auto px-8 py-3.5 bg-secondary text-secondary-foreground font-medium rounded-md border border-border/50 hover:bg-secondary/80 hover:border-border transition-all duration-300"
           >
             Get in Touch
           </Link>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            className="hidden md:inline-flex items-center justify-center px-6 py-3.5 bg-transparent text-muted-foreground font-medium rounded-md hover:text-foreground transition-all duration-200"
+          >
+            <Terminal className="w-4 h-4 mr-2" />
+            Resume
+          </a>
         </motion.div>
 
         <motion.div
-          className="flex items-center justify-center gap-8"
+          className="flex items-center justify-start md:justify-center gap-6 w-full"
           variants={itemVariants}
         >
-          <a href="https://www.linkedin.com/in/kishore-kumar-sharma-product-engineer/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-            <Linkedin className="w-6 h-6" />
-          </a>
-          <a href="https://github.com/kishore-kumar-sharma" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+          <a href="https://github.com/kishore-kumar-sharma" target="_blank" rel="noopener noreferrer" className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-full transition-all">
             <Github className="w-6 h-6" />
+            <span className="sr-only">GitHub</span>
           </a>
-          <a href="mailto:kishoresharma914@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
+          <a href="https://www.linkedin.com/in/kishore-kumar-sharma-product-engineer/" target="_blank" rel="noopener noreferrer" className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-full transition-all">
+            <Linkedin className="w-6 h-6" />
+            <span className="sr-only">LinkedIn</span>
+          </a>
+          <a href="mailto:kishoresharma914@gmail.com" className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-full transition-all">
             <Mail className="w-6 h-6" />
+            <span className="sr-only">Email</span>
           </a>
         </motion.div>
       </div>
