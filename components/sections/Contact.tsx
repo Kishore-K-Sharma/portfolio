@@ -1,54 +1,70 @@
 'use client'
 
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import { useFormState, useFormStatus } from 'react-dom';
+import { submitContactForm } from '@/app/actions';
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { Send } from 'lucide-react';
 
-const contactFormSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  email: z.string().email('Invalid email address'),
-  message: z.string().min(1, 'Message is required'),
-});
+const initialState = {
+  message: '',
+  success: false,
+  errors: undefined,
+};
 
-type ContactFormValues = z.infer<typeof contactFormSchema>;
+function SubmitButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <motion.button 
+      type="submit" 
+      disabled={pending} 
+      className="w-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-primary-foreground dark:text-white rounded-lg group bg-primary dark:bg-gradient-to-br dark:from-cyan-500 dark:to-blue-500 hover:bg-primary/90 dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-primary/50 dark:focus:ring-cyan-800 disabled:opacity-50 disabled:cursor-not-allowed"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+        <span className="w-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-primary dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+            <div className="flex items-center justify-center gap-2">
+                {pending ? (
+                    <>
+                        <div className="w-4 h-4 border-2 border-dashed rounded-full animate-spin border-white"></div>
+                        <span>Submitting...</span>
+                    </>
+                ) : (
+                    <>
+                        <Send className="w-4 h-4"/>
+                        <span>Send Inquiry</span>
+                    </>
+                )}
+            </div>
+        </span>
+    </motion.button>
+  );
+}
+
+const InputField = ({ name, label, type = 'text', errors, ...props }: any) => (
+    <div className="mb-6">
+        <label htmlFor={name} className="block mb-2 text-sm font-medium text-muted-foreground dark:text-primary/80">{label}</label>
+        <input 
+            name={name} 
+            id={name} 
+            type={type}
+            className={`w-full p-3 rounded-md bg-background dark:bg-background/70 border ${errors ? 'border-destructive' : 'border-border/30'} focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 shadow-inner`}
+            {...props}
+        />
+        {errors && <p className="text-destructive text-sm mt-1">{errors[0]}</p>}
+    </div>
+);
 
 export function Contact() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{ success: boolean; message: string } | null>(null);
+  const [state, formAction] = useFormState(submitContactForm, initialState);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<ContactFormValues>({
-    resolver: zodResolver(contactFormSchema),
-  });
-
-  const onSubmit = async (data: ContactFormValues) => {
-    setIsSubmitting(true);
-    setSubmitStatus(null);
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setSubmitStatus({ success: true, message: result.message });
-        reset();
-      } else {
-        setSubmitStatus({ success: false, message: result.error || 'Something went wrong' });
-      }
-    } catch (error) {
-      setSubmitStatus({ success: false, message: 'Something went wrong' });
+  useEffect(() => {
+    if (state.success) {
+      formRef.current?.reset();
     }
-
-    setIsSubmitting(false);
-  };
+  }, [state.success]);
 
   return (
     <motion.section
@@ -61,38 +77,36 @@ export function Contact() {
     >
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-serif font-bold text-primary mb-4">Let&apos;s Connect</h2>
-          <p className="text-secondary max-w-2xl mx-auto text-lg">
-            I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious vision. 
+          <h2 className="text-3xl md:text-5xl font-bold font-space-grotesk text-primary mb-4">Let&apos;s Build Together</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+            Have a project in mind, a question, or just want to connect? I&apos;m here to listen. Drop me a line and I&apos;ll get back to you soon.
           </p>
         </div>
 
-        <div className="max-w-xl mx-auto bg-card p-8 rounded-lg shadow-card">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="mb-6">
-              <label htmlFor="name" className="block mb-2 text-sm font-medium text-primary">Name</label>
-              <input {...register('name')} id="name" className={`w-full p-3 rounded-md bg-gray-100 dark:bg-gray-800 border ${errors.name ? 'border-red-500' : 'border-border'} focus:ring-accent focus:border-accent transition`} />
-              {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
-            </div>
-            <div className="mb-6">
-              <label htmlFor="email" className="block mb-2 text-sm font-medium text-primary">Email</label>
-              <input {...register('email')} id="email" className={`w-full p-3 rounded-md bg-gray-100 dark:bg-gray-800 border ${errors.email ? 'border-red-500' : 'border-border'} focus:ring-accent focus:border-accent transition`} />
-              {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
-            </div>
-            <div className="mb-6">
-              <label htmlFor="message" className="block mb-2 text-sm font-medium text-primary">Message</label>
-              <textarea {...register('message')} id="message" rows={5} className={`w-full p-3 rounded-md bg-gray-100 dark:bg-gray-800 border ${errors.message ? 'border-red-500' : 'border-border'} focus:ring-accent focus:border-accent transition`} />
-              {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
-            </div>
-            <button type="submit" disabled={isSubmitting} className="w-full py-3 px-6 bg-primary text-white font-semibold rounded-md hover:bg-opacity-90 transition-all disabled:bg-gray-500 shadow-interactive">
-              {isSubmitting ? 'Submitting...' : 'Send Inquiry'}
-            </button>
-            {submitStatus && (
-              <p className={`mt-4 text-center ${submitStatus.success ? 'text-green-500' : 'text-red-500'}`}>
-                {submitStatus.message}
-              </p>
-            )}
-          </form>
+        <div className="relative max-w-2xl mx-auto">
+          <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 dark:from-cyan-500 dark:to-blue-500 dark:opacity-25 dark:group-hover:opacity-75 animate-tilt"></div>
+          <div className="relative bg-card dark:bg-background/80 backdrop-blur-xl border border-border/20 rounded-lg p-8 shadow-2xl">
+            <form ref={formRef} action={formAction}>
+              <InputField name="name" label="Your Name" errors={state.errors?.name} />
+              <InputField name="email" label="Your Email" type="email" errors={state.errors?.email} />
+              <div className="mb-6">
+                <label htmlFor="message" className="block mb-2 text-sm font-medium text-muted-foreground dark:text-primary/80">Your Message</label>
+                <textarea 
+                  name="message" 
+                  id="message" 
+                  rows={5} 
+                  className={`w-full p-3 rounded-md bg-background dark:bg-background/70 border ${state.errors?.message ? 'border-destructive' : 'border-border/30'} focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 shadow-inner`}
+                />
+                {state.errors?.message && <p className="text-destructive text-sm mt-1">{state.errors.message[0]}</p>}
+              </div>
+              <SubmitButton />
+              {state.message && (
+                <p className={`mt-4 text-center text-sm ${state.success ? 'text-green-400' : 'text-destructive'}`}>
+                  {state.message}
+                </p>
+              )}
+            </form>
+          </div>
         </div>
       </div>
     </motion.section>

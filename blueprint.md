@@ -1,41 +1,39 @@
-
-# Kishore Kumar Sharma - Personal Portfolio
+# Project Blueprint
 
 ## Overview
 
-This project is a personal portfolio website for Kishore Kumar Sharma, a Senior Full Stack Engineer. The goal is to create a modern, visually appealing, and responsive single-page application that showcases his skills, experience, projects, and certifications. The website is built with Next.js and styled with Tailwind CSS, featuring smooth animations with Framer Motion.
+This project is a personal portfolio website for Kishore Kumar Sharma, a Senior Full Stack Engineer. The portfolio showcases his skills, experience, and projects in a modern and visually appealing way. The design, dubbed the "Aurora" theme, is a dark, futuristic theme with glowing elements and frosted glass effects, creating an immersive and engaging user experience.
 
-## Project Structure & Features
+## Design & Features
 
-- **Framework**: Next.js (App Router)
-- **Styling**: Tailwind CSS with a custom dark theme.
-- **Animations**: Framer Motion for engaging and smooth transitions.
-- **Icons**: `lucide-react` for clean and modern iconography.
-- **Contact Form**: A functional contact form built with `react-hook-form` and `zod` for validation, backed by a Next.js API route.
-- **Theme**: Dark mode by default using `next-themes`.
+### General
+- **Theme**: Dark theme by default, with a system theme toggle.
+- **Font**: `Space Grotesk` for a modern, technical feel.
+- **Background**: Animated "Aurora" background with a subtle dot pattern.
+- **Effects**: Frosted glass, glowing borders, and shimmer effects on interactive elements.
 
 ### Components
+- **Navigation**: A sticky navigation bar that becomes a frosted glass element on scroll.
+- **Hero Section**: A dynamic hero section with an animated background, spotlight effect, and glowing buttons.
+- **Skills Section**: A grid of frosted glass cards showcasing skills, with a shimmer effect on hover.
+- **Experience Section**: A vertical timeline with glowing, animated lines and frosted glass cards for each experience entry.
+- **Projects Section**: A grid of frosted glass cards for projects, with a shimmer effect on hover.
+- **Contact Section**: A contact form with a frosted glass effect and glowing elements.
 
-- **`Navigation`**: A responsive navigation bar that sticks to the top, providing smooth scrolling to different sections.
-- **`Hero`**: An impactful hero section with a headline, social media links, and calls to action.
-- **`About`**: A section detailing Kishore's professional background and expertise.
-- **`Skills`**: A grid-based layout showcasing technical skills categorized for clarity.
-- **`Experience`**: A vertical timeline illustrating work history.
-- **`Projects`**: A card-based gallery of key projects with descriptions and technology stacks.
-- **`Certifications`**: A section to display certifications and awards.
-- **`Contact`**: A contact form for inquiries.
-- **`Footer`**: A site footer with social links and copyright information.
+## Current Plan
 
-## Development Plan
-
-1.  **Project Setup**: Initialize a Next.js project and install all necessary dependencies (`tailwindcss`, `framer-motion`, `lucide-react`, `next-themes`, `react-hook-form`, `zod`).
-2.  **Styling and Configuration**:
-    *   Configure `tailwind.config.ts` with a custom color palette and animations.
-    *   Create a `globals.css` file for base styles.
-    *   Create an `animations.ts` file to store reusable `framer-motion` variants.
-3.  **Component Creation**: Develop each section of the portfolio as a separate React component in the `components/sections` directory.
-4.  **API Route**: Implement a Next.js API route (`app/api/contact/route.ts`) to handle submissions from the contact form.
-5.  **Page Assembly**: Assemble all the section components in the main `app/page.tsx` file.
-6.  **Layout**: Update the root `app/layout.tsx` to include the `Navigation`, `ThemeProvider`, and global styles.
-7.  **Linting and Formatting**: Run `npm run lint -- --fix` to ensure code quality and consistency.
-8.  **Review and Deploy**: Thoroughly test the application in the browser preview and prepare for deployment.
+- **Task**: Implement the "Aurora" theme across the entire portfolio website.
+- **Status**: Completed.
+- **Steps Taken**:
+    1. Updated `tailwind.config.ts` with the new theme colors and animations.
+    2. Updated `app/globals.css` with the new theme styles.
+    3. Refactored `app/layout.tsx` to use the new theme and font.
+    4. Created `components/DotPattern.tsx` for the hero section background.
+    5. Refactored `components/sections/Hero.tsx` to use the new theme and dot pattern.
+    6. Created `components/ShimmerButton.tsx` for the new CTA button.
+    7. Refactored `components/sections/Skills.tsx` to use the new frosted glass card style.
+    8. Refactored `components/sections/Experience.tsx` to use a vertical timeline with frosted glass cards.
+    9. Refactored `components/sections/Projects.tsx` to use frosted glass cards.
+    10. Refactored `components/sections/Contact.tsx` to use a frosted glass form.
+    11. Refactored `components/Navigation.tsx` to use a frosted glass navigation bar.
+    12. Updated `app/actions.ts` to match the new theme.

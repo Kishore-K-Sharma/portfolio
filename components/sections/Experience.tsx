@@ -1,86 +1,75 @@
-'use client'
+import { Briefcase } from 'lucide-react';
 
-import { motion } from 'framer-motion';
+const ProjectInExperienceCard = ({ project }: { project: any }) => (
+  <div className="bg-background/50 dark:bg-background/20 rounded-lg p-4 mt-4">
+      <h4 className="font-bold text-primary">{project.title}</h4>
+      <p className="text-sm text-muted-foreground italic mb-2">{project.duration}</p>
+      <p className="text-sm text-muted-foreground">{project.description}</p>
+  </div>
+);
 
-const experiences = [
-  {
-    company: "Tata Consultancy Services",
-    role: "Systems Engineer",
-    period: "May 2023 – Present",
-    achievements: [
-      "Architected scalable microservices for a pan-India telecom rollout using Java 17 and Spring Boot 3.",
-      "Successfully integrated 30+ disparate enterprise systems into a unified platform.",
-      "Drove a 30% improvement in mission-critical API performance through strategic optimization.",
-      "Championed engineering best practices and mentored junior development staff."
-    ],
-  },
-  {
-    company: "Credenc Web Technologies",
-    role: "Software Engineer",
-    period: "Oct 2021 – May 2023",
-    achievements: [
-      "Digital transformation of CRM and loan processing platforms, reducing manual overhead by 70%.",
-      "Designed and implemented high-performance RESTful APIs to support complex financial transactions.",
-      "Established robust CI/CD pipelines on AWS, accelerating release cycles.",
-      "Implemented security protocols to ensure compliance with financial data standards."
-    ],
-  },
-  {
-    company: "Skaplink Technologies",
-    role: "Full Stack Developer",
-    period: "Mar 2020 – Sep 2021",
-    achievements: [
-      "Built a highly-available real-time tutoring platform leveraging Socket.io for synchronous communication.",
-      "Developed cross-platform mobile applications, expanding market reach.",
-      "Engineered secure payment gateway integrations for seamless transactions."
-    ],
-  },
-];
+const ExperienceCard = ({ experience, isLeft }: { experience: any, isLeft: boolean }) => (
+  <div className={`w-full lg:w-1/2 ${isLeft ? 'lg:pr-8' : 'lg:pl-8'}`}>
+    <div className="bg-card dark:bg-card/60 border border-border/20 rounded-lg p-6 shadow-lg hover:shadow-xl hover:border-primary/30 transition-all duration-300 h-full">
+      <div className="flex items-start mb-4">
+        <div className="bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary/80 p-3 rounded-full mr-4">
+          <Briefcase className="w-6 h-6" />
+        </div>
+        <div>
+          <h3 className="text-xl font-bold font-space-grotesk text-primary">{experience.role}</h3>
+          <p className="text-muted-foreground font-semibold">{experience.company}</p>
+          <p className="text-sm text-muted-foreground mt-1">{experience.startDate} - {experience.endDate}</p>
+        </div>
+      </div>
+      <ul className="space-y-3 text-muted-foreground list-disc list-inside mb-4 pl-4">
+          {experience.description.map((desc: string, index: number) => (
+              <li key={index}>{desc}</li>
+          ))}
+      </ul>
+      <div className="flex flex-wrap gap-2">
+          {experience.technologies.map((tech: string, index:number) => (
+              <span key={index} className="bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary/80 text-xs font-semibold px-2.5 py-1 rounded-full">
+                  {tech}
+              </span>
+          ))}
+      </div>
+      {experience.projects && experience.projects.length > 0 && (
+          <div className="mt-6">
+              <h4 className="text-lg font-bold font-space-grotesk text-primary mb-2">Projects</h4>
+              <div className="space-y-4">
+                {experience.projects.map((project: any, index: number) => (
+                    <ProjectInExperienceCard key={index} project={project} />
+                ))}
+              </div>
+          </div>
+      )}
+    </div>
+  </div>
+);
 
-export function Experience() {
+export function Experience({ experience }: { experience: any[] }) {
   return (
-    <motion.section
-      id="experience"
-      className="py-32 bg-white dark:bg-gray-900"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-    >
+    <section id="experience" className="py-32 bg-secondary/50 dark:bg-secondary/20">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-5xl font-serif font-bold text-primary mb-16 text-center">Professional Journey</h2>
-        <div className="relative max-w-4xl mx-auto">
-          <div className="absolute left-1/2 -translate-x-1/2 h-full w-px bg-border" />
-          {experiences.map((exp, index) => (
-            <div key={index} className={`flex items-center w-full mb-16 ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}>
-              <div className="w-1/2 px-8">
-                <motion.div 
-                  className="bg-card p-8 rounded-lg shadow-card"
-                  initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <h3 className="text-2xl font-bold text-primary mb-2">{exp.company}</h3>
-                  <p className="text-accent font-medium mb-2">{exp.role}</p>
-                  <p className="text-secondary text-sm mb-4">{exp.period}</p>
-                  <ul className="space-y-3 text-secondary">
-                    {exp.achievements.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="text-accent font-bold mt-1">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold font-space-grotesk text-primary mb-4">Professional Journey</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+            A timeline of my career, highlighting key roles, responsibilities, and accomplishments.
+          </p>
+        </div>
+
+        <div className="relative">
+          <div className="hidden lg:block absolute left-1/2 -ml-0.5 w-1 h-full bg-border/40 dark:bg-border/20"></div>
+          {experience.map((exp, index) => (
+            <div key={index} className={`flex justify-center lg:justify-start ${index % 2 === 0 ? 'lg:flex-row-reverse' : ''} mb-12`}>
+              <div className="hidden lg:block absolute left-1/2 -ml-4 w-8 h-8 bg-primary rounded-full border-4 border-background dark:border-background/80 flex items-center justify-center">
+                <div className="w-3 h-3 bg-primary-foreground rounded-full"></div>
               </div>
-              <div className="w-1/2 flex justify-center">
-                <div className="w-4 h-4 bg-accent rounded-full z-10" />
-              </div>
+              <ExperienceCard experience={exp} isLeft={index % 2 !== 0} />
             </div>
           ))}
         </div>
       </div>
-    </motion.section>
-  );
+    </section>
+  )
 }

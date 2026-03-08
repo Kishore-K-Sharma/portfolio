@@ -1,62 +1,38 @@
-'use client'
+import { Award } from 'lucide-react';
 
-import { motion } from 'framer-motion';
-import { Award, Star } from 'lucide-react';
+const CertificationCard = ({ certification }: { certification: any }) => (
+  <div 
+    className="bg-card dark:bg-card/60 border border-border/20 rounded-lg p-6 flex items-center gap-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:border-primary/30"
+  >
+    <div className="bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary/80 p-4 rounded-full">
+      <Award className="w-8 h-8" />
+    </div>
+    <div>
+      <h3 className="text-lg font-bold font-space-grotesk text-primary">{certification.title}</h3>
+    </div>
+  </div>
+);
 
-const certifications = [
-  "IBM Full Stack Developer Specialization",
-  "IBM DevOps & Software Engineering",
-  "Java 17 Masterclass",
-  "Generative AI Foundation",
-];
-
-const awards = [
-  "Best Employee of the Year",
-  "Star Performer Award",
-  "Technical Excellence Award",
-];
-
-export function Certifications() {
+export function Certifications({ certifications }: { certifications: any[] }) {
   return (
-    <motion.section
+    <section 
       id="certifications"
-      className="py-32 bg-white dark:bg-gray-900"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className="py-32 bg-secondary/50 dark:bg-secondary/20"
     >
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-5xl font-serif font-bold text-primary mb-16 text-center">Accolades & Recognition</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-          <div>
-            <h3 className="flex items-center gap-3 text-2xl font-bold text-primary mb-8">
-              <Award className="w-6 h-6 text-accent" />
-              Certifications
-            </h3>
-            <div className="space-y-4">
-              {certifications.map((cert) => (
-                <div key={cert} className="bg-card p-4 rounded-lg shadow-card">
-                  <p className="text-lg text-secondary">{cert}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h3 className="flex items-center gap-3 text-2xl font-bold text-primary mb-8">
-              <Star className="w-6 h-6 text-accent" />
-              Awards
-            </h3>
-            <div className="space-y-4">
-              {awards.map((award) => (
-                <div key={award} className="bg-card p-4 rounded-lg shadow-card">
-                  <p className="text-lg text-secondary">{award}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold font-space-grotesk text-primary mb-4">Licenses & Certifications</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+            Validation of my skills and knowledge through professional certifications.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {certifications.map((certification, index) => (
+                <CertificationCard key={index} certification={certification} />
+            ))}
         </div>
       </div>
-    </motion.section>
-  );
+    </section>
+  )
 }
