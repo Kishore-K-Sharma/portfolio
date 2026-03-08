@@ -19,7 +19,6 @@ export function Footer() {
 
         <div className="text-center md:text-right text-sm text-muted-foreground font-medium">
           <p>&copy; {new Date().getFullYear()} {portfolioData.personal.name}.</p>
-          <p>Built with Next.js & Tailwind</p>
         </div>
       </div>
     </footer>

@@ -5,6 +5,7 @@ import { Experience } from "@/components/sections/Experience";
 import { Education } from "@/components/sections/Education";
 import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
+import { Articles } from "@/components/sections/Articles";
 import { Skills } from "@/components/sections/Skills";
 import { Testimonials } from "@/components/sections/Testimonials";
 import portfolioData from "@/data/portfolio.json";
@@ -18,6 +19,7 @@ export default function Home() {
       <Experience experience={portfolioData.experience} />
       <Education education={portfolioData.education} />
       <Projects projects={portfolioData.projects} />
+      <Articles articles={portfolioData.articles} />
       <Certifications certifications={portfolioData.certifications} />
       <Testimonials testimonials={portfolioData.testimonials} />
       <Contact />

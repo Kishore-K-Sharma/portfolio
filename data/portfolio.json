@@ -6,7 +6,9 @@
     "location": "Noida, UP",
     "email": "kishoresharma914@gmail.com",
     "phone": "+91 8638099280",
-    "linkedin": "https://www.linkedin.com/in/kishore-kumar-sharma-product-engineer/",
+    "linkedin": "https://www.linkedin.com/in/kishore-kumar-sharma-a8902917a/",
+    "linkedinPage": "https://www.linkedin.com/groups/14367379/",
+    "naukri": "https://www.naukri.com/mnjuser/profile",
     "github": "https://github.com/kishore-kumar-sharma"
   },
   "summary": "Results-driven Senior Full Stack Engineer (6+ years) with proven expertise in building and leading cloud-native microservice architectures using Java/Spring Boot, NodeJS/NestJS, MEAN/MERN stack and React/Angular. Experienced across Telecom, FinTech, GovTech, and EdTech domains with a strong focus on scalability, performance, and automation. Skilled in AWS Cloud, CI/CD pipelines, and system observability. Passionate about mentoring teams and driving full lifecycle delivery of enterprise-grade software that improves efficiency and customer experience.",
@@ -316,22 +318,158 @@
   ],
   "certifications": [
     {
-      "title": "Generative AI Foundation Curriculum"
+      "title": "Advanced SQL Retrieval Queries in SQLiteStudio",
+      "issuer": "Coursera",
+      "year": "Jun 2023",
+      "credentialId": "F2YP9387W234",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/F2YP9387W234"
     },
     {
-      "title": "Java 17 Masterclass"
+      "title": "Project Planning: Putting It All Together",
+      "issuer": "Coursera",
+      "year": "May 2023",
+      "credentialId": "N62KDCCUWP6C",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/N62KDCCUWP6C"
     },
     {
-      "title": "IBM DevOps & Software Engineering Specialization"
+      "title": "Cloud Application Development Foundations Specialization",
+      "issuer": "Coursera",
+      "year": "Oct 2022",
+      "credentialId": "ZPJTQBKHEVTW",
+      "link": "https://www.coursera.org/account/accomplishments/specialization/certificate/ZPJTQBKHEVTW"
     },
     {
-      "title": "IBM Full Stack Software Developer Specialization"
+      "title": "DevOps, Cloud, and Agile Foundations Specialization",
+      "issuer": "Coursera",
+      "year": "Jul 2023",
+      "credentialId": "K2VZ2XVDKGLH",
+      "link": "https://www.coursera.org/account/accomplishments/specialization/certificate/K2VZ2XVDKGLH"
     },
     {
-      "title": "Application Development using Microservices & Serverless Containers with Docker, Kubernetes & OpenShift"
+      "title": "IBM Full Stack Software Developer Specialization",
+      "issuer": "Coursera",
+      "year": "Jul 2023",
+      "credentialId": "M78JP3BB3YE8",
+      "link": "https://www.coursera.org/account/accomplishments/specialization/certificate/M78JP3BB3YE8"
     },
     {
-      "title": "Network Security & Ethical Hacking Basics"
+      "title": "IBM DevOps and Software Engineering Specialization",
+      "issuer": "Coursera",
+      "year": "Jul 2023",
+      "credentialId": "N7KD5EBB2KKL",
+      "link": "https://www.coursera.org/account/accomplishments/specialization/certificate/N7KD5EBB2KKL"
+    },
+    {
+      "title": "Python Data Structures",
+      "issuer": "Coursera",
+      "year": "Jul 2021",
+      "credentialId": "HKSZUCZG2GQA",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/HKSZUCZG2GQA"
+    },
+    {
+      "title": "Server-side Development with NodeJS, Express and MongoDB",
+      "issuer": "Coursera",
+      "year": "May 2022",
+      "credentialId": "S8KQS8GAE62J",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/S8KQS8GAE62J"
+    },
+    {
+      "title": "Using Databases with Python",
+      "issuer": "Coursera",
+      "year": "Jan 2022",
+      "credentialId": "PBM7BVKB7YPT",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/PBM7BVKB7YPT"
+    },
+    {
+      "title": "Introduction to Web Development with HTML, CSS, JavaScript",
+      "issuer": "Coursera",
+      "year": "Aug 2021",
+      "credentialId": "FQWRXE9ELV3D",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/FQWRXE9ELV3D"
+    },
+    {
+      "title": "Getting Started with Linux Terminal",
+      "issuer": "Coursera",
+      "year": "Jul 2021",
+      "credentialId": "B9V2BVNBVWKG",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/B9V2BVNBVWKG"
+    },
+    {
+      "title": "Using Python to Access Web Data",
+      "issuer": "Coursera",
+      "year": "Aug 2021",
+      "credentialId": "LLJCB5BQGQM2",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/LLJCB5BQGQM2"
+    },
+    {
+      "title": "Developing Cloud Native Applications",
+      "issuer": "Coursera",
+      "year": "May 2022",
+      "credentialId": "27TKCZWM6GAT",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/27TKCZWM6GAT"
+    },
+    {
+      "title": "Object-Oriented Hierarchies in Java",
+      "issuer": "Coursera",
+      "year": "Dec 2021",
+      "credentialId": "585K2ANNJGU6",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/585K2ANNJGU6"
+    },
+    {
+      "title": "Introduction to Java",
+      "issuer": "Coursera",
+      "year": "Jul 2021",
+      "credentialId": "NVPMY8U9RUNT",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/NVPMY8U9RUNT"
+    },
+    {
+      "title": "Introduction to Object-Oriented Programming with Java",
+      "issuer": "Coursera",
+      "year": "Aug 2021",
+      "credentialId": "JNZJE3XTYMMR",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/JNZJE3XTYMMR"
+    },
+    {
+      "title": "Introduction to Agile Development and Scrum",
+      "issuer": "Coursera",
+      "year": "Sep 2022",
+      "credentialId": "PT4YV3NQQLGY",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/PT4YV3NQQLGY"
+    },
+    {
+      "title": "Tools for Data Science",
+      "issuer": "Coursera",
+      "year": "Sep 2022",
+      "credentialId": "86MWK8STSTJH",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/86MWK8STSTJH"
+    },
+    {
+      "title": "Introduction to DevOps",
+      "issuer": "Coursera",
+      "year": "Jul 2022",
+      "credentialId": "RFUTZLRWEL7K",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/RFUTZLRWEL7K"
+    },
+    {
+      "title": "Hands-on Introduction to Linux Commands and Shell Scripting",
+      "issuer": "Coursera",
+      "year": "Dec 2022",
+      "credentialId": "S54MSTP9B85S",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/S54MSTP9B85S"
+    },
+    {
+      "title": "Getting Started with Git and GitHub",
+      "issuer": "Coursera",
+      "year": "Jun 2022",
+      "credentialId": "TNBGXK2MLJXB",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/TNBGXK2MLJXB"
+    },
+    {
+      "title": "Data Science Methodology",
+      "issuer": "Coursera",
+      "year": "Dec 2022",
+      "credentialId": "QRQUQN9KG9BE",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/QRQUQN9KG9BE"
     }
   ],
   "testimonials": [
@@ -397,6 +535,15 @@
       "relationship": "Jiaul worked with Kishore Kumar on the same team",
       "date": "October 10, 2021",
       "content": "I have learnt many things under you. I like your way of teaching and how to think about logics. I'm very lucky having mentor like you. You are a hard working boy..."
+    }
+  ],
+  "articles": [
+    {
+      "title": "From Code to Architecture: Lessons Learned Building Scalable Systems",
+      "url": "https://www.linkedin.com/pulse/from-code-architecture-lessons-learned-building-scalable-sharma-2l44c/",
+      "platform": "LinkedIn Pulse",
+      "date": "Recent",
+      "description": "Insights and lessons learned regarding software architecture, microservices, and system scalability."
     }
   ]
 }
