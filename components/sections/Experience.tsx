@@ -40,7 +40,7 @@ const ExperienceCard = ({ experience }: { experience: any }) => (
         <ul className="space-y-3 text-muted-foreground mb-6">
           {experience.description.map((desc: string, index: number) => (
             <li key={index} className="flex">
-              <ChevronRight className="w-4 h-4 mr-2 mt-1 text-primary/50 shrink-0" />
+              <ChevronRight className="w-4 h-4 mr-2 mt-1 text-primary shrink-0" />
               <span className="leading-relaxed">{desc}</span>
             </li>
           ))}

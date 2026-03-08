@@ -4,48 +4,77 @@
 
 @layer base {
   :root {
+    /* Base Background - White */
     --background: 0 0% 100%;
+    /* Base Foreground - Dark Gray (21:1 Contrast) */
     --foreground: 224 71.4% 4.1%;
+    
     --card: 0 0% 100%;
     --card-foreground: 224 71.4% 4.1%;
+    
     --popover: 0 0% 100%;
     --popover-foreground: 224 71.4% 4.1%;
-    --primary: 262.1 83.3% 57.8%;
+    
+    /* Primary needs to be darker to pass 4.5:1 against bg */
+    --primary: 262.1 83.3% 43%; 
     --primary-foreground: 210 20% 98%;
+    
+    /* Secondary Background slightly off-white */
     --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220 8.9% 46.1%;
+    /* Secondary Text darkened to pass 4.5:1 against secondary bg */
+    --secondary-foreground: 220 8.9% 38%;
+    
     --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
+    /* Muted text darkened for 4.5:1 readability */
+    --muted-foreground: 220 8.9% 38%;
+    
     --accent: 220 14.3% 95.9%;
-    --accent-foreground: 220 8.9% 46.1%;
-    --destructive: 0 84.2% 60.2%;
+    --accent-foreground: 220 8.9% 38%;
+    
+    /* Destructive darkened to pass 4.5:1 against white */
+    --destructive: 0 84.2% 43%;
     --destructive-foreground: 210 20% 98%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 262.1 83.3% 57.8%;
+    
+    --border: 220 13% 85%;
+    --input: 220 13% 85%;
+    --ring: 262.1 83.3% 43%;
     --radius: 0.75rem;
   }
 
   .dark {
+    /* Base Background - Dark */
     --background: 224 71.4% 4.1%;
+    /* Base Foreground - Off White (20:1 Contrast) */
     --foreground: 210 20% 98%;
+    
     --card: 224 71.4% 4.1%;
     --card-foreground: 210 20% 98%;
+    
     --popover: 224 71.4% 4.1%;
     --popover-foreground: 210 20% 98%;
-    --primary: 210 20% 98%;
+    
+    /* Primary lightened to pass 4.5:1 against dark bg AND match theme branding */
+    --primary: 262.1 83.3% 75%;
+    /* Dark text on light primary button */
     --primary-foreground: 224 71.4% 4.1%;
+    
     --secondary: 215 27.9% 16.9%;
     --secondary-foreground: 210 20% 98%;
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 217.9 10.6% 64.9%;
-    --accent: 215 27.9% 16.9%;
+    
+    --muted: 215 27.9% 18%;
+    /* Muted text lightened to pass 4.5:1 against dark backgrounds */
+    --muted-foreground: 215 15% 72%;
+    
+    --accent: 215 27.9% 18%;
     --accent-foreground: 210 20% 98%;
-    --destructive: 0 62.8% 30.6%;
+    
+    /* Destructive lightened slightly for better contrast footprint if used for text */
+    --destructive: 0 62.8% 50%;
     --destructive-foreground: 210 40% 98%;
-    --border: 215 27.9% 16.9%;
-    --input: 215 27.9% 16.9%;
-    --ring: 216 12.2% 83.9%;
+    
+    --border: 215 27.9% 25%;
+    --input: 215 27.9% 25%;
+    --ring: 262.1 83.3% 75%;
   }
 }
 

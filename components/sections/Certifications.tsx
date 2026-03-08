@@ -13,7 +13,7 @@ const CertificationCard = ({ certification }: { certification: any }) => (
     </div>
     <div>
       <h3 className="text-xl font-bold font-space-grotesk text-foreground group-hover:text-primary transition-colors">{certification.title}</h3>
-      <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1.5 font-semibold text-primary/70">Certified Professional</p>
+      <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1.5 font-semibold">Certified Professional</p>
     </div>
   </motion.div>
 );

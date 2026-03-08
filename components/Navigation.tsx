@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ThemeToggle } from './ThemeToggle';
 import { Terminal } from 'lucide-react';
+import portfolioData from '@/data/portfolio.json';
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
@@ -15,17 +16,19 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const firstName = portfolioData.personal.name.split(' ')[0];
+
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${scrolled
-          ? 'bg-background/80 backdrop-blur-lg border-border/40 py-3 shadow-sm'
-          : 'bg-transparent border-transparent py-5'
+        ? 'bg-background/80 backdrop-blur-lg border-border/40 py-3 shadow-sm'
+        : 'bg-transparent border-transparent py-5'
         }`}
     >
       <nav className="container mx-auto px-6 flex justify-between items-center">
         <Link href="/" className="flex items-center gap-2 text-xl font-bold font-space-grotesk text-foreground tracking-tight group">
           <Terminal className="w-5 h-5 text-primary" />
-          <span>Kishore<span className="text-primary">.dev</span></span>
+          <span>{firstName}<span className="text-primary">.dev</span></span>
         </Link>
 
         <div className="hidden md:flex items-center space-x-8 text-sm font-medium">

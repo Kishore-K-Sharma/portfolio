@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, ArrowRight, Terminal } from 'lucide-react';
 import Link from 'next/link';
 import { HeroBackground } from '@/components/HeroBackground';
+import portfolioData from '@/data/portfolio.json';
 
 const containerVariants = {
   hidden: {},
@@ -51,14 +52,14 @@ export function Hero() {
 
         <motion.div variants={itemVariants} className="w-full text-left md:text-center">
           <h1 className="font-space-grotesk text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-foreground mb-4">
-            Kishore Kumar Sharma
+            {portfolioData.personal.name}
           </h1>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-500 mb-6 pb-2">
-            Senior Full Stack Consultant
+            {portfolioData.personal.title}
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-light">
             Architecting and building scalable cloud-native microservices and distributed systems.
-            Over <strong className="font-medium text-foreground">6+ years</strong> of experience engineering high-performance applications for the modern web.
+            Over <strong className="font-medium text-foreground">{portfolioData.personal.experienceYears}</strong> of experience engineering high-performance applications for the modern web.
           </p>
         </motion.div>
 
@@ -93,18 +94,24 @@ export function Hero() {
           className="flex items-center justify-start md:justify-center gap-6 w-full"
           variants={itemVariants}
         >
-          <a href="https://github.com/kishore-kumar-sharma" target="_blank" rel="noopener noreferrer" className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-full transition-all">
-            <Github className="w-6 h-6" />
-            <span className="sr-only">GitHub</span>
-          </a>
-          <a href="https://www.linkedin.com/in/kishore-kumar-sharma-product-engineer/" target="_blank" rel="noopener noreferrer" className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-full transition-all">
-            <Linkedin className="w-6 h-6" />
-            <span className="sr-only">LinkedIn</span>
-          </a>
-          <a href="mailto:kishoresharma914@gmail.com" className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-full transition-all">
-            <Mail className="w-6 h-6" />
-            <span className="sr-only">Email</span>
-          </a>
+          {portfolioData.personal.github && (
+            <a href={portfolioData.personal.github} target="_blank" rel="noopener noreferrer" className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-full transition-all">
+              <Github className="w-6 h-6" />
+              <span className="sr-only">GitHub</span>
+            </a>
+          )}
+          {portfolioData.personal.linkedin && (
+            <a href={portfolioData.personal.linkedin} target="_blank" rel="noopener noreferrer" className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-full transition-all">
+              <Linkedin className="w-6 h-6" />
+              <span className="sr-only">LinkedIn</span>
+            </a>
+          )}
+          {portfolioData.personal.email && (
+            <a href={`mailto:${portfolioData.personal.email}`} className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-full transition-all">
+              <Mail className="w-6 h-6" />
+              <span className="sr-only">Email</span>
+            </a>
+          )}
         </motion.div>
       </div>
     </motion.section>
