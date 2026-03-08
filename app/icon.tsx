@@ -28,7 +28,7 @@ export default function Icon() {
                     fontFamily: 'monospace'
                 }}
             >
-                KS
+                R
             </div>
         ),
         {
