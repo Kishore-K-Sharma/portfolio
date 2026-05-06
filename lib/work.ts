@@ -1,9 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import { marked } from "marked";
-import sanitizeHtml from "sanitize-html";
 import portfolioData from "@/data/portfolio.json";
+import { renderMarkdown } from "./markdown";
 
 export interface WorkFrontmatter {
   title: string;
@@ -53,32 +52,7 @@ export function loadWork(slug: string): WorkCase | null {
     return null;
   }
 
-  const rawHtml = marked.parse(parsed.content, { async: false }) as string;
-  const html = sanitizeHtml(rawHtml, {
-    allowedTags: [
-      "h1", "h2", "h3", "h4", "h5", "h6",
-      "p", "blockquote", "ul", "ol", "li",
-      "strong", "em", "code", "pre", "hr", "br",
-      "a", "img", "figure", "figcaption",
-      "table", "thead", "tbody", "tr", "th", "td",
-    ],
-    allowedAttributes: {
-      a: ["href", "title", "target", "rel"],
-      img: ["src", "alt", "title", "loading", "decoding"],
-      code: ["class"],
-      pre: ["class"],
-    },
-    allowedSchemes: ["http", "https", "mailto"],
-    allowedSchemesAppliedToAttributes: ["href", "src"],
-    allowProtocolRelative: true,
-    transformTags: {
-      a: (tagName, attribs) => {
-        const out = { ...attribs };
-        if (out.target === "_blank") out.rel = "noopener noreferrer";
-        return { tagName, attribs: out };
-      },
-    },
-  });
+  const html = renderMarkdown(parsed.content);
 
   return {
     slug,
