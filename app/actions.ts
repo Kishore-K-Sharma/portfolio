@@ -2,14 +2,58 @@
 
 import { z } from 'zod'
 import nodemailer from 'nodemailer'
+import { headers } from 'next/headers'
 
 const contactFormSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  email: z.string().email('Invalid email address'),
-  message: z.string().min(10, 'Message must be at least 10 characters'),
+  name: z.string().min(1, 'Name is required').max(100),
+  email: z.string().email('Invalid email address').max(254),
+  message: z.string().min(10, 'Message must be at least 10 characters').max(5000),
 });
 
+// In-memory rate limiter — best-effort only (resets on cold start, not shared across instances).
+// For stronger guarantees, swap for Upstash/Redis.
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX = 3;
+const submissions = new Map<string, number[]>();
+
+function getClientIp(): string {
+  const h = headers();
+  const forwarded = h.get('x-forwarded-for');
+  if (forwarded) return forwarded.split(',')[0].trim();
+  return h.get('x-real-ip') ?? 'unknown';
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const cutoff = now - RATE_LIMIT_WINDOW_MS;
+  const recent = (submissions.get(ip) ?? []).filter((t) => t > cutoff);
+  if (recent.length >= RATE_LIMIT_MAX) {
+    submissions.set(ip, recent);
+    return true;
+  }
+  recent.push(now);
+  submissions.set(ip, recent);
+  return false;
+}
+
+function escapeHtml(input: string): string {
+  return input
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 export async function submitContactForm(prevState: any, formData: FormData) {
+  if (isRateLimited(getClientIp())) {
+    return {
+      message: 'Too many submissions. Please wait a minute and try again.',
+      success: false,
+      errors: undefined,
+    };
+  }
+
   const validatedFields = contactFormSchema.safeParse({
     name: formData.get('name'),
     email: formData.get('email'),
@@ -40,6 +84,10 @@ export async function submitContactForm(prevState: any, formData: FormData) {
     };
   }
 
+  const safeName = escapeHtml(name);
+  const safeEmail = escapeHtml(email);
+  const safeMessage = escapeHtml(message);
+
   try {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -62,21 +110,21 @@ export async function submitContactForm(prevState: any, formData: FormData) {
           <table style="width: 100%; border-collapse: collapse;">
             <tr>
               <td style="padding: 8px 0; font-weight: 600; color: #374151; width: 80px;">Name</td>
-              <td style="padding: 8px 0; color: #111827;">${name}</td>
+              <td style="padding: 8px 0; color: #111827;">${safeName}</td>
             </tr>
             <tr>
               <td style="padding: 8px 0; font-weight: 600; color: #374151;">Email</td>
               <td style="padding: 8px 0;">
-                <a href="mailto:${email}" style="color: #7c3aed;">${email}</a>
+                <a href="mailto:${safeEmail}" style="color: #7c3aed;">${safeEmail}</a>
               </td>
             </tr>
           </table>
           <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;" />
           <h3 style="color: #374151; margin-bottom: 8px;">Message</h3>
-          <p style="color: #111827; line-height: 1.7; white-space: pre-wrap;">${message}</p>
+          <p style="color: #111827; line-height: 1.7; white-space: pre-wrap;">${safeMessage}</p>
           <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;" />
           <p style="color: #9ca3af; font-size: 12px;">
-            Sent from kishore-kumar-sharma.dev · Hit Reply to respond directly to ${name}.
+            Sent from kishore-kumar-sharma.dev · Hit Reply to respond directly to ${safeName}.
           </p>
         </div>
       `,

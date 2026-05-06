@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { X, Award, ExternalLink } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useId, useRef } from 'react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -19,16 +19,27 @@ interface ModalProps {
 }
 
 export function Modal({ isOpen, onClose, certificate }: ModalProps) {
+  const titleId = useId();
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
+    if (!isOpen) return;
+    previouslyFocused.current = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = 'hidden';
+    closeButtonRef.current?.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
     };
-  }, [isOpen]);
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = 'unset';
+      previouslyFocused.current?.focus();
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen || !certificate) return null;
 
@@ -40,6 +51,9 @@ export function Modal({ isOpen, onClose, certificate }: ModalProps) {
         exit={{ opacity: 0 }}
         className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 md:p-6"
         onClick={onClose}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
       >
         <motion.div
           initial={{ scale: 0.95, opacity: 0, y: 20 }}
@@ -51,10 +65,11 @@ export function Modal({ isOpen, onClose, certificate }: ModalProps) {
         >
           {/* Header */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-border/40 shrink-0 bg-secondary/20">
-            <h3 className="font-space-grotesk font-bold text-xl text-foreground truncate pr-4">
+            <h3 id={titleId} className="font-space-grotesk font-bold text-xl text-foreground truncate pr-4">
               {certificate.title}
             </h3>
             <button
+              ref={closeButtonRef}
               onClick={onClose}
               className="p-2 bg-background hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors rounded-full shrink-0 shadow-sm border border-border/50"
               aria-label="Close modal"
