@@ -2,6 +2,7 @@
 
 import { z } from 'zod'
 import nodemailer from 'nodemailer'
+import { encode as escapeHtml } from 'html-entities'
 import { headers } from 'next/headers';
 import { isRateLimited } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
@@ -13,6 +14,12 @@ const contactFormSchema = z.object({
   message: z.string().min(10, 'Message must be at least 10 characters').max(5000),
 });
 
+export type ContactFormState = {
+  message?: string;
+  errors?: Partial<Record<'name' | 'email' | 'message', string[]>>;
+  success: boolean;
+};
+
 async function getClientIp(): Promise<string> {
   const h = await headers();
   const forwarded = h.get('x-forwarded-for');
@@ -20,16 +27,17 @@ async function getClientIp(): Promise<string> {
   return h.get('x-real-ip') ?? 'unknown';
 }
 
-function escapeHtml(input: string): string {
-  return input
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+// CR/LF in user input can inject extra SMTP headers when interpolated into
+// Subject / From / etc. (header fields are line-delimited). Body is safe via
+// escapeHtml, but these need stripping before reaching Nodemailer headers.
+function stripHeaderNewlines(input: string): string {
+  return input.replace(/[\r\n]+/g, ' ').trim();
 }
 
-export async function submitContactForm(prevState: any, formData: FormData) {
+export async function submitContactForm(
+  _prevState: ContactFormState,
+  formData: FormData,
+): Promise<ContactFormState> {
   const ip = await getClientIp();
 
   if (await isRateLimited(ip)) {
@@ -83,7 +91,8 @@ export async function submitContactForm(prevState: any, formData: FormData) {
     };
   }
 
-  const safeName = escapeHtml(name);
+  const headerSafeName = stripHeaderNewlines(name);
+  const safeName = escapeHtml(headerSafeName);
   const safeEmail = escapeHtml(email);
   const safeMessage = escapeHtml(message);
 
@@ -110,8 +119,11 @@ export async function submitContactForm(prevState: any, formData: FormData) {
     await transporter.sendMail({
       from: `"Portfolio · /contact" <${gmailUser}>`,
       to: gmailUser,
+      // Safe to pass `email` raw: Zod's .email() regex rejects CR/LF, so the
+      // value can't contain header-injection characters by the time it reaches
+      // Nodemailer. `name` doesn't have that property — see headerSafeName.
       replyTo: email,
-      subject: `New inquiry · ${name}`,
+      subject: `New inquiry · ${headerSafeName}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 580px; margin: 0 auto; padding: 32px 28px; background: #ffffff; color: #111827;">
           <p style="${labelStyle} margin: 0 0 6px;">/contact · new inquiry</p>

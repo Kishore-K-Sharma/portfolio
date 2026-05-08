@@ -20,7 +20,10 @@ export function proxy(request: NextRequest) {
     `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline' https: ${
       isDev ? "'unsafe-eval'" : ""
     }`,
-    // Tailwind / Next inject critical CSS without nonces.
+    // `'unsafe-inline'` is required here: Next.js injects critical/inline CSS
+    // without nonce support, and Tailwind's runtime style insertions can't be
+    // nonce-tagged either. Trade-off accepted — script-src is still strict, so
+    // an XSS payload can't pivot to script execution via injected styles.
     `style-src 'self' 'unsafe-inline'`,
     `img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com`,
     `font-src 'self' data:`,

@@ -1,0 +1,65 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-decide">
+  <title id="t-decide">Decision tree: server action vs API route</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.fa{fill:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">WHICH ONE? · ASK ONE QUESTION</text>
+
+  <!-- Root -->
+  <rect x="220" y="60" width="360" height="48" rx="4" class="fs"/>
+  <rect x="220" y="60" width="360" height="48" rx="4" class="a"/>
+  <text x="400" y="84" text-anchor="middle" class="acc">will it ever be called by something</text>
+  <text x="400" y="100" text-anchor="middle" class="acc">other than a &lt;form&gt; in this app?</text>
+
+  <!-- No branch -->
+  <line x1="320" y1="108" x2="200" y2="148" class="a"/>
+  <polygon points="200,148 207,150 207,140" class="fa"/>
+  <text x="270" y="128" text-anchor="middle" class="label">NO</text>
+
+  <rect x="40" y="156" width="320" height="40" rx="4" class="s"/>
+  <text x="200" y="180" text-anchor="middle" class="acc">→ server action</text>
+
+  <line x1="200" y1="196" x2="200" y2="220" class="a"/>
+  <polygon points="200,220 195,210 205,210" class="fa"/>
+
+  <rect x="40" y="228" width="320" height="120" rx="4" class="s"/>
+  <text x="60" y="252" class="text">contact form, login, profile update,</text>
+  <text x="60" y="272" class="text">delete confirmation, save draft</text>
+  <line x1="60" y1="290" x2="340" y2="290" class="sm"/>
+  <text x="60" y="312" class="label">FEWER FILES · TYPED · PROGRESSIVE</text>
+  <text x="60" y="332" class="label">PERFECT FOR INTERNAL FORMS</text>
+
+  <!-- Yes branch -->
+  <line x1="480" y1="108" x2="600" y2="148" class="a"/>
+  <polygon points="600,148 593,140 593,150" class="fa"/>
+  <text x="530" y="128" text-anchor="start" class="label">YES</text>
+
+  <rect x="440" y="156" width="320" height="40" rx="4" class="s"/>
+  <text x="600" y="180" text-anchor="middle" class="acc">→ API route</text>
+
+  <line x1="600" y1="196" x2="600" y2="220" class="a"/>
+  <polygon points="600,220 595,210 605,210" class="fa"/>
+
+  <rect x="440" y="228" width="320" height="120" rx="4" class="s"/>
+  <text x="460" y="252" class="text">mobile clients, webhooks, partners,</text>
+  <text x="460" y="272" class="text">file downloads, custom headers</text>
+  <line x1="460" y1="290" x2="740" y2="290" class="sm"/>
+  <text x="460" y="312" class="label">STABLE URL · DOCUMENTED CONTRACT</text>
+  <text x="460" y="332" class="label">FULL CONTROL OVER RESPONSE</text>
+
+  <text x="400" y="376" text-anchor="middle" class="label">BOTH CAN COEXIST · DON'T FORCE EVERYTHING THROUGH ONE</text>
+</svg>

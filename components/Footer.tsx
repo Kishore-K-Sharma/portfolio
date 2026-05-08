@@ -45,11 +45,6 @@ export function Footer() {
                   LinkedIn ↗
                 </a>
               </li>
-              <li>
-                <a href={personal.github} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
-                  GitHub ↗
-                </a>
-              </li>
             </ul>
           </div>
         </div>

@@ -12,10 +12,6 @@ import { CommandPalette } from "@/components/CommandPalette";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-// GA4 measurement IDs match `G-` followed by alphanumerics. Anything else is
-// rejected so the env value can never be coerced into script content.
-const GA_ID_PATTERN = /^G-[A-Z0-9]+$/;
-
 const fraunces = Fraunces({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -123,15 +119,21 @@ export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const nonce = (await headers()).get("x-nonce") ?? undefined;
-  const gaId = GA_ID_PATTERN.test(siteConfig.gaMeasurementId) ? siteConfig.gaMeasurementId : null;
+  const gaId = siteConfig.gaMeasurementId;
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": `${baseUrl}/#person`,
     name: "Kishore Kumar Sharma",
+    givenName: "Kishore",
+    familyName: "Sharma",
     jobTitle: "Senior Full Stack Engineer",
     url: baseUrl,
     image: `${baseUrl}/profile-picture.jpg`,
+    email: "mailto:kishoresharma914@gmail.com",
+    nationality: { "@type": "Country", name: "India" },
+    knowsLanguage: ["English", "Hindi"],
     description:
       "Senior full-stack engineer who ships end-to-end across telecom, fintech, govtech and edtech. Backend-deep by training; full-stack by delivery.",
     address: {
@@ -140,9 +142,25 @@ export default async function RootLayout({
       addressRegion: "Uttar Pradesh",
       addressCountry: "IN",
     },
+    worksFor: {
+      "@type": "Organization",
+      name: "Tata Consultancy Services",
+      url: "https://www.tcs.com",
+    },
+    alumniOf: [
+      {
+        "@type": "CollegeOrUniversity",
+        name: "Manipal University Jaipur",
+        url: "https://jaipur.manipal.edu",
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        name: "Gauhati University",
+        url: "https://gauhati.ac.in",
+      },
+    ],
     sameAs: [
-      "https://www.linkedin.com/in/kishore-kumar-sharma-a8902917a/",
-      "https://github.com/kishore-kumar-sharma",
+      "https://www.linkedin.com/in/kishore-kumar-sharma/",
     ],
     knowsAbout: [
       "Full Stack Development",

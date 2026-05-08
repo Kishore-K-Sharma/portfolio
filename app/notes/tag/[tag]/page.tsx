@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { listTags, notesByTag, tagSlug } from "@/lib/notes";
+import { safeJsonLd } from "@/lib/json-ld";
 import { siteConfig } from "@/config/site";
+import { NotesBrowser, type NoteSummary } from "@/components/notes/NotesBrowser";
 
 interface Props {
   params: Promise<{ tag: string }>;
@@ -16,15 +20,35 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const tag = decodeURIComponent(params.tag);
   const url = `${siteConfig.baseUrl}/notes/tag/${tagSlug(tag)}`;
+  const description = `Notes on ${tag} — long-form writing on architecture, distributed systems, and shipping discipline by Kishore Kumar Sharma.`;
   return {
     title: `#${tag}`,
-    description: `Notes tagged ${tag} by Kishore Kumar Sharma.`,
+    description,
+    keywords: [tag, "software engineering", "backend", "Kishore Kumar Sharma"],
+    authors: [{ name: "Kishore Kumar Sharma", url: siteConfig.baseUrl }],
     alternates: { canonical: url },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-snippet": -1,
+        "max-image-preview": "large",
+      },
+    },
     openGraph: {
       title: `Notes tagged #${tag}`,
-      description: `Long-form thinking tagged ${tag}.`,
+      description,
       url,
       type: "website",
+      siteName: "Kishore Kumar Sharma",
+      locale: "en_IN",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Notes tagged #${tag}`,
+      description,
     },
   };
 }
@@ -40,8 +64,64 @@ export default async function TagPage(props: Props) {
   const notes = notesByTag(match.tag);
   if (notes.length === 0) notFound();
 
+  const summaries: NoteSummary[] = notes.map((n) => ({
+    slug: n.slug,
+    title: n.title,
+    description: n.description,
+    date: n.date,
+    tags: n.tags ?? [],
+    readMin: n.readMin,
+  }));
+
+  const basePath = `/notes/tag/${tagSlug(match.tag)}`;
+  const url = `${siteConfig.baseUrl}${basePath}`;
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
+
+  const collectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": url,
+    name: `Notes tagged #${match.tag}`,
+    description: `Long-form notes by Kishore Kumar Sharma tagged ${match.tag}.`,
+    url,
+    inLanguage: "en",
+    isPartOf: { "@type": "Blog", "@id": `${siteConfig.baseUrl}/notes` },
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: notes.length,
+      itemListElement: notes.map((n, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: `${siteConfig.baseUrl}/notes/${n.slug}`,
+        name: n.title,
+      })),
+    },
+  };
+
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.baseUrl },
+      { "@type": "ListItem", position: 2, name: "Writing", item: `${siteConfig.baseUrl}/notes` },
+      { "@type": "ListItem", position: 3, name: `#${match.tag}`, item: url },
+    ],
+  };
+
   return (
     <div className="min-h-screen pt-32 pb-24">
+      <script
+        type="application/ld+json"
+        nonce={nonce}
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(collectionJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        nonce={nonce}
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbs) }}
+      />
       <div className="container-narrow">
         <Link
           href="/notes"
@@ -57,36 +137,15 @@ export default async function TagPage(props: Props) {
           <h1 className="font-display text-display-sm md:text-display text-foreground tracking-[-0.03em] leading-[1.02] text-balance">
             #{match.tag}
           </h1>
-          <p className="mt-4 font-mono text-[0.78rem] text-muted-foreground">
-            {notes.length} {notes.length === 1 ? "note" : "notes"}
-          </p>
         </header>
 
-        <ol className="divide-y divide-subtle/60">
-          {notes.map((n) => (
-            <li key={n.slug} className="py-7 first:pt-0 last:pb-0">
-              <Link href={`/notes/${n.slug}`} className="group block">
-                <div className="flex items-baseline justify-between gap-4 mb-3">
-                  <time
-                    dateTime={n.date}
-                    className="font-mono text-[0.72rem] text-muted-foreground"
-                  >
-                    {formatDate(n.date)}
-                  </time>
-                  <span className="font-mono text-[0.7rem] text-muted-foreground">
-                    {n.readMin} min read
-                  </span>
-                </div>
-                <h2 className="font-display text-heading text-foreground tracking-[-0.025em] leading-[1.1] text-balance group-hover:text-accent transition-colors">
-                  {n.title}
-                </h2>
-                <p className="mt-3 text-[0.94rem] text-muted-foreground leading-relaxed text-pretty max-w-[58ch]">
-                  {n.description}
-                </p>
-              </Link>
-            </li>
-          ))}
-        </ol>
+        <Suspense fallback={null}>
+          <NotesBrowser
+            notes={summaries}
+            basePath={basePath}
+            searchPlaceholder={`Search within #${match.tag}…`}
+          />
+        </Suspense>
 
         <div className="mt-14 pt-6 border-t border-subtle/40">
           <Link
@@ -99,9 +158,4 @@ export default async function TagPage(props: Props) {
       </div>
     </div>
   );
-}
-
-function formatDate(iso: string): string {
-  const d = new Date(iso);
-  return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 }

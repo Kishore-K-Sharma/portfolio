@@ -18,9 +18,13 @@ interface ModalProps {
   } | null;
 }
 
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 export function Modal({ isOpen, onClose, certificate }: ModalProps) {
   const titleId = useId();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -30,7 +34,28 @@ export function Modal({ isOpen, onClose, certificate }: ModalProps) {
     closeButtonRef.current?.focus();
 
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab" || !dialogRef.current) return;
+
+      const focusable = Array.from(
+        dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
+      ).filter((el) => !el.hasAttribute("inert") && el.offsetParent !== null);
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+
+      if (e.shiftKey && (active === first || !dialogRef.current.contains(active))) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKeyDown);
 
@@ -56,6 +81,7 @@ export function Modal({ isOpen, onClose, certificate }: ModalProps) {
         aria-labelledby={titleId}
       >
         <motion.div
+          ref={dialogRef}
           initial={{ scale: 0.97, opacity: 0, y: 12 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.97, opacity: 0, y: 12 }}
@@ -72,8 +98,9 @@ export function Modal({ isOpen, onClose, certificate }: ModalProps) {
             </div>
             <button
               ref={closeButtonRef}
+              type="button"
               onClick={onClose}
-              aria-label="Close"
+              aria-label="Close certificate dialog"
               className="inline-flex items-center justify-center w-9 h-9 rounded-md border border-subtle text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors shrink-0"
             >
               <X size={16} />

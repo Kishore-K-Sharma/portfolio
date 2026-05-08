@@ -1,0 +1,77 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-storm">
+  <title id="t-storm">Reconnect storm: flat retry vs jittered backoff</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <!-- Bad: storm -->
+  <text x="40" y="36" class="danger">DEFAULT · FLAT 1s RETRY → STORM</text>
+
+  <!-- Axis -->
+  <line x1="60" y1="180" x2="760" y2="180" class="s"/>
+  <line x1="60" y1="80" x2="60" y2="180" class="s"/>
+  <text x="40" y="86" class="label">conn/sec</text>
+  <text x="60" y="200" class="label">0s</text>
+  <text x="200" y="200" class="label">1s</text>
+  <text x="340" y="200" class="label">2s</text>
+  <text x="480" y="200" class="label">3s</text>
+  <text x="620" y="200" class="label">4s</text>
+  <text x="760" y="200" text-anchor="end" class="label">5s</text>
+
+  <!-- Spike at 0 (deploy drop) -->
+  <line x1="60" y1="180" x2="60" y2="100" class="dg"/>
+  <text x="65" y="100" class="danger">3000 dropped</text>
+
+  <!-- Reconnect spikes at 1s, 2s, 3s -->
+  <line x1="200" y1="180" x2="200" y2="110" class="dg"/>
+  <line x1="340" y1="180" x2="340" y2="120" class="dg"/>
+  <line x1="480" y1="180" x2="480" y2="135" class="dg"/>
+  <line x1="620" y1="180" x2="620" y2="155" class="dg"/>
+
+  <text x="200" y="106" class="danger">×× retry storm</text>
+
+  <text x="40" y="232" class="danger">SAME RETRY MOMENT · COMPOUNDING SPIKES · EFFECTIVELY OFFLINE</text>
+
+  <!-- Good: jittered -->
+  <line x1="40" y1="252" x2="760" y2="252" class="sm"/>
+
+  <text x="40" y="278" class="acc">FIXED · JITTERED EXPONENTIAL BACKOFF</text>
+
+  <!-- Mini chart -->
+  <line x1="60" y1="346" x2="760" y2="346" class="s"/>
+  <line x1="60" y1="296" x2="60" y2="346" class="s"/>
+
+  <!-- Distributed reconnects -->
+  <line x1="80" y1="346" x2="80" y2="338" class="a"/>
+  <line x1="120" y1="346" x2="120" y2="334" class="a"/>
+  <line x1="170" y1="346" x2="170" y2="332" class="a"/>
+  <line x1="220" y1="346" x2="220" y2="336" class="a"/>
+  <line x1="280" y1="346" x2="280" y2="334" class="a"/>
+  <line x1="340" y1="346" x2="340" y2="332" class="a"/>
+  <line x1="400" y1="346" x2="400" y2="336" class="a"/>
+  <line x1="460" y1="346" x2="460" y2="334" class="a"/>
+  <line x1="520" y1="346" x2="520" y2="332" class="a"/>
+  <line x1="580" y1="346" x2="580" y2="336" class="a"/>
+  <line x1="640" y1="346" x2="640" y2="334" class="a"/>
+  <line x1="700" y1="346" x2="700" y2="332" class="a"/>
+  <line x1="740" y1="346" x2="740" y2="336" class="a"/>
+
+  <text x="200" y="316" class="acc">3000 reconnects · spread over 30 seconds</text>
+  <text x="200" y="334" class="label">JITTERED BACKOFF + COORDINATED DRAIN ON DEPLOY</text>
+</svg>

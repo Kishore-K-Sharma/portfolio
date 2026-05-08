@@ -18,13 +18,17 @@ export interface Note extends NoteFrontmatter {
   content: string; // raw markdown
   html: string;    // rendered HTML
   readMin: number; // always present after load
+  wordCount: number;
 }
 
 const NOTES_DIR = path.join(process.cwd(), "content", "notes");
 
+function countWords(text: string): number {
+  return text.replace(/[^\w\s]/g, " ").split(/\s+/).filter(Boolean).length;
+}
+
 function wordsPerMinute(text: string): number {
-  const words = text.replace(/[^\w\s]/g, " ").split(/\s+/).filter(Boolean).length;
-  return Math.max(1, Math.round(words / 220));
+  return Math.max(1, Math.round(countWords(text) / 220));
 }
 
 export function listNotes({ includeDrafts = false } = {}): Note[] {
@@ -58,6 +62,7 @@ export function loadNote(slug: string): Note | null {
     tags: fm.tags ?? [],
     draft: fm.draft ?? false,
     readMin: fm.readMin ?? wordsPerMinute(parsed.content),
+    wordCount: countWords(parsed.content),
     content: parsed.content,
     html,
   };
@@ -88,4 +93,33 @@ export function notesByTag(tag: string): Note[] {
 /** Slugify a tag for URL use (preserve simple cases, lowercase, hyphenate). */
 export function tagSlug(tag: string): string {
   return tag.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+}
+
+// djb2 hash — small, stable, no deps. Used to pick neighbors deterministically.
+function hashSlug(s: string): number {
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) {
+    h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+  }
+  return h;
+}
+
+/**
+ * Pick a prev/next pair for a given note that is NOT in date order, but is
+ * stable per slug — so static generation produces consistent HTML and a user
+ * walking forward through "next → next → next" doesn't see the same post twice
+ * in a row. Falls back gracefully when there are 0 or 1 other notes.
+ */
+export function relatedNotes(currentSlug: string): { prev: Note | null; next: Note | null } {
+  const others = listNotes().filter((n) => n.slug !== currentSlug);
+  if (others.length === 0) return { prev: null, next: null };
+  if (others.length === 1) return { prev: null, next: others[0] };
+
+  const seed = hashSlug(currentSlug);
+  const nextIdx = seed % others.length;
+  // Different multiplicative spread so prev rarely collides with next.
+  let prevIdx = ((seed * 2654435761) >>> 0) % others.length;
+  if (prevIdx === nextIdx) prevIdx = (prevIdx + 1) % others.length;
+
+  return { prev: others[prevIdx], next: others[nextIdx] };
 }

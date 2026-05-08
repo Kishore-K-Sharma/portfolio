@@ -1,0 +1,104 @@
+<svg viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-fanout">
+  <title id="t-fanout">Gateway / queue / worker fan-out for real-time platforms</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.fa{fill:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">CONNECTION LAYER · QUEUE · WORKER LAYER</text>
+
+  <!-- Clients -->
+  <text x="80" y="78" class="label">CLIENTS</text>
+  <rect x="40" y="92" width="80" height="28" rx="3" class="s"/>
+  <text x="80" y="111" text-anchor="middle" class="mono">student · 1</text>
+  <rect x="40" y="128" width="80" height="28" rx="3" class="s"/>
+  <text x="80" y="147" text-anchor="middle" class="mono">student · 2</text>
+  <rect x="40" y="164" width="80" height="28" rx="3" class="s"/>
+  <text x="80" y="183" text-anchor="middle" class="mono">…</text>
+  <rect x="40" y="200" width="80" height="28" rx="3" class="s"/>
+  <text x="80" y="219" text-anchor="middle" class="mono">student · 30k</text>
+
+  <!-- Gateway pods -->
+  <text x="220" y="78" class="label">GATEWAY · STATELESS</text>
+  <rect x="180" y="92" width="160" height="34" rx="3" class="s"/>
+  <text x="260" y="115" text-anchor="middle" class="mono">gateway pod 1</text>
+  <rect x="180" y="132" width="160" height="34" rx="3" class="s"/>
+  <text x="260" y="155" text-anchor="middle" class="mono">gateway pod 2</text>
+  <rect x="180" y="172" width="160" height="34" rx="3" class="s"/>
+  <text x="260" y="195" text-anchor="middle" class="mono">gateway pod n</text>
+
+  <!-- Connection arrows -->
+  <line x1="120" y1="106" x2="178" y2="109" class="a"/>
+  <polygon points="178,109 168,103 168,114" class="fa"/>
+  <line x1="120" y1="142" x2="178" y2="145" class="a"/>
+  <polygon points="178,145 168,140 168,151" class="fa"/>
+  <line x1="120" y1="178" x2="178" y2="184" class="a"/>
+  <polygon points="178,184 168,179 168,189" class="fa"/>
+  <line x1="120" y1="214" x2="178" y2="194" class="a"/>
+  <polygon points="178,194 168,193 169,202" class="fa"/>
+
+  <!-- Queue -->
+  <text x="430" y="78" class="label">REDIS STREAM · QUEUE</text>
+  <rect x="380" y="92" width="120" height="114" rx="4" class="fs"/>
+  <rect x="380" y="92" width="120" height="114" rx="4" class="a"/>
+  <line x1="380" y1="118" x2="500" y2="118" class="a"/>
+  <line x1="380" y1="142" x2="500" y2="142" class="a"/>
+  <line x1="380" y1="166" x2="500" y2="166" class="a"/>
+  <line x1="380" y1="190" x2="500" y2="190" class="a"/>
+  <text x="440" y="110" text-anchor="middle" class="acc">msg</text>
+  <text x="440" y="134" text-anchor="middle" class="acc">msg</text>
+  <text x="440" y="158" text-anchor="middle" class="acc">msg</text>
+  <text x="440" y="182" text-anchor="middle" class="acc">msg</text>
+
+  <!-- Gateway → Queue -->
+  <line x1="340" y1="148" x2="378" y2="148" class="a"/>
+  <polygon points="378,148 368,143 368,153" class="fa"/>
+
+  <!-- Workers -->
+  <text x="600" y="78" class="label">WORKERS · DO THE WORK</text>
+  <rect x="560" y="92" width="180" height="34" rx="3" class="s"/>
+  <text x="650" y="115" text-anchor="middle" class="mono">worker · auth + persist</text>
+  <rect x="560" y="132" width="180" height="34" rx="3" class="s"/>
+  <text x="650" y="155" text-anchor="middle" class="mono">worker · fan-out</text>
+  <rect x="560" y="172" width="180" height="34" rx="3" class="s"/>
+  <text x="650" y="195" text-anchor="middle" class="mono">worker · …</text>
+
+  <!-- Queue → Workers -->
+  <line x1="500" y1="148" x2="558" y2="148" class="a"/>
+  <polygon points="558,148 548,143 548,153" class="fa"/>
+
+  <!-- Fan-out back -->
+  <line x1="40" y1="270" x2="760" y2="270" class="sm"/>
+
+  <text x="40" y="298" class="label">FAN-OUT · WORKERS PUBLISH BACK · GATEWAYS DELIVER</text>
+
+  <rect x="180" y="320" width="160" height="34" rx="3" class="s"/>
+  <text x="260" y="343" text-anchor="middle" class="mono">gateway pod n</text>
+
+  <rect x="380" y="320" width="120" height="34" rx="4" class="fs"/>
+  <rect x="380" y="320" width="120" height="34" rx="4" class="a"/>
+  <text x="440" y="343" text-anchor="middle" class="acc">pub/sub</text>
+
+  <rect x="560" y="320" width="180" height="34" rx="3" class="s"/>
+  <text x="650" y="343" text-anchor="middle" class="mono">worker</text>
+
+  <line x1="558" y1="337" x2="500" y2="337" class="a"/>
+  <polygon points="500,337 510,332 510,342" class="fa"/>
+  <line x1="378" y1="337" x2="340" y2="337" class="a"/>
+  <polygon points="340,337 350,332 350,342" class="fa"/>
+
+  <text x="400" y="394" text-anchor="middle" class="label">CONNECTION LOAD ≠ MESSAGE LOAD · SCALE EACH SEPARATELY</text>
+  <text x="400" y="412" text-anchor="middle" class="label">SLOW WORKER ≠ DROPPED CONNECTION · QUEUE ABSORBS THE LAG</text>
+</svg>

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
-import { listSlugs, loadNote } from "@/lib/notes";
+import { listSlugs, loadNote, relatedNotes } from "@/lib/notes";
+import type { Note } from "@/lib/notes";
 import { safeJsonLd } from "@/lib/json-ld";
 import { siteConfig } from "@/config/site";
 
@@ -19,18 +20,39 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const note = loadNote(params.slug);
   if (!note) return {};
   const url = `${siteConfig.baseUrl}/notes/${note.slug}`;
+  const tags = note.tags ?? [];
   return {
     title: note.title,
     description: note.description,
+    keywords: tags,
+    authors: [{ name: "Kishore Kumar Sharma", url: siteConfig.baseUrl }],
+    creator: "Kishore Kumar Sharma",
+    publisher: "Kishore Kumar Sharma",
+    category: tags[0],
     alternates: { canonical: url },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-snippet": -1,
+        "max-image-preview": "large",
+        "max-video-preview": -1,
+      },
+    },
     openGraph: {
       title: note.title,
       description: note.description,
       type: "article",
       url,
+      siteName: "Kishore Kumar Sharma",
+      locale: "en_IN",
       publishedTime: note.date,
+      modifiedTime: note.date,
       authors: ["Kishore Kumar Sharma"],
-      tags: note.tags,
+      tags,
+      section: tags[0],
     },
     twitter: {
       card: "summary_large_image",
@@ -45,22 +67,60 @@ export default async function NotePage(props: Props) {
   const note = loadNote(params.slug);
   if (!note) notFound();
 
+  const { prev, next } = relatedNotes(note.slug);
   const nonce = (await headers()).get("x-nonce") ?? undefined;
   const url = `${siteConfig.baseUrl}/notes/${note.slug}`;
+  const ogImage = `${siteConfig.baseUrl}/notes/${note.slug}/opengraph-image`;
+  const tags = note.tags ?? [];
+
+  // Reference the canonical Person record defined in the root layout via @id
+  // so Google joins this byline to the full author profile (worksFor,
+  // alumniOf, knowsLanguage, etc.) without duplicating the data here.
+  const author = {
+    "@type": "Person" as const,
+    "@id": `${siteConfig.baseUrl}/#person`,
+    name: "Kishore Kumar Sharma",
+    url: siteConfig.baseUrl,
+    sameAs: ["https://www.linkedin.com/in/kishore-kumar-sharma/"],
+    jobTitle: "Senior Full Stack Engineer",
+  };
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: note.title,
     description: note.description,
-    author: {
-      "@type": "Person",
-      name: "Kishore Kumar Sharma",
-      url: siteConfig.baseUrl,
-    },
+    image: [ogImage],
+    author,
+    publisher: author,
     datePublished: note.date,
+    dateModified: note.date,
     url,
-    keywords: note.tags?.join(", "),
+    inLanguage: "en",
+    keywords: tags.join(", "),
+    articleSection: tags[0],
+    wordCount: note.wordCount,
+    timeRequired: `PT${note.readMin}M`,
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
+  };
+
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Writing",
+        item: `${siteConfig.baseUrl}/notes`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: note.title,
+        item: url,
+      },
+    ],
   };
 
   return (
@@ -70,6 +130,12 @@ export default async function NotePage(props: Props) {
         nonce={nonce}
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        nonce={nonce}
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbs) }}
       />
 
       <div className="container-narrow">
@@ -126,6 +192,24 @@ export default async function NotePage(props: Props) {
           dangerouslySetInnerHTML={{ __html: note.html }}
         />
 
+        {(prev || next) && (
+          <nav
+            aria-label="Related notes"
+            className="mt-20 pt-10 border-t border-subtle/60 grid grid-cols-1 md:grid-cols-2 gap-4"
+          >
+            {prev ? (
+              <NoteCard direction="prev" note={prev} />
+            ) : (
+              <div aria-hidden className="hidden md:block" />
+            )}
+            {next ? (
+              <NoteCard direction="next" note={next} />
+            ) : (
+              <div aria-hidden className="hidden md:block" />
+            )}
+          </nav>
+        )}
+
         <footer className="mt-16 pt-8 border-t border-subtle/60">
           <p className="font-mono text-[0.78rem] text-muted-foreground mb-4">
             written by Kishore Kumar Sharma · {formatDate(note.date)}
@@ -153,5 +237,27 @@ export default async function NotePage(props: Props) {
 function formatDate(iso: string): string {
   const d = new Date(iso);
   return d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+}
+
+function NoteCard({ direction, note }: { direction: "prev" | "next"; note: Note }) {
+  const isNext = direction === "next";
+  return (
+    <Link
+      href={`/notes/${note.slug}`}
+      className={`group block rounded-lg border border-subtle/60 p-5 hover:border-foreground/40 transition-colors ${
+        isNext ? "md:text-right" : ""
+      }`}
+    >
+      <span className="block font-mono text-[0.7rem] uppercase tracking-[0.14em] text-muted-foreground">
+        {isNext ? "next →" : "← previous"}
+      </span>
+      <span className="mt-2 block font-display text-[1.05rem] leading-snug text-foreground tracking-[-0.01em] text-balance group-hover:text-accent transition-colors">
+        {note.title}
+      </span>
+      <span className="mt-2 block text-[0.85rem] text-muted-foreground line-clamp-2 text-pretty">
+        {note.description}
+      </span>
+    </Link>
+  );
 }
 

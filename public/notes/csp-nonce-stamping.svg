@@ -1,0 +1,61 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-stamp">
+  <title id="t-stamp">Which scripts need the nonce stamp</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.fa{fill:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">EVERY SCRIPT YOU CONTROL · STAMP IT</text>
+
+  <!-- Layout file representation -->
+  <rect x="40" y="64" width="720" height="280" rx="6" class="s"/>
+  <text x="60" y="92" class="label">app/layout.tsx</text>
+
+  <!-- nonce read -->
+  <text x="60" y="124" class="mono">const nonce = headers().get("x-nonce")</text>
+  <text x="500" y="124" class="acc">// per-request</text>
+
+  <line x1="60" y1="140" x2="740" y2="140" class="sm"/>
+
+  <!-- JSON-LD -->
+  <text x="80" y="166" class="mono">&lt;script type="application/ld+json"</text>
+  <text x="80" y="184" class="acc">  nonce={nonce}</text>
+  <text x="80" y="202" class="mono">  dangerouslySetInnerHTML={{ __html: jsonLd }} /&gt;</text>
+
+  <!-- GA -->
+  <text x="80" y="232" class="mono">&lt;script async</text>
+  <text x="80" y="250" class="acc">  nonce={nonce}</text>
+  <text x="80" y="268" class="mono">  src="https://googletagmanager.com/gtag/js?id=..." /&gt;</text>
+
+  <!-- Inline GA bootstrap -->
+  <text x="80" y="298" class="mono">&lt;script</text>
+  <text x="80" y="316" class="acc">  nonce={nonce}</text>
+  <text x="80" y="334" class="mono">  dangerouslySetInnerHTML={{ __html: gtagInit }} /&gt;</text>
+
+  <!-- Right side annotations -->
+  <line x1="500" y1="184" x2="540" y2="184" class="a"/>
+  <polygon points="540,184 530,179 530,189" class="fa"/>
+  <text x="550" y="188" class="acc">JSON-LD block</text>
+
+  <line x1="500" y1="250" x2="540" y2="250" class="a"/>
+  <polygon points="540,250 530,245 530,255" class="fa"/>
+  <text x="550" y="254" class="acc">third-party loader</text>
+
+  <line x1="500" y1="316" x2="540" y2="316" class="a"/>
+  <polygon points="540,316 530,311 530,321" class="fa"/>
+  <text x="550" y="320" class="acc">inline bootstrap</text>
+
+  <text x="40" y="370" class="label">FORGET ONE = CONSOLE ERROR · DEVTOOLS WILL TELL YOU WHICH</text>
+</svg>

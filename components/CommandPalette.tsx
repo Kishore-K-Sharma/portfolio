@@ -46,7 +46,6 @@ export function CommandPalette() {
       { id: "sys-ls", label: "ls projects", hint: "list case studies", group: "system", run: () => go("work") },
       { id: "sys-grep", label: "grep skills java", hint: "jump to capability", group: "system", run: () => go("capability") },
       { id: "ext-linkedin", label: "open linkedin", hint: "↗ external", group: "external", run: () => { window.open(portfolioData.personal.linkedin, "_blank", "noopener,noreferrer"); close(); } },
-      { id: "ext-github", label: "open github", hint: "↗ external", group: "external", run: () => { window.open(portfolioData.personal.github, "_blank", "noopener,noreferrer"); close(); } },
       { id: "open-contact", label: "open contact form", hint: "say hi via the form", group: "external", run: () => go("contact") },
     ],
     [go, close]

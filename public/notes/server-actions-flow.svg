@@ -1,0 +1,85 @@
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-actions">
+  <title id="t-actions">API route flow vs server action flow</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.fa{fill:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <!-- Top: API route flow -->
+  <text x="40" y="36" class="label">01 — API ROUTE · 6 HOPS</text>
+
+  <rect x="40" y="62" width="100" height="40" rx="4" class="s"/>
+  <text x="90" y="86" text-anchor="middle" class="mono">form jsx</text>
+  <line x1="140" y1="82" x2="180" y2="82" class="a"/>
+  <polygon points="180,82 170,77 170,87" class="fa"/>
+
+  <rect x="180" y="62" width="100" height="40" rx="4" class="s"/>
+  <text x="230" y="80" text-anchor="middle" class="text">setPending</text>
+  <text x="230" y="94" text-anchor="middle" class="label">USESTATE</text>
+  <line x1="280" y1="82" x2="320" y2="82" class="a"/>
+  <polygon points="320,82 310,77 310,87" class="fa"/>
+
+  <rect x="320" y="62" width="100" height="40" rx="4" class="s"/>
+  <text x="370" y="80" text-anchor="middle" class="text">fetch</text>
+  <text x="370" y="94" text-anchor="middle" class="label">JSON.stringify</text>
+  <line x1="420" y1="82" x2="460" y2="82" class="a"/>
+  <polygon points="460,82 450,77 450,87" class="fa"/>
+
+  <rect x="460" y="62" width="100" height="40" rx="4" class="s"/>
+  <text x="510" y="80" text-anchor="middle" class="text">route.ts</text>
+  <text x="510" y="94" text-anchor="middle" class="label">POST /api/x</text>
+  <line x1="560" y1="82" x2="600" y2="82" class="a"/>
+  <polygon points="600,82 590,77 590,87" class="fa"/>
+
+  <rect x="600" y="62" width="100" height="40" rx="4" class="fs"/>
+  <rect x="600" y="62" width="100" height="40" rx="4" class="a"/>
+  <text x="650" y="86" text-anchor="middle" class="acc">do work</text>
+
+  <line x1="650" y1="102" x2="650" y2="140" class="a"/>
+  <line x1="650" y1="140" x2="90" y2="140" class="a"/>
+  <line x1="90" y1="140" x2="90" y2="170" class="a"/>
+  <polygon points="90,170 85,160 95,160" class="fa"/>
+  <text x="370" y="135" text-anchor="middle" class="label">RESPONSE · JSON.parse · setError · setPending(false)</text>
+
+  <text x="40" y="190" class="label">4 FILES · 80 LINES · MANUAL STATE MGMT</text>
+
+  <line x1="40" y1="218" x2="760" y2="218" class="sm"/>
+
+  <!-- Bottom: Server action flow -->
+  <text x="40" y="248" class="label">02 — SERVER ACTION · 3 HOPS</text>
+
+  <rect x="60" y="276" width="180" height="44" rx="4" class="s"/>
+  <text x="150" y="300" text-anchor="middle" class="mono">&lt;form action={fn}&gt;</text>
+  <text x="150" y="316" text-anchor="middle" class="label">USEACTIONSTATE</text>
+
+  <line x1="240" y1="298" x2="320" y2="298" class="a"/>
+  <polygon points="320,298 310,293 310,303" class="fa"/>
+
+  <rect x="320" y="276" width="180" height="44" rx="4" class="fs"/>
+  <rect x="320" y="276" width="180" height="44" rx="4" class="a"/>
+  <text x="410" y="300" text-anchor="middle" class="acc">"use server"</text>
+  <text x="410" y="316" text-anchor="middle" class="label">RUNS DIRECTLY · DO WORK</text>
+
+  <line x1="500" y1="298" x2="580" y2="298" class="a"/>
+  <polygon points="580,298 570,293 570,303" class="fa"/>
+
+  <rect x="580" y="276" width="160" height="44" rx="4" class="s"/>
+  <text x="660" y="300" text-anchor="middle" class="mono">return value</text>
+  <text x="660" y="316" text-anchor="middle" class="label">REACT UPDATES STATE</text>
+
+  <text x="60" y="354" class="acc">2 FILES · 30 LINES · TYPED END-TO-END · NO FETCH</text>
+
+  <text x="400" y="396" text-anchor="middle" class="label">USE FOR INTERNAL FORMS · API ROUTES FOR EVERYTHING ELSE</text>
+</svg>

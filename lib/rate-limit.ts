@@ -20,10 +20,35 @@ const ratelimit =
       })
     : null;
 
+const MEMORY_MAX_KEYS = 5_000;
 const memorySubmissions = new Map<string, number[]>();
+let lastSweep = 0;
+
+function sweepMemory(now: number): void {
+  // Sweep at most once per window; cheap O(n) prune of fully-expired entries.
+  if (now - lastSweep < RATE_LIMIT_WINDOW_MS) return;
+  lastSweep = now;
+  const cutoff = now - RATE_LIMIT_WINDOW_MS;
+  for (const [key, timestamps] of memorySubmissions) {
+    if (timestamps.length === 0 || timestamps[timestamps.length - 1] <= cutoff) {
+      memorySubmissions.delete(key);
+    }
+  }
+  // Hard cap: if still oversized, drop the oldest insertion-order entries.
+  if (memorySubmissions.size > MEMORY_MAX_KEYS) {
+    const overflow = memorySubmissions.size - MEMORY_MAX_KEYS;
+    let dropped = 0;
+    for (const key of memorySubmissions.keys()) {
+      if (dropped >= overflow) break;
+      memorySubmissions.delete(key);
+      dropped++;
+    }
+  }
+}
 
 function memoryLimited(ip: string): boolean {
   const now = Date.now();
+  sweepMemory(now);
   const cutoff = now - RATE_LIMIT_WINDOW_MS;
   const recent = (memorySubmissions.get(ip) ?? []).filter((t) => t > cutoff);
   if (recent.length >= RATE_LIMIT_MAX) {

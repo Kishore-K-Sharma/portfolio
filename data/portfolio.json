@@ -6,9 +6,8 @@
     "experienceYears": "6.5+",
     "location": "Noida, UP",
     "email": "kishoresharma914@gmail.com",
-    "linkedin": "https://www.linkedin.com/in/kishore-kumar-sharma-a8902917a/",
-    "linkedinPage": "https://www.linkedin.com/groups/14367379/",
-    "github": "https://github.com/kishore-kumar-sharma"
+    "linkedin": "https://www.linkedin.com/in/kishore-kumar-sharma/",
+    "linkedinPage": "https://www.linkedin.com/groups/14367379/"
   },
   "summary": "Six and a half years shipping end-to-end. I take features from data model to deployed UI — designing the schema, writing the services, building the screens, running the deploys. Backend-deep by training, full-stack by delivery. Built across telecom, fintech, govtech and edtech — every system shipped with measurable lift.",
   "manifesto": [
@@ -256,7 +255,6 @@
         "React",
         "Tailwind CSS"
       ],
-      "githubUrl": "https://github.com/kishore-kumar-sharma",
       "liveUrl": "https://kishore.dev"
     }
   ],

@@ -1,0 +1,74 @@
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-schema">
+  <title id="t-schema">Schema first vs UI first</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.dg{stroke:#d97a7a}.a{stroke:#b89be8}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <!-- Top: schema first -->
+  <text x="40" y="36" class="label">01 — SCHEMA FIRST · UI IS A VIEW</text>
+
+  <rect x="60" y="68" width="160" height="60" rx="4" class="fs"/>
+  <rect x="60" y="68" width="160" height="60" rx="4" class="a"/>
+  <text x="140" y="92" text-anchor="middle" class="acc">schema</text>
+  <text x="140" y="112" text-anchor="middle" class="label">ENTITIES · STATES · KEYS</text>
+
+  <line x1="220" y1="98" x2="298" y2="98" class="a"/>
+  <polygon points="298,98 288,93 288,103" class="fa"/>
+
+  <rect x="300" y="68" width="160" height="60" rx="4" class="s"/>
+  <text x="380" y="92" text-anchor="middle" class="mono">api contract</text>
+  <text x="380" y="112" text-anchor="middle" class="label">DERIVED · TYPED · STABLE</text>
+
+  <line x1="460" y1="98" x2="538" y2="98" class="a"/>
+  <polygon points="538,98 528,93 528,103" class="fa"/>
+
+  <rect x="540" y="68" width="200" height="60" rx="4" class="s"/>
+  <text x="640" y="92" text-anchor="middle" class="mono">screens</text>
+  <text x="640" y="112" text-anchor="middle" class="label">CHEAP TO CHANGE · UI IS THE FAST PART</text>
+
+  <text x="60" y="158" class="label">SCHEMA EXPRESSES THE QUESTIONS THE SYSTEM CAN ANSWER</text>
+
+  <line x1="40" y1="190" x2="760" y2="190" class="sm"/>
+
+  <!-- Bottom: UI first (the trap) -->
+  <text x="40" y="222" class="label">02 — UI FIRST · SCHEMA IS A CONFESSION</text>
+
+  <rect x="60" y="254" width="200" height="60" rx="4" class="s"/>
+  <text x="160" y="278" text-anchor="middle" class="mono">screens</text>
+  <text x="160" y="298" text-anchor="middle" class="label">FIGMA · HIGH FIDELITY</text>
+
+  <line x1="260" y1="284" x2="338" y2="284" class="dg"/>
+  <polygon points="338,284 328,279 328,289" class="fd"/>
+
+  <rect x="340" y="254" width="160" height="60" rx="4" class="s"/>
+  <text x="420" y="278" text-anchor="middle" class="text">api · "make it work"</text>
+  <text x="420" y="298" text-anchor="middle" class="danger">FIELDS BACKFILLED</text>
+
+  <line x1="500" y1="284" x2="578" y2="284" class="dg"/>
+  <polygon points="578,284 568,279 568,289" class="fd"/>
+
+  <rect x="580" y="254" width="160" height="60" rx="4" class="s"/>
+  <text x="660" y="274" text-anchor="middle" class="danger">schema</text>
+  <text x="660" y="290" text-anchor="middle" class="label">EXTRA TABLES · NULLS</text>
+  <text x="660" y="306" text-anchor="middle" class="label">SYNC JOBS · MIGRATIONS</text>
+
+  <text x="60" y="346" class="danger">×× THE SLOW PART (SCHEMA) ABSORBS THE COST OF EVERY UI CHANGE</text>
+
+  <text x="400" y="392" text-anchor="middle" class="label">UI IS FAST · SCHEMA IS SLOW · SPEND THE DESIGN TIME ON THE SLOW PART</text>
+</svg>

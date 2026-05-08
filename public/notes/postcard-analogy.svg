@@ -1,0 +1,70 @@
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-postcard">
+  <title id="t-postcard">Postcard analogy: extra address lines hijack the post office</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">POSTCARD · EACH LINE IS A SEPARATE INSTRUCTION</text>
+
+  <!-- Normal postcard -->
+  <text x="200" y="74" text-anchor="middle" class="acc">NORMAL · ONE RECIPIENT</text>
+
+  <rect x="40" y="92" width="320" height="160" rx="4" class="fs"/>
+  <rect x="40" y="92" width="320" height="160" rx="4" class="s"/>
+  <line x1="200" y1="92" x2="200" y2="252" class="sm"/>
+
+  <!-- Address side -->
+  <text x="60" y="118" class="label">ADDRESS</text>
+  <text x="60" y="146" class="mono">Mr. Foo Sharma</text>
+  <text x="60" y="166" class="mono">12 Park Street</text>
+  <text x="60" y="186" class="mono">Noida 201301</text>
+  <text x="60" y="216" class="acc">→ DELIVERED TO</text>
+  <text x="60" y="236" class="acc">  ONE PERSON</text>
+
+  <!-- Message side -->
+  <text x="220" y="118" class="label">MESSAGE</text>
+  <text x="220" y="146" class="text">"Hi Foo,"</text>
+  <text x="220" y="170" class="text">"Looking forward"</text>
+  <text x="220" y="190" class="text">"to next week."</text>
+  <text x="220" y="218" class="text">— Bob</text>
+
+  <!-- Hijacked postcard -->
+  <text x="600" y="74" text-anchor="middle" class="danger">HIJACKED · EXTRA LINES</text>
+
+  <rect x="440" y="92" width="320" height="160" rx="4" class="fs"/>
+  <rect x="440" y="92" width="320" height="160" rx="4" class="s"/>
+  <line x1="600" y1="92" x2="600" y2="252" class="sm"/>
+
+  <!-- Address side -->
+  <text x="460" y="118" class="label">ADDRESS</text>
+  <text x="460" y="146" class="mono">Mr. Foo Sharma</text>
+  <text x="460" y="166" class="danger">CC: attacker@evil.com</text>
+  <text x="460" y="186" class="mono">12 Park Street</text>
+  <text x="460" y="206" class="mono">Noida 201301</text>
+  <text x="460" y="232" class="danger">→ TWO RECIPIENTS</text>
+  <text x="460" y="248" class="danger">  POST OFFICE COMPLIES</text>
+
+  <!-- Message side -->
+  <text x="620" y="118" class="label">MESSAGE</text>
+  <text x="620" y="146" class="text">"Hi Foo,"</text>
+  <text x="620" y="170" class="text">"Looking forward"</text>
+  <text x="620" y="190" class="text">"to next week."</text>
+
+  <text x="400" y="290" text-anchor="middle" class="label">EMAIL HEADERS WORK THE SAME WAY · NEWLINES ARE INSTRUCTIONS</text>
+</svg>

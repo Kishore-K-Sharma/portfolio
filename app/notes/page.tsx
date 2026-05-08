@@ -1,27 +1,122 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { headers } from "next/headers";
+import { Suspense } from "react";
 import { listNotes, listTags, tagSlug } from "@/lib/notes";
+import { safeJsonLd } from "@/lib/json-ld";
 import { siteConfig } from "@/config/site";
+import { NotesBrowser, type NoteSummary } from "@/components/notes/NotesBrowser";
 
 export const metadata: Metadata = {
   title: "Writing",
   description:
     "Long-form notes on architecture, distributed systems, microservices, and the engineering discipline behind production software.",
+  keywords: [
+    "software engineering blog",
+    "backend architecture",
+    "distributed systems",
+    "microservices",
+    "system design",
+    "production engineering",
+    "Kishore Kumar Sharma",
+  ],
+  authors: [{ name: "Kishore Kumar Sharma", url: siteConfig.baseUrl }],
   alternates: { canonical: `${siteConfig.baseUrl}/notes` },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     title: "Writing — Kishore Kumar Sharma",
     description: "Notes on architecture, distributed systems, and shipping discipline.",
     type: "website",
     url: `${siteConfig.baseUrl}/notes`,
+    siteName: "Kishore Kumar Sharma",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Writing — Kishore Kumar Sharma",
+    description: "Notes on architecture, distributed systems, and shipping discipline.",
   },
 };
 
-export default function NotesIndex() {
+export default async function NotesIndex() {
   const notes = listNotes();
   const tags = listTags();
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
+
+  // Slim down for the client — drop raw markdown and rendered html.
+  const summaries: NoteSummary[] = notes.map((n) => ({
+    slug: n.slug,
+    title: n.title,
+    description: n.description,
+    date: n.date,
+    tags: n.tags ?? [],
+    readMin: n.readMin,
+  }));
+
+  const author = {
+    "@type": "Person" as const,
+    "@id": `${siteConfig.baseUrl}/#person`,
+    name: "Kishore Kumar Sharma",
+    url: siteConfig.baseUrl,
+    sameAs: ["https://www.linkedin.com/in/kishore-kumar-sharma/"],
+  };
+
+  const blogJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": `${siteConfig.baseUrl}/notes`,
+    name: "Writing — Kishore Kumar Sharma",
+    description:
+      "Long-form notes on architecture, distributed systems, and the discipline behind production software.",
+    url: `${siteConfig.baseUrl}/notes`,
+    inLanguage: "en",
+    author,
+    publisher: author,
+    blogPost: notes.map((n) => ({
+      "@type": "BlogPosting",
+      headline: n.title,
+      description: n.description,
+      url: `${siteConfig.baseUrl}/notes/${n.slug}`,
+      datePublished: n.date,
+      dateModified: n.date,
+      author,
+      keywords: (n.tags ?? []).join(", "),
+    })),
+  };
+
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.baseUrl },
+      { "@type": "ListItem", position: 2, name: "Writing", item: `${siteConfig.baseUrl}/notes` },
+    ],
+  };
 
   return (
     <div className="min-h-screen pt-32 pb-24">
+      <script
+        type="application/ld+json"
+        nonce={nonce}
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(blogJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        nonce={nonce}
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbs) }}
+      />
       <div className="container-narrow">
         <header className="mb-16 md:mb-20">
           <p className="font-mono text-[0.72rem] uppercase tracking-[0.18em] text-muted-foreground mb-4">
@@ -36,51 +131,14 @@ export default function NotesIndex() {
           </p>
         </header>
 
-        {notes.length === 0 ? (
+        {summaries.length === 0 ? (
           <p className="font-mono text-[0.85rem] text-muted-foreground">
             No posts yet — first one is being drafted.
           </p>
         ) : (
-          <ol className="divide-y divide-subtle/60">
-            {notes.map((n) => (
-              <li key={n.slug} className="py-7 first:pt-0 last:pb-0">
-                <Link
-                  href={`/notes/${n.slug}`}
-                  className="group block"
-                >
-                  <div className="flex items-baseline justify-between gap-4 mb-3">
-                    <time
-                      dateTime={n.date}
-                      className="font-mono text-[0.72rem] text-muted-foreground"
-                    >
-                      {formatDate(n.date)}
-                    </time>
-                    <span className="font-mono text-[0.7rem] text-muted-foreground">
-                      {n.readMin} min read
-                    </span>
-                  </div>
-                  <h2 className="font-display text-heading md:text-display-sm text-foreground tracking-[-0.025em] leading-[1.1] text-balance group-hover:text-accent transition-colors">
-                    {n.title}
-                  </h2>
-                  <p className="mt-3 text-[0.95rem] text-muted-foreground leading-relaxed text-pretty max-w-[58ch]">
-                    {n.description}
-                  </p>
-                  {n.tags && n.tags.length > 0 && (
-                    <ul className="mt-4 flex flex-wrap gap-x-1.5 gap-y-1.5">
-                      {n.tags.map((t) => (
-                        <li
-                          key={t}
-                          className="font-mono text-[0.7rem] text-muted-foreground"
-                        >
-                          #{t}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </Link>
-              </li>
-            ))}
-          </ol>
+          <Suspense fallback={null}>
+            <NotesBrowser notes={summaries} />
+          </Suspense>
         )}
 
         {tags.length > 0 && (
@@ -118,9 +176,4 @@ export default function NotesIndex() {
       </div>
     </div>
   );
-}
-
-function formatDate(iso: string): string {
-  const d = new Date(iso);
-  return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 }

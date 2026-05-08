@@ -2,15 +2,15 @@
 
 import { useFormStatus } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { submitContactForm } from "@/app/actions";
+import { submitContactForm, type ContactFormState } from "@/app/actions";
 import portfolioData from "@/data/portfolio.json";
 import { Section } from "@/components/editorial/Section";
 import { Reveal } from "@/components/editorial/Reveal";
 import { useActionState, useEffect, useRef, useState } from "react";
 
-const initialState = {
+const initialState: ContactFormState = {
   message: "",
-  errors: undefined as Record<string, string[] | undefined> | undefined,
+  errors: undefined,
   success: false,
 };
 
@@ -65,8 +65,7 @@ export function Contact() {
       formRef.current.reset();
       setMessage("");
       // Reset the Turnstile widget so the next submission gets a fresh token.
-      const w = (window as unknown as { turnstile?: { reset: () => void } }).turnstile;
-      w?.reset();
+      window.turnstile?.reset();
     }
   }, [state.success]);
 
@@ -93,14 +92,6 @@ export function Contact() {
                 <dd>
                   <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-accent transition-colors">
                     /in/kishore-kumar-sharma
-                  </a>
-                </dd>
-              </div>
-              <div className="flex items-baseline gap-3">
-                <dt className="text-muted-foreground w-24 shrink-0">github</dt>
-                <dd>
-                  <a href={personal.github} target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-accent transition-colors">
-                    /kishore-kumar-sharma
                   </a>
                 </dd>
               </div>

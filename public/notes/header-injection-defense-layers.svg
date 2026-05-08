@@ -1,0 +1,81 @@
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-defense">
+  <title id="t-defense">Defense layers: validate, strip, escape</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">DEFENSE IN DEPTH · USER INPUT TO SAFE EMAIL</text>
+
+  <!-- Layer 1: input -->
+  <rect x="40" y="64" width="160" height="48" rx="4" class="s"/>
+  <text x="120" y="84" text-anchor="middle" class="mono">user submission</text>
+  <text x="120" y="100" text-anchor="middle" class="danger">"Foo\r\nBcc: …"</text>
+
+  <line x1="200" y1="88" x2="240" y2="88" class="a"/>
+  <polygon points="240,88 230,83 230,93" class="fa"/>
+
+  <!-- Layer 2: Zod schema -->
+  <rect x="240" y="64" width="160" height="48" rx="4" class="fs"/>
+  <rect x="240" y="64" width="160" height="48" rx="4" class="a"/>
+  <text x="320" y="84" text-anchor="middle" class="acc">01 · zod schema</text>
+  <text x="320" y="100" text-anchor="middle" class="label">.refine(no CR/LF)</text>
+
+  <line x1="400" y1="88" x2="440" y2="88" class="a"/>
+  <polygon points="440,88 430,83 430,93" class="fa"/>
+
+  <!-- Layer 3: strip -->
+  <rect x="440" y="64" width="160" height="48" rx="4" class="fs"/>
+  <rect x="440" y="64" width="160" height="48" rx="4" class="a"/>
+  <text x="520" y="84" text-anchor="middle" class="acc">02 · strip CR/LF</text>
+  <text x="520" y="100" text-anchor="middle" class="label">replace(/[\r\n]+/g)</text>
+
+  <line x1="600" y1="88" x2="640" y2="88" class="a"/>
+  <polygon points="640,88 630,83 630,93" class="fa"/>
+
+  <!-- Layer 4: nodemailer -->
+  <rect x="640" y="64" width="120" height="48" rx="4" class="s"/>
+  <text x="700" y="84" text-anchor="middle" class="mono">nodemailer</text>
+  <text x="700" y="100" text-anchor="middle" class="acc">SAFE</text>
+
+  <!-- Why each? -->
+  <line x1="40" y1="142" x2="760" y2="142" class="sm"/>
+
+  <text x="40" y="170" class="acc">WHY EACH LAYER</text>
+
+  <rect x="40" y="186" width="240" height="100" rx="4" class="s"/>
+  <text x="60" y="208" class="acc">01 · validate</text>
+  <text x="60" y="228" class="text">friendly user error,</text>
+  <text x="60" y="244" class="text">stops malicious input early,</text>
+  <text x="60" y="260" class="text">visible in form errors</text>
+  <text x="60" y="278" class="label">USER-FACING DEFENSE</text>
+
+  <rect x="285" y="186" width="240" height="100" rx="4" class="s"/>
+  <text x="305" y="208" class="acc">02 · sanitize</text>
+  <text x="305" y="228" class="text">last line of defense,</text>
+  <text x="305" y="244" class="text">runs even if validation</text>
+  <text x="305" y="260" class="text">is bypassed somehow</text>
+  <text x="305" y="278" class="label">CODE-LEVEL DEFENSE</text>
+
+  <rect x="530" y="186" width="240" height="100" rx="4" class="s"/>
+  <text x="550" y="208" class="acc">03 · escape body</text>
+  <text x="550" y="228" class="text">html-entities for the</text>
+  <text x="550" y="244" class="text">message body, separate</text>
+  <text x="550" y="260" class="text">from header sanitization</text>
+  <text x="550" y="278" class="label">RENDER-LEVEL DEFENSE</text>
+</svg>

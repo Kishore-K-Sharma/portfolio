@@ -1,0 +1,79 @@
+<svg viewBox="0 0 800 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-csp">
+  <title id="t-csp">Per-request CSP nonce flow</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.dg{stroke:#d97a7a}.a{stroke:#b89be8}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">PER-REQUEST NONCE · 5 PIECES</text>
+
+  <!-- 1. Middleware -->
+  <rect x="40" y="64" width="160" height="60" rx="4" class="s"/>
+  <text x="120" y="86" text-anchor="middle" class="acc">1 · middleware</text>
+  <text x="120" y="104" text-anchor="middle" class="text">crypto.randomUUID</text>
+  <text x="120" y="118" text-anchor="middle" class="label">NEW NONCE PER REQUEST</text>
+
+  <line x1="200" y1="94" x2="240" y2="94" class="a"/>
+  <polygon points="240,94 230,89 230,99" class="fa"/>
+
+  <!-- 2. Build CSP -->
+  <rect x="240" y="64" width="240" height="60" rx="4" class="fs"/>
+  <rect x="240" y="64" width="240" height="60" rx="4" class="a"/>
+  <text x="360" y="86" text-anchor="middle" class="acc">2 · build CSP</text>
+  <text x="360" y="104" text-anchor="middle" class="mono">script-src 'nonce-XYZ'</text>
+  <text x="360" y="118" text-anchor="middle" class="mono">'strict-dynamic' 'unsafe-inline'</text>
+
+  <line x1="480" y1="94" x2="520" y2="94" class="a"/>
+  <polygon points="520,94 510,89 510,99" class="fa"/>
+
+  <!-- 3. Pass via header -->
+  <rect x="520" y="64" width="240" height="60" rx="4" class="s"/>
+  <text x="640" y="86" text-anchor="middle" class="acc">3 · forward to page</text>
+  <text x="640" y="104" text-anchor="middle" class="mono">x-nonce: XYZ</text>
+  <text x="640" y="118" text-anchor="middle" class="label">REQUEST HEADER · INTERNAL</text>
+
+  <!-- Down arrow to layout -->
+  <line x1="640" y1="124" x2="640" y2="160" class="a"/>
+  <polygon points="640,160 635,150 645,150" class="fa"/>
+
+  <!-- 4. Layout reads nonce -->
+  <rect x="240" y="160" width="520" height="60" rx="4" class="s"/>
+  <text x="500" y="182" text-anchor="middle" class="acc">4 · layout · read nonce + stamp every &lt;script&gt;</text>
+  <text x="500" y="200" text-anchor="middle" class="mono">const nonce = headers().get("x-nonce")</text>
+  <text x="500" y="214" text-anchor="middle" class="label">JSON-LD · GA · TURNSTILE · INLINE BOOTSTRAPS</text>
+
+  <!-- Down arrow to browser -->
+  <line x1="500" y1="220" x2="500" y2="260" class="a"/>
+  <polygon points="500,260 495,250 505,250" class="fa"/>
+
+  <!-- 5. Browser -->
+  <rect x="40" y="260" width="720" height="80" rx="4" class="s"/>
+  <text x="400" y="284" text-anchor="middle" class="acc">5 · browser enforces CSP</text>
+  <text x="180" y="306" text-anchor="middle" class="mono">&lt;script nonce="XYZ"&gt;</text>
+  <text x="180" y="322" text-anchor="middle" class="acc">RUNS</text>
+  <text x="400" y="306" text-anchor="middle" class="mono">&lt;script src="..." nonce="XYZ"&gt;</text>
+  <text x="400" y="322" text-anchor="middle" class="acc">RUNS · STRICT-DYNAMIC INHERITS</text>
+  <text x="620" y="306" text-anchor="middle" class="mono">&lt;script&gt; (injected, no nonce)</text>
+  <text x="620" y="322" text-anchor="middle" class="danger">×× BLOCKED</text>
+
+  <line x1="40" y1="370" x2="760" y2="370" class="sm"/>
+
+  <text x="40" y="398" class="label">COST · headers() FORCES DYNAMIC RENDERING ON THE PAGE</text>
+  <text x="40" y="416" class="label">TRADE · STRICT XSS DEFENSE FOR PER-REQUEST FUNCTION INVOCATION</text>
+  <text x="40" y="434" class="label">DEV · ADD 'unsafe-eval' SO HOT RELOAD WORKS</text>
+</svg>

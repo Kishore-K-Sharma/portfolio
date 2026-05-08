@@ -1,0 +1,84 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-drafts">
+  <title id="t-drafts">Drafts retrofitted vs designed-in: the cost</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <!-- Bad: retrofitted -->
+  <text x="40" y="36" class="danger">RETROFITTED · "ADD DRAFTS LATER"</text>
+
+  <rect x="40" y="64" width="160" height="56" rx="4" class="s"/>
+  <text x="60" y="88" class="mono">item</text>
+  <text x="60" y="106" class="label">title · body · status</text>
+  <text x="60" y="118" class="label">+ HAS_PENDING_DRAFT (BOOL)</text>
+
+  <line x1="200" y1="92" x2="240" y2="92" class="dg"/>
+  <polygon points="240,92 230,87 230,97" class="fd"/>
+
+  <rect x="240" y="64" width="160" height="56" rx="4" class="s"/>
+  <text x="260" y="88" class="mono">item_draft</text>
+  <text x="260" y="106" class="label">MIRRORS ITEM</text>
+  <text x="260" y="118" class="danger">×× SHAPE DUPLICATED</text>
+
+  <line x1="400" y1="92" x2="440" y2="92" class="dg"/>
+  <polygon points="440,92 430,87 430,97" class="fd"/>
+
+  <rect x="440" y="64" width="160" height="56" rx="4" class="s"/>
+  <text x="460" y="88" class="mono">publish flow</text>
+  <text x="460" y="106" class="label">COPIES FIELDS</text>
+  <text x="460" y="118" class="danger">×× NOT ATOMIC</text>
+
+  <line x1="600" y1="92" x2="640" y2="92" class="dg"/>
+  <polygon points="640,92 630,87 630,97" class="fd"/>
+
+  <rect x="640" y="64" width="120" height="56" rx="4" class="s"/>
+  <text x="660" y="88" class="mono">sync job</text>
+  <text x="660" y="106" class="label">RECONCILES</text>
+  <text x="660" y="118" class="danger">×× CRON HELL</text>
+
+  <text x="40" y="158" class="danger">×× 4 MONTHS · OCCASIONAL PARTIAL PUBLISHES STILL HAPPEN 2 YEARS LATER</text>
+
+  <line x1="40" y1="190" x2="760" y2="190" class="sm"/>
+
+  <!-- Good: designed in -->
+  <text x="40" y="220" class="acc">DESIGNED IN · DAY ONE</text>
+
+  <rect x="40" y="248" width="160" height="56" rx="4" class="fs"/>
+  <rect x="40" y="248" width="160" height="56" rx="4" class="a"/>
+  <text x="60" y="272" class="acc">item</text>
+  <text x="60" y="290" class="label">LOGICAL ENTITY</text>
+
+  <line x1="200" y1="276" x2="240" y2="276" class="a"/>
+  <polygon points="240,276 230,271 230,281" class="fa"/>
+
+  <rect x="240" y="248" width="200" height="56" rx="4" class="fs"/>
+  <rect x="240" y="248" width="200" height="56" rx="4" class="a"/>
+  <text x="260" y="272" class="acc">item_version</text>
+  <text x="260" y="290" class="label">DRAFT · PENDING · PUBLISHED</text>
+
+  <line x1="440" y1="276" x2="480" y2="276" class="a"/>
+  <polygon points="480,276 470,271 470,281" class="fa"/>
+
+  <rect x="480" y="248" width="280" height="56" rx="4" class="s"/>
+  <text x="500" y="272" class="acc">latest published version → user</text>
+  <text x="500" y="290" class="label">HISTORY IS FREE · DRAFTS ARE FREE</text>
+
+  <text x="40" y="342" class="acc">FOUR WEEKS · SCALES · NO SYNC JOBS · NO PARTIAL PUBLISHES</text>
+  <text x="40" y="362" class="label">SAME REQUIREMENTS · DIFFERENT BUILD ORDER · 4× DIFFERENCE IN COST</text>
+</svg>

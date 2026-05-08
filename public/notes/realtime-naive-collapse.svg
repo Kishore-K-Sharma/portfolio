@@ -1,0 +1,62 @@
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-naive">
+  <title id="t-naive">Naive single-process realtime architecture and how it fails</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">ONE NODE PROCESS · CONNECTION + LOGIC + DB</text>
+
+  <!-- Stack of users -->
+  <text x="80" y="78" class="label">8K CLIENTS</text>
+  <line x1="40" y1="92" x2="120" y2="92" class="a"/>
+  <line x1="40" y1="100" x2="120" y2="100" class="a"/>
+  <line x1="40" y1="108" x2="120" y2="108" class="a"/>
+  <line x1="40" y1="116" x2="120" y2="116" class="a"/>
+  <line x1="40" y1="124" x2="120" y2="124" class="a"/>
+  <line x1="40" y1="132" x2="120" y2="132" class="a"/>
+  <line x1="40" y1="140" x2="120" y2="140" class="a"/>
+  <line x1="40" y1="148" x2="120" y2="148" class="a"/>
+  <line x1="40" y1="156" x2="120" y2="156" class="a"/>
+  <line x1="40" y1="164" x2="120" y2="164" class="a"/>
+  <line x1="40" y1="172" x2="120" y2="172" class="a"/>
+  <line x1="40" y1="180" x2="120" y2="180" class="a"/>
+  <line x1="40" y1="188" x2="120" y2="188" class="a"/>
+  <line x1="40" y1="196" x2="120" y2="196" class="a"/>
+
+  <!-- Big single process -->
+  <rect x="180" y="80" width="380" height="140" rx="6" class="s"/>
+  <text x="370" y="106" text-anchor="middle" class="acc">node.js single process</text>
+  <line x1="200" y1="120" x2="540" y2="120" class="sm"/>
+  <text x="220" y="146" class="text">socket.io connections</text>
+  <text x="220" y="170" class="text">message handling</text>
+  <text x="220" y="194" class="text">db queries</text>
+  <text x="540" y="146" text-anchor="end" class="label">SHARED EVENT LOOP</text>
+  <text x="540" y="170" text-anchor="end" class="label">SHARED EVENT LOOP</text>
+  <text x="540" y="194" text-anchor="end" class="danger">×× ONE SLOW QUERY = ROOM SILENT</text>
+
+  <!-- DB -->
+  <line x1="560" y1="150" x2="620" y2="150" class="a"/>
+  <polygon points="620,150 610,145 610,155" class="fa"/>
+  <rect x="620" y="130" width="140" height="40" rx="3" class="s"/>
+  <text x="690" y="154" text-anchor="middle" class="mono">postgres</text>
+
+  <text x="40" y="252" class="danger">×× CPU SPIKES · CLASS START AT 5PM CRASHES THE PROCESS</text>
+  <text x="40" y="276" class="label">CONNECTION LOAD AND MESSAGE LOAD CAN'T BE SCALED INDEPENDENTLY</text>
+  <text x="40" y="300" class="label">WORKS UNTIL ~8K CONCURRENT · COLLAPSES AT 10K</text>
+</svg>

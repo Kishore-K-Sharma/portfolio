@@ -1,0 +1,62 @@
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-files">
+  <title id="t-files">File count comparison: API route vs server action</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.fa{fill:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">SAME CONTACT FORM · TWO IMPLEMENTATIONS</text>
+
+  <!-- API route side -->
+  <text x="200" y="74" text-anchor="middle" class="label">API ROUTE · 4 FILES</text>
+
+  <rect x="40" y="92" width="320" height="40" rx="3" class="s"/>
+  <text x="60" y="116" class="mono">app/api/contact/route.ts</text>
+  <text x="340" y="116" text-anchor="end" class="label">~25 LINES</text>
+
+  <rect x="40" y="140" width="320" height="40" rx="3" class="s"/>
+  <text x="60" y="164" class="mono">components/ContactForm.tsx</text>
+  <text x="340" y="164" text-anchor="end" class="label">~45 LINES</text>
+
+  <rect x="40" y="188" width="320" height="40" rx="3" class="s"/>
+  <text x="60" y="212" class="mono">lib/api-client.ts</text>
+  <text x="340" y="212" text-anchor="end" class="label">~10 LINES</text>
+
+  <rect x="40" y="236" width="320" height="40" rx="3" class="s"/>
+  <text x="60" y="260" class="mono">types/contact.ts</text>
+  <text x="340" y="260" text-anchor="end" class="label">~10 LINES</text>
+
+  <text x="200" y="298" text-anchor="middle" class="acc">~80 LINES TOTAL</text>
+
+  <!-- Server action side -->
+  <text x="600" y="74" text-anchor="middle" class="acc">SERVER ACTION · 2 FILES</text>
+
+  <rect x="440" y="92" width="320" height="40" rx="3" class="fs"/>
+  <rect x="440" y="92" width="320" height="40" rx="3" class="a"/>
+  <text x="460" y="116" class="mono">app/actions.ts</text>
+  <text x="740" y="116" text-anchor="end" class="acc">~12 LINES</text>
+
+  <rect x="440" y="140" width="320" height="40" rx="3" class="fs"/>
+  <rect x="440" y="140" width="320" height="40" rx="3" class="a"/>
+  <text x="460" y="164" class="mono">components/ContactForm.tsx</text>
+  <text x="740" y="164" text-anchor="end" class="acc">~18 LINES</text>
+
+  <rect x="440" y="188" width="320" height="88" rx="3" class="s" stroke-dasharray="4 3"/>
+  <text x="600" y="220" text-anchor="middle" class="label">NO API CLIENT</text>
+  <text x="600" y="244" text-anchor="middle" class="label">NO TYPES FILE</text>
+  <text x="600" y="262" text-anchor="middle" class="label">TYPES INFERRED FROM ACTION SIGNATURE</text>
+
+  <text x="600" y="298" text-anchor="middle" class="acc">~30 LINES TOTAL</text>
+</svg>

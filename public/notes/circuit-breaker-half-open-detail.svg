@@ -1,0 +1,80 @@
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-halfopen">
+  <title id="t-halfopen">Half-open: 1 trial vs many trials</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <!-- Bad: many trials -->
+  <text x="40" y="36" class="danger">DEFAULT · ALL QUEUED REQUESTS PROBE AT ONCE</text>
+
+  <rect x="40" y="60" width="100" height="32" rx="3" class="s"/>
+  <text x="90" y="80" text-anchor="middle" class="mono">service a</text>
+
+  <text x="180" y="80" class="label">queued during open:</text>
+  <line x1="170" y1="92" x2="320" y2="92" class="dg"/>
+  <line x1="170" y1="100" x2="320" y2="100" class="dg"/>
+  <line x1="170" y1="108" x2="320" y2="108" class="dg"/>
+  <line x1="170" y1="116" x2="320" y2="116" class="dg"/>
+  <line x1="170" y1="124" x2="320" y2="124" class="dg"/>
+  <line x1="170" y1="132" x2="320" y2="132" class="dg"/>
+
+  <rect x="320" y="60" width="100" height="32" rx="3" class="s"/>
+  <text x="370" y="80" text-anchor="middle" class="mono">breaker</text>
+
+  <text x="440" y="80" class="acc">→ half-open transition</text>
+  <line x1="420" y1="92" x2="540" y2="92" class="dg"/>
+  <line x1="420" y1="108" x2="540" y2="108" class="dg"/>
+  <line x1="420" y1="124" x2="540" y2="124" class="dg"/>
+  <line x1="420" y1="140" x2="540" y2="140" class="dg"/>
+  <line x1="420" y1="156" x2="540" y2="156" class="dg"/>
+  <polygon points="540,108 530,103 530,113" class="fd"/>
+
+  <rect x="540" y="60" width="120" height="32" rx="3" class="s"/>
+  <text x="600" y="80" text-anchor="middle" class="mono">service b</text>
+  <text x="690" y="92" class="danger">overwhelmed</text>
+  <text x="690" y="108" class="danger">trips again</text>
+  <text x="690" y="124" class="danger">cycle continues</text>
+
+  <line x1="40" y1="180" x2="760" y2="180" class="sm"/>
+
+  <!-- Good: one trial -->
+  <text x="40" y="208" class="acc">FIXED · ONE TRIAL · JITTER ON COOLDOWN</text>
+
+  <rect x="40" y="232" width="100" height="32" rx="3" class="s"/>
+  <text x="90" y="252" text-anchor="middle" class="mono">service a</text>
+
+  <text x="180" y="248" class="label">queue held back:</text>
+  <line x1="170" y1="260" x2="220" y2="260" class="sm"/>
+  <line x1="220" y1="260" x2="320" y2="260" class="a"/>
+  <polygon points="320,260 310,255 310,265" class="fa"/>
+
+  <rect x="320" y="232" width="100" height="32" rx="3" class="s"/>
+  <text x="370" y="252" text-anchor="middle" class="mono">breaker</text>
+
+  <text x="440" y="248" class="acc">→ permits 1 trial</text>
+  <line x1="420" y1="260" x2="540" y2="260" class="a"/>
+  <polygon points="540,260 530,255 530,265" class="fa"/>
+
+  <rect x="540" y="232" width="120" height="32" rx="3" class="s"/>
+  <text x="600" y="252" text-anchor="middle" class="mono">service b</text>
+
+  <text x="690" y="252" class="acc">probe → close</text>
+
+  <text x="40" y="304" class="label">SET PERMITTEDNUMBEROFCALLSINHALFOPENSTATE = 1 · ADD JITTER TO COOLDOWN</text>
+</svg>

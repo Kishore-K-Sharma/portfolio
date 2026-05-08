@@ -1,0 +1,52 @@
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-checklist">
+  <title id="t-checklist">90-second audit checklist</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.fa{fill:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">YOUR CONTACT FORM · AUDIT IT IN 90 SECONDS</text>
+
+  <!-- Step 1 -->
+  <rect x="40" y="64" width="32" height="32" rx="3" class="s"/>
+  <text x="56" y="84" text-anchor="middle" class="acc">01</text>
+  <text x="84" y="84" class="acc">find every interpolation into a header</text>
+  <text x="84" y="100" class="label">SUBJECT · FROM · TO · CC · BCC · REPLYTO · CUSTOM</text>
+
+  <!-- Step 2 -->
+  <rect x="40" y="120" width="32" height="32" rx="3" class="s"/>
+  <text x="56" y="140" text-anchor="middle" class="acc">02</text>
+  <text x="84" y="140" class="acc">trace each: is the value CR/LF stripped?</text>
+  <text x="84" y="156" class="label">grep replace(/[\r\n]/g) AT EVERY CALL SITE</text>
+
+  <!-- Step 3 -->
+  <rect x="40" y="176" width="32" height="32" rx="3" class="s"/>
+  <text x="56" y="196" text-anchor="middle" class="acc">03</text>
+  <text x="84" y="196" class="acc">add a stripHeaderNewlines helper</text>
+  <text x="84" y="212" class="label">ONE FUNCTION · APPLIED EVERYWHERE</text>
+
+  <!-- Step 4 -->
+  <rect x="40" y="232" width="32" height="32" rx="3" class="s"/>
+  <text x="56" y="252" text-anchor="middle" class="acc">04</text>
+  <text x="84" y="252" class="acc">add a Zod refinement that rejects CR/LF</text>
+  <text x="84" y="268" class="label">USER GETS FRIENDLY ERROR · DEFENCE IN DEPTH</text>
+
+  <!-- Step 5 -->
+  <rect x="40" y="288" width="32" height="32" rx="3" class="fs"/>
+  <rect x="40" y="288" width="32" height="32" rx="3" class="a"/>
+  <text x="56" y="308" text-anchor="middle" class="acc">05</text>
+  <text x="84" y="308" class="acc">test with "Foo\r\nBcc: yourself@…"</text>
+  <text x="84" y="324" class="label">VERIFY THE BCC DOESN'T LEAK</text>
+</svg>

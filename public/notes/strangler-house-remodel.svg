@@ -1,0 +1,79 @@
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-house">
+  <title id="t-house">House remodel analogy: replace room by room while occupied</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.fa{fill:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">SAME HOUSE · DIFFERENT ROOM EACH MONTH</text>
+
+  <!-- Month 0 -->
+  <text x="100" y="74" text-anchor="middle" class="label">MONTH 0</text>
+  <rect x="40" y="90" width="120" height="120" class="s"/>
+  <line x1="40" y1="120" x2="160" y2="120" class="s"/>
+  <line x1="100" y1="120" x2="100" y2="210" class="s"/>
+  <text x="70" y="170" text-anchor="middle" class="text">old</text>
+  <text x="130" y="170" text-anchor="middle" class="text">old</text>
+  <text x="100" y="106" text-anchor="middle" class="text">old roof</text>
+  <text x="100" y="232" text-anchor="middle" class="label">EVERYTHING LEGACY</text>
+
+  <!-- arrow -->
+  <line x1="180" y1="150" x2="200" y2="150" class="a"/>
+  <polygon points="200,150 190,145 190,155" class="fa"/>
+
+  <!-- Month 2 -->
+  <text x="280" y="74" text-anchor="middle" class="label">MONTH 2</text>
+  <rect x="220" y="90" width="120" height="120" class="s"/>
+  <line x1="220" y1="120" x2="340" y2="120" class="s"/>
+  <line x1="280" y1="120" x2="280" y2="210" class="s"/>
+  <rect x="222" y="122" width="58" height="86" class="fs"/>
+  <text x="251" y="170" text-anchor="middle" class="acc">NEW</text>
+  <text x="310" y="170" text-anchor="middle" class="text">old</text>
+  <text x="280" y="106" text-anchor="middle" class="text">old roof</text>
+  <text x="280" y="232" text-anchor="middle" class="label">FIRST ROOM REBUILT</text>
+
+  <!-- arrow -->
+  <line x1="360" y1="150" x2="380" y2="150" class="a"/>
+  <polygon points="380,150 370,145 370,155" class="fa"/>
+
+  <!-- Month 4 -->
+  <text x="460" y="74" text-anchor="middle" class="label">MONTH 4</text>
+  <rect x="400" y="90" width="120" height="120" class="s"/>
+  <line x1="400" y1="120" x2="520" y2="120" class="s"/>
+  <line x1="460" y1="120" x2="460" y2="210" class="s"/>
+  <rect x="402" y="122" width="58" height="86" class="fs"/>
+  <rect x="462" y="122" width="58" height="86" class="fs"/>
+  <text x="431" y="170" text-anchor="middle" class="acc">NEW</text>
+  <text x="491" y="170" text-anchor="middle" class="acc">NEW</text>
+  <text x="460" y="106" text-anchor="middle" class="text">old roof</text>
+  <text x="460" y="232" text-anchor="middle" class="label">DOWNSTAIRS DONE</text>
+
+  <!-- arrow -->
+  <line x1="540" y1="150" x2="560" y2="150" class="a"/>
+  <polygon points="560,150 550,145 550,155" class="fa"/>
+
+  <!-- Month 6 -->
+  <text x="640" y="74" text-anchor="middle" class="label">MONTH 6</text>
+  <rect x="580" y="90" width="120" height="120" class="fs"/>
+  <rect x="580" y="90" width="120" height="120" class="a"/>
+  <line x1="580" y1="120" x2="700" y2="120" class="a"/>
+  <line x1="640" y1="120" x2="640" y2="210" class="a"/>
+  <text x="610" y="170" text-anchor="middle" class="acc">NEW</text>
+  <text x="670" y="170" text-anchor="middle" class="acc">NEW</text>
+  <text x="640" y="106" text-anchor="middle" class="acc">NEW</text>
+  <text x="640" y="232" text-anchor="middle" class="acc">FAMILY NEVER STOPPED EATING</text>
+
+  <text x="400" y="284" text-anchor="middle" class="label">YOU CAN'T SHUT THE KITCHEN DOWN FOR SIX WEEKS · MIGRATE PIECE BY PIECE</text>
+</svg>

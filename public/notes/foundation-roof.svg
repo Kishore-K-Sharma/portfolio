@@ -1,0 +1,69 @@
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-house-build">
+  <title id="t-house-build">Foundation before roof: build order matters</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">BUILD ORDER · CONSTRUCTION ANALOGY</text>
+
+  <!-- Right way -->
+  <text x="200" y="74" text-anchor="middle" class="acc">RIGHT · BOTTOM-UP</text>
+
+  <!-- Foundation -->
+  <rect x="100" y="220" width="200" height="20" class="fs"/>
+  <rect x="100" y="220" width="200" height="20" class="a"/>
+  <text x="200" y="234" text-anchor="middle" class="acc">foundation</text>
+  <text x="60" y="234" text-anchor="end" class="label">SQL</text>
+
+  <!-- Walls -->
+  <rect x="120" y="160" width="160" height="60" class="fs"/>
+  <rect x="120" y="160" width="160" height="60" class="a"/>
+  <text x="200" y="194" text-anchor="middle" class="acc">walls</text>
+  <text x="60" y="194" text-anchor="end" class="label">API</text>
+
+  <!-- Roof -->
+  <polygon points="100,160 200,100 300,160" class="fs"/>
+  <polygon points="100,160 200,100 300,160" class="a"/>
+  <text x="200" y="142" text-anchor="middle" class="acc">roof</text>
+  <text x="60" y="142" text-anchor="end" class="label">UI</text>
+
+  <text x="200" y="266" text-anchor="middle" class="text">each layer rests on a stable one below</text>
+
+  <!-- Wrong way -->
+  <text x="600" y="74" text-anchor="middle" class="danger">WRONG · ROOF FIRST</text>
+
+  <!-- Roof floating -->
+  <polygon points="500,160 600,100 700,160" class="fs"/>
+  <polygon points="500,160 600,100 700,160" class="dg"/>
+  <text x="600" y="142" text-anchor="middle" class="danger">roof</text>
+
+  <!-- "Air" supporting it -->
+  <line x1="520" y1="160" x2="520" y2="220" class="dg" stroke-dasharray="3 3"/>
+  <line x1="600" y1="160" x2="600" y2="220" class="dg" stroke-dasharray="3 3"/>
+  <line x1="680" y1="160" x2="680" y2="220" class="dg" stroke-dasharray="3 3"/>
+  <text x="600" y="200" text-anchor="middle" class="danger">×× nothing to hold it up</text>
+
+  <!-- Foundation last -->
+  <rect x="500" y="220" width="200" height="20" class="s"/>
+  <text x="600" y="234" text-anchor="middle" class="text">"we'll figure it out"</text>
+
+  <text x="600" y="266" text-anchor="middle" class="danger">SCHEMA RETROFITTED · BUGS BAKED IN</text>
+
+  <text x="400" y="306" text-anchor="middle" class="label">UI IS THE ROOF · THE PART YOU SEE · BUT NOT THE PART YOU BUILD FIRST</text>
+</svg>

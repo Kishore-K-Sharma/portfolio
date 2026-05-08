@@ -1,0 +1,64 @@
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-fuse">
+  <title id="t-fuse">Circuit breaker as a fuse box: the mental model</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">CLOSED · OPEN · HALF-OPEN</text>
+
+  <!-- Closed state -->
+  <rect x="40" y="64" width="220" height="180" rx="6" class="s"/>
+  <text x="150" y="92" text-anchor="middle" class="acc">closed · normal</text>
+  <line x1="80" y1="148" x2="220" y2="148" class="a"/>
+  <line x1="80" y1="148" x2="100" y2="128" class="a"/>
+  <line x1="100" y1="128" x2="220" y2="128" class="a"/>
+  <circle cx="100" cy="128" r="3" class="fa"/>
+  <text x="150" y="194" text-anchor="middle" class="text">calls flow through</text>
+  <text x="150" y="218" text-anchor="middle" class="label">FAIL RATE BELOW THRESHOLD</text>
+
+  <!-- Open state -->
+  <rect x="290" y="64" width="220" height="180" rx="6" class="s"/>
+  <text x="400" y="92" text-anchor="middle" class="danger">open · tripped</text>
+  <line x1="330" y1="148" x2="380" y2="148" class="dg"/>
+  <line x1="380" y1="148" x2="400" y2="128" class="dg"/>
+  <line x1="420" y1="148" x2="470" y2="148" class="dg"/>
+  <text x="400" y="194" text-anchor="middle" class="text">calls fail fast</text>
+  <text x="400" y="218" text-anchor="middle" class="label">DOWNSTREAM GETS A BREAK</text>
+
+  <!-- Half-open state -->
+  <rect x="540" y="64" width="220" height="180" rx="6" class="s"/>
+  <text x="650" y="92" text-anchor="middle" class="acc">half-open · trial</text>
+  <line x1="580" y1="148" x2="640" y2="148" class="a"/>
+  <line x1="640" y1="148" x2="660" y2="128" class="a"/>
+  <line x1="660" y1="128" x2="720" y2="128" class="a"/>
+  <circle cx="640" cy="148" r="3" class="fa"/>
+  <text x="650" y="194" text-anchor="middle" class="text">one call probes</text>
+  <text x="650" y="218" text-anchor="middle" class="label">PASS → CLOSE · FAIL → OPEN AGAIN</text>
+
+  <!-- Transitions -->
+  <line x1="260" y1="290" x2="290" y2="290" class="a"/>
+  <polygon points="290,290 280,285 280,295" class="fa"/>
+  <text x="200" y="282" class="label">N FAILURES</text>
+
+  <line x1="510" y1="290" x2="540" y2="290" class="a"/>
+  <polygon points="540,290 530,285 530,295" class="fa"/>
+  <text x="465" y="282" class="label">COOLDOWN</text>
+
+  <text x="400" y="310" text-anchor="middle" class="label">FUSE BOX FOR YOUR SERVICE CALLS · POPS WHEN DOWNSTREAM IS BAD</text>
+</svg>

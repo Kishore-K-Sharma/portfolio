@@ -1,0 +1,76 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-hash">
+  <title id="t-hash">Two failure modes of body-hash deduplication</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.dg{stroke:#d97a7a}.a{stroke:#b89be8}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">DEDUPING BY BODY HASH · TWO WAYS IT BREAKS</text>
+
+  <!-- Failure 1: collision -->
+  <text x="40" y="74" class="label">01 — TWO REAL CHARGES, SAME HASH</text>
+
+  <rect x="40" y="92" width="200" height="68" rx="4" class="s"/>
+  <text x="60" y="114" class="mono">amount: 500, merchant: m_42</text>
+  <text x="60" y="132" class="mono">user: u_alice</text>
+  <text x="60" y="150" class="acc">→ hash: 7a3f</text>
+
+  <line x1="240" y1="126" x2="280" y2="126" class="a"/>
+  <polygon points="280,126 270,121 270,131" class="fa"/>
+
+  <rect x="280" y="92" width="200" height="68" rx="4" class="s"/>
+  <text x="300" y="114" class="mono">amount: 500, merchant: m_42</text>
+  <text x="300" y="132" class="mono">user: u_bob</text>
+  <text x="300" y="150" class="acc">→ hash: 7a3f</text>
+
+  <line x1="480" y1="126" x2="540" y2="126" class="dg"/>
+  <polygon points="540,126 530,121 530,131" class="fd"/>
+
+  <rect x="540" y="92" width="220" height="68" rx="4" class="s"/>
+  <text x="650" y="118" text-anchor="middle" class="danger">×× COLLISION</text>
+  <text x="650" y="138" text-anchor="middle" class="label">SECOND CHARGE SKIPPED</text>
+  <text x="650" y="156" text-anchor="middle" class="label">BOB NEVER PAYS</text>
+
+  <line x1="40" y1="190" x2="760" y2="190" class="sm"/>
+
+  <!-- Failure 2: same charge, different hash -->
+  <text x="40" y="218" class="label">02 — RETRY OF ONE CHARGE, DIFFERENT HASH</text>
+
+  <rect x="40" y="236" width="200" height="68" rx="4" class="s"/>
+  <text x="60" y="258" class="mono">amount: 500</text>
+  <text x="60" y="276" class="mono">timestamp: 14:32:08.221</text>
+  <text x="60" y="294" class="acc">→ hash: c91x</text>
+
+  <line x1="240" y1="270" x2="280" y2="270" class="a"/>
+  <polygon points="280,270 270,265 270,275" class="fa"/>
+
+  <rect x="280" y="236" width="200" height="68" rx="4" class="s"/>
+  <text x="300" y="258" class="mono">amount: 500</text>
+  <text x="300" y="276" class="mono">timestamp: 14:32:08.224</text>
+  <text x="300" y="294" class="acc">→ hash: e07q</text>
+
+  <line x1="480" y1="270" x2="540" y2="270" class="dg"/>
+  <polygon points="540,270 530,265 530,275" class="fd"/>
+
+  <rect x="540" y="236" width="220" height="68" rx="4" class="s"/>
+  <text x="650" y="262" text-anchor="middle" class="danger">×× SAME OPERATION</text>
+  <text x="650" y="282" text-anchor="middle" class="label">SERVER PROCESSES BOTH</text>
+  <text x="650" y="300" text-anchor="middle" class="label">USER CHARGED TWICE</text>
+
+  <text x="400" y="346" text-anchor="middle" class="label">HASHING THE BODY ≠ IDEMPOTENCY · IT'S COINCIDENCE</text>
+</svg>

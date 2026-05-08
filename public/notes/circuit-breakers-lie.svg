@@ -1,0 +1,84 @@
+<svg viewBox="0 0 800 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-cb-lie">
+  <title id="t-cb-lie">Three failure modes of a circuit breaker</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.dg{stroke:#d97a7a}.a{stroke:#b89be8}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <!-- Mode 1: Cold-start trip -->
+  <text x="40" y="36" class="label">01 — TRIPS ON COLD-START LATENCY</text>
+  <rect x="60" y="60" width="100" height="46" rx="4" class="s"/>
+  <text x="110" y="88" text-anchor="middle" class="mono">service a</text>
+  <line x1="160" y1="83" x2="280" y2="83" class="dg" stroke-dasharray="4 3"/>
+  <polygon points="280,83 270,78 270,88" class="fd"/>
+  <text x="220" y="75" text-anchor="middle" class="danger">TIMEOUTS</text>
+  <rect x="280" y="60" width="100" height="46" rx="4" class="s"/>
+  <text x="330" y="88" text-anchor="middle" class="mono">service b</text>
+  <text x="395" y="76" class="label">cold pool</text>
+  <text x="395" y="92" class="label">JIT warming</text>
+  <text x="395" y="108" class="label">healthy</text>
+  <text x="600" y="84" class="danger">×× BREAKER OPEN — A FAILS WHILE B IS FINE</text>
+
+  <line x1="40" y1="142" x2="760" y2="142" class="sm"/>
+
+  <!-- Mode 2: Half-open stampede -->
+  <text x="40" y="172" class="label">02 — HALF-OPEN STAMPEDE</text>
+  <rect x="60" y="196" width="100" height="46" rx="4" class="s"/>
+  <text x="110" y="224" text-anchor="middle" class="mono">service a</text>
+  <text x="220" y="200" class="label">queued requests:</text>
+  <line x1="170" y1="208" x2="280" y2="208" class="a"/>
+  <line x1="170" y1="216" x2="280" y2="216" class="a"/>
+  <line x1="170" y1="224" x2="280" y2="224" class="a"/>
+  <line x1="170" y1="232" x2="280" y2="232" class="a"/>
+  <line x1="170" y1="240" x2="280" y2="240" class="a"/>
+  <polygon points="280,224 270,219 270,229" class="fa"/>
+  <rect x="280" y="196" width="100" height="46" rx="4" class="s"/>
+  <text x="330" y="224" text-anchor="middle" class="mono">service b</text>
+  <text x="395" y="216" class="text">all flood through</text>
+  <text x="395" y="232" class="text">on transition</text>
+  <text x="600" y="220" class="danger">×× B OVERWHELMED · TRIPS AGAIN · LOOP</text>
+
+  <line x1="40" y1="278" x2="760" y2="278" class="sm"/>
+
+  <!-- Mode 3: Per-instance divergence -->
+  <text x="40" y="308" class="label">03 — PER-INSTANCE BREAKERS DIVERGE</text>
+  <rect x="60" y="332" width="60" height="34" rx="3" class="s"/>
+  <text x="90" y="354" text-anchor="middle" class="mono">a-1</text>
+  <rect x="60" y="370" width="60" height="34" rx="3" class="s"/>
+  <text x="90" y="392" text-anchor="middle" class="mono">a-2</text>
+  <rect x="60" y="408" width="60" height="34" rx="3" class="s"/>
+  <text x="90" y="430" text-anchor="middle" class="mono">a-3</text>
+
+  <line x1="120" y1="349" x2="280" y2="349" class="a"/>
+  <polygon points="280,349 270,344 270,354" class="fa"/>
+  <line x1="120" y1="387" x2="280" y2="368" class="dg"/>
+  <polygon points="280,368 270,365 271,375" class="fd"/>
+  <line x1="120" y1="425" x2="280" y2="406" class="a"/>
+  <polygon points="280,406 270,401 270,411" class="fa"/>
+
+  <rect x="280" y="332" width="60" height="34" rx="3" class="s"/>
+  <text x="310" y="354" text-anchor="middle" class="mono">b-ok</text>
+  <rect x="280" y="370" width="60" height="34" rx="3" class="s"/>
+  <text x="310" y="392" text-anchor="middle" class="danger">b-bad</text>
+  <rect x="280" y="408" width="60" height="34" rx="3" class="s"/>
+  <text x="310" y="430" text-anchor="middle" class="mono">b-ok</text>
+
+  <text x="380" y="370" class="text">a-2 sees ~10% fail · trips locally</text>
+  <text x="380" y="390" class="text">a-1 + a-3 see 10% fail · don't trip</text>
+  <text x="380" y="412" class="danger">×× SAME ENDPOINT FAILS PER-POD</text>
+</svg>
