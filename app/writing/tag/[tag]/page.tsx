@@ -19,7 +19,7 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const tag = decodeURIComponent(params.tag);
-  const url = `${siteConfig.baseUrl}/notes/tag/${tagSlug(tag)}`;
+  const url = `${siteConfig.baseUrl}/writing/tag/${tagSlug(tag)}`;
   const description = `Notes on ${tag} — long-form writing on architecture, distributed systems, and shipping discipline by Kishore Kumar Sharma.`;
   return {
     title: `#${tag}`,
@@ -73,7 +73,7 @@ export default async function TagPage(props: Props) {
     readMin: n.readMin,
   }));
 
-  const basePath = `/notes/tag/${tagSlug(match.tag)}`;
+  const basePath = `/writing/tag/${tagSlug(match.tag)}`;
   const url = `${siteConfig.baseUrl}${basePath}`;
   const nonce = (await headers()).get("x-nonce") ?? undefined;
 
@@ -85,14 +85,14 @@ export default async function TagPage(props: Props) {
     description: `Long-form notes by Kishore Kumar Sharma tagged ${match.tag}.`,
     url,
     inLanguage: "en",
-    isPartOf: { "@type": "Blog", "@id": `${siteConfig.baseUrl}/notes` },
+    isPartOf: { "@type": "Blog", "@id": `${siteConfig.baseUrl}/writing` },
     mainEntity: {
       "@type": "ItemList",
       numberOfItems: notes.length,
       itemListElement: notes.map((n, i) => ({
         "@type": "ListItem",
         position: i + 1,
-        url: `${siteConfig.baseUrl}/notes/${n.slug}`,
+        url: `${siteConfig.baseUrl}/writing/${n.slug}`,
         name: n.title,
       })),
     },
@@ -103,7 +103,7 @@ export default async function TagPage(props: Props) {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.baseUrl },
-      { "@type": "ListItem", position: 2, name: "Writing", item: `${siteConfig.baseUrl}/notes` },
+      { "@type": "ListItem", position: 2, name: "Writing", item: `${siteConfig.baseUrl}/writing` },
       { "@type": "ListItem", position: 3, name: `#${match.tag}`, item: url },
     ],
   };
@@ -124,7 +124,7 @@ export default async function TagPage(props: Props) {
       />
       <div className="container-narrow">
         <Link
-          href="/notes"
+          href="/writing"
           className="font-mono text-[0.72rem] text-muted-foreground hover:text-foreground transition-colors"
         >
           ← writing
@@ -149,10 +149,10 @@ export default async function TagPage(props: Props) {
 
         <div className="mt-14 pt-6 border-t border-subtle/40">
           <Link
-            href="/notes"
+            href="/writing"
             className="font-mono text-[0.78rem] text-muted-foreground hover:text-foreground transition-colors"
           >
-            ← all notes
+            ← all writing
           </Link>
         </div>
       </div>

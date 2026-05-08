@@ -84,7 +84,7 @@ export function TestimonialBand() {
               onClick={goPrev}
               aria-label="Previous testimonial"
               data-cursor-label="prev"
-              className="inline-flex items-center justify-center w-8 h-8 rounded-md border border-subtle/60 text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-md border border-subtle/60 text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors"
             >
               <ChevronLeft size={14} />
             </button>
@@ -92,7 +92,7 @@ export function TestimonialBand() {
               onClick={goNext}
               aria-label="Next testimonial"
               data-cursor-label="next"
-              className="inline-flex items-center justify-center w-8 h-8 rounded-md border border-subtle/60 text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-md border border-subtle/60 text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors"
             >
               <ChevronRight size={14} />
             </button>
@@ -111,10 +111,15 @@ export function TestimonialBand() {
                 aria-selected={i === idx}
                 aria-label={`Show testimonial from ${tx.name}`}
                 onClick={() => setIdx(i)}
-                className={`h-1 rounded-full transition-all ${
-                  i === idx ? "w-5 bg-foreground" : "w-2.5 bg-subtle hover:bg-foreground/40"
-                }`}
-              />
+                className="group flex items-center justify-center py-2 px-1 -my-2"
+              >
+                <span
+                  aria-hidden
+                  className={`block h-1 rounded-full transition-all ${
+                    i === idx ? "w-5 bg-foreground" : "w-2.5 bg-subtle group-hover:bg-foreground/40"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </div>

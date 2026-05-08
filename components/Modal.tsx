@@ -101,7 +101,7 @@ export function Modal({ isOpen, onClose, certificate }: ModalProps) {
               type="button"
               onClick={onClose}
               aria-label="Close certificate dialog"
-              className="inline-flex items-center justify-center w-9 h-9 rounded-md border border-subtle text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors shrink-0"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-md border border-subtle text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors shrink-0"
             >
               <X size={16} />
             </button>

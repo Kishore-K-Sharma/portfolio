@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     "Kishore Kumar Sharma",
   ],
   authors: [{ name: "Kishore Kumar Sharma", url: siteConfig.baseUrl }],
-  alternates: { canonical: `${siteConfig.baseUrl}/notes` },
+  alternates: { canonical: `${siteConfig.baseUrl}/writing` },
   robots: {
     index: true,
     follow: true,
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "Writing — Kishore Kumar Sharma",
     description: "Notes on architecture, distributed systems, and shipping discipline.",
     type: "website",
-    url: `${siteConfig.baseUrl}/notes`,
+    url: `${siteConfig.baseUrl}/writing`,
     siteName: "Kishore Kumar Sharma",
     locale: "en_IN",
   },
@@ -74,11 +74,11 @@ export default async function NotesIndex() {
   const blogJsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    "@id": `${siteConfig.baseUrl}/notes`,
+    "@id": `${siteConfig.baseUrl}/writing`,
     name: "Writing — Kishore Kumar Sharma",
     description:
       "Long-form notes on architecture, distributed systems, and the discipline behind production software.",
-    url: `${siteConfig.baseUrl}/notes`,
+    url: `${siteConfig.baseUrl}/writing`,
     inLanguage: "en",
     author,
     publisher: author,
@@ -86,7 +86,7 @@ export default async function NotesIndex() {
       "@type": "BlogPosting",
       headline: n.title,
       description: n.description,
-      url: `${siteConfig.baseUrl}/notes/${n.slug}`,
+      url: `${siteConfig.baseUrl}/writing/${n.slug}`,
       datePublished: n.date,
       dateModified: n.date,
       author,
@@ -99,7 +99,7 @@ export default async function NotesIndex() {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.baseUrl },
-      { "@type": "ListItem", position: 2, name: "Writing", item: `${siteConfig.baseUrl}/notes` },
+      { "@type": "ListItem", position: 2, name: "Writing", item: `${siteConfig.baseUrl}/writing` },
     ],
   };
 
@@ -123,7 +123,7 @@ export default async function NotesIndex() {
             /writing
           </p>
           <h1 className="font-display text-display text-foreground tracking-[-0.03em] leading-[1.02] text-balance">
-            Notes on building <span className="font-display-soft italic text-accent">things that hold</span>.
+            Writing on building <span className="font-display-soft italic text-accent">things that hold</span>.
           </h1>
           <p className="mt-6 max-w-[58ch] text-body-lg text-muted-foreground text-pretty">
             Long-form thinking on architecture, distributed systems, and the discipline behind
@@ -150,7 +150,7 @@ export default async function NotesIndex() {
               {tags.map(({ tag, count }) => (
                 <li key={tag}>
                   <Link
-                    href={`/notes/tag/${tagSlug(tag)}`}
+                    href={`/writing/tag/${tagSlug(tag)}`}
                     className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-subtle/60 font-mono text-[0.74rem] text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors"
                   >
                     #{tag}
@@ -170,7 +170,7 @@ export default async function NotesIndex() {
             ← back to portfolio
           </Link>
           <span className="font-mono text-[0.7rem] text-muted-foreground">
-            {notes.length} {notes.length === 1 ? "note" : "notes"}
+            {notes.length} {notes.length === 1 ? "piece" : "pieces"}
           </span>
         </div>
       </div>

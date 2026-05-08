@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { listSlugs, loadNote, relatedNotes } from "@/lib/notes";
 import type { Note } from "@/lib/notes";
+import { ShareBar } from "@/components/notes/ShareBar";
 import { safeJsonLd } from "@/lib/json-ld";
 import { siteConfig } from "@/config/site";
 
@@ -19,7 +20,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const note = loadNote(params.slug);
   if (!note) return {};
-  const url = `${siteConfig.baseUrl}/notes/${note.slug}`;
+  const url = `${siteConfig.baseUrl}/writing/${note.slug}`;
   const tags = note.tags ?? [];
   return {
     title: note.title,
@@ -69,8 +70,8 @@ export default async function NotePage(props: Props) {
 
   const { prev, next } = relatedNotes(note.slug);
   const nonce = (await headers()).get("x-nonce") ?? undefined;
-  const url = `${siteConfig.baseUrl}/notes/${note.slug}`;
-  const ogImage = `${siteConfig.baseUrl}/notes/${note.slug}/opengraph-image`;
+  const url = `${siteConfig.baseUrl}/writing/${note.slug}`;
+  const ogImage = `${siteConfig.baseUrl}/writing/${note.slug}/opengraph-image`;
   const tags = note.tags ?? [];
 
   // Reference the canonical Person record defined in the root layout via @id
@@ -112,7 +113,7 @@ export default async function NotePage(props: Props) {
         "@type": "ListItem",
         position: 1,
         name: "Writing",
-        item: `${siteConfig.baseUrl}/notes`,
+        item: `${siteConfig.baseUrl}/writing`,
       },
       {
         "@type": "ListItem",
@@ -141,7 +142,7 @@ export default async function NotePage(props: Props) {
       <div className="container-narrow">
         <header className="mb-12">
           <Link
-            href="/notes"
+            href="/writing"
             className="font-mono text-[0.72rem] text-muted-foreground hover:text-foreground transition-colors"
           >
             ← writing
@@ -169,6 +170,7 @@ export default async function NotePage(props: Props) {
               ))}
             </ul>
           )}
+          <ShareBar url={url} title={note.title} description={note.description} compact />
         </header>
 
         <div
@@ -182,19 +184,21 @@ export default async function NotePage(props: Props) {
                      prose-strong:text-foreground prose-strong:font-semibold
                      prose-em:text-foreground prose-em:font-display-soft
                      prose-code:font-mono prose-code:text-[0.88em] prose-code:bg-surface prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
-                     prose-pre:bg-surface prose-pre:border prose-pre:border-subtle/60 prose-pre:rounded-lg
+                     prose-pre:bg-surface prose-pre:border prose-pre:border-subtle/60 prose-pre:rounded-lg prose-pre:overflow-x-auto
                      prose-blockquote:border-l-accent prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:text-foreground/80
                      prose-li:text-foreground/90 prose-li:leading-[1.7]
                      prose-hr:border-subtle/60 prose-hr:my-12
-                     prose-img:rounded-lg prose-img:border prose-img:border-subtle/60 prose-img:my-0
+                     prose-img:rounded-lg prose-img:border prose-img:border-subtle/60 prose-img:my-0 prose-img:max-w-full prose-img:h-auto
                      prose-figure:my-10 prose-figure:flex prose-figure:flex-col prose-figure:items-center
                      prose-figcaption:font-mono prose-figcaption:text-[0.78rem] prose-figcaption:text-muted-foreground prose-figcaption:mt-3 prose-figcaption:text-center prose-figcaption:max-w-[50ch]"
           dangerouslySetInnerHTML={{ __html: note.html }}
         />
 
+        <ShareBar url={url} title={note.title} description={note.description} />
+
         {(prev || next) && (
           <nav
-            aria-label="Related notes"
+            aria-label="Related writing"
             className="mt-20 pt-10 border-t border-subtle/60 grid grid-cols-1 md:grid-cols-2 gap-4"
           >
             {prev ? (
@@ -216,10 +220,10 @@ export default async function NotePage(props: Props) {
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              href="/notes"
+              href="/writing"
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md border border-subtle text-foreground text-[0.85rem] hover:border-foreground/40 transition-colors"
             >
-              ← more notes
+              ← more writing
             </Link>
             <Link
               href="/#contact"
@@ -243,7 +247,7 @@ function NoteCard({ direction, note }: { direction: "prev" | "next"; note: Note 
   const isNext = direction === "next";
   return (
     <Link
-      href={`/notes/${note.slug}`}
+      href={`/writing/${note.slug}`}
       className={`group block rounded-lg border border-subtle/60 p-5 hover:border-foreground/40 transition-colors ${
         isNext ? "md:text-right" : ""
       }`}

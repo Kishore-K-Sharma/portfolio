@@ -20,14 +20,14 @@ interface NotesBrowserProps {
   notes: NoteSummary[];
   /** Override the search input placeholder (e.g. for tag pages). */
   searchPlaceholder?: string;
-  /** Path the page lives on; used when rewriting the URL. Defaults to "/notes". */
+  /** Path the page lives on; used when rewriting the URL. Defaults to "/writing". */
   basePath?: string;
 }
 
 export function NotesBrowser({
   notes,
   searchPlaceholder = "Search by title, description, or tag…",
-  basePath = "/notes",
+  basePath = "/writing",
 }: NotesBrowserProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -131,7 +131,7 @@ export function NotesBrowser({
         <ol className="divide-y divide-subtle/60">
           {pageNotes.map((n) => (
             <li key={n.slug} className="py-7 first:pt-0 last:pb-0">
-              <Link href={`/notes/${n.slug}`} className="group block">
+              <Link href={`/writing/${n.slug}`} className="group block">
                 <div className="flex items-baseline justify-between gap-4 mb-3">
                   <time
                     dateTime={n.date}
@@ -176,7 +176,7 @@ export function NotesBrowser({
             type="button"
             onClick={() => goToPage(Math.max(1, safePage - 1))}
             disabled={safePage === 1}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-subtle/60 font-mono text-[0.78rem] text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-1.5 h-10 px-3 rounded-md border border-subtle/60 font-mono text-[0.78rem] text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             ← prev
           </button>
@@ -188,7 +188,7 @@ export function NotesBrowser({
                   type="button"
                   onClick={() => goToPage(n)}
                   aria-current={n === safePage ? "page" : undefined}
-                  className={`min-w-[2rem] h-8 px-2 rounded font-mono text-[0.78rem] transition-colors ${
+                  className={`min-w-[2.5rem] h-10 px-2 rounded font-mono text-[0.78rem] transition-colors ${
                     n === safePage
                       ? "bg-foreground text-background"
                       : "text-muted-foreground hover:text-foreground"
@@ -204,7 +204,7 @@ export function NotesBrowser({
             type="button"
             onClick={() => goToPage(Math.min(totalPages, safePage + 1))}
             disabled={safePage === totalPages}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-subtle/60 font-mono text-[0.78rem] text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-1.5 h-10 px-3 rounded-md border border-subtle/60 font-mono text-[0.78rem] text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             next →
           </button>

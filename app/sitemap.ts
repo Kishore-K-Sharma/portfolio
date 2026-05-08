@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: siteConfig.baseUrl, lastModified: now, changeFrequency: "monthly", priority: 1 },
     { url: `${siteConfig.baseUrl}/work`, lastModified: now, changeFrequency: "monthly", priority: 0.95 },
-    { url: `${siteConfig.baseUrl}/notes`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${siteConfig.baseUrl}/writing`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${siteConfig.baseUrl}/uses`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     ...work.map((w) => ({
       url: `${siteConfig.baseUrl}/work/${w.slug}`,
@@ -21,13 +21,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     })),
     ...notes.map((n) => ({
-      url: `${siteConfig.baseUrl}/notes/${n.slug}`,
+      url: `${siteConfig.baseUrl}/writing/${n.slug}`,
       lastModified: new Date(n.date),
       changeFrequency: "yearly" as const,
       priority: 0.8,
     })),
     ...tags.map(({ tag }) => ({
-      url: `${siteConfig.baseUrl}/notes/tag/${tagSlug(tag)}`,
+      url: `${siteConfig.baseUrl}/writing/tag/${tagSlug(tag)}`,
       lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 0.6,

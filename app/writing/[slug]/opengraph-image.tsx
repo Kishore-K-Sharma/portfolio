@@ -25,7 +25,7 @@ export default async function NoteOG({ params }: { params: { slug: string } }) {
             fontFamily: "sans-serif",
           }}
         >
-          /notes
+          /writing
         </div>
       ),
       { ...size }

@@ -36,7 +36,7 @@ export function CommandPalette() {
   const commands: Cmd[] = useMemo(
     () => [
       { id: "nav-work", label: "open work", hint: "/work · all case studies", group: "navigate", run: () => { window.location.href = "/work"; close(); } },
-      { id: "nav-notes", label: "open writing", hint: "/notes · long-form", group: "navigate", run: () => { window.location.href = "/notes"; close(); } },
+      { id: "nav-writing", label: "open writing", hint: "/writing · long-form", group: "navigate", run: () => { window.location.href = "/writing"; close(); } },
       { id: "nav-uses", label: "open uses", hint: "/uses · the toolkit", group: "navigate", run: () => { window.location.href = "/uses"; close(); } },
       { id: "nav-cap", label: "open capability", hint: "scroll · skills", group: "navigate", run: () => go("capability") },
       { id: "nav-proof", label: "open proof", hint: "scroll · testimonials + awards", group: "navigate", run: () => go("proof") },

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const SUGGESTIONS = [
   { href: "/", label: "Home", hint: "the actual portfolio" },
   { href: "/work", label: "Work", hint: "case studies" },
-  { href: "/notes", label: "Writing", hint: "long-form notes" },
+  { href: "/writing", label: "Writing", hint: "long-form pieces" },
   { href: "/uses", label: "Uses", hint: "tools I reach for" },
   { href: "/#contact", label: "Contact", hint: "say hi" },
 ];

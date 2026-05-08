@@ -141,7 +141,7 @@ export function Contact() {
                 maxLength={5000}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full bg-transparent border-b border-subtle focus:border-foreground transition-colors py-2 text-[0.95rem] outline-none resize-none placeholder:text-muted-foreground/50"
+                className="w-full bg-transparent border-b border-subtle focus:border-foreground transition-colors py-2 text-base outline-none resize-none placeholder:text-muted-foreground/50"
                 placeholder="Project, timeline, what's making it hard. Or just a hello."
               />
               {state.errors?.message?.[0] && (
@@ -210,7 +210,7 @@ function Field({
         type={type}
         required={required}
         placeholder={placeholder}
-        className="w-full bg-transparent border-b border-subtle focus:border-foreground transition-colors py-2 text-[0.95rem] outline-none placeholder:text-muted-foreground/50"
+        className="w-full bg-transparent border-b border-subtle focus:border-foreground transition-colors py-2 text-base outline-none placeholder:text-muted-foreground/50"
       />
       {error && <p className="mt-2 font-mono text-[0.75rem] text-destructive">{error}</p>}
     </div>

@@ -21,6 +21,17 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    // 301 redirects from the old /notes paths to the new /writing paths.
+    // Preserves SEO equity for any indexed URLs (GSC, backlinks, social shares).
+    // Static assets under /public/notes/*.svg keep working — Next serves the
+    // public/ directory BEFORE evaluating redirects, so the markdown image
+    // refs that still point at /notes/*.svg continue to resolve directly.
+    return [
+      { source: '/notes', destination: '/writing', permanent: true },
+      { source: '/notes/:path*', destination: '/writing/:path*', permanent: true },
+    ];
+  },
 };
 
 module.exports = nextConfig;

@@ -125,11 +125,11 @@ export default async function WorkPage(props: Props) {
                      prose-strong:text-foreground prose-strong:font-semibold
                      prose-em:text-foreground prose-em:font-display-soft
                      prose-code:font-mono prose-code:text-[0.88em] prose-code:bg-surface prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
-                     prose-pre:bg-surface prose-pre:border prose-pre:border-subtle/60 prose-pre:rounded-lg
+                     prose-pre:bg-surface prose-pre:border prose-pre:border-subtle/60 prose-pre:rounded-lg prose-pre:overflow-x-auto
                      prose-blockquote:border-l-accent prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:text-foreground/80
                      prose-li:text-foreground/90 prose-li:leading-[1.7]
                      prose-hr:border-subtle/60 prose-hr:my-12
-                     prose-img:rounded-lg prose-img:border prose-img:border-subtle/60 prose-img:my-0
+                     prose-img:rounded-lg prose-img:border prose-img:border-subtle/60 prose-img:my-0 prose-img:max-w-full prose-img:h-auto
                      prose-figure:my-10 prose-figure:flex prose-figure:flex-col prose-figure:items-center
                      prose-figcaption:font-mono prose-figcaption:text-[0.78rem] prose-figcaption:text-muted-foreground prose-figcaption:mt-3 prose-figcaption:text-center prose-figcaption:max-w-[50ch]"
           dangerouslySetInnerHTML={{ __html: work.html }}
