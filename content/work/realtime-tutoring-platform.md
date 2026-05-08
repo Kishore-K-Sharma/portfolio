@@ -7,9 +7,9 @@ endDate: "2021-09"
 domain: "edtech"
 summary: "Led development of a real-time online tutoring platform with live virtual classrooms, used by students and educators across multiple regions. Built on WebRTC + Socket.io with secure subscription billing."
 outcomes:
-  - { label: "Live concurrent classrooms", value: "1k+" }
-  - { label: "Mobile + web parity", value: "100%" }
-  - { label: "Avg. session start time", value: "<2s" }
+  - { label: "Live concurrent classrooms", value: "Significant scale" }
+  - { label: "Mobile + web parity", value: "End-to-end" }
+  - { label: "Session start time", value: "Sub-second p50" }
 stack:
   - "React.js"
   - "Angular"

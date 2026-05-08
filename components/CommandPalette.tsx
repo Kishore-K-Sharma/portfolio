@@ -37,6 +37,7 @@ export function CommandPalette() {
     () => [
       { id: "nav-work", label: "open work", hint: "/work · all case studies", group: "navigate", run: () => { window.location.href = "/work"; close(); } },
       { id: "nav-writing", label: "open writing", hint: "/writing · long-form", group: "navigate", run: () => { window.location.href = "/writing"; close(); } },
+      { id: "nav-about", label: "open about", hint: "/about · profile + experience", group: "navigate", run: () => { window.location.href = "/about"; close(); } },
       { id: "nav-uses", label: "open uses", hint: "/uses · the toolkit", group: "navigate", run: () => { window.location.href = "/uses"; close(); } },
       { id: "nav-cap", label: "open capability", hint: "scroll · skills", group: "navigate", run: () => go("capability") },
       { id: "nav-proof", label: "open proof", hint: "scroll · testimonials + awards", group: "navigate", run: () => go("proof") },
@@ -46,6 +47,7 @@ export function CommandPalette() {
       { id: "sys-ls", label: "ls projects", hint: "list case studies", group: "system", run: () => go("work") },
       { id: "sys-grep", label: "grep skills java", hint: "jump to capability", group: "system", run: () => go("capability") },
       { id: "ext-linkedin", label: "open linkedin", hint: "↗ external", group: "external", run: () => { window.open(portfolioData.personal.linkedin, "_blank", "noopener,noreferrer"); close(); } },
+      { id: "ext-rss", label: "subscribe rss", hint: "↗ /writing/rss.xml", group: "external", run: () => { window.open("/writing/rss.xml", "_blank", "noopener,noreferrer"); close(); } },
       { id: "open-contact", label: "open contact form", hint: "say hi via the form", group: "external", run: () => go("contact") },
     ],
     [go, close]

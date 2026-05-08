@@ -11,7 +11,7 @@ Content Security Policy (CSP) is what happens when you write the bouncer a stric
 
 A well-written CSP is the single most effective defense against cross-site scripting (XSS) — the class of attack where someone tricks your page into running code it shouldn't. If a script gets injected into your HTML somehow, CSP is what stops the browser from executing it.
 
-![Four scripts queued at the door: hydration, GA loader, Turnstile, and an injected attacker. The first three carry a nonce stamp and pass; the attacker's script has no nonce and gets blocked.](/notes/csp-bouncer.svg "Nonce on the guest list = run. No nonce = refused at the door.")
+![Four scripts queued at the door: hydration, GA loader, Turnstile, and an injected attacker. The first three carry a nonce stamp and pass; the attacker's script has no nonce and gets blocked.](/writing/csp-bouncer.svg "Nonce on the guest list = run. No nonce = refused at the door.")
 
 The catch: most CSP examples on the internet are written for a static site with no third-party JavaScript and no CSS framework. The moment you bring in Tailwind, Next.js, Google Analytics, or a CAPTCHA widget, the textbook CSP either blocks them or has to be loosened so much it stops being a defense.
 
@@ -34,7 +34,7 @@ The right answer is **nonces** — a fresh random token, generated per page load
 
 ## The five pieces, in order
 
-![A flowchart: middleware generates a per-request nonce, sets it on the request headers and CSP response header, the layout reads it via headers() and passes it to scripts, scripts that carry the nonce execute, scripts without it are blocked.](/notes/csp-nonce-flow.svg "One nonce per request. Five places need to know about it.")
+![A flowchart: middleware generates a per-request nonce, sets it on the request headers and CSP response header, the layout reads it via headers() and passes it to scripts, scripts that carry the nonce execute, scripts without it are blocked.](/writing/csp-nonce-flow.svg "One nonce per request. Five places need to know about it.")
 
 ### 1. Generate a fresh nonce per request, in middleware
 
@@ -116,7 +116,7 @@ Every `<script>` tag you control needs `nonce={nonce}`. This includes:
 
 If you forget one, that script gets blocked silently. Open devtools, check the console, it will tell you which `script-src` directive blocked which URL. Fix one at a time.
 
-![A simulated layout file showing the three places nonce attribute lands: JSON-LD block via dangerouslySetInnerHTML, the GA loader script tag, and the inline gtag bootstrap script.](/notes/csp-nonce-stamping.svg "The nonce shows up everywhere a <script> does — including the inline ones you might forget.")
+![A simulated layout file showing the three places nonce attribute lands: JSON-LD block via dangerouslySetInnerHTML, the GA loader script tag, and the inline gtag bootstrap script.](/writing/csp-nonce-stamping.svg "The nonce shows up everywhere a <script> does — including the inline ones you might forget.")
 
 ### 5. The Tailwind / styles concession
 
@@ -148,7 +148,7 @@ Two ways to live with this:
 
 I take option 1. The site has the dynamic-rendering cost; XSS is the more important defense.
 
-![Side by side: static-nonce path (CDN-cached HTML, weak — attacker knows the nonce) versus per-request-nonce path (function invocation per request, strong — XSS blocked).](/notes/csp-cost-tradeoff.svg "Cheaper or stronger. Pick one. The whole class of XSS-by-script-injection going away is worth the function call.")
+![Side by side: static-nonce path (CDN-cached HTML, weak — attacker knows the nonce) versus per-request-nonce path (function invocation per request, strong — XSS blocked).](/writing/csp-cost-tradeoff.svg "Cheaper or stronger. Pick one. The whole class of XSS-by-script-injection going away is worth the function call.")
 
 ## The dev-mode gotcha
 

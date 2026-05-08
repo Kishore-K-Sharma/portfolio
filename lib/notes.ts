@@ -13,12 +13,22 @@ export interface NoteFrontmatter {
   draft?: boolean;
 }
 
-export interface Note extends NoteFrontmatter {
+/** Frontmatter-only view — cheap to compute, no HTML rendering required. */
+export interface NoteMeta {
   slug: string;
-  content: string; // raw markdown
-  html: string;    // rendered HTML
-  readMin: number; // always present after load
+  title: string;
+  description: string;
+  date: string;
+  tags: string[];
+  readMin: number;
   wordCount: number;
+  draft?: boolean;
+}
+
+/** Full note — meta + raw markdown + rendered HTML. Async to load. */
+export interface Note extends NoteMeta {
+  content: string;
+  html: string;
 }
 
 const NOTES_DIR = path.join(process.cwd(), "content", "notes");
@@ -31,17 +41,7 @@ function wordsPerMinute(text: string): number {
   return Math.max(1, Math.round(countWords(text) / 220));
 }
 
-export function listNotes({ includeDrafts = false } = {}): Note[] {
-  if (!fs.existsSync(NOTES_DIR)) return [];
-  const files = fs.readdirSync(NOTES_DIR).filter((f) => f.endsWith(".md") || f.endsWith(".mdx"));
-  const notes: Note[] = files
-    .map((file) => loadNote(file.replace(/\.(md|mdx)$/, "")))
-    .filter((n): n is Note => !!n)
-    .filter((n) => includeDrafts || !n.draft);
-  return notes.sort((a, b) => b.date.localeCompare(a.date));
-}
-
-export function loadNote(slug: string): Note | null {
+function readSource(slug: string): { fm: Partial<NoteFrontmatter>; content: string } | null {
   const mdPath = path.join(NOTES_DIR, `${slug}.md`);
   const mdxPath = path.join(NOTES_DIR, `${slug}.mdx`);
   const file = fs.existsSync(mdPath) ? mdPath : fs.existsSync(mdxPath) ? mdxPath : null;
@@ -49,10 +49,15 @@ export function loadNote(slug: string): Note | null {
 
   const raw = fs.readFileSync(file, "utf8");
   const parsed = matter(raw);
-  const fm = parsed.data as Partial<NoteFrontmatter>;
-  if (!fm.title || !fm.description || !fm.date) return null;
+  return { fm: parsed.data as Partial<NoteFrontmatter>, content: parsed.content };
+}
 
-  const html = renderMarkdown(parsed.content);
+/** Load metadata only — synchronous, used by listings/sitemap/OG. */
+export function loadNoteMeta(slug: string): NoteMeta | null {
+  const r = readSource(slug);
+  if (!r) return null;
+  const { fm, content } = r;
+  if (!fm.title || !fm.description || !fm.date) return null;
 
   return {
     slug,
@@ -61,11 +66,29 @@ export function loadNote(slug: string): Note | null {
     date: fm.date,
     tags: fm.tags ?? [],
     draft: fm.draft ?? false,
-    readMin: fm.readMin ?? wordsPerMinute(parsed.content),
-    wordCount: countWords(parsed.content),
-    content: parsed.content,
-    html,
+    readMin: fm.readMin ?? wordsPerMinute(content),
+    wordCount: countWords(content),
   };
+}
+
+/** Load full note including rendered HTML. Async because shiki is async. */
+export async function loadNote(slug: string): Promise<Note | null> {
+  const r = readSource(slug);
+  if (!r) return null;
+  const meta = loadNoteMeta(slug);
+  if (!meta) return null;
+  const html = await renderMarkdown(r.content);
+  return { ...meta, content: r.content, html };
+}
+
+export function listNotes({ includeDrafts = false } = {}): NoteMeta[] {
+  if (!fs.existsSync(NOTES_DIR)) return [];
+  const files = fs.readdirSync(NOTES_DIR).filter((f) => f.endsWith(".md") || f.endsWith(".mdx"));
+  return files
+    .map((file) => loadNoteMeta(file.replace(/\.(md|mdx)$/, "")))
+    .filter((n): n is NoteMeta => !!n)
+    .filter((n) => includeDrafts || !n.draft)
+    .sort((a, b) => b.date.localeCompare(a.date));
 }
 
 export function listSlugs(): string[] {
@@ -85,7 +108,7 @@ export function listTags(): { tag: string; count: number }[] {
     .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
 }
 
-export function notesByTag(tag: string): Note[] {
+export function notesByTag(tag: string): NoteMeta[] {
   const t = tag.toLowerCase();
   return listNotes().filter((n) => (n.tags ?? []).some((x) => x.toLowerCase() === t));
 }
@@ -110,7 +133,7 @@ function hashSlug(s: string): number {
  * walking forward through "next → next → next" doesn't see the same post twice
  * in a row. Falls back gracefully when there are 0 or 1 other notes.
  */
-export function relatedNotes(currentSlug: string): { prev: Note | null; next: Note | null } {
+export function relatedNotes(currentSlug: string): { prev: NoteMeta | null; next: NoteMeta | null } {
   const others = listNotes().filter((n) => n.slug !== currentSlug);
   if (others.length === 0) return { prev: null, next: null };
   if (others.length === 1) return { prev: null, next: others[0] };

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
-import { listWorkSlugs, loadWork } from "@/lib/work";
+import { listWorkSlugs, loadWork, loadWorkMeta } from "@/lib/work";
 import { safeJsonLd } from "@/lib/json-ld";
 import { siteConfig } from "@/config/site";
 
@@ -23,7 +23,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
-  const work = loadWork(params.slug);
+  // Metadata only needs frontmatter — skip the markdown render.
+  const work = loadWorkMeta(params.slug);
   if (!work) return {};
   const url = `${siteConfig.baseUrl}/work/${work.slug}`;
   return {
@@ -46,7 +47,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function WorkPage(props: Props) {
   const params = await props.params;
-  const work = loadWork(params.slug);
+  const work = await loadWork(params.slug);
   if (!work) notFound();
 
   const nonce = (await headers()).get("x-nonce") ?? undefined;

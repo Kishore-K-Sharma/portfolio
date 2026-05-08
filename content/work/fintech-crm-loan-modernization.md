@@ -5,12 +5,12 @@ role: "Software Engineer"
 startDate: "2021-10"
 endDate: "2023-05"
 domain: "fintech"
-summary: "Modernized legacy CRM and loan-processing platforms for a Capital India Group fintech. Reduced manual processing effort by 70%, cut loan approval time in half, lifted deployment efficiency 60%."
+summary: "Modernized legacy CRM and loan-processing platforms for a fintech client. Achieved a substantial reduction in manual processing effort, materially shortened loan approval cycle time, and significantly lifted deployment efficiency."
 outcomes:
-  - { label: "Manual effort", value: "−70%" }
-  - { label: "Loan approval time", value: "−50%" }
-  - { label: "Deploy efficiency", value: "+60%" }
-  - { label: "B2B/B2C apps shipped", value: "4+" }
+  - { label: "Manual effort", value: "Major reduction" }
+  - { label: "Loan approval time", value: "Materially shorter" }
+  - { label: "Deploy efficiency", value: "Significant lift" }
+  - { label: "B2B/B2C apps shipped", value: "Multiple" }
 stack:
   - "Node.js"
   - "NestJS"
@@ -41,11 +41,11 @@ The hard part was data. Legacy ran on tightly-coupled SQL with stored procedures
 
 ## What I shipped
 
-- **Bank statement analysis API** — automated what was previously a manual review step, cutting per-application processing time by ~70%
-- **Loan-approval workflow service** — orchestrated the multi-step approval flow; approval time dropped from 4–6 days to ~2
+- **Bank-statement analysis API** — automated a previously manual review step and meaningfully shortened per-application processing time
+- **Loan-approval workflow service** — orchestrated the multi-step approval flow; approval cycles became materially shorter
 - **Customer-facing B2C app** — React + React Native, with offline-first onboarding for spotty-connectivity field cases
 - **Internal CRM modernization** — Angular front-end with a NestJS API; replaced the legacy stack incrementally
-- **CI/CD on AWS** — CodeBuild + CodePipeline + ECR; deploys went from "manual, scary, hourly" to "automated, gated, ten-times-a-day"
+- **CI/CD on AWS** — CodeBuild + CodePipeline + ECR; deploys went from "manual, scary, hourly" to "automated, gated, many-times-a-day"
 
 ## What I learned
 

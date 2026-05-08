@@ -49,7 +49,7 @@ export const config = {
   matcher: [
     {
       source:
-        "/((?!api|_next/static|_next/image|opengraph-image|favicon.ico|robots.txt|sitemap.xml|.*\\.(?:svg|jpg|jpeg|png|webp|avif|gif|ico|woff2?|ttf|otf)).*)",
+        "/((?!api|_next/static|_next/image|opengraph-image|favicon.ico|robots.txt|sitemap.xml|writing/rss.xml|.*\\.(?:svg|jpg|jpeg|png|webp|avif|gif|ico|woff2?|ttf|otf)).*)",
       missing: [
         { type: "header", key: "next-router-prefetch" },
         { type: "header", key: "purpose", value: "prefetch" },

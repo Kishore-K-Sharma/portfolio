@@ -86,7 +86,14 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  alternates: { canonical: baseUrl },
+  alternates: {
+    canonical: baseUrl,
+    types: {
+      "application/rss+xml": [
+        { url: `${baseUrl}/writing/rss.xml`, title: "Writing — Kishore Kumar Sharma" },
+      ],
+    },
+  },
   openGraph: {
     type: "website",
     locale: "en_IN",
@@ -108,7 +115,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kishore Kumar Sharma — Senior Full Stack Engineer",
     description:
-      "End to end. No handoffs. 35+ enterprise integrations across four verticals — every one shipped with measurable lift.",
+      "End to end. No handoffs. Enterprise integrations across four verticals — every system shipped with measurable lift.",
     images: ["/profile-picture.jpg"],
     creator: "@kishoresharma",
   },

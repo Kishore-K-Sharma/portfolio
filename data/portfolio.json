@@ -14,19 +14,19 @@
     "I ship end-to-end. Schema to surface, service to screen — no handoff costs, no blocked tickets, no waiting on the other team.",
     "Backend is my depth — Java/Spring Boot, Node/NestJS, microservices, AWS — but I write the React and Angular too. The same engineer ships the API and the form that calls it.",
     "I have worked across four verticals — telecom, fintech, govtech, edtech — because the discipline travels: model the domain, draw clean boundaries, instrument what matters, ship measurable lift.",
-    "Every system I have owned shipped with a number attached: 30% faster APIs, 70% less manual work, 35+ enterprise integrations. If it does not move a metric, I do not ship it."
+    "Every system I have owned shipped with a number attached. If it does not move a metric, I do not ship it."
   ],
   "domains": [
-    { "id": "telecom", "name": "Telecom", "label": "Pan-India 4G · DIA microservices", "since": "2023" },
+    { "id": "telecom", "name": "Telecom", "label": "Carrier-scale microservices · enterprise integrations", "since": "2023" },
     { "id": "fintech", "name": "FinTech", "label": "Loan processing · CRM modernization", "since": "2021" },
     { "id": "edtech", "name": "EdTech", "label": "Live-class platform · Socket.io · WebRTC", "since": "2020" },
     { "id": "govtech", "name": "GovTech", "label": "E-governance portals at department scale", "since": "2020" }
   ],
   "stats": [
     { "value": "6.5", "suffix": "+", "label": "years shipping production systems" },
-    { "value": "35", "suffix": "+", "label": "enterprise systems integrated" },
     { "value": "4", "suffix": "", "label": "verticals · telecom, fintech, govtech, edtech" },
-    { "value": "30", "suffix": "%", "label": "average API throughput lift" }
+    { "value": "End-to-end", "suffix": "", "label": "schema → service → screen" },
+    { "value": "Cross-stack", "suffix": "", "label": "Java/Node backend · React/Angular frontend" }
   ],
   "skills": {
     "backend": [
@@ -115,13 +115,13 @@
       "startDate": "May 2023",
       "endDate": "Present",
       "description": [
-        "Designed and delivered scalable microservices using Java 17 and Spring Boot 3 for telecom enterprise platforms.",
+        "Designed and delivered scalable microservices using Java 17 and Spring Boot 3 on telecom enterprise platforms.",
         "Built workflow automation solutions improving operational efficiency and system performance.",
-        "Optimized backend APIs and databases achieving up to 30 percent improvement in response time and throughput.",
+        "Optimized backend APIs and databases, delivering measurable gains in response time and throughput on critical paths.",
         "Led code quality, CI/CD governance, and secure API practices while mentoring junior engineers.",
         "Developed shared core libraries and reusable modules to standardize services and improve maintainability.",
         "Implemented observability with logging, monitoring, and performance metrics (Grafana, ELK).",
-        "Integrated and supported 35+ enterprise systems ensuring reliable and secure data exchange."
+        "Integrated and supported a wide range of enterprise systems with reliable and secure data exchange."
       ],
       "technologies": [
         "Java 17",
@@ -137,28 +137,28 @@
       ],
       "projects": [
         {
-          "title": "National Enterprise Connectivity Platform",
+          "title": "Enterprise Microservices Platform",
           "duration": "Jan 2024 - Present",
-          "description": "Led the architectural design and development of a large-scale microservices platform powering a national enterprise connectivity initiative aligned with a country-wide carrier network rollout. Enabled seamless integration across 30+ enterprise services and optimized backend services to significantly enhance API response times and throughput."
+          "description": "Led architectural design and development of a large-scale microservices platform for a telecom enterprise engagement. Drove integrations across multiple enterprise systems and lifted API throughput on critical paths through targeted backend optimization."
         },
         {
-          "title": "Network Planning & Resource Allocation Suite",
+          "title": "Telecom Planning & Operations Tooling",
           "duration": "Jun 2023 - Dec 2023",
-          "description": "Owned and maintained a microservices-based architecture for internal telecom planning portals, demonstrating strong expertise in distributed systems and resource allocation workflows. Delivered end-to-end full-stack modules with a focus on code optimization, performance tuning, and operational reliability."
+          "description": "Owned and maintained a microservices-based architecture for internal telecom planning portals. Distributed-systems work focused on code optimization, performance tuning, and operational reliability across full-stack modules."
         }
       ]
     },
     {
-      "company": "Credenc Web Technologies Pvt Ltd (A Capital India Group)",
+      "company": "Credenc Web Technologies Pvt Ltd",
       "role": "Software Engineer",
       "startDate": "October 2021",
       "endDate": "May 2023",
       "description": [
-        "Modernized CRM and loan processing platforms, reducing manual effort by 70 percent.",
-        "Integrated third party financial APIs and automated workflows, cutting loan approval time by 50 percent.",
+        "Modernized CRM and loan-processing platforms, achieving a substantial reduction in manual effort.",
+        "Integrated third-party financial APIs and automated workflows, materially shortening loan approval cycle time.",
         "Developed scalable backend APIs using Node.js, NestJS, PostgreSQL, and MongoDB.",
         "Built mobile and B2B/B2C applications using React Native and Angular.",
-        "Implemented AWS based CI/CD pipelines, improving deployment efficiency by 60 percent."
+        "Implemented AWS-based CI/CD pipelines, significantly improving deployment efficiency."
       ],
       "technologies": [
         "Node.js",
@@ -173,9 +173,9 @@
       ],
       "projects": [
         {
-          "title": "FinTech CRM & Processing Systems",
+          "title": "FinTech CRM & Loan Processing",
           "duration": "Oct 2021 - May 2023",
-          "description": "Spearheaded the modernization of legacy CRM and loan processing platforms. Reduced manual processing effort by over 70% through robust API integrations including automated bank statement analysis. Implemented AWS CI/CD pipelines and strengthened observability."
+          "description": "Spearheaded the modernization of legacy CRM and loan-processing platforms. Drove a major reduction in manual processing effort through robust API integrations, including automated bank-statement analysis. Implemented AWS CI/CD pipelines and strengthened observability."
         }
       ]
     },
@@ -202,7 +202,7 @@
       ],
       "projects": [
         {
-          "title": "Skaplink (Online Tutoring Platform)",
+          "title": "Online Tutoring Platform",
           "duration": "Mar 2020 - Sep 2021",
           "description": "Led the development of a real-time online tutoring platform connecting students and educators with live classroom collaboration features using Socket.io and secure payment gateways."
         },

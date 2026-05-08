@@ -9,7 +9,7 @@ If you've ever tapped *Pay Now* and the page hung, then tapped it again — and 
 
 You don't want the second tap to charge you twice.
 
-![A user on a slow connection taps Pay, the response is lost, they tap again four seconds later — an idempotent server charges ₹500 once, a naïve one charges ₹1,000.](/notes/idempotency-pay-twice.svg "One logical operation, two network attempts. The server's job is to know the difference.")
+![A user on a slow connection taps Pay, the response is lost, they tap again four seconds later — an idempotent server charges ₹500 once, a naïve one charges ₹1,000.](/writing/idempotency-pay-twice.svg "One logical operation, two network attempts. The server's job is to know the difference.")
 
 That's the whole idea. **Idempotent** = pressing the button twice gives the same result as pressing it once. The system is allowed to remember you already pressed it.
 
@@ -31,7 +31,7 @@ This sort of works for a minute. Then you remember:
 
 Hashing the body is doing the work twice and hoping the bodies match. It's not idempotency, it's coincidence.
 
-![Two failure modes side by side: two different users with the same payment hash collide and one is silently skipped; a single retry with a different timestamp produces a different hash and gets processed twice.](/notes/idempotency-naive-hash.svg "Hashing the body produces collisions when you don't want them and misses matches when you do.")
+![Two failure modes side by side: two different users with the same payment hash collide and one is silently skipped; a single retry with a different timestamp produces a different hash and gets processed twice.](/writing/idempotency-naive-hash.svg "Hashing the body produces collisions when you don't want them and misses matches when you do.")
 
 ## The right version: a client-supplied key
 
@@ -47,7 +47,7 @@ Idempotency-Key: 7a3f1d8e-b91c-4c1a-9e0a-9f5e2b8a1c7e
 
 The server's contract is now simple: *"if you've ever seen this key before, return the response you returned last time. Don't process the request again."*
 
-![A sequence diagram showing the same Idempotency-Key returning a cached response on retry, with no second charge.](/notes/idempotency.svg "The second request hits the cache, not the side effect.")
+![A sequence diagram showing the same Idempotency-Key returning a cached response on retry, with no second charge.](/writing/idempotency.svg "The second request hits the cache, not the side effect.")
 
 The two things to nail are *where* you store that mapping, and *how* you handle the moment a retry shows up while the first request is still being processed.
 
@@ -60,7 +60,7 @@ That single command answers two questions atomically:
 1. Have I seen this key before?
 2. If not, claim it as mine.
 
-![One command, two outcomes: SET NX EX returns 'OK' on the first call (claim is mine, do work, cache response), and 'nil' on a retry (read the cached response, skip the work).](/notes/idempotency-set-nx.svg "Redis answers 'is this new?' and 'mark it taken' in a single round trip. No race.")
+![One command, two outcomes: SET NX EX returns 'OK' on the first call (claim is mine, do work, cache response), and 'nil' on a retry (read the cached response, skip the work).](/writing/idempotency-set-nx.svg "Redis answers 'is this new?' and 'mark it taken' in a single round trip. No race.")
 
 Pseudocode:
 
@@ -100,7 +100,7 @@ If B reads `"pending"` and just returns it as the response, the client sees `pen
 
 The pattern I use:
 
-![State diagram: a key is either CLAIMED (pending), DONE (cached response), or absent. A retry that hits CLAIMED polls with a small backoff up to a deadline.](/notes/idempotency-states.svg "A key has three states. The retry path needs to know what to do in each.")
+![State diagram: a key is either CLAIMED (pending), DONE (cached response), or absent. A retry that hits CLAIMED polls with a small backoff up to a deadline.](/writing/idempotency-states.svg "A key has three states. The retry path needs to know what to do in each.")
 
 The key has three states:
 

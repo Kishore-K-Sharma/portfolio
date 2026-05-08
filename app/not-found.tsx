@@ -10,6 +10,7 @@ const SUGGESTIONS = [
   { href: "/", label: "Home", hint: "the actual portfolio" },
   { href: "/work", label: "Work", hint: "case studies" },
   { href: "/writing", label: "Writing", hint: "long-form pieces" },
+  { href: "/about", label: "About", hint: "the bio version" },
   { href: "/uses", label: "Uses", hint: "tools I reach for" },
   { href: "/#contact", label: "Contact", hint: "say hi" },
 ];

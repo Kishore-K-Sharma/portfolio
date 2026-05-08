@@ -74,7 +74,7 @@ The form *posts to the function*. There's no API route, no fetch, no JSON. React
 
 That's the whole pitch. It looks small. It changes a lot.
 
-![Two flowcharts. Left: client code → fetch → API route → handler → response → client state. Right: client code → form action → server function → return value → client state. The right side has fewer hops.](/notes/server-actions-flow.svg "Same outcome, fewer hops. The frontend never knows there was a network request.")
+![Two flowcharts. Left: client code → fetch → API route → handler → response → client state. Right: client code → form action → server function → return value → client state. The right side has fewer hops.](/writing/server-actions-flow.svg "Same outcome, fewer hops. The frontend never knows there was a network request.")
 
 ## What's good (the wins)
 
@@ -84,7 +84,7 @@ The biggest, most immediate win is what *isn't there anymore*. No fetch wrapper.
 
 I count files. The old way: 1 route file, 1 form component, 1 API client wrapper, often a separate `types.ts` for request/response. The new way: 1 function, 1 form component. **Half the files, usually less code in the files that remain.**
 
-![Side-by-side file count: API route requires 4 files totalling ~80 lines; server action requires 2 files totalling ~30 lines.](/notes/server-actions-files.svg "Same contact form. Two implementations. Roughly half the surface area.")
+![Side-by-side file count: API route requires 4 files totalling ~80 lines; server action requires 2 files totalling ~30 lines.](/writing/server-actions-files.svg "Same contact form. Two implementations. Roughly half the surface area.")
 
 ### 2. Type safety end-to-end without codegen
 
@@ -98,7 +98,7 @@ The form attribute `action={formAction}` is *real HTML*. If JavaScript fails to 
 
 I haven't shipped a "JS-disabled" experience deliberately in years. With server actions, I get one for free. That changes my mental model of what counts as a graceful degradation.
 
-![Two parallel paths: with JS, react intercepts the submission and the action runs in place; without JS, the browser POSTs the form natively, the action runs, the page does a full reload. Same outcome.](/notes/server-actions-progressive.svg "Both paths land in the same action. The only thing that changes is whether the page reloads.")
+![Two parallel paths: with JS, react intercepts the submission and the action runs in place; without JS, the browser POSTs the form natively, the action runs, the page does a full reload. Same outcome.](/writing/server-actions-progressive.svg "Both paths land in the same action. The only thing that changes is whether the page reloads.")
 
 ### 4. Mutations live next to the data they mutate
 
@@ -176,4 +176,4 @@ Where they don't fit, the framework gives you the API route system to fall back 
 
 If yes, write the API. If no, write the action. Move on.
 
-![A two-branch decision tree starting from 'will it ever be called by something other than a form in this app?' — no branches to server action with examples; yes branches to API route with examples. Bottom note: both can coexist.](/notes/server-actions-decision.svg "One question decides. Don't force everything through one tool.")
+![A two-branch decision tree starting from 'will it ever be called by something other than a form in this app?' — no branches to server action with examples; yes branches to API route with examples. Bottom note: both can coexist.](/writing/server-actions-decision.svg "One question decides. Don't force everything through one tool.")

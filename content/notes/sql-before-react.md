@@ -7,7 +7,7 @@ tags: ["delivery", "architecture", "backend", "process"]
 
 If a builder showed up to your construction site, looked at the blueprints, and started with the roof, you'd send him home.
 
-![Two houses side by side: the right one has foundation → walls → roof labelled SQL → API → UI; the left one has the roof first floating in the air with dashed lines pretending to support it.](/notes/foundation-roof.svg "UI is the roof — the part you see — but not the part you build first.")
+![Two houses side by side: the right one has foundation → walls → roof labelled SQL → API → UI; the left one has the roof first floating in the air with dashed lines pretending to support it.](/writing/foundation-roof.svg "UI is the roof — the part you see — but not the part you build first.")
 
 The roof is what people see. The roof is what gets photographed. The roof is, in some real sense, the *point* of the house. But you can't put a roof on air. You build the foundation, then the walls, then the roof — not because the foundation is more important, but because everything else depends on it being right.
 
@@ -27,7 +27,7 @@ The cost of getting the data model wrong is paid in *every future change to that
 
 This is why I write the SQL first.
 
-![A three-row diagram showing data flowing from schema to API to UI; below, a contrast row where someone has tried to derive the schema from the UI and gotten a confused, redundant data model.](/notes/schema-first.svg "When the schema comes first, the UI is a view. When the UI comes first, the schema is a confession.")
+![A three-row diagram showing data flowing from schema to API to UI; below, a contrast row where someone has tried to derive the schema from the UI and gotten a confused, redundant data model.](/writing/schema-first.svg "When the schema comes first, the UI is a view. When the UI comes first, the schema is a confession.")
 
 ## What "SQL first" actually looks like in practice
 
@@ -40,7 +40,7 @@ It does not mean opening pgAdmin before you've talked to a designer. It means: b
 
 Get those four answers, and you have a schema. The schema is *what the system actually is*. Everything else — UI, API, validations, reports — is a view on top of it.
 
-![Four boxes: entities (what nouns), relationships (cardinalities), lifecycle (states + transitions), source of truth (whose value wins). Answer four = get a schema. Answer two = get a migration.](/notes/schema-four-questions.svg "These four questions are the schema, in plain English.")
+![Four boxes: entities (what nouns), relationships (cardinalities), lifecycle (states + transitions), source of truth (whose value wins). Answer four = get a schema. Answer two = get a migration.](/writing/schema-four-questions.svg "These four questions are the schema, in plain English.")
 
 You can write the SQL before you write the schema, but you'll regret it. The schema is the spec; the SQL is the implementation.
 
@@ -96,7 +96,7 @@ The bug they're still fighting two years later: occasionally, an editor's draft 
 
 Every line of that is the cost of designing the schema after the UI.
 
-![Top: an item table retrofitted with has_pending_draft + an item_draft mirror table + a non-atomic publish flow + a sync cron — four months of work, partial-publish bugs years later. Bottom: an item table plus an item_version table with status field — drafts and history come for free, four weeks.](/notes/schema-drafts-retrofit.svg "Same requirement. Different build order. Roughly 4× difference in cost.")
+![Top: an item table retrofitted with has_pending_draft + an item_draft mirror table + a non-atomic publish flow + a sync cron — four months of work, partial-publish bugs years later. Bottom: an item table plus an item_version table with status field — drafts and history come for free, four weeks.](/writing/schema-drafts-retrofit.svg "Same requirement. Different build order. Roughly 4× difference in cost.")
 
 ## The shortest version
 

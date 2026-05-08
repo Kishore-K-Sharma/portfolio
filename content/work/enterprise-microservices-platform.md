@@ -1,16 +1,16 @@
 ---
-title: "National Enterprise Connectivity Platform"
+title: "Enterprise Microservices Platform"
 company: "Tata Consultancy Services"
 role: "Systems Engineer · Lead architect"
 startDate: "2024-01"
 endDate: "Present"
 domain: "telecom"
-summary: "Architected a large-scale microservices platform powering a national enterprise connectivity initiative, aligned with a country-wide carrier network rollout. 30+ enterprise services integrated, +30% API throughput."
+summary: "Architected a large-scale microservices platform for a telecom enterprise engagement. Multiple enterprise systems integrated, with measurable gains in API throughput and reliability on critical paths."
 outcomes:
-  - { label: "API throughput", value: "+30%" }
-  - { label: "Cold start", value: "−42%" }
-  - { label: "Services integrated", value: "30+" }
-  - { label: "Error rate", value: "<0.05%" }
+  - { label: "API throughput", value: "Significant lift" }
+  - { label: "Cold start", value: "Materially reduced" }
+  - { label: "Integrations", value: "Multi-system" }
+  - { label: "Error rate", value: "Tight SLO" }
 stack:
   - "Java 17"
   - "Spring Boot 3"
@@ -24,7 +24,7 @@ stack:
 
 ## The mandate
 
-Build the backend platform for a national-scale enterprise connectivity initiative — the kind of system where a single misrouted request can leave a state-government department offline. We were asked to integrate 30+ enterprise services into one coherent platform, with API performance budgets tighter than anything our team had run before.
+Build the backend platform for a large-scale enterprise engagement — the kind of system where a single misrouted request can take a downstream consumer offline. The remit was to integrate a wide range of enterprise systems into one coherent platform, with API performance budgets tighter than anything our team had run before.
 
 The brief was small. The constraints were not:
 - Failure domains had to be small and isolated — one downstream outage couldn't take the platform with it.
@@ -47,9 +47,9 @@ Spring Cloud handles service discovery and config. PostgreSQL is the system of r
 
 ## What I shipped
 
-- **Microservice platform** supporting 30+ integrated enterprise services
+- **Microservice platform** supporting integration across multiple enterprise systems
 - **Workflow automation** that replaced a previously-manual chain of approvals
-- **API performance optimization** — connection pool tuning, query batching, and a careful caching layer brought average response times down by ~30%
+- **API performance optimization** — connection pool tuning, query batching, and a careful caching layer brought average response times down meaningfully on critical paths
 - **CI/CD governance** — every PR runs SonarQube, every deploy goes through a gated pipeline; rollback is one click
 - **Observability stack** — Grafana dashboards for request rate, latency p95/p99, and error rate per dependency; ELK for searchable structured logs
 - **Shared core libraries** — common code (auth, idempotency, retry, observability hooks) extracted to a versioned internal SDK so service teams stop reinventing the foundations
@@ -62,4 +62,4 @@ The second insight: **observability is a team-shape problem, not a tooling probl
 
 ## What's next
 
-The platform is now stable enough that we're moving from "keep it working" to "make it scale." The next phase is async-first — moving the slowest synchronous calls onto a Kafka-backed event bus, with consumers that can be scaled horizontally without coordinating with producers. The architecture is laid out; the rollout is staged across three quarters.
+The platform is now stable enough that we're moving from "keep it working" to "make it scale." The next phase is async-first — moving the slowest synchronous calls onto a Kafka-backed event bus, with consumers that can be scaled horizontally without coordinating with producers. The architecture is laid out; the rollout is staged.

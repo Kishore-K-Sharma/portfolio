@@ -126,10 +126,10 @@ export function RequestTrace() {
 
       <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-subtle/60">
         {[
-          { k: "Throughput", v: "+30%" },
-          { k: "Cold start", v: "−42%" },
-          { k: "Error rate", v: "<0.05%" },
-          { k: "Services", v: "30+" },
+          { k: "Throughput", v: "Lifted" },
+          { k: "Cold start", v: "Reduced" },
+          { k: "Error rate", v: "Tight SLO" },
+          { k: "Services", v: "Multi" },
         ].map((m) => (
           <div key={m.k}>
             <div className="font-mono text-[0.7rem] text-muted-foreground">{m.k}</div>

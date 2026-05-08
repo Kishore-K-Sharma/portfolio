@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
-import { listSlugs, loadNote, relatedNotes } from "@/lib/notes";
-import type { Note } from "@/lib/notes";
+import { listSlugs, loadNote, loadNoteMeta, relatedNotes } from "@/lib/notes";
+import type { NoteMeta } from "@/lib/notes";
 import { ShareBar } from "@/components/notes/ShareBar";
+import { ReadingProgress } from "@/components/notes/ReadingProgress";
 import { safeJsonLd } from "@/lib/json-ld";
 import { siteConfig } from "@/config/site";
 
@@ -18,7 +19,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
-  const note = loadNote(params.slug);
+  // Metadata only needs frontmatter — skip the markdown render.
+  const note = loadNoteMeta(params.slug);
   if (!note) return {};
   const url = `${siteConfig.baseUrl}/writing/${note.slug}`;
   const tags = note.tags ?? [];
@@ -65,7 +67,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function NotePage(props: Props) {
   const params = await props.params;
-  const note = loadNote(params.slug);
+  const note = await loadNote(params.slug);
   if (!note) notFound();
 
   const { prev, next } = relatedNotes(note.slug);
@@ -126,6 +128,7 @@ export default async function NotePage(props: Props) {
 
   return (
     <article className="min-h-screen pt-32 pb-24">
+      <ReadingProgress />
       <script
         type="application/ld+json"
         nonce={nonce}
@@ -243,7 +246,7 @@ function formatDate(iso: string): string {
   return d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 }
 
-function NoteCard({ direction, note }: { direction: "prev" | "next"; note: Note }) {
+function NoteCard({ direction, note }: { direction: "prev" | "next"; note: NoteMeta }) {
   const isNext = direction === "next";
   return (
     <Link

@@ -13,7 +13,7 @@ If I, sending the postcard, can write *more lines than I'm supposed to*, I can s
 
 That, in two paragraphs, is how email header injection works. Email is just structured text. Each line of the header is a separate instruction. If a user-submitted field can contain a newline, the user can write extra header lines — and your mail server will follow them.
 
-![Two postcards side by side: a normal one with a single recipient address; a hijacked one with an extra 'CC: attacker@evil.com' line snuck into the address block, which the post office faithfully follows.](/notes/postcard-analogy.svg "An extra line on the address side becomes an extra instruction. Email headers work the same way.")
+![Two postcards side by side: a normal one with a single recipient address; a hijacked one with an extra 'CC: attacker@evil.com' line snuck into the address block, which the post office faithfully follows.](/writing/postcard-analogy.svg "An extra line on the address side becomes an extra instruction. Email headers work the same way.")
 
 This vulnerability is, I want to emphasize, *thirty years old*. It is in every guide on web security. It has its own page on OWASP. And last week, while I was finishing my own portfolio's contact form — code I'd written specifically *to be careful*, with rate limiting and CAPTCHA and Zod validation — I caught it in my own implementation.
 
@@ -64,7 +64,7 @@ The third one is the worst. Once an attacker can inject arbitrary body content, 
 
 And the field that lets them do this is your contact form's "name."
 
-![Two diagrams. Top: a user's "name" field containing a CRLF and an extra Bcc header line, which the SMTP server interprets as two headers. Bottom: the same input after stripping CR/LF, which collapses to a single safe header line.](/notes/header-injection.svg "Newlines in user input become extra headers. Strip them at the boundary.")
+![Two diagrams. Top: a user's "name" field containing a CRLF and an extra Bcc header line, which the SMTP server interprets as two headers. Bottom: the same input after stripping CR/LF, which collapses to a single safe header line.](/writing/header-injection.svg "Newlines in user input become extra headers. Strip them at the boundary.")
 
 ## How I found it in my own code
 
@@ -124,7 +124,7 @@ name: z.string().min(1).max(100).refine(
 
 Both layers are useful — validation gives a friendly user-facing error, the helper is your last line of defense if someone bypasses validation. I run both.
 
-![A pipeline showing user submission flowing through three layers: Zod schema with refine() rejecting CR/LF, a strip-CR/LF helper, and html-entities for the body, before reaching Nodemailer. Each layer's purpose is described below.](/notes/header-injection-defense-layers.svg "Three layers, three different jobs. None of them is enough alone.")
+![A pipeline showing user submission flowing through three layers: Zod schema with refine() rejecting CR/LF, a strip-CR/LF helper, and html-entities for the body, before reaching Nodemailer. Each layer's purpose is described below.](/writing/header-injection-defense-layers.svg "Three layers, three different jobs. None of them is enough alone.")
 
 ## What about the email field? Or replyTo?
 
@@ -157,7 +157,7 @@ If you have a contact form, audit it now. It takes about ninety seconds.
 
 That's the whole job.
 
-![Five-step numbered checklist: find header interpolations, trace whether each is sanitized, add a stripHeaderNewlines helper, add a Zod refinement, test with a malicious string.](/notes/header-injection-checklist.svg "Ninety seconds of audit. The bug is older than most engineers; most engineers still have it.")
+![Five-step numbered checklist: find header interpolations, trace whether each is sanitized, add a stripHeaderNewlines helper, add a Zod refinement, test with a malicious string.](/writing/header-injection-checklist.svg "Ninety seconds of audit. The bug is older than most engineers; most engineers still have it.")
 
 ## The shortest version
 

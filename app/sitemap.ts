@@ -13,7 +13,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: siteConfig.baseUrl, lastModified: now, changeFrequency: "monthly", priority: 1 },
     { url: `${siteConfig.baseUrl}/work`, lastModified: now, changeFrequency: "monthly", priority: 0.95 },
     { url: `${siteConfig.baseUrl}/writing`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${siteConfig.baseUrl}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${siteConfig.baseUrl}/uses`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${siteConfig.baseUrl}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${siteConfig.baseUrl}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     ...work.map((w) => ({
       url: `${siteConfig.baseUrl}/work/${w.slug}`,
       lastModified: new Date(`${w.startDate}-01`),

@@ -176,3 +176,42 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ─── Shiki dual-theme code highlighting ──────────────────
+   `defaultColor: false` makes shiki emit both palettes as CSS custom
+   properties on every <pre>/<span>. We pick the right one based on the
+   next-themes class on <html>. */
+.prose .shiki,
+.prose .shiki span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+  font-style: var(--shiki-light-font-style);
+  font-weight: var(--shiki-light-font-weight);
+  text-decoration: var(--shiki-light-text-decoration);
+}
+html.dark .prose .shiki,
+html.dark .prose .shiki span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+  font-style: var(--shiki-dark-font-style);
+  font-weight: var(--shiki-dark-font-weight);
+  text-decoration: var(--shiki-dark-text-decoration);
+}
+.prose pre.shiki {
+  padding: 1.1rem 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid hsl(var(--subtle) / 0.6);
+  overflow-x: auto;
+  font-size: 0.86em;
+  line-height: 1.6;
+}
+.prose pre.shiki code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+.prose pre.shiki code::before,
+.prose pre.shiki code::after {
+  content: none;
+}

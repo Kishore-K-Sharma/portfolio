@@ -6,9 +6,22 @@ import { Section } from "@/components/editorial/Section";
 import { Reveal } from "@/components/editorial/Reveal";
 import { Modal } from "@/components/Modal";
 
+const FEATURED_CERT_COUNT = 6;
+
 export function ProofGrid() {
   const { testimonials, awards, certifications, articles } = portfolioData;
   const [activeCert, setActiveCert] = useState<typeof certifications[number] | null>(null);
+  const [showAllCerts, setShowAllCerts] = useState(false);
+
+  // Specializations (multi-course bundles) carry more signal than individual
+  // courses, so they go first; everything else keeps its source order.
+  const sortedCerts = [...certifications].sort((a, b) => {
+    const aSpec = a.title.includes("Specialization") ? 1 : 0;
+    const bSpec = b.title.includes("Specialization") ? 1 : 0;
+    return bSpec - aSpec;
+  });
+  const visibleCerts = showAllCerts ? sortedCerts : sortedCerts.slice(0, FEATURED_CERT_COUNT);
+  const hiddenCount = certifications.length - FEATURED_CERT_COUNT;
 
   const allTestimonials = testimonials;
 
@@ -91,7 +104,7 @@ export function ProofGrid() {
         </div>
       </div>
 
-      {/* Certifications — compact list */}
+      {/* Certifications — featured first, expandable */}
       <div className="mt-20">
         <Reveal>
           <div className="flex items-baseline justify-between mb-6">
@@ -101,23 +114,40 @@ export function ProofGrid() {
             </p>
           </div>
         </Reveal>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-px bg-subtle/40 border border-subtle/40 rounded-lg overflow-hidden">
-          {certifications.map((c, i) => (
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-subtle/40 border border-subtle/40 rounded-lg overflow-hidden">
+          {visibleCerts.map((c, i) => (
             <Reveal key={c.credentialId} delay={Math.min(i * 0.02, 0.3)} as="li" className="bg-background">
               <button
                 onClick={() => setActiveCert(c)}
-                className="w-full text-left px-5 py-4 hover:bg-surface/60 transition-colors"
+                className="w-full text-left px-6 py-5 hover:bg-surface/60 transition-colors"
               >
-                <div className="flex items-baseline gap-2 font-mono text-[0.7rem] text-muted-foreground mb-1.5">
+                <div className="flex items-baseline gap-2 font-mono text-[0.7rem] text-muted-foreground mb-2">
                   <span>{c.year}</span>
                   <span className="text-subtle">·</span>
                   <span>{c.issuer}</span>
                 </div>
-                <p className="text-[0.88rem] text-foreground line-clamp-2 text-pretty">{c.title}</p>
+                <p className="text-[0.92rem] text-foreground/90 line-clamp-2 text-pretty leading-snug">
+                  {c.title}
+                </p>
               </button>
             </Reveal>
           ))}
         </ul>
+        {hiddenCount > 0 && (
+          <Reveal>
+            <div className="mt-5 flex justify-center">
+              <button
+                type="button"
+                onClick={() => setShowAllCerts((v) => !v)}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-subtle/60 font-mono text-[0.78rem] text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors"
+                aria-expanded={showAllCerts}
+              >
+                {showAllCerts ? "Show fewer" : `Show all ${certifications.length}`}
+                <span aria-hidden>{showAllCerts ? "↑" : "↓"}</span>
+              </button>
+            </div>
+          </Reveal>
+        )}
       </div>
 
       <Modal

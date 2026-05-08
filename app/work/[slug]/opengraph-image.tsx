@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { loadWork } from "@/lib/work";
+import { loadWorkMeta } from "@/lib/work";
 
 export const runtime = "nodejs";
 export const alt = "Case study by Kishore Kumar Sharma";
@@ -14,7 +14,7 @@ const DOMAIN_HEX: Record<string, string> = {
 };
 
 export default async function WorkOG({ params }: { params: { slug: string } }) {
-  const work = loadWork(params.slug);
+  const work = loadWorkMeta(params.slug);
   if (!work) {
     return new ImageResponse(
       (

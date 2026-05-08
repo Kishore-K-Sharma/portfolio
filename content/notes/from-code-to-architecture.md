@@ -15,7 +15,7 @@ Every microservice migration I've seen go badly started with the same mistake: t
 
 The test is simple. If a downstream team can ship a breaking change without your service knowing about it, you don't have a contract. You have an internal call masquerading as a network call — the worst of both worlds. You pay the latency cost of HTTP and the coupling cost of a shared module.
 
-![A shared internal module silently couples two services; a versioned contract decouples them.](/notes/contract.svg "Contracts are integration tests with a version number.")
+![A shared internal module silently couples two services; a versioned contract decouples them.](/writing/contract.svg "Contracts are integration tests with a version number.")
 
 What it looks like when it's right:
 - Schemas live in a versioned, language-agnostic format (OpenAPI, protobuf)
@@ -31,7 +31,7 @@ Networks fail. Retries happen. The question isn't whether your service will see 
 
 The cheapest implementation is a request-id header that the caller generates and the server caches the result against. If the same id arrives twice, the server returns the cached response and skips the side effect. Costs you a Redis key and a hash check. Saves you a duplicate charge or a duplicate row.
 
-![Sequence diagram: when a network blip drops the response, the retry hits a cache keyed on the request-id and returns the same payload with no side effect.](/notes/idempotency.svg "The second request hits the cache, not the side effect.")
+![Sequence diagram: when a network blip drops the response, the retry hits a cache keyed on the request-id and returns the same payload with no side effect.](/writing/idempotency.svg "The second request hits the cache, not the side effect.")
 
 I've watched teams without this build elaborate compensation flows to undo what the second request did. They never work as well as not doing the work twice in the first place.
 
@@ -39,7 +39,7 @@ I've watched teams without this build elaborate compensation flows to undo what 
 
 Retries between services without a budget are how cascading failures start. Service A retries B three times, B retries C three times — that's nine attempts on C from one logical call. C is already struggling; now it's seeing 9× load.
 
-![Without a budget, per-hop retries multiply into 9× load on the deepest dependency. With an end-to-end deadline, each hop checks remaining time before retrying.](/notes/retry-budget.svg "Per-hop retries multiply. End-to-end deadlines bound the blast radius.")
+![Without a budget, per-hop retries multiply into 9× load on the deepest dependency. With an end-to-end deadline, each hop checks remaining time before retrying.](/writing/retry-budget.svg "Per-hop retries multiply. End-to-end deadlines bound the blast radius.")
 
 Two rules I won't break:
 - **Bound the retry budget end-to-end**, not per-hop. Pass a deadline header. Each hop checks it before retrying.
@@ -51,7 +51,7 @@ Spring Cloud's circuit breaker (Resilience4j under the hood) does this in three 
 
 The single biggest predictor of how a system survives an incident is whether the operator can see what's happening *right now*. Not yesterday's logs. Now.
 
-![Three panels: structured logs threaded by request-id, latency p50/p95/p99 lines, and error rate bars per dependency.](/notes/observability.svg "Structured logs, latency percentiles, error rate per dependency. The minimum viable trio.")
+![Three panels: structured logs threaded by request-id, latency p50/p95/p99 lines, and error rate bars per dependency.](/writing/observability.svg "Structured logs, latency percentiles, error rate per dependency. The minimum viable trio.")
 
 The minimum viable trio:
 - **Structured logs** with a request-id propagated through every service touched
@@ -62,11 +62,11 @@ Add this *before* you have the incident. The pattern I've seen kill teams: rolli
 
 ## 5. If it doesn't move a metric, don't ship it
 
-Every system I've owned shipped with a number attached. Throughput +30%. Manual processing −70%. Loan approval time −50%. 35+ enterprise integrations live.
+Every system I've owned shipped with a number attached — throughput lifts, manual-effort reductions, faster cycle times, integrations going live across enterprise systems.
 
 Not because metrics make engineers feel important. Because the discipline of choosing a metric *before* you start coding forces you to know what "done" means. Every one of those numbers existed in a spec before the first line of code did. The code was the cheap part. The agreement on the metric was the expensive part.
 
-![A three-stage flow: define the metric first, then write code, then measure against the same number.](/notes/metric-first.svg "The metric exists before the first line of code.")
+![A three-stage flow: define the metric first, then write code, then measure against the same number.](/writing/metric-first.svg "The metric exists before the first line of code.")
 
 The corollary: if you can't articulate the metric, you don't understand the work yet. Go back and ask.
 

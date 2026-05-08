@@ -11,7 +11,7 @@ You can't gut the whole place and start over — they need a kitchen tomorrow. B
 
 That's the **strangler pattern**. You replace a legacy system *piece by piece*, routing traffic through a thin layer that decides — for each request — whether the new code or the old code handles it. New code grows around the old one until the old one has nothing left to do, and you delete it.
 
-![Four panels showing the same house at month 0, 2, 4, and 6: rooms swap from old to new one at a time, the family stays in the house the whole time.](/notes/strangler-house-remodel.svg "Same house, different room each month. The family never stops eating dinner.")
+![Four panels showing the same house at month 0, 2, 4, and 6: rooms swap from old to new one at a time, the family stays in the house the whole time.](/writing/strangler-house-remodel.svg "Same house, different room each month. The family never stops eating dinner.")
 
 It sounds neat in a blog post. In production, it's a mess of coordination, political conversations, and one piece of wiring that turns out to be load-bearing in a way the original team forgot to document.
 
@@ -29,7 +29,7 @@ The reason for the migration wasn't engineering ego. The platform's compliance p
 
 The whole pattern depends on a single piece of plumbing: a request-routing layer that sits between users and the application. Every request — every URL, every API call, every mobile app endpoint — passes through it. The facade decides where the request goes.
 
-![Two-stage diagram. Top: all requests flow into a legacy monolith. Bottom: requests pass through a routing facade that sends some paths to the new service and the rest to the legacy system. Over time, more arrows point at the new service.](/notes/strangler-pattern.svg "The facade is the only place that knows about the migration. Everything else stays the same.")
+![Two-stage diagram. Top: all requests flow into a legacy monolith. Bottom: requests pass through a routing facade that sends some paths to the new service and the rest to the legacy system. Over time, more arrows point at the new service.](/writing/strangler-pattern.svg "The facade is the only place that knows about the migration. Everything else stays the same.")
 
 In our case the facade was an Nginx layer with a Lua plugin reading routing rules from a config service. Could have been an API gateway, an Envoy proxy, a tiny custom Node service — the technology doesn't matter. What matters is:
 
@@ -65,7 +65,7 @@ For our loan-status endpoint, the first week of shadow traffic surfaced:
 
 You don't find these in unit tests. You find them by replaying real production traffic against both systems and watching what diverges. Shadow mode is the QA strategy that pays for itself.
 
-![A request enters the facade, gets sent to both the legacy and the new service; legacy's response goes back to the user, new service's goes into a diff log. Below: three real diffs found this way — a timezone bug, a CSV-vs-array shape, and a 0.4% legacy bug nobody knew about.](/notes/strangler-shadow-traffic.svg "Real production traffic finds the bugs your tests cannot.")
+![A request enters the facade, gets sent to both the legacy and the new service; legacy's response goes back to the user, new service's goes into a diff log. Below: three real diffs found this way — a timezone bug, a CSV-vs-array shape, and a 0.4% legacy bug nobody knew about.](/writing/strangler-shadow-traffic.svg "Real production traffic finds the bugs your tests cannot.")
 
 ## The cutover: feature flag with seconds-to-rollback
 
@@ -79,7 +79,7 @@ The longest migration I ran took four months from "first read endpoint shadowed"
 
 Migration is a patience problem dressed up as a code problem.
 
-![A bar growing from 5% on day 1, to 25% on day 3, to 50% on day 7, to 100% on day 14, with a dashed rollback arrow indicating any metric can return the routing to the previous step.](/notes/strangler-cutover-ramp.svg "Ramp over days, watch the metric, hold a rollback in reserve at every step.")
+![A bar growing from 5% on day 1, to 25% on day 3, to 50% on day 7, to 100% on day 14, with a dashed rollback arrow indicating any metric can return the routing to the previous step.](/writing/strangler-cutover-ramp.svg "Ramp over days, watch the metric, hold a rollback in reserve at every step.")
 
 ## The political part nobody puts in the blog post
 

@@ -21,25 +21,20 @@ export interface WorkFrontmatter {
   draft?: boolean;
 }
 
-export interface WorkCase extends WorkFrontmatter {
+/** Frontmatter-only view — synchronous, used by listings / sitemap / OG. */
+export interface WorkMeta extends WorkFrontmatter {
   slug: string;
-  html: string;
+}
+
+/** Full case study — meta + raw markdown + rendered HTML. */
+export interface WorkCase extends WorkMeta {
   raw: string;
+  html: string;
 }
 
 const WORK_DIR = path.join(process.cwd(), "content", "work");
 
-export function listWork({ includeDrafts = false } = {}): WorkCase[] {
-  if (!fs.existsSync(WORK_DIR)) return [];
-  const files = fs.readdirSync(WORK_DIR).filter((f) => f.endsWith(".md") || f.endsWith(".mdx"));
-  return files
-    .map((file) => loadWork(file.replace(/\.(md|mdx)$/, "")))
-    .filter((w): w is WorkCase => !!w)
-    .filter((w) => includeDrafts || !w.draft)
-    .sort((a, b) => b.startDate.localeCompare(a.startDate));
-}
-
-export function loadWork(slug: string): WorkCase | null {
+function readSource(slug: string): { fm: Partial<WorkFrontmatter>; content: string } | null {
   const mdPath = path.join(WORK_DIR, `${slug}.md`);
   const mdxPath = path.join(WORK_DIR, `${slug}.mdx`);
   const file = fs.existsSync(mdPath) ? mdPath : fs.existsSync(mdxPath) ? mdxPath : null;
@@ -47,17 +42,15 @@ export function loadWork(slug: string): WorkCase | null {
 
   const raw = fs.readFileSync(file, "utf8");
   const parsed = matter(raw);
-  const fm = parsed.data as Partial<WorkFrontmatter>;
+  return { fm: parsed.data as Partial<WorkFrontmatter>, content: parsed.content };
+}
+
+function metaFrom(slug: string, fm: Partial<WorkFrontmatter>): WorkMeta | null {
   if (!fm.title || !fm.company || !fm.role || !fm.startDate || !fm.endDate || !fm.domain || !fm.summary) {
     return null;
   }
-
-  const html = renderMarkdown(parsed.content);
-
   return {
     slug,
-    raw: parsed.content,
-    html,
     title: fm.title,
     company: fm.company,
     role: fm.role,
@@ -72,6 +65,31 @@ export function loadWork(slug: string): WorkCase | null {
   };
 }
 
+export function loadWorkMeta(slug: string): WorkMeta | null {
+  const r = readSource(slug);
+  if (!r) return null;
+  return metaFrom(slug, r.fm);
+}
+
+export async function loadWork(slug: string): Promise<WorkCase | null> {
+  const r = readSource(slug);
+  if (!r) return null;
+  const meta = metaFrom(slug, r.fm);
+  if (!meta) return null;
+  const html = await renderMarkdown(r.content);
+  return { ...meta, raw: r.content, html };
+}
+
+export function listWork({ includeDrafts = false } = {}): WorkMeta[] {
+  if (!fs.existsSync(WORK_DIR)) return [];
+  const files = fs.readdirSync(WORK_DIR).filter((f) => f.endsWith(".md") || f.endsWith(".mdx"));
+  return files
+    .map((file) => loadWorkMeta(file.replace(/\.(md|mdx)$/, "")))
+    .filter((w): w is WorkMeta => !!w)
+    .filter((w) => includeDrafts || !w.draft)
+    .sort((a, b) => b.startDate.localeCompare(a.startDate));
+}
+
 export function listWorkSlugs(): string[] {
   return listWork().map((w) => w.slug);
 }
@@ -80,6 +98,8 @@ export function listWorkSlugs(): string[] {
  * Heuristic: link a case-study slug to one of the experience entries
  * in portfolio.json so we can cross-reference dates / company info.
  */
-export function findExperienceFor(work: WorkCase) {
-  return portfolioData.experience.find((e) => e.company.toLowerCase().includes(work.company.toLowerCase().split(" ")[0]));
+export function findExperienceFor(work: WorkMeta) {
+  return portfolioData.experience.find((e) =>
+    e.company.toLowerCase().includes(work.company.toLowerCase().split(" ")[0])
+  );
 }

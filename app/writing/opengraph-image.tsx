@@ -1,36 +1,14 @@
 import { ImageResponse } from "next/og";
-import { loadNoteMeta } from "@/lib/notes";
+import { listNotes, listTags } from "@/lib/notes";
 
 export const runtime = "nodejs";
-export const alt = "Note by Kishore Kumar Sharma";
+export const alt = "Writing — Kishore Kumar Sharma";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function NoteOG({ params }: { params: { slug: string } }) {
-  const note = loadNoteMeta(params.slug);
-  if (!note) {
-    // Fallback OG for unknown slugs
-    return new ImageResponse(
-      (
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            background: "#0A0A0B",
-            color: "#F5F2ED",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: 48,
-            fontFamily: "sans-serif",
-          }}
-        >
-          /writing
-        </div>
-      ),
-      { ...size }
-    );
-  }
+export default function WritingIndexOG() {
+  const notes = listNotes();
+  const tags = listTags().slice(0, 6);
 
   return new ImageResponse(
     (
@@ -52,23 +30,24 @@ export default async function NoteOG({ params }: { params: { slug: string } }) {
             <span style={{ width: 8, height: 8, borderRadius: 4, background: "#C9A8FF" }} />
             /writing · kishore-kumar-sharma.dev
           </span>
-          <span>{note.readMin} min read</span>
+          <span>{notes.length} {notes.length === 1 ? "piece" : "pieces"}</span>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", maxWidth: 1040 }}>
+          <div style={{ fontSize: 96, lineHeight: 1.02, letterSpacing: "-0.035em", color: "#F5F2ED" }}>
+            Writing on building
+          </div>
           <div
             style={{
-              fontSize: clampFont(note.title, 64, 92),
-              lineHeight: 1.05,
-              letterSpacing: "-0.025em",
-              color: "#F5F2ED",
-              display: "-webkit-box",
-              WebkitLineClamp: 4,
-              WebkitBoxOrient: "vertical",
-              overflow: "hidden",
+              fontSize: 96,
+              lineHeight: 1.02,
+              letterSpacing: "-0.035em",
+              color: "#C9A8FF",
+              fontStyle: "italic",
+              marginTop: 4,
             }}
           >
-            {note.title}
+            things that hold.
           </div>
           <div
             style={{
@@ -77,13 +56,9 @@ export default async function NoteOG({ params }: { params: { slug: string } }) {
               lineHeight: 1.5,
               marginTop: 28,
               maxWidth: 920,
-              display: "-webkit-box",
-              WebkitLineClamp: 3,
-              WebkitBoxOrient: "vertical",
-              overflow: "hidden",
             }}
           >
-            {note.description}
+            Long-form notes on architecture, distributed systems, and the discipline behind production software.
           </div>
         </div>
 
@@ -94,11 +69,11 @@ export default async function NoteOG({ params }: { params: { slug: string } }) {
               Senior Full Stack Engineer
             </div>
           </div>
-          {note.tags && note.tags.length > 0 && (
+          {tags.length > 0 && (
             <div style={{ display: "flex", gap: 8 }}>
-              {note.tags.slice(0, 3).map((t) => (
+              {tags.map(({ tag }) => (
                 <span
-                  key={t}
+                  key={tag}
                   style={{
                     fontSize: 14,
                     padding: "6px 12px",
@@ -107,7 +82,7 @@ export default async function NoteOG({ params }: { params: { slug: string } }) {
                     color: "#9B9CA3",
                   }}
                 >
-                  #{t}
+                  #{tag}
                 </span>
               ))}
             </div>
@@ -117,11 +92,4 @@ export default async function NoteOG({ params }: { params: { slug: string } }) {
     ),
     { ...size }
   );
-}
-
-function clampFont(text: string, min: number, max: number): number {
-  // Rough heuristic: scale font down with title length
-  if (text.length <= 36) return max;
-  if (text.length <= 56) return Math.round((min + max) / 2);
-  return min;
 }

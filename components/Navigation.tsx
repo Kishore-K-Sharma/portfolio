@@ -11,6 +11,7 @@ import { SmoothAnchor } from "@/components/SmoothAnchor";
 const NAV = [
   { href: "/work", label: "Work" },
   { href: "/writing", label: "Writing" },
+  { href: "/about", label: "About" },
   { href: "/uses", label: "Uses" },
   { href: "/#contact", label: "Contact" },
 ];
