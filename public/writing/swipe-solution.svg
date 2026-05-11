@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300">
+  <rect width="100%" height="100%" fill="#1e293b" rx="8"/>
+  <text x="400" y="50" fill="#e2e8f0" font-family="sans-serif" font-size="24" text-anchor="middle" font-weight="bold">The intendedIndexRef Pattern</text>
+  
+  <rect x="50" y="100" width="180" height="120" fill="#334155" rx="8" stroke="#475569" stroke-width="2"/>
+  <text x="140" y="150" fill="#f8fafc" font-family="sans-serif" font-size="18" text-anchor="middle">Touch End</text>
+  <text x="140" y="180" fill="#94a3b8" font-family="sans-serif" font-size="14" text-anchor="middle">Capture Intent</text>
+
+  <path d="M 250 160 L 310 160" stroke="#10b981" stroke-width="4" marker-end="url(#arrow-green)"/>
+  
+  <rect x="330" y="100" width="180" height="120" fill="#064e3b" rx="8" stroke="#10b981" stroke-width="2"/>
+  <text x="420" y="150" fill="#f8fafc" font-family="sans-serif" font-size="18" text-anchor="middle">Update Ref &amp; State</text>
+  <text x="420" y="180" fill="#a7f3d0" font-family="sans-serif" font-size="14" text-anchor="middle">Synchronous (+1 or -1)</text>
+
+  <path d="M 530 160 L 590 160" stroke="#10b981" stroke-width="4" marker-end="url(#arrow-green)"/>
+
+  <rect x="610" y="100" width="140" height="120" fill="#334155" rx="8" stroke="#475569" stroke-width="2"/>
+  <text x="680" y="150" fill="#f8fafc" font-family="sans-serif" font-size="16" text-anchor="middle">scrollTo()</text>
+  <text x="680" y="180" fill="#94a3b8" font-family="sans-serif" font-size="14" text-anchor="middle">Smooth 1 Slide</text>
+
+  <defs>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#10b981" />
+    </marker>
+  </defs>
+</svg>
