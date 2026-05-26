@@ -9,11 +9,11 @@ export const WRITING_CATEGORIES = [
     label: "Engineering",
     description: "Architecture, distributed systems, the discipline behind production software.",
   },
-  // {
-  //   slug: "career",
-  //   label: "Career & Leadership",
-  //   description: "Industry observations, career growth, mentoring, hiring, senior engineering.",
-  // },
+  {
+    slug: "career",
+    label: "Career & Leadership",
+    description: "Industry observations, career growth, mentoring, hiring, senior engineering.",
+  },
   // {
   //   slug: "personal",
   //   label: "Personal & Opinion",

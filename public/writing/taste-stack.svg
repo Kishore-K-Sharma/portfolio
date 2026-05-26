@@ -1,0 +1,43 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-taste-stack">
+  <title id="t-taste-stack">The taste stack: where engineering judgment actually lives</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.fa{fill:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">THE TASTE STACK · LOWER = HIGHER CONSEQUENCE OF GETTING IT WRONG</text>
+
+  <rect x="160" y="68" width="480" height="46" rx="4" class="s"/>
+  <text x="400" y="90" text-anchor="middle" class="acc">05 · CODE STYLE · NAMES, FORMATTING</text>
+  <text x="400" y="106" text-anchor="middle" class="label">EASY TO FIX · LOWEST CONSEQUENCE</text>
+
+  <rect x="130" y="124" width="540" height="46" rx="4" class="s"/>
+  <text x="400" y="146" text-anchor="middle" class="acc">04 · ERROR HANDLING · WHERE TO FAIL, HOW LOUDLY</text>
+  <text x="400" y="162" text-anchor="middle" class="label">FIXABLE BUT PAINFUL · WAKE-UP-AT-3AM CLASS</text>
+
+  <rect x="100" y="180" width="600" height="46" rx="4" class="fs"/>
+  <rect x="100" y="180" width="600" height="46" rx="4" class="a"/>
+  <text x="400" y="202" text-anchor="middle" class="acc">03 · API + DATA MODEL · CONTRACTS WITH THE FUTURE</text>
+  <text x="400" y="218" text-anchor="middle" class="label">EXPENSIVE TO REVERSE · YEARS OF TECH DEBT IF WRONG</text>
+
+  <rect x="70" y="236" width="660" height="46" rx="4" class="fs"/>
+  <rect x="70" y="236" width="660" height="46" rx="4" class="a"/>
+  <text x="400" y="258" text-anchor="middle" class="acc">02 · DEPENDENCY + BOUNDARY CHOICES</text>
+  <text x="400" y="274" text-anchor="middle" class="label">RARELY REVERSIBLE · SHAPES EVERY FUTURE DECISION</text>
+
+  <rect x="40" y="292" width="720" height="46" rx="4" class="fs"/>
+  <rect x="40" y="292" width="720" height="46" rx="4" class="a"/>
+  <text x="400" y="314" text-anchor="middle" class="acc">01 · WHAT TO BUILD · WHEN TO NOT ADD A FEATURE</text>
+  <text x="400" y="330" text-anchor="middle" class="label">FOUNDATIONAL · NO REFACTOR FIXES THE WRONG PRODUCT</text>
+</svg>

@@ -1,0 +1,81 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-skill-transfer">
+  <title id="t-skill-transfer">Which backend skills carry over to AI engineering, and what's actually new</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">YOUR BACKEND TOOLBOX · MOST OF IT ALREADY APPLIES</text>
+
+  <text x="40" y="76" class="acc">CARRIES OVER 1:1</text>
+  <line x1="40" y1="84" x2="240" y2="84" class="a"/>
+
+  <rect x="40" y="100" width="220" height="28" rx="3" class="s"/>
+  <text x="56" y="118" class="mono">System design · trade-offs</text>
+  <rect x="40" y="134" width="220" height="28" rx="3" class="s"/>
+  <text x="56" y="152" class="mono">REST/gRPC · API design</text>
+  <rect x="40" y="168" width="220" height="28" rx="3" class="s"/>
+  <text x="56" y="186" class="mono">Observability · logging</text>
+  <rect x="40" y="202" width="220" height="28" rx="3" class="s"/>
+  <text x="56" y="220" class="mono">Caching · idempotency</text>
+  <rect x="40" y="236" width="220" height="28" rx="3" class="s"/>
+  <text x="56" y="254" class="mono">Queues · async jobs</text>
+  <rect x="40" y="270" width="220" height="28" rx="3" class="s"/>
+  <text x="56" y="288" class="mono">CI/CD · deployment</text>
+
+  <text x="290" y="76" class="acc">NEW · LEARN DEEPLY</text>
+  <line x1="290" y1="84" x2="490" y2="84" class="a"/>
+
+  <rect x="290" y="100" width="220" height="28" rx="3" class="fs"/>
+  <rect x="290" y="100" width="220" height="28" rx="3" class="a"/>
+  <text x="306" y="118" class="mono">LLM mental model</text>
+  <rect x="290" y="134" width="220" height="28" rx="3" class="fs"/>
+  <rect x="290" y="134" width="220" height="28" rx="3" class="a"/>
+  <text x="306" y="152" class="mono">Embeddings · vector stores</text>
+  <rect x="290" y="168" width="220" height="28" rx="3" class="fs"/>
+  <rect x="290" y="168" width="220" height="28" rx="3" class="a"/>
+  <text x="306" y="186" class="mono">Eval design · scoring</text>
+  <rect x="290" y="202" width="220" height="28" rx="3" class="fs"/>
+  <rect x="290" y="202" width="220" height="28" rx="3" class="a"/>
+  <text x="306" y="220" class="mono">Prompt patterns</text>
+  <rect x="290" y="236" width="220" height="28" rx="3" class="fs"/>
+  <rect x="290" y="236" width="220" height="28" rx="3" class="a"/>
+  <text x="306" y="254" class="mono">RAG retrieval shape</text>
+  <rect x="290" y="270" width="220" height="28" rx="3" class="fs"/>
+  <rect x="290" y="270" width="220" height="28" rx="3" class="a"/>
+  <text x="306" y="288" class="mono">Tool-use / agent loops</text>
+
+  <text x="540" y="76" class="danger">SKIP · NOT REQUIRED</text>
+  <line x1="540" y1="84" x2="740" y2="84" class="dg"/>
+
+  <rect x="540" y="100" width="220" height="28" rx="3" class="dg"/>
+  <text x="556" y="118" class="mono">Backprop · gradient math</text>
+  <rect x="540" y="134" width="220" height="28" rx="3" class="dg"/>
+  <text x="556" y="152" class="mono">Training from scratch</text>
+  <rect x="540" y="168" width="220" height="28" rx="3" class="dg"/>
+  <text x="556" y="186" class="mono">GPU kernel tuning</text>
+  <rect x="540" y="202" width="220" height="28" rx="3" class="dg"/>
+  <text x="556" y="220" class="mono">PhD-level theory</text>
+  <rect x="540" y="236" width="220" height="28" rx="3" class="dg"/>
+  <text x="556" y="254" class="mono">Custom architectures</text>
+  <rect x="540" y="270" width="220" height="28" rx="3" class="dg"/>
+  <text x="556" y="288" class="mono">Distributed training</text>
+
+  <text x="400" y="338" text-anchor="middle" class="label">SIX NEW THINGS · MOST LEARNABLE IN 90 DAYS · NONE OF THEM REQUIRE A PHD</text>
+  <text x="400" y="358" text-anchor="middle" class="acc">REUSE 80% · LEARN 20% · SHIP IN A QUARTER</text>
+</svg>

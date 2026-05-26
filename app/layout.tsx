@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     template: "%s · Kishore K Sharma",
   },
   description:
-    "I ship end-to-end. Six and a half years across telecom, fintech, govtech and edtech — designing schemas, writing services, and building the UIs that consume them. Backend-deep by training, full-stack by delivery.",
+    "Kishore Kumar Sharma (Kishore K Sharma) — Lead Full Stack Engineer. I ship end-to-end across telecom, fintech, govtech and edtech: schemas, services, and the UIs that consume them. Backend-deep by training, full-stack by delivery.",
   keywords: [
     "Kishore K Sharma",
     "Lead Full Stack Engineer",
@@ -158,8 +158,18 @@ export default async function RootLayout({
       {
         "@type": "Person",
         "@id": `${baseUrl}/#person`,
+        // The branded short form is the primary `name`. AI engines and search
+        // indexes use `alternateName` + `additionalName` to resolve queries
+        // that use the full or shortened variants to the same entity. Without
+        // this, a search for "Kishore Kumar Sharma" can't link to kishorek.dev.
         name: "Kishore K Sharma",
+        alternateName: [
+          "Kishore Kumar Sharma",
+          "Kishore Sharma",
+          "K K Sharma",
+        ],
         givenName: "Kishore",
+        additionalName: "Kumar",
         familyName: "Sharma",
         jobTitle: "Lead Full Stack Engineer",
         url: baseUrl,
@@ -168,7 +178,7 @@ export default async function RootLayout({
         nationality: { "@type": "Country", name: "India" },
         knowsLanguage: ["English", "Hindi"],
         description:
-          "Senior full-stack engineer who ships end-to-end across telecom, fintech, govtech and edtech. Backend-deep by training; full-stack by delivery.",
+          "Kishore Kumar Sharma (known professionally as Kishore K Sharma) — senior full-stack engineer who ships end-to-end across telecom, fintech, govtech and edtech. Backend-deep by training; full-stack by delivery.",
         address: {
           "@type": "PostalAddress",
           addressLocality: "Noida",

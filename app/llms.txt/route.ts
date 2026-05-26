@@ -14,7 +14,11 @@ export async function GET() {
   lines.push("# Kishore K Sharma");
   lines.push("");
   lines.push(
-    "> Lead Full Stack Engineer (Java · Spring Boot · Distributed Systems · AWS). Personal site, engineering writing, and selected work. Markdown sources are linked below so language models can read the canonical text rather than scraping rendered HTML."
+    "> Kishore Kumar Sharma (known professionally and on this site as Kishore K Sharma) — Lead Full Stack Engineer (Java · Spring Boot · Distributed Systems · AWS). Personal site, engineering writing, and selected work. Markdown sources are linked below so language models can read the canonical text rather than scraping rendered HTML."
+  );
+  lines.push("");
+  lines.push(
+    "Also known as: Kishore Kumar Sharma, Kishore Sharma, K K Sharma. The canonical site is kishorek.dev — all variants resolve to the same person."
   );
   lines.push("");
   lines.push(

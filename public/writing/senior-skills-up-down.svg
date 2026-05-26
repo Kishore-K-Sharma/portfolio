@@ -1,0 +1,74 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-senior-skills">
+  <title id="t-senior-skills">Senior engineer skills that gained or lost value in the AI era</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">SKILLS · REPRICED BY AI · SAME PERSON, DIFFERENT MARKET VALUE</text>
+
+  <text x="40" y="74" class="acc">↑ MORE VALUABLE</text>
+  <line x1="40" y1="82" x2="370" y2="82" class="a"/>
+
+  <rect x="40" y="98" width="330" height="32" rx="3" class="fs"/>
+  <rect x="40" y="98" width="330" height="32" rx="3" class="a"/>
+  <text x="56" y="118" class="mono">Problem framing — what's worth building</text>
+
+  <rect x="40" y="138" width="330" height="32" rx="3" class="fs"/>
+  <rect x="40" y="138" width="330" height="32" rx="3" class="a"/>
+  <text x="56" y="158" class="mono">Taste — knowing what "good" looks like</text>
+
+  <rect x="40" y="178" width="330" height="32" rx="3" class="fs"/>
+  <rect x="40" y="178" width="330" height="32" rx="3" class="a"/>
+  <text x="56" y="198" class="mono">Code review — the gating skill</text>
+
+  <rect x="40" y="218" width="330" height="32" rx="3" class="fs"/>
+  <rect x="40" y="218" width="330" height="32" rx="3" class="a"/>
+  <text x="56" y="238" class="mono">System design — leverage compounds</text>
+
+  <rect x="40" y="258" width="330" height="32" rx="3" class="fs"/>
+  <rect x="40" y="258" width="330" height="32" rx="3" class="a"/>
+  <text x="56" y="278" class="mono">Eval design — only way to know "better"</text>
+
+  <rect x="40" y="298" width="330" height="32" rx="3" class="fs"/>
+  <rect x="40" y="298" width="330" height="32" rx="3" class="a"/>
+  <text x="56" y="318" class="mono">Mentorship — humans + agents both</text>
+
+  <text x="430" y="74" class="danger">↓ LESS VALUABLE</text>
+  <line x1="430" y1="82" x2="760" y2="82" class="dg"/>
+
+  <rect x="430" y="98" width="330" height="32" rx="3" class="dg"/>
+  <text x="446" y="118" class="mono">Hand-rolling boilerplate CRUD</text>
+
+  <rect x="430" y="138" width="330" height="32" rx="3" class="dg"/>
+  <text x="446" y="158" class="mono">Memorising syntax / framework APIs</text>
+
+  <rect x="430" y="178" width="330" height="32" rx="3" class="dg"/>
+  <text x="446" y="198" class="mono">Solo deep-focus coding marathons</text>
+
+  <rect x="430" y="218" width="330" height="32" rx="3" class="dg"/>
+  <text x="446" y="238" class="mono">"Senior who only writes code"</text>
+
+  <rect x="430" y="258" width="330" height="32" rx="3" class="dg"/>
+  <text x="446" y="278" class="mono">Lines-of-code as productivity proxy</text>
+
+  <rect x="430" y="298" width="330" height="32" rx="3" class="dg"/>
+  <text x="446" y="318" class="mono">Encyclopedic stack-specific knowledge</text>
+
+  <text x="400" y="358" text-anchor="middle" class="label">RIGHT SIDE WAS YOUR JOB. LEFT SIDE IS YOUR JOB. THE GAP IS THE NEXT TWO YEARS.</text>
+</svg>
