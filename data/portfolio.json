@@ -8,7 +8,18 @@
     "location": "Noida, UP",
     "email": "kishoresharma914@gmail.com",
     "linkedin": "https://www.linkedin.com/in/kishore-k-sharma",
-    "linkedinPage": "https://www.linkedin.com/groups/14367379/"
+    "linkedinPage": "https://www.linkedin.com/groups/14367379/",
+    "hashnode": "https://blogs.kishorek.dev",
+    "social": {
+      "linkedin": "https://www.linkedin.com/in/kishore-k-sharma",
+      "github": "https://github.com/Kishore-K-Sharma",
+      "x": "https://x.com/kishoreksharmaa",
+      "bluesky": "https://bsky.app/profile/kishoreksharma.bsky.social",
+      "mastodon": "https://mastodon.social/@kishoreksharma",
+      "devto": "https://dev.to/kishoreksharma",
+      "hashnode": "https://blogs.kishorek.dev",
+      "instagram": "https://www.instagram.com/sharma.kishorek/"
+    }
   },
   "summary": "Six and a half years shipping end-to-end. I take features from data model to deployed UI — designing the schema, writing the services, building the screens, running the deploys. Backend-deep by training, full-stack by delivery. Built across telecom, fintech, govtech and edtech — every system shipped with measurable lift.",
   "manifesto": [

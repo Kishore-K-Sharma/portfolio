@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { listWork } from "@/lib/work";
 import { siteConfig } from "@/config/site";
+import { safeJsonLd } from "@/lib/json-ld";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -23,11 +25,58 @@ const DOMAIN_LABEL: Record<string, string> = {
   govtech: "GovTech",
 };
 
-export default function WorkIndex() {
+export default async function WorkIndex() {
   const work = listWork();
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
+  const url = `${siteConfig.baseUrl}/work`;
+
+  const collectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": url,
+    name: "Selected Work — Kishore K Sharma",
+    description:
+      "Engineering case studies across telecom, fintech, govtech, and edtech — architectural decisions and measurable outcomes.",
+    url,
+    inLanguage: "en",
+    isPartOf: { "@id": `${siteConfig.baseUrl}/#website` },
+    about: { "@id": `${siteConfig.baseUrl}/#person` },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListOrder: "https://schema.org/ItemListOrderDescending",
+      numberOfItems: work.length,
+      itemListElement: work.map((w, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: `${siteConfig.baseUrl}/work/${w.slug}`,
+        name: w.title,
+      })),
+    },
+  };
+
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.baseUrl },
+      { "@type": "ListItem", position: 2, name: "Work", item: url },
+    ],
+  };
 
   return (
     <div className="min-h-screen pt-32 pb-24">
+      <script
+        type="application/ld+json"
+        nonce={nonce}
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(collectionJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        nonce={nonce}
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbs) }}
+      />
       <div className="container-narrow">
         <header className="mb-16 md:mb-20">
           <p className="font-mono text-[0.72rem] uppercase tracking-[0.18em] text-muted-foreground mb-4">

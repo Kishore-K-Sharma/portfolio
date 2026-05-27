@@ -90,8 +90,40 @@ export function Contact() {
               <div className="flex items-baseline gap-3">
                 <dt className="text-muted-foreground w-24 shrink-0">linkedin</dt>
                 <dd>
-                  <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-accent transition-colors">
+                  <a href={personal.social.linkedin} target="_blank" rel="noopener noreferrer me" className="text-foreground hover:text-accent transition-colors">
                     /in/kishore-k-sharma
+                  </a>
+                </dd>
+              </div>
+              <div className="flex items-baseline gap-3">
+                <dt className="text-muted-foreground w-24 shrink-0">github</dt>
+                <dd>
+                  <a href={personal.social.github} target="_blank" rel="noopener noreferrer me" className="text-foreground hover:text-accent transition-colors">
+                    @Kishore-K-Sharma
+                  </a>
+                </dd>
+              </div>
+              <div className="flex items-baseline gap-3">
+                <dt className="text-muted-foreground w-24 shrink-0">x</dt>
+                <dd>
+                  <a href={personal.social.x} target="_blank" rel="noopener noreferrer me" className="text-foreground hover:text-accent transition-colors">
+                    @kishoreksharmaa
+                  </a>
+                </dd>
+              </div>
+              <div className="flex items-baseline gap-3">
+                <dt className="text-muted-foreground w-24 shrink-0">hashnode</dt>
+                <dd>
+                  <a href={personal.social.hashnode} target="_blank" rel="noopener noreferrer me" className="text-foreground hover:text-accent transition-colors">
+                    blogs.kishorek.dev
+                  </a>
+                </dd>
+              </div>
+              <div className="flex items-baseline gap-3">
+                <dt className="text-muted-foreground w-24 shrink-0">dev.to</dt>
+                <dd>
+                  <a href={personal.social.devto} target="_blank" rel="noopener noreferrer me" className="text-foreground hover:text-accent transition-colors">
+                    @kishoreksharma
                   </a>
                 </dd>
               </div>

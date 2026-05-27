@@ -11,6 +11,7 @@ import { AuthorCard } from "@/components/notes/AuthorCard";
 import { CopyAttribution } from "@/components/notes/CopyAttribution";
 import { safeJsonLd } from "@/lib/json-ld";
 import { siteConfig } from "@/config/site";
+import portfolioData from "@/data/portfolio.json";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -72,6 +73,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       card: "summary_large_image",
       title: note.title,
       description: note.description,
+      site: "@kishoreksharmaa",
+      creator: "@kishoreksharmaa",
     },
   };
 }
@@ -95,7 +98,7 @@ export default async function NotePage(props: Props) {
     "@id": `${siteConfig.baseUrl}/#person`,
     name: "Kishore K Sharma",
     url: siteConfig.baseUrl,
-    sameAs: ["https://www.linkedin.com/in/kishore-k-sharma"],
+    sameAs: Object.values(portfolioData.personal.social),
     jobTitle: "Lead Full Stack Engineer",
   };
 

@@ -11,10 +11,15 @@ const { personal, summary, manifesto, experience, education, awards, certificati
 
 export const metadata: Metadata = {
   title: "About",
-  description: `${personal.name} — ${personal.title} based in ${personal.location}. ${personal.experienceYears} years across telecom, fintech, govtech and edtech. Backend-deep by training, full-stack by delivery.`,
+  description: `About Kishore Kumar Sharma (Kishore K Sharma) — ${personal.title} based in ${personal.location}. ${personal.experienceYears} years across telecom, fintech, govtech and edtech. Backend-deep by training, full-stack by delivery.`,
   alternates: { canonical: `${siteConfig.baseUrl}/about` },
   keywords: [
-    `About ${personal.name}`,
+    "Kishore K Sharma",
+    "Kishore Kumar Sharma",
+    "Kishore Sharma",
+    "About Kishore K Sharma",
+    "Kishore K Sharma blog",
+    "kishorek.dev",
     "Lead Full Stack Engineer",
     "Engineer profile",
     "Java Spring Boot Node.js engineer",
@@ -72,6 +77,17 @@ export default async function AboutPage() {
           <h1 className="font-display text-display-sm md:text-display text-foreground tracking-[-0.03em] leading-[1.02] text-balance">
             {personal.name}
           </h1>
+          {/*
+            Name-variant disambiguation for crawlers and assistive tech. Hidden
+            visually via `sr-only` (NOT display:none, which Google can flag as
+            cloaking) — screen readers and indexers still read this; sighted
+            readers don't. Variants also live in Person JSON-LD alternateName
+            and the page metadata description, so this is one more textual
+            signal on top of the structured-data primary.
+          */}
+          <p className="sr-only">
+            Kishore K Sharma is also known as Kishore Kumar Sharma and Kishore Sharma. Personal site: kishorek.dev. Hashnode blog: blogs.kishorek.dev.
+          </p>
           <p className="mt-4 font-mono text-[0.85rem] text-muted-foreground">
             {personal.title} · {personal.location} · {personal.experienceYears} years
           </p>
@@ -90,6 +106,22 @@ export default async function AboutPage() {
             title={personal.title}
             location={personal.location}
           />
+        </section>
+
+        <section className="mb-16">
+          <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground mb-5">
+            /elsewhere
+          </p>
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-3 max-w-[640px] font-mono text-[0.85rem]">
+            <SocialRow label="GitHub" handle="@Kishore-K-Sharma" href={personal.social.github} />
+            <SocialRow label="X" handle="@kishoreksharmaa" href={personal.social.x} />
+            <SocialRow label="Hashnode" handle="blogs.kishorek.dev" href={personal.social.hashnode} />
+            <SocialRow label="dev.to" handle="@kishoreksharma" href={personal.social.devto} />
+            <SocialRow label="Bluesky" handle="@kishoreksharma.bsky.social" href={personal.social.bluesky} />
+            <SocialRow label="Mastodon" handle="@kishoreksharma@mastodon.social" href={personal.social.mastodon} />
+            <SocialRow label="Instagram" handle="@sharma.kishorek" href={personal.social.instagram} />
+            <SocialRow label="Email" handle={personal.email} href={`mailto:${personal.email}`} />
+          </dl>
         </section>
 
         <section className="mb-16">
@@ -234,5 +266,23 @@ export default async function AboutPage() {
         </footer>
       </div>
     </main>
+  );
+}
+
+function SocialRow({ label, handle, href }: { label: string; handle: string; href: string }) {
+  const external = href.startsWith("http");
+  return (
+    <div className="flex items-baseline gap-3 min-w-0">
+      <dt className="text-muted-foreground w-24 shrink-0">{label}</dt>
+      <dd className="min-w-0">
+        <a
+          href={href}
+          {...(external ? { target: "_blank", rel: "noopener noreferrer me" } : {})}
+          className="text-foreground hover:text-accent transition-colors truncate inline-block max-w-full"
+        >
+          {handle}
+        </a>
+      </dd>
+    </div>
   );
 }

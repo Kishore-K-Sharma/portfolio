@@ -22,12 +22,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(`${w.startDate}-01`),
       changeFrequency: "yearly" as const,
       priority: 0.85,
+      // OG cover image — surfaces in Google Image Search and improves rich-card
+      // rendering. The dynamic /opengraph-image route returns a 1200x630 PNG.
+      images: [`${siteConfig.baseUrl}/work/${w.slug}/opengraph-image`],
     })),
     ...notes.map((n) => ({
       url: `${siteConfig.baseUrl}/writing/${n.slug}`,
       lastModified: new Date(n.date),
       changeFrequency: "yearly" as const,
       priority: 0.8,
+      images: [`${siteConfig.baseUrl}/writing/${n.slug}/opengraph-image`],
     })),
     ...tags.map(({ tag }) => ({
       url: `${siteConfig.baseUrl}/writing/tag/${tagSlug(tag)}`,

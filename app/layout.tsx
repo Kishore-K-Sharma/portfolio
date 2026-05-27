@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { siteConfig } from "@/config/site";
 import { safeJsonLd } from "@/lib/json-ld";
+import portfolioData from "@/data/portfolio.json";
 import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
@@ -40,6 +41,9 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: dark)", color: "#0A0A0B" },
     { media: "(prefers-color-scheme: light)", color: "#FAF8F4" },
   ],
+  // Tells browsers the site supports both schemes — improves first-paint colour
+  // before CSS resolves and stops the brief flash of wrong-mode UI.
+  colorScheme: "light dark",
   width: "device-width",
   initialScale: 1,
 };
@@ -54,6 +58,12 @@ export const metadata: Metadata = {
     "Kishore Kumar Sharma (Kishore K Sharma) — Lead Full Stack Engineer. I ship end-to-end across telecom, fintech, govtech and edtech: schemas, services, and the UIs that consume them. Backend-deep by training, full-stack by delivery.",
   keywords: [
     "Kishore K Sharma",
+    "Kishore Kumar Sharma",
+    "Kishore Sharma",
+    "Kishore K Sharma blog",
+    "Kishore K Sharma portfolio",
+    "kishorek.dev",
+    "blogs.kishorek.dev",
     "Lead Full Stack Engineer",
     "Full Stack Engineer for hire",
     "End-to-end full stack developer",
@@ -130,7 +140,11 @@ export const metadata: Metadata = {
     description:
       "End to end. No handoffs. Enterprise integrations across four verticals — every system shipped with measurable lift.",
     // Twitter card image inherits from openGraph.images / opengraph-image.tsx.
-    creator: "@kishoresharma",
+    // `site` and `creator` are both the same handle for a personal site —
+    // Twitter/X uses `creator` to attribute the author and `site` to attribute
+    // the publishing site. Card analytics surface in both accounts when set.
+    site: "@kishoreksharmaa",
+    creator: "@kishoreksharmaa",
   },
   category: "technology",
 };
@@ -202,7 +216,12 @@ export default async function RootLayout({
             url: "https://gauhati.ac.in",
           },
         ],
-        sameAs: ["https://www.linkedin.com/in/kishore-k-sharma"],
+        // Every authoritative profile that represents the same identity. AI
+        // engines and search use this as the primary entity-resolution signal
+        // — more verified profiles here = higher confidence "all of these are
+        // the same person." Sourced from portfolio.json so every surface stays
+        // in sync.
+        sameAs: Object.values(portfolioData.personal.social),
         knowsAbout: [
           "Full Stack Development",
           "End-to-end Feature Delivery",
@@ -252,6 +271,11 @@ export default async function RootLayout({
     ],
   };
 
+  // rel="me" head links — IndieAuth / Fediverse verification convention.
+  // Mirrors the visible rel="me" anchors in Footer/Contact. Mastodon, Bluesky,
+  // and IndieWeb tooling check head links specifically; Google ignores them.
+  const relMeLinks = Object.values(portfolioData.personal.social);
+
   return (
     <html lang="en" suppressHydrationWarning className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
       <head>
@@ -261,6 +285,9 @@ export default async function RootLayout({
           suppressHydrationWarning
           dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
         />
+        {relMeLinks.map((href) => (
+          <link key={href} rel="me" href={href} />
+        ))}
         {process.env.NODE_ENV === "production" && gaId && (
           <>
             <script

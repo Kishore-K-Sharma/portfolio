@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { listCategoriesWithCounts, listNotes, listTags, tagSlug } from "@/lib/notes";
 import { safeJsonLd } from "@/lib/json-ld";
 import { siteConfig } from "@/config/site";
+import portfolioData from "@/data/portfolio.json";
 import { NotesBrowser, type NoteSummary } from "@/components/notes/NotesBrowser";
 
 export const metadata: Metadata = {
@@ -70,7 +71,7 @@ export default async function NotesIndex() {
     "@id": `${siteConfig.baseUrl}/#person`,
     name: "Kishore K Sharma",
     url: siteConfig.baseUrl,
-    sameAs: ["https://www.linkedin.com/in/kishore-k-sharma"],
+    sameAs: Object.values(portfolioData.personal.social),
   };
 
   const blogJsonLd = {
@@ -164,13 +165,21 @@ export default async function NotesIndex() {
           </section>
         )}
 
-        <div className="mt-12 pt-6 border-t border-subtle/40 flex items-center justify-between">
+        <div className="mt-12 pt-6 border-t border-subtle/40 flex items-center justify-between gap-4 flex-wrap">
           <Link
             href="/"
             className="font-mono text-[0.78rem] text-muted-foreground hover:text-foreground transition-colors"
           >
             ← back to portfolio
           </Link>
+          <a
+            href="https://blogs.kishorek.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-[0.78rem] text-muted-foreground hover:text-foreground transition-colors"
+          >
+            also on Hashnode ↗
+          </a>
           <span className="font-mono text-[0.7rem] text-muted-foreground">
             {notes.length} {notes.length === 1 ? "piece" : "pieces"}
           </span>

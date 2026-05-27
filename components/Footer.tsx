@@ -41,11 +41,46 @@ export function Footer() {
             <p className="eyebrow mb-4">Elsewhere</p>
             <ul className="space-y-2 text-[0.92rem] text-muted-foreground">
               <li>
-                <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+                <a href={personal.social.linkedin} target="_blank" rel="noopener noreferrer me" className="hover:text-foreground transition-colors">
                   LinkedIn ↗
                 </a>
               </li>
               <li>
+                <a href={personal.social.github} target="_blank" rel="noopener noreferrer me" className="hover:text-foreground transition-colors">
+                  GitHub ↗
+                </a>
+              </li>
+              <li>
+                <a href={personal.social.x} target="_blank" rel="noopener noreferrer me" className="hover:text-foreground transition-colors">
+                  X ↗
+                </a>
+              </li>
+              <li>
+                <a href={personal.social.hashnode} target="_blank" rel="noopener noreferrer me" className="hover:text-foreground transition-colors">
+                  Hashnode ↗
+                </a>
+              </li>
+              <li>
+                <a href={personal.social.devto} target="_blank" rel="noopener noreferrer me" className="hover:text-foreground transition-colors">
+                  dev.to ↗
+                </a>
+              </li>
+              <li>
+                <a href={personal.social.bluesky} target="_blank" rel="noopener noreferrer me" className="hover:text-foreground transition-colors">
+                  Bluesky ↗
+                </a>
+              </li>
+              <li>
+                <a href={personal.social.mastodon} target="_blank" rel="noopener noreferrer me" className="hover:text-foreground transition-colors">
+                  Mastodon ↗
+                </a>
+              </li>
+              <li>
+                <a href={personal.social.instagram} target="_blank" rel="noopener noreferrer me" className="hover:text-foreground transition-colors">
+                  Instagram ↗
+                </a>
+              </li>
+              <li className="pt-2">
                 <Link href="/about" className="hover:text-foreground transition-colors">
                   About
                 </Link>

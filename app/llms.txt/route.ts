@@ -22,8 +22,21 @@ export async function GET() {
   );
   lines.push("");
   lines.push(
-    "Author: Kishore K Sharma. Contact: kishoresharma914@gmail.com. LinkedIn: https://www.linkedin.com/in/kishore-k-sharma."
+    "Author: Kishore K Sharma. Contact: kishoresharma914@gmail.com."
   );
+  lines.push("");
+  lines.push("## Profiles (same person)");
+  lines.push("");
+  lines.push(
+    "- LinkedIn: https://www.linkedin.com/in/kishore-k-sharma"
+  );
+  lines.push("- GitHub: https://github.com/Kishore-K-Sharma");
+  lines.push("- X: https://x.com/kishoreksharmaa");
+  lines.push("- Bluesky: https://bsky.app/profile/kishoreksharma.bsky.social");
+  lines.push("- Mastodon: https://mastodon.social/@kishoreksharma");
+  lines.push("- dev.to: https://dev.to/kishoreksharma");
+  lines.push("- Hashnode: https://blogs.kishorek.dev (additional writing, cross-posts, shorter notes)");
+  lines.push("- Instagram: https://www.instagram.com/sharma.kishorek/");
   lines.push("");
 
   lines.push("## Writing");

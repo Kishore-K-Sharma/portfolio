@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { siteConfig } from "@/config/site";
+import { safeJsonLd } from "@/lib/json-ld";
+
+const PAGE_URL = `${siteConfig.baseUrl}/uses`;
 
 export const metadata: Metadata = {
   title: "Uses",
@@ -114,9 +118,37 @@ const GROUPS: UsesGroup[] = [
   },
 ];
 
-export default function UsesPage() {
+export default async function UsesPage() {
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
+
+  const webPageJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": PAGE_URL,
+    name: "Uses — Kishore K Sharma",
+    description:
+      "Editor, hardware, fonts, terminal setup, and tools Kishore K Sharma reaches for daily.",
+    url: PAGE_URL,
+    inLanguage: "en",
+    isPartOf: { "@id": `${siteConfig.baseUrl}/#website` },
+    about: { "@id": `${siteConfig.baseUrl}/#person` },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.baseUrl },
+        { "@type": "ListItem", position: 2, name: "Uses", item: PAGE_URL },
+      ],
+    },
+  };
+
   return (
     <div className="min-h-screen pt-32 pb-24">
+      <script
+        type="application/ld+json"
+        nonce={nonce}
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(webPageJsonLd) }}
+      />
       <div className="container-narrow">
         <header className="mb-14">
           <p className="font-mono text-[0.72rem] uppercase tracking-[0.18em] text-muted-foreground mb-4">
