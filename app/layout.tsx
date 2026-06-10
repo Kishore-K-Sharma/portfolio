@@ -85,6 +85,14 @@ export const metadata: Metadata = {
   authors: [{ name: "Kishore K Sharma", url: baseUrl }],
   creator: "Kishore K Sharma",
   publisher: "Kishore K Sharma",
+  // Webmaster verification tokens — read from env so they ship without
+  // committing the secret values. Set in Vercel → Project → Environment
+  // Variables. Each is optional; an unset value just omits the meta tag.
+  // The HTML-meta-tag verification method is what each console offers; the
+  // alternative (DNS TXT record) requires registrar access. Meta is faster.
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+  },
   other: {
     // Surfaces a copyright signal to crawlers and archive tools that read the
     // legacy meta-name. Per-post copyrightNotice JSON-LD is the modern carrier;

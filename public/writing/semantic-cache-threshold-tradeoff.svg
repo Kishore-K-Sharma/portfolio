@@ -1,0 +1,61 @@
+<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-sc-thresh">
+  <title id="t-sc-thresh">The similarity threshold as a dial: a loose threshold gives a high hit rate but risks serving confidently wrong answers to subtly different questions, while a tight threshold is safe but collapses the hit rate</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">THE SIMILARITY THRESHOLD τ · ONE DIAL · TWO WAYS TO LOSE</text>
+
+  <!-- axis -->
+  <line x1="80" y1="150" x2="720" y2="150" class="s"/>
+  <polygon points="720,150 710,145 710,155" class="fa" fill="#1a1a24"/>
+
+  <text x="80" y="178" class="label">LOOSE τ ≈ 0.80</text>
+  <text x="400" y="178" text-anchor="middle" class="acc">SWEET SPOT τ ≈ 0.92</text>
+  <text x="720" y="178" text-anchor="end" class="label">TIGHT τ ≈ 0.99</text>
+
+  <!-- ticks -->
+  <line x1="80" y1="143" x2="80" y2="157" class="s"/>
+  <line x1="400" y1="143" x2="400" y2="157" class="a"/>
+  <line x1="720" y1="143" x2="720" y2="157" class="s"/>
+
+  <!-- sweet spot marker -->
+  <circle cx="400" cy="150" r="7" class="a" fill="none"/>
+  <circle cx="400" cy="150" r="2.5" class="fa"/>
+
+  <!-- LOOSE danger box -->
+  <rect x="60" y="58" width="240" height="64" rx="4" class="dg"/>
+  <text x="80" y="82" class="danger">FALSE HITS</text>
+  <text x="80" y="100" class="text">serves a confident wrong</text>
+  <text x="80" y="116" class="text">answer to a different question</text>
+  <line x1="120" y1="122" x2="120" y2="143" class="dg"/>
+
+  <!-- TIGHT box -->
+  <rect x="500" y="58" width="240" height="64" rx="4" class="s"/>
+  <text x="520" y="82" class="label">HIT RATE COLLAPSES</text>
+  <text x="520" y="100" class="text">safe, but nearly every</text>
+  <text x="520" y="116" class="text">paraphrase misses → pays</text>
+  <line x1="680" y1="122" x2="680" y2="143" class="sm"/>
+
+  <!-- bottom guidance -->
+  <rect x="60" y="206" width="680" height="56" rx="4" class="fs"/>
+  <rect x="60" y="206" width="680" height="56" rx="4" class="a"/>
+  <text x="80" y="230" class="acc">START STRICT · MEASURE FALSE-HIT RATE · LOOSEN CAREFULLY</text>
+  <text x="80" y="250" class="text">for borderline scores, run a cheap LLM verifier: "does this cached answer fit?"</text>
+</svg>

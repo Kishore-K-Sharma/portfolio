@@ -1,0 +1,89 @@
+<svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-sc-flow">
+  <title id="t-sc-flow">Semantic cache lookup: embed the query, run an ANN search, gate on a similarity threshold — a hit returns the cached answer with no model call, a miss calls the model and writes back</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="34" class="label">EMBED · SEARCH · GATE · ON A HIT THE MODEL CALL NEVER HAPPENS</text>
+
+  <!-- Request -->
+  <rect x="30" y="70" width="120" height="58" rx="4" class="s"/>
+  <text x="90" y="96" text-anchor="middle" class="acc">REQUEST</text>
+  <text x="90" y="114" text-anchor="middle" class="text">user query</text>
+
+  <line x1="150" y1="99" x2="178" y2="99" class="a"/>
+  <polygon points="178,99 168,94 168,104" class="fa"/>
+
+  <!-- Embed -->
+  <rect x="180" y="70" width="120" height="58" rx="4" class="s"/>
+  <text x="240" y="96" text-anchor="middle" class="acc">EMBED</text>
+  <text x="240" y="114" text-anchor="middle" class="text">query vector</text>
+
+  <line x1="300" y1="99" x2="328" y2="99" class="a"/>
+  <polygon points="328,99 318,94 318,104" class="fa"/>
+
+  <!-- ANN search -->
+  <rect x="330" y="70" width="140" height="58" rx="4" class="s"/>
+  <text x="400" y="96" text-anchor="middle" class="acc">ANN SEARCH</text>
+  <text x="400" y="114" text-anchor="middle" class="text">nearest neighbor</text>
+
+  <line x1="470" y1="99" x2="498" y2="99" class="a"/>
+  <polygon points="498,99 488,94 488,104" class="fa"/>
+
+  <!-- Threshold gate (diamond) -->
+  <polygon points="585,70 660,99 585,128 510,99" class="s"/>
+  <text x="585" y="95" text-anchor="middle" class="acc">GATE</text>
+  <text x="585" y="112" text-anchor="middle" class="label">SIM ≥ τ ?</text>
+
+  <!-- HIT branch -->
+  <line x1="660" y1="99" x2="700" y2="99" class="a"/>
+  <polygon points="700,99 690,94 690,104" class="fa"/>
+  <text x="685" y="90" class="acc">HIT</text>
+
+  <rect x="640" y="148" width="130" height="64" rx="4" class="fs"/>
+  <rect x="640" y="148" width="130" height="64" rx="4" class="a"/>
+  <line x1="705" y1="99" x2="705" y2="146" class="a"/>
+  <polygon points="705,148 700,138 710,138" class="fa"/>
+  <text x="705" y="174" text-anchor="middle" class="acc">RETURN CACHED</text>
+  <text x="705" y="192" text-anchor="middle" class="text">no model call</text>
+  <text x="705" y="206" text-anchor="middle" class="label">~5 MS · $0</text>
+
+  <!-- MISS branch -->
+  <line x1="585" y1="128" x2="585" y2="168" class="dg"/>
+  <polygon points="585,168 580,158 590,158" class="fd"/>
+  <text x="595" y="150" class="danger">MISS</text>
+
+  <rect x="380" y="170" width="150" height="58" rx="4" class="s"/>
+  <text x="455" y="196" text-anchor="middle" class="text">call the model</text>
+  <text x="455" y="214" text-anchor="middle" class="label">FULL LATENCY · FULL COST</text>
+
+  <line x1="585" y1="168" x2="585" y2="199" class="s"/>
+  <line x1="585" y1="199" x2="532" y2="199" class="s"/>
+  <polygon points="530,199 540,194 540,204" class="fa" fill="#1a1a24"/>
+
+  <!-- Write back -->
+  <line x1="455" y1="228" x2="455" y2="262" class="sm"/>
+  <polygon points="455,262 450,252 460,252" class="fa"/>
+  <rect x="360" y="264" width="190" height="50" rx="4" class="sm"/>
+  <text x="455" y="288" text-anchor="middle" class="acc">WRITE BACK</text>
+  <text x="455" y="305" text-anchor="middle" class="text">store (query vec, answer)</text>
+
+  <text x="40" y="300" class="label">CACHE STORE</text>
+  <text x="40" y="316" class="mono">redis · pgvector</text>
+</svg>

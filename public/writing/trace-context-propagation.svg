@@ -1,0 +1,69 @@
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-trace-ctx">
+  <title id="t-trace-ctx">How the trace id travels — the traceparent header carried over HTTP from service A to B, then through a Kafka message header to service C, keeping every span on one trace</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="34" class="label">CONTEXT PROPAGATION · SAME trace_id, NEW span_id AT EACH HOP</text>
+
+  <!-- Service A -->
+  <rect x="40" y="70" width="150" height="70" rx="4" class="s"/>
+  <text x="115" y="100" text-anchor="middle" class="acc">SERVICE A</text>
+  <text x="115" y="120" text-anchor="middle" class="text">order-service</text>
+
+  <!-- HTTP arrow A -> B -->
+  <line x1="190" y1="105" x2="320" y2="105" class="a"/>
+  <polygon points="320,105 310,100 310,110" class="fa"/>
+  <text x="255" y="96" text-anchor="middle" class="label">HTTP HEADER</text>
+
+  <!-- Service B -->
+  <rect x="320" y="70" width="150" height="70" rx="4" class="s"/>
+  <text x="395" y="100" text-anchor="middle" class="acc">SERVICE B</text>
+  <text x="395" y="120" text-anchor="middle" class="text">payment-service</text>
+
+  <!-- Kafka arrow B -> C -->
+  <line x1="470" y1="105" x2="600" y2="105" class="a"/>
+  <polygon points="600,105 590,100 590,110" class="fa"/>
+  <text x="535" y="96" text-anchor="middle" class="label">KAFKA HEADER</text>
+
+  <!-- Service C -->
+  <rect x="600" y="70" width="160" height="70" rx="4" class="s"/>
+  <text x="680" y="100" text-anchor="middle" class="acc">SERVICE C</text>
+  <text x="680" y="120" text-anchor="middle" class="text">inventory-service</text>
+
+  <!-- the carried value, HTTP -->
+  <rect x="200" y="175" width="240" height="46" rx="4" class="fs"/>
+  <rect x="200" y="175" width="240" height="46" rx="4" class="s"/>
+  <text x="210" y="194" class="label">traceparent:  (W3C)</text>
+  <text x="210" y="212" class="acc">00-4bf92f35..-a1b2c3d4-01</text>
+
+  <!-- the carried value, Kafka -->
+  <rect x="490" y="175" width="240" height="46" rx="4" class="fs"/>
+  <rect x="490" y="175" width="240" height="46" rx="4" class="s"/>
+  <text x="500" y="194" class="label">message header:</text>
+  <text x="500" y="212" class="acc">traceparent = 00-4bf92f35..</text>
+
+  <!-- connectors -->
+  <line x1="255" y1="140" x2="290" y2="175" class="sm"/>
+  <line x1="545" y1="140" x2="560" y2="175" class="sm"/>
+
+  <line x1="40" y1="252" x2="760" y2="252" class="sm"/>
+  <text x="40" y="274" class="label">SAME trace_id ACROSS ALL THREE → ONE WATERFALL IN TEMPO / JAEGER</text>
+  <text x="40" y="298" class="danger">DROP THE HEADER ON THE ASYNC HOP → THE TRACE SPLITS INTO TWO ORPHANS</text>
+</svg>

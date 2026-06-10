@@ -1,0 +1,58 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-ctx-rot">
+  <title id="t-ctx-rot">Answer quality plotted against context length, degrading as the window fills, with the lost-in-the-middle zone marked</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:2.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:2.5;stroke-dasharray:6 4}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">ANSWER QUALITY vs CONTEXT LENGTH · MORE TOKENS ≠ MORE INTELLIGENCE</text>
+
+  <!-- Axes -->
+  <line x1="80" y1="70" x2="80" y2="290" class="s"/>
+  <line x1="80" y1="290" x2="750" y2="290" class="s"/>
+
+  <text x="60" y="76" text-anchor="end" class="label">HIGH</text>
+  <text x="60" y="290" text-anchor="end" class="label">LOW</text>
+  <text x="33" y="180" text-anchor="middle" class="label" transform="rotate(-90,33,180)">ANSWER QUALITY</text>
+
+  <text x="150" y="310" text-anchor="middle" class="label">LIGHT</text>
+  <text x="415" y="310" text-anchor="middle" class="label">HALF FULL</text>
+  <text x="690" y="310" text-anchor="middle" class="label">BRIMMING</text>
+  <text x="415" y="330" text-anchor="middle" class="label">CONTEXT WINDOW FILL →</text>
+
+  <!-- Gridlines -->
+  <line x1="80" y1="120" x2="750" y2="120" class="sm"/>
+  <line x1="80" y1="180" x2="750" y2="180" class="sm"/>
+  <line x1="80" y1="240" x2="750" y2="240" class="sm"/>
+
+  <!-- Lost-in-the-middle shaded band -->
+  <rect x="300" y="70" width="230" height="220" class="fa" opacity="0.10"/>
+  <line x1="300" y1="70" x2="300" y2="290" class="sm"/>
+  <line x1="530" y1="70" x2="530" y2="290" class="sm"/>
+  <text x="415" y="90" text-anchor="middle" class="danger">LOST IN THE MIDDLE</text>
+  <text x="415" y="106" text-anchor="middle" class="label">PRESENT · UNDER-ATTENDED</text>
+
+  <!-- Quality curve: high & flat while light, then degrades -->
+  <path d="M 100 110 Q 250 108, 320 130 Q 415 165, 530 215 Q 640 255, 735 268" class="a"/>
+  <circle cx="100" cy="110" r="3" class="fa"/>
+  <circle cx="735" cy="268" r="3" class="fa"/>
+
+  <text x="110" y="135" class="acc">SHARP</text>
+  <text x="600" y="248" class="danger" text-anchor="end" transform="translate(60,0)">CONTEXT ROT</text>
+
+  <text x="400" y="352" text-anchor="middle" class="label">FILLING THE WINDOW BURIES YOUR SIGNAL · LEAN BEATS STUFFED</text>
+</svg>

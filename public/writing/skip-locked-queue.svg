@@ -1,0 +1,79 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-skip">
+  <title id="t-skip">Three workers run the same FOR UPDATE SKIP LOCKED query and each claims a distinct row from one jobs table</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="34" class="label">SAME QUERY · THREE WORKERS · NEVER A COLLISION</text>
+  <text x="40" y="54" class="acc">SELECT id … FOR UPDATE SKIP LOCKED LIMIT 1</text>
+
+  <!-- workers on the left -->
+  <rect x="40" y="96" width="120" height="44" rx="4" class="s"/>
+  <text x="100" y="122" text-anchor="middle" class="mono">worker A</text>
+
+  <rect x="40" y="158" width="120" height="44" rx="4" class="s"/>
+  <text x="100" y="184" text-anchor="middle" class="mono">worker B</text>
+
+  <rect x="40" y="220" width="120" height="44" rx="4" class="s"/>
+  <text x="100" y="246" text-anchor="middle" class="mono">worker C</text>
+
+  <!-- jobs table on the right -->
+  <text x="560" y="84" text-anchor="middle" class="label">JOBS TABLE</text>
+  <rect x="470" y="92" width="180" height="240" rx="4" class="s"/>
+
+  <!-- rows -->
+  <rect x="482" y="104" width="156" height="30" rx="3" class="fs"/>
+  <rect x="482" y="104" width="156" height="30" rx="3" class="a"/>
+  <text x="496" y="124" class="acc">#101</text>
+  <text x="560" y="124" class="label">→ A (LOCKED)</text>
+
+  <rect x="482" y="140" width="156" height="30" rx="3" class="fs"/>
+  <rect x="482" y="140" width="156" height="30" rx="3" class="a"/>
+  <text x="496" y="160" class="acc">#102</text>
+  <text x="560" y="160" class="label">→ B (LOCKED)</text>
+
+  <rect x="482" y="176" width="156" height="30" rx="3" class="fs"/>
+  <rect x="482" y="176" width="156" height="30" rx="3" class="a"/>
+  <text x="496" y="196" class="acc">#103</text>
+  <text x="560" y="196" class="label">→ C (LOCKED)</text>
+
+  <rect x="482" y="212" width="156" height="30" rx="3" class="sm"/>
+  <text x="496" y="232" class="label">#104</text>
+  <text x="560" y="232" class="label">PENDING</text>
+
+  <rect x="482" y="248" width="156" height="30" rx="3" class="sm"/>
+  <text x="496" y="268" class="label">#105</text>
+  <text x="560" y="268" class="label">PENDING</text>
+
+  <rect x="482" y="284" width="156" height="30" rx="3" class="sm"/>
+  <text x="496" y="304" class="label">#106</text>
+  <text x="560" y="304" class="label">PENDING</text>
+
+  <!-- arrows worker -> row -->
+  <line x1="160" y1="118" x2="478" y2="119" class="a"/>
+  <polygon points="478,119 468,114 468,124" class="fa"/>
+
+  <line x1="160" y1="180" x2="478" y2="155" class="a"/>
+  <polygon points="478,155 468,153 470,163" class="fa"/>
+
+  <line x1="160" y1="242" x2="478" y2="191" class="a"/>
+  <polygon points="478,191 468,189 470,199" class="fa"/>
+
+  <text x="400" y="350" text-anchor="middle" class="label">SKIP LOCKED STEPS OVER ROWS SOMEONE ELSE HOLDS — NO BROKER, NO DOUBLE-PROCESS</text>
+</svg>

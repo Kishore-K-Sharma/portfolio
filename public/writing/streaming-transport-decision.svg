@@ -1,0 +1,74 @@
+<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-transport">
+  <title id="t-transport">A decision diagram for picking a transport: tiny responses await the full call, one-way token streams use SSE, bidirectional interactive flows use WebSockets</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="34" class="label">PICK THE TRANSPORT BY HOW THE BYTES NEED TO MOVE</text>
+
+  <!-- Question box -->
+  <rect x="40" y="120" width="170" height="74" rx="4" class="s"/>
+  <text x="125" y="150" text-anchor="middle" class="text">How does the</text>
+  <text x="125" y="168" text-anchor="middle" class="text">response flow?</text>
+  <text x="125" y="186" text-anchor="middle" class="label">START HERE</text>
+
+  <!-- branch lines -->
+  <line x1="210" y1="140" x2="320" y2="84" class="a"/>
+  <polygon points="320,84 309,85 314,94" class="fa"/>
+  <line x1="210" y1="157" x2="320" y2="157" class="a"/>
+  <polygon points="320,157 310,152 310,162" class="fa"/>
+  <line x1="210" y1="174" x2="320" y2="230" class="a"/>
+  <polygon points="320,230 314,220 309,229" class="fa"/>
+
+  <!-- branch labels -->
+  <text x="252" y="98" class="label">TINY / SIMPLE</text>
+  <text x="240" y="150" class="label">ONE-WAY TOKENS</text>
+  <text x="236" y="248" class="label">BIDIRECTIONAL</text>
+
+  <!-- Option 1: await -->
+  <rect x="320" y="56" width="200" height="56" rx="4" class="s"/>
+  <text x="420" y="82" text-anchor="middle" class="acc">JUST AWAIT IT</text>
+  <text x="420" y="100" text-anchor="middle" class="text">one request, one JSON reply</text>
+
+  <!-- Option 2: SSE (highlighted) -->
+  <rect x="320" y="128" width="200" height="56" rx="4" class="fs"/>
+  <rect x="320" y="128" width="200" height="56" rx="4" class="a"/>
+  <text x="420" y="154" text-anchor="middle" class="acc">SERVER-SENT EVENTS</text>
+  <text x="420" y="172" text-anchor="middle" class="text">HTTP · auto-reconnect · default</text>
+
+  <!-- Option 3: WebSocket -->
+  <rect x="320" y="200" width="200" height="56" rx="4" class="s"/>
+  <text x="420" y="226" text-anchor="middle" class="acc">WEBSOCKET</text>
+  <text x="420" y="244" text-anchor="middle" class="text">duplex · interactive · stateful</text>
+
+  <!-- right-side use cases -->
+  <line x1="520" y1="84" x2="600" y2="84" class="sm"/>
+  <text x="610" y="80" class="text">classify, short answers</text>
+  <text x="610" y="96" class="label">NO STREAMING NEEDED</text>
+
+  <line x1="520" y1="156" x2="600" y2="156" class="sm"/>
+  <text x="610" y="152" class="text">chat tokens, completions</text>
+  <text x="610" y="168" class="label">99% OF LLM UIS</text>
+
+  <line x1="520" y1="228" x2="600" y2="228" class="sm"/>
+  <text x="610" y="224" class="text">voice, live cursors, games</text>
+  <text x="610" y="240" class="label">CLIENT TALKS BACK CONSTANTLY</text>
+
+  <text x="400" y="288" text-anchor="middle" class="label">WHEN IN DOUBT FOR LLM OUTPUT · SSE · DON'T REACH FOR WEBSOCKETS BY REFLEX</text>
+</svg>

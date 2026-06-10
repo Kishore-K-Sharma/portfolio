@@ -1,0 +1,78 @@
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-graphrag-build">
+  <title id="t-graphrag-build">The offline GraphRAG build: documents go through LLM entity and relationship extraction into a graph and community summaries, queried alongside the vector index</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="34" class="label">OFFLINE BUILD · RUNS ONCE, THEN ON EVERY UPDATE · THIS IS THE EXPENSIVE PART</text>
+
+  <!-- Stage 1: docs -->
+  <rect x="30" y="76" width="120" height="74" rx="4" class="s"/>
+  <text x="90" y="104" text-anchor="middle" class="acc">DOCS</text>
+  <text x="90" y="124" text-anchor="middle" class="text">wiki · tickets</text>
+  <text x="90" y="140" text-anchor="middle" class="text">code · PDFs</text>
+
+  <line x1="150" y1="113" x2="172" y2="113" class="a"/>
+  <polygon points="172,113 162,108 162,118" class="fa"/>
+
+  <!-- Stage 2: extract -->
+  <rect x="172" y="76" width="150" height="74" rx="4" class="s"/>
+  <text x="247" y="100" text-anchor="middle" class="acc">LLM EXTRACT</text>
+  <text x="247" y="120" text-anchor="middle" class="text">entities +</text>
+  <text x="247" y="136" text-anchor="middle" class="text">relationships</text>
+  <text x="247" y="160" text-anchor="middle" class="danger">$ MANY CALLS</text>
+
+  <line x1="322" y1="113" x2="344" y2="113" class="a"/>
+  <polygon points="344,113 334,108 334,118" class="fa"/>
+
+  <!-- Stage 3: graph -->
+  <rect x="344" y="76" width="150" height="74" rx="4" class="a"/>
+  <text x="419" y="100" text-anchor="middle" class="acc">GRAPH</text>
+  <text x="419" y="120" text-anchor="middle" class="text">nodes + edges</text>
+  <text x="419" y="136" text-anchor="middle" class="label">SRC · DST · RELATION</text>
+
+  <line x1="494" y1="113" x2="516" y2="113" class="a"/>
+  <polygon points="516,113 506,108 506,118" class="fa"/>
+
+  <!-- Stage 4: communities -->
+  <rect x="516" y="76" width="160" height="74" rx="4" class="s"/>
+  <text x="596" y="100" text-anchor="middle" class="acc">COMMUNITIES</text>
+  <text x="596" y="120" text-anchor="middle" class="text">cluster + LLM</text>
+  <text x="596" y="136" text-anchor="middle" class="text">summarize each</text>
+  <text x="596" y="160" text-anchor="middle" class="danger">$ MANY CALLS</text>
+
+  <!-- query rail -->
+  <line x1="40" y1="216" x2="760" y2="216" class="sm"/>
+  <text x="40" y="240" class="label">AT QUERY TIME · PICK THE RIGHT SOURCE FOR THE QUESTION</text>
+
+  <rect x="40" y="252" width="220" height="44" rx="4" class="s"/>
+  <text x="56" y="272" class="acc">LOCAL</text>
+  <text x="120" y="272" class="text">traverse graph neighbors</text>
+  <text x="56" y="288" class="label">"TELL ME ABOUT ENTITY X"</text>
+
+  <rect x="280" y="252" width="220" height="44" rx="4" class="s"/>
+  <text x="296" y="272" class="acc">GLOBAL</text>
+  <text x="362" y="272" class="text">map/reduce summaries</text>
+  <text x="296" y="288" class="label">"THEMES ACROSS EVERYTHING"</text>
+
+  <rect x="520" y="252" width="240" height="44" rx="4" class="s"/>
+  <text x="536" y="272" class="acc">VECTOR</text>
+  <text x="600" y="272" class="text">top-K for fact lookup</text>
+  <text x="536" y="288" class="label">STILL THE CHEAP DEFAULT</text>
+</svg>

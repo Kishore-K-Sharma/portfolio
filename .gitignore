@@ -10,6 +10,7 @@
 !.yarn/releases
 !.yarn/versions
 
+
 # testing
 /coverage
 
@@ -57,3 +58,6 @@ blueprint.md
 GEMINI.md
 firebase-debug.log
 .docs/
+.agents/
+skills-lock.json
+data/*

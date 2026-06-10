@@ -1,0 +1,102 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-saga-coord">
+  <title id="t-saga-coord">Two saga coordination styles: choreography chains services through events with no center, while orchestration routes every step through a central orchestrator</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <!-- divider -->
+  <line x1="400" y1="60" x2="400" y2="360" class="sm"/>
+
+  <!-- ============ LEFT: CHOREOGRAPHY ============ -->
+  <text x="40" y="36" class="acc">CHOREOGRAPHY</text>
+  <text x="40" y="52" class="label">NO BRAIN · SERVICES REACT TO EVENTS</text>
+
+  <!-- Order -->
+  <rect x="40" y="90" width="120" height="46" rx="4" class="s"/>
+  <text x="100" y="118" text-anchor="middle" class="text">Order</text>
+
+  <!-- Payment -->
+  <rect x="230" y="90" width="120" height="46" rx="4" class="s"/>
+  <text x="290" y="118" text-anchor="middle" class="text">Payment</text>
+
+  <!-- Inventory -->
+  <rect x="230" y="220" width="120" height="46" rx="4" class="s"/>
+  <text x="290" y="248" text-anchor="middle" class="text">Inventory</text>
+
+  <!-- Shipping -->
+  <rect x="40" y="220" width="120" height="46" rx="4" class="s"/>
+  <text x="100" y="248" text-anchor="middle" class="text">Shipping</text>
+
+  <!-- Order -> Payment event -->
+  <line x1="160" y1="113" x2="225" y2="113" class="a"/>
+  <polygon points="230,113 220,108 220,118" class="fa"/>
+  <text x="192" y="103" text-anchor="middle" class="label">ORDERED</text>
+
+  <!-- Payment -> Inventory event -->
+  <line x1="290" y1="136" x2="290" y2="215" class="a"/>
+  <polygon points="290,220 285,210 295,210" class="fa"/>
+  <text x="352" y="180" text-anchor="middle" class="label">PAID</text>
+
+  <!-- Inventory -> Shipping event -->
+  <line x1="230" y1="243" x2="165" y2="243" class="a"/>
+  <polygon points="160,243 170,238 170,248" class="fa"/>
+  <text x="197" y="262" text-anchor="middle" class="label">RESERVED</text>
+
+  <text x="220" y="330" text-anchor="middle" class="text">workflow logic is smeared</text>
+  <text x="220" y="348" text-anchor="middle" class="text">across all four services</text>
+
+  <!-- ============ RIGHT: ORCHESTRATION ============ -->
+  <text x="440" y="36" class="acc">ORCHESTRATION</text>
+  <text x="440" y="52" class="label">CENTRAL STATE MACHINE COMMANDS EACH STEP</text>
+
+  <!-- Orchestrator center -->
+  <rect x="560" y="150" width="130" height="60" rx="4" class="fs"/>
+  <rect x="560" y="150" width="130" height="60" rx="4" class="a"/>
+  <text x="625" y="176" text-anchor="middle" class="acc">ORCHESTRATOR</text>
+  <text x="625" y="196" text-anchor="middle" class="label">STATE MACHINE</text>
+
+  <!-- Order -->
+  <rect x="440" y="80" width="110" height="42" rx="4" class="s"/>
+  <text x="495" y="106" text-anchor="middle" class="text">Order</text>
+
+  <!-- Payment -->
+  <rect x="700" y="80" width="90" height="42" rx="4" class="s"/>
+  <text x="745" y="106" text-anchor="middle" class="text">Payment</text>
+
+  <!-- Inventory -->
+  <rect x="700" y="238" width="90" height="42" rx="4" class="s"/>
+  <text x="745" y="264" text-anchor="middle" class="text">Inventory</text>
+
+  <!-- Shipping -->
+  <rect x="440" y="238" width="110" height="42" rx="4" class="s"/>
+  <text x="495" y="264" text-anchor="middle" class="text">Shipping</text>
+
+  <!-- spokes (commands out / replies in) -->
+  <line x1="560" y1="165" x2="552" y2="118" class="a"/>
+  <polygon points="550,113 558,121 547,123" class="fa"/>
+  <line x1="690" y1="165" x2="700" y2="120" class="a"/>
+  <polygon points="702,116 692,121 700,128" class="fa"/>
+  <line x1="690" y1="195" x2="700" y2="240" class="a"/>
+  <polygon points="702,244 700,233 692,239" class="fa"/>
+  <line x1="560" y1="195" x2="552" y2="240" class="a"/>
+  <polygon points="550,245 547,234 558,237" class="fa"/>
+
+  <text x="625" y="330" text-anchor="middle" class="text">one place to read, observe,</text>
+  <text x="625" y="348" text-anchor="middle" class="text">and drive compensation</text>
+</svg>

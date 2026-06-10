@@ -1,0 +1,69 @@
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-dual-write">
+  <title id="t-dual-write">The dual-write problem: the DB commit succeeds but the Kafka publish fails, leaving an order with no event</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">TWO SYSTEMS · NO SHARED TRANSACTION · ONE OF THEM CAN FAIL ALONE</text>
+
+  <!-- OrderService box -->
+  <rect x="40" y="110" width="150" height="90" rx="4" class="s"/>
+  <text x="115" y="138" text-anchor="middle" class="acc">OrderService</text>
+  <text x="115" y="160" text-anchor="middle" class="text">save() then</text>
+  <text x="115" y="178" text-anchor="middle" class="text">publish()</text>
+  <text x="115" y="194" text-anchor="middle" class="label">TWO CALLS</text>
+
+  <!-- Write 1 arrow to Postgres -->
+  <line x1="190" y1="135" x2="330" y2="135" class="a"/>
+  <polygon points="330,135 320,130 320,140" class="fa"/>
+  <text x="260" y="124" text-anchor="middle" class="label">1 · WRITE</text>
+
+  <!-- Postgres box - success -->
+  <rect x="330" y="100" width="160" height="70" rx="4" class="s"/>
+  <text x="410" y="128" text-anchor="middle" class="acc">POSTGRES</text>
+  <text x="410" y="150" text-anchor="middle" class="text">order row saved</text>
+  <text x="410" y="166" text-anchor="middle" class="acc">COMMIT OK</text>
+
+  <!-- Write 2 arrow to Kafka - danger -->
+  <line x1="190" y1="180" x2="330" y2="230" class="dg"/>
+  <polygon points="330,230 318,226 322,217" class="fd"/>
+  <text x="250" y="214" text-anchor="middle" class="danger">2 · PUBLISH</text>
+
+  <!-- Kafka box - failed -->
+  <rect x="330" y="205" width="160" height="70" rx="4" class="dg"/>
+  <text x="410" y="233" text-anchor="middle" class="danger">KAFKA</text>
+  <text x="410" y="255" text-anchor="middle" class="text">broker unreachable</text>
+  <text x="410" y="271" text-anchor="middle" class="danger">PUBLISH FAILS</text>
+
+  <!-- The gap -->
+  <line x1="510" y1="135" x2="560" y2="135" class="sm"/>
+  <line x1="510" y1="240" x2="560" y2="240" class="sm"/>
+
+  <!-- Outcome box -->
+  <rect x="560" y="120" width="200" height="135" rx="4" class="fs"/>
+  <rect x="560" y="120" width="200" height="135" rx="4" class="dg"/>
+  <text x="660" y="148" text-anchor="middle" class="danger">THE GAP</text>
+  <text x="660" y="174" text-anchor="middle" class="text">order EXISTS</text>
+  <text x="660" y="194" text-anchor="middle" class="text">event NEVER sent</text>
+  <line x1="580" y1="208" x2="740" y2="208" class="sm"/>
+  <text x="660" y="230" text-anchor="middle" class="text">downstream never</text>
+  <text x="660" y="247" text-anchor="middle" class="text">ships the order</text>
+
+  <text x="400" y="304" text-anchor="middle" class="label">FLIP THE ORDER AND YOU PUBLISH FOR AN ORDER THAT ROLLED BACK · NO ORDERING IS SAFE</text>
+</svg>
