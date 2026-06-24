@@ -1,0 +1,52 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-plugin-cost">
+  <title id="t-plugin-cost">Claude Code plugin primitives ordered by per-session cost</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.fa{fill:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">FIVE PLUGIN PRIMITIVES · ORDERED BY PER-SESSION COST</text>
+
+  <!-- Skills - shortest bar -->
+  <rect x="40" y="60" width="120" height="34" rx="3" class="s"/>
+  <text x="56" y="82" class="acc">SKILLS</text>
+  <text x="180" y="82" class="text">metadata only · loads on demand · ~free</text>
+
+  <!-- Slash commands -->
+  <rect x="40" y="104" width="160" height="34" rx="3" class="s"/>
+  <text x="56" y="126" class="acc">SLASH CMDS</text>
+  <text x="220" y="126" class="text">user-invoked · ~free when idle</text>
+
+  <!-- Hooks -->
+  <rect x="40" y="148" width="220" height="34" rx="3" class="s"/>
+  <text x="56" y="170" class="acc">HOOKS</text>
+  <text x="280" y="170" class="text">harness-side · model cost ~0 · wall-clock varies</text>
+
+  <!-- Subagents -->
+  <rect x="40" y="192" width="320" height="34" rx="3" class="s"/>
+  <text x="56" y="214" class="acc">SUBAGENTS</text>
+  <text x="380" y="214" class="text">fresh context fork · one extra call · saves main ctx</text>
+
+  <!-- MCP servers - longest bar -->
+  <rect x="40" y="236" width="500" height="34" rx="3" class="fs"/>
+  <rect x="40" y="236" width="500" height="34" rx="3" class="a"/>
+  <text x="56" y="258" class="acc">MCP SERVERS</text>
+  <text x="560" y="258" class="text">tool defs ride along every turn · pick deliberately</text>
+
+  <line x1="40" y1="290" x2="760" y2="290" class="sm"/>
+  <text x="40" y="310" class="text">Cost is what shows up in your context window each turn,</text>
+  <text x="40" y="328" class="text">not what feels expensive at install time.</text>
+  <text x="40" y="350" class="label">SMALL INSTALL LIST · LONG SESSION HEALTH</text>
+</svg>

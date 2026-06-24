@@ -1,0 +1,79 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-queue">
+  <title id="t-queue">Redis reliable-list job queue: producer, workers, reaper</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.fa{fill:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">RELIABLE-LIST QUEUE · BLMOVE + REAPER · AT-LEAST-ONCE</text>
+
+  <!-- Producer -->
+  <rect x="40" y="80" width="140" height="60" rx="4" class="s"/>
+  <text x="110" y="106" text-anchor="middle" class="acc">PRODUCER</text>
+  <text x="110" y="126" text-anchor="middle" class="mono">LPUSH pending</text>
+
+  <line x1="180" y1="110" x2="240" y2="110" class="a"/>
+  <polygon points="240,110 230,105 230,115" class="fa"/>
+
+  <!-- Pending list -->
+  <rect x="240" y="80" width="160" height="60" rx="4" class="fs"/>
+  <rect x="240" y="80" width="160" height="60" rx="4" class="a"/>
+  <text x="320" y="106" text-anchor="middle" class="acc">PENDING</text>
+  <text x="320" y="126" text-anchor="middle" class="mono">[ job1 job2 job3 ]</text>
+
+  <line x1="400" y1="110" x2="460" y2="110" class="a"/>
+  <polygon points="460,110 450,105 450,115" class="fa"/>
+  <text x="430" y="100" text-anchor="middle" class="label">BLMOVE</text>
+
+  <!-- 3 workers -->
+  <rect x="460" y="40" width="140" height="46" rx="4" class="s"/>
+  <text x="530" y="60" text-anchor="middle" class="acc">WORKER 1</text>
+  <text x="530" y="78" text-anchor="middle" class="mono">processing:w1</text>
+
+  <rect x="460" y="92" width="140" height="46" rx="4" class="s"/>
+  <text x="530" y="112" text-anchor="middle" class="acc">WORKER 2</text>
+  <text x="530" y="130" text-anchor="middle" class="mono">processing:w2</text>
+
+  <rect x="460" y="144" width="140" height="46" rx="4" class="s"/>
+  <text x="530" y="164" text-anchor="middle" class="acc">WORKER 3</text>
+  <text x="530" y="182" text-anchor="middle" class="mono">processing:w3</text>
+
+  <!-- LREM ack arrows out -->
+  <line x1="600" y1="64" x2="660" y2="64" class="a"/>
+  <polygon points="660,64 650,59 650,69" class="fa"/>
+  <text x="664" y="68" class="label">LREM = ack</text>
+
+  <line x1="600" y1="116" x2="660" y2="116" class="a"/>
+  <polygon points="660,116 650,111 650,121" class="fa"/>
+
+  <line x1="600" y1="168" x2="660" y2="168" class="a"/>
+  <polygon points="660,168 650,163 650,173" class="fa"/>
+
+  <!-- Reaper -->
+  <rect x="240" y="220" width="160" height="60" rx="4" class="s"/>
+  <text x="320" y="246" text-anchor="middle" class="acc">REAPER</text>
+  <text x="320" y="266" text-anchor="middle" class="mono">stale → pending</text>
+
+  <!-- Arrow from workers to reaper -->
+  <path d="M 530 190 L 530 250 L 400 250" class="sm"/>
+  <polygon points="400,250 410,245 410,255" class="fs"/>
+  <text x="540" y="220" class="label">if worker dies</text>
+
+  <!-- Arrow reaper back to pending -->
+  <line x1="320" y1="220" x2="320" y2="142" class="a"/>
+  <polygon points="320,142 315,152 325,152" class="fa"/>
+
+  <text x="400" y="320" text-anchor="middle" class="text">Crash-safe up to ~10k jobs/s. Past that → Redis Streams →</text>
+  <text x="400" y="338" text-anchor="middle" class="text">a real queue service.</text>
+</svg>

@@ -1,0 +1,57 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-hook-mental">
+  <title id="t-hook-mental">Claude Code hook mental model: three things, six events</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:13px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">HOOKS · THREE THINGS THEY DO · SIX EVENTS THEY ATTACH TO</text>
+
+  <!-- Concentric rings -->
+  <circle cx="240" cy="190" r="100" class="dg"/>
+  <circle cx="240" cy="190" r="68" class="a"/>
+  <circle cx="240" cy="190" r="36" class="s"/>
+
+  <text x="240" y="186" text-anchor="middle" class="mono">ALLOW</text>
+  <text x="240" y="200" text-anchor="middle" class="mono">BLOCK</text>
+
+  <text x="240" y="138" text-anchor="middle" class="acc">OBSERVE</text>
+  <text x="240" y="100" text-anchor="middle" class="danger">INJECT</text>
+
+  <!-- Right-side legend -->
+  <text x="400" y="84" class="acc">INJECT</text>
+  <text x="400" y="102" class="text">stdout becomes added context</text>
+  <text x="400" y="118" class="label">SESSIONSTART · USERPROMPTSUBMIT</text>
+
+  <text x="400" y="146" class="acc">OBSERVE</text>
+  <text x="400" y="164" class="text">exit 0 · side effects only</text>
+  <text x="400" y="180" class="label">LOG · METRIC · NOTIFY</text>
+
+  <text x="400" y="208" class="acc">ALLOW / BLOCK</text>
+  <text x="400" y="226" class="text">exit 2 = block · stderr → model</text>
+  <text x="400" y="242" class="label">PRETOOLUSE · GATE THE ACTION</text>
+
+  <line x1="400" y1="260" x2="760" y2="260" class="sm"/>
+
+  <text x="400" y="284" class="acc">EVENTS</text>
+  <text x="400" y="302" class="mono">PreToolUse · PostToolUse</text>
+  <text x="400" y="320" class="mono">UserPromptSubmit · SessionStart</text>
+  <text x="400" y="338" class="mono">Stop · Notification</text>
+
+  <text x="400" y="356" class="label">PROMPTS ADVISE · HOOKS DECIDE</text>
+</svg>

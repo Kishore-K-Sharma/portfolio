@@ -1,0 +1,68 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-keep-cut">
+  <title id="t-keep-cut">Claude plugins keep vs cut</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">EVERY PLUGIN HAS A CONTEXT COST · MAKE IT EARN THE SLOT</text>
+
+  <!-- Keep column -->
+  <rect x="40" y="60" width="340" height="280" rx="4" class="a"/>
+  <text x="60" y="88" class="acc">KEEP — HIGH SIGNAL</text>
+  <line x1="60" y1="100" x2="360" y2="100" class="sm"/>
+  <text x="60" y="124" class="mono">superpowers</text>
+  <text x="60" y="140" class="text">discipline · brainstorm · verify</text>
+
+  <text x="60" y="166" class="mono">caveman</text>
+  <text x="60" y="182" class="text">token cost cut for long sessions</text>
+
+  <text x="60" y="208" class="mono">/code-review</text>
+  <text x="60" y="224" class="text">second brain on every diff</text>
+
+  <text x="60" y="250" class="mono">systematic-debugging</text>
+  <text x="60" y="266" class="text">isolate before patching</text>
+
+  <text x="60" y="292" class="mono">filesystem MCP (scoped)</text>
+  <text x="60" y="308" class="text">only if your host needs it</text>
+
+  <text x="60" y="328" class="mono">/commit · claude-api</text>
+
+  <!-- Cut column -->
+  <rect x="420" y="60" width="340" height="280" rx="4" class="dg"/>
+  <text x="440" y="88" class="danger">UNINSTALL — LOW SIGNAL</text>
+  <line x1="440" y1="100" x2="740" y2="100" class="sm"/>
+  <text x="440" y="124" class="mono">two review plugins at once</text>
+  <text x="440" y="140" class="text">model picks the wrong one</text>
+
+  <text x="440" y="166" class="mono">chatty MCP (40 tools, use 3)</text>
+  <text x="440" y="182" class="text">37 tools of pure context tax</text>
+
+  <text x="440" y="208" class="mono">hook spammers</text>
+  <text x="440" y="224" class="text">prints into every turn</text>
+
+  <text x="440" y="250" class="mono">status-line flair</text>
+  <text x="440" y="266" class="text">no behaviour change</text>
+
+  <text x="440" y="292" class="mono">role-mismatched plugins</text>
+  <text x="440" y="308" class="text">frontend tools on backend day</text>
+
+  <text x="440" y="328" class="mono">"cool but never used"</text>
+
+  <text x="400" y="368" text-anchor="middle" class="label">QUARTERLY PASS: NOT INVOKED IN 30 DAYS · UNINSTALL</text>
+</svg>

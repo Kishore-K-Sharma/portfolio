@@ -1,0 +1,66 @@
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-mcp-loop">
+  <title id="t-mcp-loop">MCP server build loop: scaffold, write, register, call, iterate</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.fa{fill:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">FOUR STEPS · ITERATE FROM STEP 4 BACK TO STEP 2</text>
+
+  <!-- Step 1 -->
+  <rect x="40" y="80" width="160" height="100" rx="4" class="s"/>
+  <text x="120" y="106" text-anchor="middle" class="acc">1 · SCAFFOLD</text>
+  <text x="120" y="128" text-anchor="middle" class="mono">npm init</text>
+  <text x="120" y="146" text-anchor="middle" class="mono">install sdk + zod</text>
+  <text x="120" y="164" text-anchor="middle" class="text">five minutes</text>
+
+  <line x1="200" y1="130" x2="240" y2="130" class="a"/>
+  <polygon points="240,130 230,125 230,135" class="fa"/>
+
+  <!-- Step 2 -->
+  <rect x="240" y="80" width="160" height="100" rx="4" class="s"/>
+  <text x="320" y="106" text-anchor="middle" class="acc">2 · WRITE SERVER</text>
+  <text x="320" y="128" text-anchor="middle" class="mono">McpServer</text>
+  <text x="320" y="146" text-anchor="middle" class="mono">registerTool(...)</text>
+  <text x="320" y="164" text-anchor="middle" class="mono">StdioTransport</text>
+
+  <line x1="400" y1="130" x2="440" y2="130" class="a"/>
+  <polygon points="440,130 430,125 430,135" class="fa"/>
+
+  <!-- Step 3 -->
+  <rect x="440" y="80" width="160" height="100" rx="4" class="s"/>
+  <text x="520" y="106" text-anchor="middle" class="acc">3 · REGISTER</text>
+  <text x="520" y="128" text-anchor="middle" class="mono">~/.claude.json</text>
+  <text x="520" y="146" text-anchor="middle" class="mono">mcpServers: {…}</text>
+  <text x="520" y="164" text-anchor="middle" class="text">restart claude code</text>
+
+  <line x1="600" y1="130" x2="640" y2="130" class="a"/>
+  <polygon points="640,130 630,125 630,135" class="fa"/>
+
+  <!-- Step 4 -->
+  <rect x="640" y="80" width="120" height="100" rx="4" class="fs"/>
+  <rect x="640" y="80" width="120" height="100" rx="4" class="a"/>
+  <text x="700" y="106" text-anchor="middle" class="acc">4 · CALL</text>
+  <text x="700" y="128" text-anchor="middle" class="mono">/mcp</text>
+  <text x="700" y="146" text-anchor="middle" class="text">ask question</text>
+  <text x="700" y="164" text-anchor="middle" class="text">observe call</text>
+
+  <!-- Loop arrow back to step 2 -->
+  <path d="M 700 180 L 700 220 L 320 220 L 320 180" class="a"/>
+  <polygon points="320,180 315,190 325,190" class="fa"/>
+  <text x="510" y="240" text-anchor="middle" class="label">REFINE TOOL DESCRIPTION · RESTART · TEST AGAIN</text>
+
+  <text x="400" y="290" text-anchor="middle" class="text">The protocol is small. The skill is the loop —</text>
+  <text x="400" y="308" text-anchor="middle" class="text">getting fast at iterate-and-test is the whole craft.</text>
+</svg>

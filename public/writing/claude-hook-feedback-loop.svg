@@ -1,0 +1,57 @@
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-hook-loop">
+  <title id="t-hook-loop">Hook feedback loop: log tool calls, find patterns, promote to commands</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.fa{fill:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">LOGGING ISN'T THE GOAL · DISCOVERING PROMOTABLE PATTERNS IS</text>
+
+  <!-- Box 1 -->
+  <rect x="40" y="80" width="170" height="80" rx="4" class="s"/>
+  <text x="125" y="106" text-anchor="middle" class="acc">1 · LOG HOOK</text>
+  <text x="125" y="126" text-anchor="middle" class="mono">PostToolUse → .log</text>
+  <text x="125" y="144" text-anchor="middle" class="text">every tool call · daily file</text>
+
+  <!-- Arrow 1 -->
+  <line x1="210" y1="120" x2="260" y2="120" class="a"/>
+  <polygon points="260,120 250,115 250,125" class="fa"/>
+
+  <!-- Box 2 -->
+  <rect x="260" y="80" width="170" height="80" rx="4" class="s"/>
+  <text x="345" y="106" text-anchor="middle" class="acc">2 · WEEKLY AWK</text>
+  <text x="345" y="126" text-anchor="middle" class="mono">sort | uniq -c | head</text>
+  <text x="345" y="144" text-anchor="middle" class="text">find the top 10 patterns</text>
+
+  <!-- Arrow 2 -->
+  <line x1="430" y1="120" x2="480" y2="120" class="a"/>
+  <polygon points="480,120 470,115 470,125" class="fa"/>
+
+  <!-- Box 3 -->
+  <rect x="480" y="80" width="280" height="80" rx="4" class="fs"/>
+  <rect x="480" y="80" width="280" height="80" rx="4" class="a"/>
+  <text x="620" y="106" text-anchor="middle" class="acc">3 · PROMOTE</text>
+  <text x="620" y="126" text-anchor="middle" class="mono">slash command or skill</text>
+  <text x="620" y="144" text-anchor="middle" class="text">model stops deriving it</text>
+
+  <!-- Loop back arrow -->
+  <path d="M 620 160 L 620 220 L 125 220 L 125 160" class="a"/>
+  <polygon points="125,160 120,170 130,170" class="fa"/>
+
+  <text x="400" y="244" text-anchor="middle" class="text">Each cycle the log shape changes — old top-10 commands</text>
+  <text x="400" y="262" text-anchor="middle" class="text">disappear from the leaderboard (they're a command now)</text>
+  <text x="400" y="280" text-anchor="middle" class="text">and new ones surface for promotion next week.</text>
+
+  <text x="400" y="306" text-anchor="middle" class="label">THE HOOK FEEDS THE NEXT HOOK YOU'D WRITE</text>
+</svg>

@@ -1,0 +1,64 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-vt-pin">
+  <title id="t-vt-pin">Virtual thread pinning: four sources and how to fix each</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">FOUR SOURCES OF PIN · MOST "VT DIDN'T HELP" STORIES ARE ONE OF THESE</text>
+
+  <!-- Q1: top-left -->
+  <rect x="40" y="64" width="350" height="140" rx="4" class="dg"/>
+  <text x="60" y="88" class="danger">1 · SYNCHRONIZED ACROSS I/O</text>
+  <text x="60" y="112" class="mono">synchronized(x) { http.call(); }</text>
+  <line x1="60" y1="124" x2="370" y2="124" class="sm"/>
+  <text x="60" y="146" class="text">Holds the monitor for the I/O duration.</text>
+  <text x="60" y="164" class="acc">FIX</text>
+  <text x="92" y="164" class="text">narrow the lock OR switch to ReentrantLock.</text>
+  <text x="60" y="184" class="label">JDK 24+ FIXES THIS · ON 21-23 IT'S ON YOU</text>
+
+  <!-- Q2: top-right -->
+  <rect x="410" y="64" width="350" height="140" rx="4" class="dg"/>
+  <text x="430" y="88" class="danger">2 · NATIVE FRAMES ON STACK</text>
+  <text x="430" y="112" class="mono">JNI, legacy java.io, Object.wait()</text>
+  <line x1="430" y1="124" x2="740" y2="124" class="sm"/>
+  <text x="430" y="146" class="text">Some legacy paths still pin.</text>
+  <text x="430" y="164" class="acc">FIX</text>
+  <text x="462" y="164" class="text">upgrade library or rewrite via java.nio.</text>
+  <text x="430" y="184" class="label">RUN -DJDK.TRACEPINNEDTHREADS=FULL · READ TRACES</text>
+
+  <!-- Q3: bottom-left -->
+  <rect x="40" y="220" width="350" height="140" rx="4" class="dg"/>
+  <text x="60" y="244" class="danger">3 · THREADLOCAL MULTIPLIED</text>
+  <text x="60" y="268" class="mono">ThreadLocal&lt;HeavyObject&gt;</text>
+  <line x1="60" y1="280" x2="370" y2="280" class="sm"/>
+  <text x="60" y="302" class="text">200 copies → 200,000 copies → OOM.</text>
+  <text x="60" y="320" class="acc">FIX</text>
+  <text x="92" y="320" class="text">replace with ScopedValue or sized cache.</text>
+  <text x="60" y="340" class="label">PER-TASK NOT PER-THREAD</text>
+
+  <!-- Q4: bottom-right -->
+  <rect x="410" y="220" width="350" height="140" rx="4" class="dg"/>
+  <text x="430" y="244" class="danger">4 · RESOURCE POOL TOO SMALL</text>
+  <text x="430" y="268" class="mono">connectionPool.borrow()</text>
+  <line x1="430" y1="280" x2="740" y2="280" class="sm"/>
+  <text x="430" y="302" class="text">100k requests · 200 connections.</text>
+  <text x="430" y="320" class="acc">FIX</text>
+  <text x="462" y="320" class="text">cap concurrency at the resource (Semaphore).</text>
+  <text x="430" y="340" class="label">NOT PINNING · SAME SYMPTOM AS PINNING</text>
+</svg>

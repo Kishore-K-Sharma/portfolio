@@ -1,0 +1,83 @@
+<svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-vt-model">
+  <title id="t-vt-model">Virtual threads vs platform threads: same code, different runtime cost</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">SAME BLOCKING CODE · DIFFERENT RUNTIME COST</text>
+
+  <!-- Platform threads row -->
+  <text x="40" y="74" class="danger">PLATFORM THREADS · 1 THREAD = 1 OS THREAD</text>
+
+  <g>
+    <rect x="40" y="92" width="22" height="22" class="dg"/>
+    <rect x="70" y="92" width="22" height="22" class="dg"/>
+    <rect x="100" y="92" width="22" height="22" class="dg"/>
+    <rect x="130" y="92" width="22" height="22" class="dg"/>
+    <rect x="160" y="92" width="22" height="22" class="dg"/>
+    <rect x="190" y="92" width="22" height="22" class="dg"/>
+    <rect x="220" y="92" width="22" height="22" class="dg"/>
+    <rect x="250" y="92" width="22" height="22" class="dg"/>
+  </g>
+  <text x="290" y="108" class="mono">… 200 OS threads, all blocked on I/O</text>
+  <text x="290" y="128" class="text">Kernel context-switches between them. Practical ceiling: ~200.</text>
+
+  <line x1="40" y1="160" x2="760" y2="160" class="sm"/>
+
+  <!-- Virtual threads row -->
+  <text x="40" y="190" class="acc">VIRTUAL THREADS · MANY ON FEW CARRIERS</text>
+
+  <!-- Carriers (small) -->
+  <text x="40" y="220" class="label">CARRIERS</text>
+  <g>
+    <rect x="40" y="226" width="18" height="18" class="a"/>
+    <rect x="64" y="226" width="18" height="18" class="a"/>
+    <rect x="88" y="226" width="18" height="18" class="a"/>
+    <rect x="112" y="226" width="18" height="18" class="a"/>
+    <rect x="136" y="226" width="18" height="18" class="a"/>
+    <rect x="160" y="226" width="18" height="18" class="a"/>
+    <rect x="184" y="226" width="18" height="18" class="a"/>
+    <rect x="208" y="226" width="18" height="18" class="a"/>
+    <rect x="232" y="226" width="18" height="18" class="a"/>
+    <rect x="256" y="226" width="18" height="18" class="a"/>
+  </g>
+  <text x="290" y="240" class="mono">10 OS threads (the carriers)</text>
+
+  <!-- Virtual thread "cloud" -->
+  <text x="40" y="272" class="label">VIRTUAL</text>
+  <g>
+    <circle cx="50" cy="296" r="4" class="fa"/>
+    <circle cx="68" cy="296" r="4" class="fa"/>
+    <circle cx="86" cy="296" r="4" class="fa"/>
+    <circle cx="104" cy="296" r="4" class="fa"/>
+    <circle cx="122" cy="296" r="4" class="fa"/>
+    <circle cx="140" cy="296" r="4" class="fa"/>
+    <circle cx="158" cy="296" r="4" class="fa"/>
+    <circle cx="176" cy="296" r="4" class="fa"/>
+    <circle cx="194" cy="296" r="4" class="fa"/>
+    <circle cx="212" cy="296" r="4" class="fa"/>
+    <circle cx="230" cy="296" r="4" class="fa"/>
+    <circle cx="248" cy="296" r="4" class="fa"/>
+    <circle cx="266" cy="296" r="4" class="fa"/>
+  </g>
+  <text x="290" y="300" class="mono">100,000 in flight, same 10 carriers</text>
+  <text x="290" y="318" class="text">JVM unmounts virtual thread on I/O block. No kernel scheduling cost.</text>
+
+  <text x="400" y="338" text-anchor="middle" class="label">SAME LINES OF JAVA · DIFFERENT THROUGHPUT CEILING</text>
+</svg>

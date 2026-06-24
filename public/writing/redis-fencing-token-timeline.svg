@@ -1,0 +1,62 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-fence">
+  <title id="t-fence">Distributed lock with fencing token: the race the token closes</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.5}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <text x="40" y="36" class="label">FENCING TOKEN · THE RACE A LOCK ALONE CANNOT CLOSE</text>
+
+  <!-- Time axis -->
+  <line x1="60" y1="320" x2="740" y2="320" class="s"/>
+  <text x="60" y="340" class="label">t=0</text>
+  <text x="200" y="340" class="label">t=20</text>
+  <text x="340" y="340" class="label">t=30</text>
+  <text x="480" y="340" class="label">t=35</text>
+  <text x="620" y="340" class="label">t=40</text>
+
+  <!-- Worker A lane -->
+  <text x="40" y="92" class="acc">WORKER A</text>
+  <rect x="60" y="80" width="280" height="28" class="a"/>
+  <text x="72" y="100" class="mono">acquire lock · token=42</text>
+  <text x="200" y="138" class="danger">--- GC pause ---</text>
+  <line x1="200" y1="146" x2="340" y2="146" class="dg"/>
+
+  <rect x="620" y="80" width="120" height="28" class="dg"/>
+  <text x="632" y="100" class="mono">write w/ token 42</text>
+  <text x="632" y="124" class="danger">REJECTED · 42 &lt; 43</text>
+
+  <!-- Worker B lane -->
+  <text x="40" y="200" class="acc">WORKER B</text>
+  <rect x="340" y="188" width="140" height="28" class="a"/>
+  <text x="352" y="208" class="mono">acquire · token=43</text>
+
+  <rect x="480" y="188" width="140" height="28" class="a"/>
+  <text x="492" y="208" class="mono">write w/ token 43</text>
+  <text x="492" y="232" class="acc">ACCEPTED</text>
+
+  <!-- Lock state lane -->
+  <text x="40" y="276" class="label">LOCK</text>
+  <rect x="60" y="264" width="280" height="22" class="s"/>
+  <text x="72" y="280" class="text">held by A · TTL 30s</text>
+  <line x1="340" y1="275" x2="380" y2="275" class="dg"/>
+  <rect x="380" y="264" width="220" height="22" class="s"/>
+  <text x="392" y="280" class="text">held by B (A expired)</text>
+
+  <text x="400" y="358" text-anchor="middle" class="label">LOCK ALONE = CONTENTION HINT · TOKEN = CORRECTNESS</text>
+</svg>
