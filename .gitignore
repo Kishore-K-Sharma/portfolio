@@ -53,6 +53,8 @@ next-env.d.ts
 .gemini/
 .cursor/
 .idea/
+.claude/
+.serena/
 *.swp
 blueprint.md
 GEMINI.md
@@ -61,3 +63,7 @@ firebase-debug.log
 .agents/
 skills-lock.json
 data/*
+
+# MemPalace per-project files (issue #185)
+mempalace.yaml
+entities.json
