@@ -1,0 +1,61 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-qck">
+  <title id="t-qck">How a cache keys a QUERY request</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fa{fill:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">THE CACHE KEY = METHOD + URI + REQUEST BODY</text>
+
+  <!-- key box -->
+  <rect x="40" y="56" width="720" height="52" rx="4" class="a"/>
+  <text x="58" y="78" class="acc">CACHE KEY</text>
+  <text x="58" y="98" class="mono">QUERY  +  /products  +  sha(request body)</text>
+
+  <!-- request A -->
+  <rect x="40" y="140" width="215" height="88" rx="4" class="s"/>
+  <text x="58" y="166" class="mono">QUERY /products</text>
+  <text x="58" y="188" class="mono">{ price: 40–150 }</text>
+  <text x="58" y="212" class="label">REQUEST A</text>
+
+  <!-- request A again -->
+  <rect x="40" y="244" width="215" height="88" rx="4" class="s"/>
+  <text x="58" y="270" class="mono">QUERY /products</text>
+  <text x="58" y="292" class="mono">{ price: 40–150 }</text>
+  <text x="58" y="316" class="label">REQUEST A · AGAIN</text>
+
+  <!-- request B -->
+  <rect x="40" y="140" width="215" height="88" rx="4" class="s" opacity="0"/>
+  <rect x="545" y="192" width="215" height="88" rx="4" class="dg"/>
+  <text x="563" y="218" class="mono">QUERY /products</text>
+  <text x="563" y="240" class="mono">{ price: 200+ }</text>
+  <text x="563" y="264" class="danger">DIFFERENT BODY</text>
+
+  <!-- cache node -->
+  <rect x="320" y="188" width="160" height="72" rx="4" class="a"/>
+  <text x="400" y="216" text-anchor="middle" class="acc">SHARED CACHE</text>
+  <text x="400" y="238" text-anchor="middle" class="text">keyed on body</text>
+
+  <!-- arrows -->
+  <line x1="255" y1="184" x2="316" y2="210" class="a"/>
+  <text x="258" y="176" class="acc">MISS → store</text>
+  <line x1="255" y1="288" x2="316" y2="240" class="a"/>
+  <text x="258" y="316" class="acc">HIT → no DB hit</text>
+  <line x1="545" y1="236" x2="484" y2="230" class="dg"/>
+  <text x="490" y="292" text-anchor="end" class="danger">MISS → origin</text>
+
+  <text x="40" y="352" class="label">IDENTICAL QUERY HITS · CHANGED BODY MISSES · GET-STYLE CACHING FOR BIG QUERIES</text>
+</svg>

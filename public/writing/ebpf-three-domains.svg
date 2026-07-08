@@ -1,0 +1,55 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-etd">
+  <title id="t-etd">The three domains eBPF powers</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">ONE KERNEL FEATURE · THREE THINGS YOU ALREADY USE ARE BUILT ON IT</text>
+
+  <!-- OBSERVABILITY -->
+  <rect x="40" y="60" width="230" height="248" rx="4" class="a"/>
+  <text x="58" y="88" class="text" style="font-weight:700">OBSERVABILITY</text>
+  <text x="58" y="110" class="acc">bpftrace · Pixie</text>
+  <line x1="58" y1="122" x2="252" y2="122" class="a" stroke-dasharray="4 4"/>
+  <text x="58" y="148" class="text">trace a live process</text>
+  <text x="58" y="170" class="text">measure a hot path</text>
+  <text x="58" y="200" class="acc">✓ zero code changes</text>
+  <text x="58" y="224" class="acc">✓ no restart, no redeploy</text>
+  <text x="58" y="286" class="label">REPLACES: PRINTF + REDEPLOY</text>
+
+  <!-- NETWORKING -->
+  <rect x="285" y="60" width="230" height="248" rx="4" class="a"/>
+  <text x="303" y="88" class="text" style="font-weight:700">NETWORKING</text>
+  <text x="303" y="110" class="acc">Cilium · XDP</text>
+  <line x1="303" y1="122" x2="497" y2="122" class="a" stroke-dasharray="4 4"/>
+  <text x="303" y="148" class="text">programmable packet path</text>
+  <text x="303" y="170" class="text">balance/drop in the NIC</text>
+  <text x="303" y="200" class="acc">✓ modern k8s CNI</text>
+  <text x="303" y="224" class="acc">✓ filter at line rate</text>
+  <text x="303" y="286" class="label">REPLACES: IPTABLES CHAINS</text>
+
+  <!-- SECURITY -->
+  <rect x="530" y="60" width="230" height="248" rx="4" class="a"/>
+  <text x="548" y="88" class="text" style="font-weight:700">SECURITY</text>
+  <text x="548" y="110" class="acc">Falco · Tetragon</text>
+  <line x1="548" y1="122" x2="742" y2="122" class="a" stroke-dasharray="4 4"/>
+  <text x="548" y="148" class="text">watch every syscall</text>
+  <text x="548" y="170" class="text">enforce policy at runtime</text>
+  <text x="548" y="200" class="acc">✓ live visibility</text>
+  <text x="548" y="224" class="acc">✓ block, don't just log it</text>
+  <text x="548" y="286" class="label">REPLACES: POST-BREACH GUESSWORK</text>
+
+  <text x="40" y="344" class="label">YOU PROBABLY DON'T WRITE eBPF BY HAND — BUT YOUR OBSERVABILITY, CNI, AND RUNTIME SECURITY DO</text>
+</svg>

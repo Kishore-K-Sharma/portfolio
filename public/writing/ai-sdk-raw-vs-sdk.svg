@@ -1,0 +1,42 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-rvs">
+  <title id="t-rvs">Raw fetch versus an AI SDK</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">SAME FOUR FEATURES · TWO WAYS TO BUILD THEM</text>
+
+  <!-- raw fetch -->
+  <rect x="40" y="60" width="340" height="240" rx="4" class="dg"/>
+  <text x="60" y="90" class="danger">RAW fetch()</text>
+  <line x1="60" y1="102" x2="360" y2="102" class="dg" stroke-dasharray="4 4"/>
+  <text x="60" y="134" class="danger">✕ hand-parse the SSE stream</text>
+  <text x="60" y="166" class="danger">✕ hand-roll the tool loop</text>
+  <text x="60" y="198" class="danger">✕ per-provider code paths</text>
+  <text x="60" y="230" class="danger">✕ hope the JSON is valid</text>
+  <text x="60" y="278" class="danger">~200 LINES OF GLUE YOU OWN</text>
+
+  <!-- ai sdk -->
+  <rect x="420" y="60" width="340" height="240" rx="4" class="a"/>
+  <text x="440" y="90" class="acc">AI SDK</text>
+  <line x1="440" y1="102" x2="740" y2="102" class="a" stroke-dasharray="4 4"/>
+  <text x="440" y="134" class="acc">✓ stream = async iterator</text>
+  <text x="440" y="166" class="acc">✓ tools as data</text>
+  <text x="440" y="198" class="acc">✓ schema-validated output</text>
+  <text x="440" y="230" class="acc">✓ swap providers in one line</text>
+  <text x="440" y="278" class="acc">A MODEL STRING + A SCHEMA + A FN</text>
+
+  <text x="40" y="344" class="label">THE SDK DOESN'T MAKE THE MODEL SMARTER · IT DELETES THE GLUE BETWEEN YOU AND IT</text>
+</svg>

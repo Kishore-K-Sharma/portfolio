@@ -1,0 +1,60 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-surf">
+  <title id="t-surf">The browser built-in AI API surface over one local model</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.acc{fill:#b89be8}.mono{fill:#e8e4d8}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">MANY TASK APIS · ONE MODEL UNDERNEATH</text>
+
+  <!-- General Prompt API -->
+  <rect x="40" y="58" width="720" height="44" rx="4" class="a"/>
+  <text x="58" y="85" class="acc">PROMPT API — general, free-form: LanguageModel.create()</text>
+
+  <!-- Task-specific APIs row -->
+  <rect x="40" y="126" width="132" height="60" rx="4" class="s"/>
+  <text x="106" y="152" text-anchor="middle" class="text" style="font-weight:700">Summarizer</text>
+  <text x="106" y="172" text-anchor="middle" class="mono">shorten</text>
+
+  <rect x="187" y="126" width="132" height="60" rx="4" class="s"/>
+  <text x="253" y="152" text-anchor="middle" class="text" style="font-weight:700">Translator</text>
+  <text x="253" y="172" text-anchor="middle" class="mono">lang → lang</text>
+
+  <rect x="334" y="126" width="132" height="60" rx="4" class="s"/>
+  <text x="400" y="146" text-anchor="middle" class="text" style="font-weight:700">Language</text>
+  <text x="400" y="163" text-anchor="middle" class="text" style="font-weight:700">Detector</text>
+  <text x="400" y="180" text-anchor="middle" class="mono">what lang?</text>
+
+  <rect x="481" y="126" width="132" height="60" rx="4" class="s"/>
+  <text x="547" y="152" text-anchor="middle" class="text" style="font-weight:700">Writer</text>
+  <text x="547" y="172" text-anchor="middle" class="mono">draft text</text>
+
+  <rect x="628" y="126" width="132" height="60" rx="4" class="s"/>
+  <text x="694" y="152" text-anchor="middle" class="text" style="font-weight:700">Rewriter</text>
+  <text x="694" y="172" text-anchor="middle" class="mono">rephrase</text>
+
+  <!-- connectors down to the model -->
+  <line x1="106" y1="186" x2="106" y2="248" class="a"/>
+  <line x1="253" y1="186" x2="253" y2="248" class="a"/>
+  <line x1="400" y1="186" x2="400" y2="248" class="a"/>
+  <line x1="547" y1="186" x2="547" y2="248" class="a"/>
+  <line x1="694" y1="186" x2="694" y2="248" class="a"/>
+  <line x1="400" y1="102" x2="400" y2="126" class="a"/>
+
+  <!-- The one local model -->
+  <rect x="40" y="248" width="720" height="66" rx="4" class="a"/>
+  <text x="400" y="278" text-anchor="middle" class="acc">GEMINI NANO</text>
+  <text x="400" y="300" text-anchor="middle" class="text">one small on-device model, downloaded once, shared by every API above</text>
+
+  <text x="40" y="348" class="label">PICK THE NARROW API WHEN YOU CAN · DROP TO PROMPT API WHEN YOU CAN'T</text>
+</svg>

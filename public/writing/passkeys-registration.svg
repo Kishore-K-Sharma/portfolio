@@ -1,0 +1,54 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-pk2">
+  <title id="t-pk2">Registering a passkey</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fa{fill:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">REGISTRATION · THE DEVICE MAKES A KEY PAIR, KEEPS THE PRIVATE HALF</text>
+
+  <!-- DEVICE box -->
+  <rect x="40" y="70" width="300" height="220" rx="4" class="a"/>
+  <text x="58" y="98" class="acc">YOUR DEVICE</text>
+  <text x="58" y="120" class="label">SECURE ENCLAVE · TPM</text>
+  <line x1="58" y1="132" x2="322" y2="132" class="a" stroke-dasharray="4 4"/>
+  <text x="58" y="160" class="mono">generate key pair for</text>
+  <text x="58" y="180" class="mono">origin = paypal.com</text>
+  <rect x="58" y="198" width="120" height="66" rx="4" class="a"/>
+  <text x="70" y="222" class="acc">PRIVATE KEY</text>
+  <text x="70" y="244" class="acc">stays here 🔒</text>
+  <rect x="196" y="198" width="126" height="66" rx="4" class="s"/>
+  <text x="208" y="222" class="mono">PUBLIC KEY</text>
+  <text x="208" y="244" class="mono">+ cred ID</text>
+
+  <!-- SERVER box -->
+  <rect x="500" y="70" width="260" height="220" rx="4" class="s"/>
+  <text x="518" y="98" class="text" style="font-weight:700">SERVER (RELYING PARTY)</text>
+  <line x1="518" y1="112" x2="742" y2="112" class="s" stroke-dasharray="4 4"/>
+  <text x="518" y="150" class="mono">stores per user:</text>
+  <text x="518" y="176" class="mono">• public key</text>
+  <text x="518" y="200" class="mono">• credential ID</text>
+  <text x="518" y="238" class="acc">no secret to leak</text>
+  <text x="518" y="262" class="acc">no password hash</text>
+
+  <!-- arrows -->
+  <line x1="500" y1="140" x2="342" y2="140" class="s"/>
+  <text x="352" y="132" class="label">1 · CHALLENGE</text>
+  <line x1="340" y1="232" x2="500" y2="232" class="a"/>
+  <text x="352" y="224" class="acc">2 · PUBLIC KEY + CRED ID ▶</text>
+
+  <text x="40" y="336" class="label">SERVER NEVER SEES THE PRIVATE KEY · IT ONLY FILES AWAY THE PUBLIC ONE</text>
+</svg>

@@ -1,0 +1,43 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-when">
+  <title id="t-when">When to reach for on-device AI versus cloud AI</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.acc{fill:#b89be8}.mono{fill:#e8e4d8}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">NOT REPLACE VS KEEP — TWO TIERS, PICK PER TASK</text>
+
+  <!-- ON-DEVICE column -->
+  <rect x="40" y="58" width="345" height="248" rx="4" class="a"/>
+  <text x="58" y="86" class="acc">REACH FOR ON-DEVICE WHEN…</text>
+  <line x1="58" y1="98" x2="367" y2="98" class="a" stroke-dasharray="4 4"/>
+  <text x="58" y="126" class="acc">✓ the data is private / sensitive</text>
+  <text x="58" y="152" class="acc">✓ it must work offline</text>
+  <text x="58" y="178" class="acc">✓ it runs high-volume / cheap</text>
+  <text x="58" y="204" class="acc">✓ the task is simple + bounded</text>
+  <text x="58" y="230" class="acc">✓ you want it free + low-latency</text>
+  <text x="58" y="286" class="acc">CLASSIFY · TAG · SUMMARIZE · TRANSLATE</text>
+
+  <!-- CLOUD column -->
+  <rect x="415" y="58" width="345" height="248" rx="4" class="s"/>
+  <text x="433" y="86" class="text" style="font-weight:700">REACH FOR CLOUD WHEN…</text>
+  <line x1="433" y1="98" x2="742" y2="98" class="s" stroke-dasharray="4 4"/>
+  <text x="433" y="126" class="text">→ you need real reasoning depth</text>
+  <text x="433" y="152" class="text">→ the context is large</text>
+  <text x="433" y="178" class="text">→ output quality is critical</text>
+  <text x="433" y="204" class="text">→ the task is complex / novel</text>
+  <text x="433" y="230" class="text">→ a small model would fumble it</text>
+  <text x="433" y="286" class="mono">AGENTS · ANALYSIS · LONG-FORM · CODE</text>
+
+  <text x="40" y="346" class="label">ON-DEVICE IS A NEW TIER, NOT A GPT REPLACEMENT · ROUTE BY THE JOB</text>
+</svg>

@@ -1,0 +1,47 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-wtsd">
+  <title id="t-wtsd">WebTransport streams versus datagrams</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">ONE CONNECTION · TWO DELIVERY MODES · PICK PER DATA TYPE</text>
+
+  <!-- STREAMS -->
+  <rect x="40" y="60" width="330" height="240" rx="4" class="a"/>
+  <text x="58" y="88" class="acc">STREAMS · reliable + ordered</text>
+  <line x1="58" y1="100" x2="352" y2="100" class="a" stroke-dasharray="4 4"/>
+  <text x="58" y="126" class="text">retransmit until delivered</text>
+  <text x="58" y="150" class="text">arrives in order, guaranteed</text>
+
+  <text x="58" y="188" class="acc">→ file &amp; asset transfer</text>
+  <text x="58" y="212" class="acc">→ chat messages</text>
+  <text x="58" y="236" class="acc">→ anything must-arrive</text>
+  <text x="58" y="278" class="text">"IT HAS TO GET THERE"</text>
+
+  <!-- DATAGRAMS -->
+  <rect x="430" y="60" width="330" height="240" rx="4" class="dg"/>
+  <text x="448" y="88" class="danger">DATAGRAMS · unreliable</text>
+  <line x1="448" y1="100" x2="742" y2="100" class="dg" stroke-dasharray="4 4"/>
+  <text x="448" y="126" class="text">fire-and-forget, no retransmit</text>
+  <text x="448" y="150" class="text">may drop, may reorder</text>
+
+  <text x="448" y="188" class="danger">→ player position updates</text>
+  <text x="448" y="212" class="danger">→ live media frames</text>
+  <text x="448" y="236" class="danger">→ high-frequency telemetry</text>
+  <text x="448" y="278" class="text">"WORTHLESS ONCE STALE"</text>
+
+  <text x="40" y="344" class="label">MUST-ARRIVE → STREAMS · DROP-IF-LATE → DATAGRAMS</text>
+</svg>

@@ -1,0 +1,45 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-odvc">
+  <title id="t-odvc">On-device inference versus cloud inference</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.acc{fill:#b89be8}.danger{fill:#d97a7a}.mono{fill:#e8e4d8}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">WHERE DOES THE INFERENCE ACTUALLY RUN?</text>
+
+  <!-- CLOUD side -->
+  <rect x="40" y="58" width="345" height="248" rx="4" class="dg"/>
+  <text x="58" y="86" class="danger">CLOUD LLM</text>
+  <line x1="58" y1="98" x2="367" y2="98" class="dg" stroke-dasharray="4 4"/>
+  <text x="58" y="122" class="mono">device  →  network  →  server model</text>
+  <text x="58" y="150" class="danger">✕ data leaves the device</text>
+  <text x="58" y="174" class="danger">✕ per-token API bill</text>
+  <text x="58" y="198" class="danger">✕ dead without a connection</text>
+  <text x="58" y="222" class="danger">✕ round-trip latency every call</text>
+  <text x="58" y="284" class="danger">POWERFUL, BUT IT COSTS + LEAKS</text>
+
+  <!-- ON-DEVICE side -->
+  <rect x="415" y="58" width="345" height="248" rx="4" class="a"/>
+  <text x="433" y="86" class="acc">ON-DEVICE · GEMINI NANO</text>
+  <line x1="433" y1="98" x2="742" y2="98" class="a" stroke-dasharray="4 4"/>
+  <text x="433" y="122" class="mono">device  →  local model  →  answer</text>
+  <text x="433" y="150" class="acc">✓ private — data never leaves</text>
+  <text x="433" y="174" class="acc">✓ free — no per-token bill</text>
+  <text x="433" y="198" class="acc">✓ works fully offline</text>
+  <text x="433" y="222" class="acc">✓ low latency — no hop</text>
+  <text x="433" y="284" class="acc">SMALLER MODEL, BUT IT STAYS HOME</text>
+
+  <text x="40" y="346" class="label">CLOUD SENDS YOUR DATA AWAY · ON-DEVICE KEEPS IT ON THE MACHINE</text>
+</svg>

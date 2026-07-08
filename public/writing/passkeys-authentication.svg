@@ -1,0 +1,60 @@
+<svg viewBox="0 0 800 370" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-pk3">
+  <title id="t-pk3">Authenticating with a passkey and why phishing fails</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="370" class="fs"/>
+  <text x="40" y="34" class="label">AUTHENTICATION · SIGN A RANDOM CHALLENGE, NEVER SEND A SECRET</text>
+
+  <!-- SERVER -->
+  <rect x="40" y="60" width="220" height="130" rx="4" class="s"/>
+  <text x="58" y="86" class="text" style="font-weight:700">SERVER</text>
+  <line x1="58" y1="98" x2="242" y2="98" class="s" stroke-dasharray="4 4"/>
+  <text x="58" y="124" class="mono">random challenge</text>
+  <text x="58" y="146" class="mono">nonce: 9f3a…</text>
+  <text x="58" y="172" class="acc">verify sig w/ public key</text>
+
+  <!-- BROWSER + DEVICE -->
+  <rect x="300" y="60" width="220" height="130" rx="4" class="a"/>
+  <text x="318" y="86" class="acc">BROWSER + DEVICE</text>
+  <line x1="318" y1="98" x2="502" y2="98" class="a" stroke-dasharray="4 4"/>
+  <text x="318" y="124" class="text">user gesture: Face ID / PIN</text>
+  <text x="318" y="146" class="mono">unlock private key 🔒</text>
+  <text x="318" y="172" class="acc">sign(challenge, origin)</text>
+
+  <!-- arrows top row -->
+  <line x1="300" y1="120" x2="262" y2="120" class="s"/>
+  <text x="256" y="112" text-anchor="end" class="label">CHALLENGE ◀</text>
+  <line x1="262" y1="168" x2="300" y2="168" class="a"/>
+  <text x="266" y="205" class="acc">SIGNATURE ▶ (no secret sent)</text>
+
+  <!-- ORIGIN BINDING panel -->
+  <rect x="560" y="60" width="200" height="130" rx="4" class="a"/>
+  <text x="578" y="86" class="acc">ORIGIN BINDING</text>
+  <line x1="578" y1="98" x2="742" y2="98" class="a" stroke-dasharray="4 4"/>
+  <text x="578" y="122" class="mono">key is bound to</text>
+  <text x="578" y="144" class="acc">rpId = paypal.com</text>
+  <text x="578" y="172" class="text">browser checks it</text>
+
+  <!-- PHISHING row -->
+  <rect x="40" y="222" width="720" height="96" rx="4" class="dg"/>
+  <text x="58" y="248" class="danger">PHISHING ATTEMPT</text>
+  <line x1="58" y1="260" x2="742" y2="260" class="dg" stroke-dasharray="4 4"/>
+  <text x="58" y="286" class="mono">you land on  paypa1.com  (lookalike origin)</text>
+  <text x="58" y="308" class="danger">✕ origin ≠ paypal.com → browser refuses to sign → no signature exists to steal</text>
+
+  <text x="40" y="352" class="label">THE CREDENTIAL IS WELDED TO THE REAL ORIGIN · A FAKE SITE CAN'T TRIGGER IT</text>
+</svg>

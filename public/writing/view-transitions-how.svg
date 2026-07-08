@@ -1,0 +1,54 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-vth">
+  <title id="t-vth">How startViewTransition animates a DOM update</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">SAME-DOCUMENT VIEW TRANSITION · ONE FUNCTION CALL</text>
+
+  <!-- the call -->
+  <rect x="40" y="52" width="720" height="46" rx="4" class="a"/>
+  <text x="400" y="80" text-anchor="middle" class="acc">document.startViewTransition(() =&gt; updateDOM())</text>
+
+  <!-- step 1 -->
+  <rect x="40" y="150" width="156" height="120" rx="4" class="s"/>
+  <text x="118" y="182" text-anchor="middle" class="label">1 · SNAPSHOT</text>
+  <text x="118" y="214" text-anchor="middle" class="text">browser shoots</text>
+  <text x="118" y="234" text-anchor="middle" class="text">the OLD DOM</text>
+
+  <!-- step 2 -->
+  <rect x="228" y="150" width="156" height="120" rx="4" class="a"/>
+  <text x="306" y="182" text-anchor="middle" class="acc">2 · updateDOM()</text>
+  <text x="306" y="214" text-anchor="middle" class="text">your callback</text>
+  <text x="306" y="234" text-anchor="middle" class="text">mutates the DOM</text>
+
+  <!-- step 3 -->
+  <rect x="416" y="150" width="156" height="120" rx="4" class="s"/>
+  <text x="494" y="182" text-anchor="middle" class="label">3 · SNAPSHOT</text>
+  <text x="494" y="214" text-anchor="middle" class="text">shoots the</text>
+  <text x="494" y="234" text-anchor="middle" class="text">NEW DOM</text>
+
+  <!-- step 4 -->
+  <rect x="604" y="150" width="156" height="120" rx="4" class="a"/>
+  <text x="682" y="182" text-anchor="middle" class="acc">4 · CROSSFADE</text>
+  <text x="682" y="214" text-anchor="middle" class="text">old → new,</text>
+  <text x="682" y="234" text-anchor="middle" class="text">browser-driven</text>
+
+  <!-- arrows -->
+  <text x="212" y="216" text-anchor="middle" class="acc" style="font-size:16px">→</text>
+  <text x="400" y="216" text-anchor="middle" class="acc" style="font-size:16px">→</text>
+  <text x="588" y="216" text-anchor="middle" class="acc" style="font-size:16px">→</text>
+
+  <text x="40" y="344" class="label">YOU WRITE ONE DOM UPDATE · THE BROWSER ANIMATES THE DIFFERENCE IN CSS</text>
+</svg>

@@ -1,0 +1,62 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-hol">
+  <title id="t-hol">TCP head-of-line blocking and connection loss versus QUIC</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">ONE LOST PACKET · ONE NETWORK SWITCH</text>
+
+  <!-- LEFT: TCP danger -->
+  <rect x="40" y="52" width="345" height="272" rx="4" class="dg"/>
+  <text x="58" y="80" class="danger" style="font-weight:700">TCP · strict order, one connection</text>
+
+  <text x="58" y="110" class="label">STREAM 1</text>
+  <line x1="140" y1="106" x2="360" y2="106" class="dg"/>
+  <text x="58" y="140" class="label">STREAM 2</text>
+  <line x1="140" y1="136" x2="245" y2="136" class="dg"/>
+  <text x="250" y="140" class="danger">✕ lost pkt</text>
+  <text x="58" y="170" class="label">STREAM 3</text>
+  <line x1="140" y1="166" x2="245" y2="166" class="dg" stroke-dasharray="3 4"/>
+  <text x="58" y="200" class="label">STREAM 4</text>
+  <line x1="140" y1="196" x2="245" y2="196" class="dg" stroke-dasharray="3 4"/>
+  <text x="58" y="228" class="danger">ALL STREAMS STALL BEHIND THE GAP</text>
+
+  <line x1="58" y1="248" x2="367" y2="248" class="dg" stroke-dasharray="2 4"/>
+  <text x="58" y="276" class="mono">Wi-Fi → cellular · IP changes</text>
+  <text x="58" y="300" class="danger">4-TUPLE BREAKS · CONNECTION DIES</text>
+
+  <!-- RIGHT: QUIC accent -->
+  <rect x="415" y="52" width="345" height="272" rx="4" class="a"/>
+  <text x="433" y="80" class="acc" style="font-weight:700">QUIC · independent streams + conn ID</text>
+
+  <text x="433" y="110" class="label">STREAM 1</text>
+  <line x1="515" y1="106" x2="735" y2="106" class="a"/>
+  <text x="433" y="140" class="label">STREAM 2</text>
+  <line x1="515" y1="136" x2="620" y2="136" class="a"/>
+  <text x="625" y="140" class="danger">✕</text>
+  <line x1="645" y1="136" x2="735" y2="136" class="a"/>
+  <text x="433" y="170" class="label">STREAM 3</text>
+  <line x1="515" y1="166" x2="735" y2="166" class="a"/>
+  <text x="433" y="200" class="label">STREAM 4</text>
+  <line x1="515" y1="196" x2="735" y2="196" class="a"/>
+  <text x="433" y="228" class="acc">LOSS ISOLATED · OTHERS KEEP FLOWING</text>
+
+  <line x1="433" y1="248" x2="742" y2="248" class="a" stroke-dasharray="2 4"/>
+  <text x="433" y="276" class="mono">Wi-Fi → cellular · IP changes</text>
+  <text x="433" y="300" class="acc">CONNECTION ID SURVIVES · KEEPS GOING</text>
+
+  <text x="40" y="344" class="label">TCP STALLS + DIES · QUIC ISOLATES THE LOSS + MIGRATES</text>
+</svg>

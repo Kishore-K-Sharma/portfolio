@@ -1,0 +1,45 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-src">
+  <title id="t-src">A speculation rules script block</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">&lt;SCRIPT TYPE="SPECULATIONRULES"&gt; · JSON, NOT CODE</text>
+
+  <!-- code frame -->
+  <rect x="40" y="52" width="720" height="270" rx="4" class="s"/>
+
+  <text x="60" y="80" class="mono">{</text>
+
+  <!-- list rule -->
+  <rect x="54" y="90" width="692" height="72" rx="3" class="a"/>
+  <text x="60" y="110" class="acc">  "prerender": [</text>
+  <text x="60" y="132" class="mono">    { "urls": ["/checkout", "/product/popular"] }</text>
+  <text x="60" y="154" class="acc">  ],</text>
+  <text x="470" y="110" class="label">LIST RULE · EXACT URLS</text>
+
+  <!-- document rule -->
+  <rect x="54" y="176" width="692" height="118" rx="3" class="a"/>
+  <text x="60" y="198" class="acc">  "prefetch": [</text>
+  <text x="60" y="220" class="mono">    {</text>
+  <text x="60" y="242" class="mono">      "where": { "href_matches": "/articles/*" },</text>
+  <text x="60" y="264" class="acc">      "eagerness": "moderate"</text>
+  <text x="60" y="286" class="mono">    }</text>
+  <text x="440" y="198" class="label">DOCUMENT RULE · MATCH LINKS</text>
+
+  <text x="60" y="314" class="mono">  ]</text>
+  <text x="740" y="314" text-anchor="end" class="mono">}</text>
+
+  <text x="40" y="348" class="label">LIST = URLS YOU KNOW · DOCUMENT = WHERE-CLAUSE + EAGERNESS, BROWSER READS INTENT</text>
+</svg>

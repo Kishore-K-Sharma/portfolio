@@ -1,0 +1,45 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-spv">
+  <title id="t-spv">Prefetch versus prerender on click</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">TWO SPEEDS OF LOADING THE NEXT PAGE EARLY</text>
+
+  <!-- PREFETCH -->
+  <rect x="40" y="60" width="340" height="228" rx="4" class="s"/>
+  <text x="58" y="88" class="text" style="font-weight:700">PREFETCH</text>
+  <line x1="58" y1="100" x2="362" y2="100" class="s" stroke-dasharray="4 4"/>
+  <text x="58" y="126" class="text">fetch the next document → cache</text>
+  <text x="58" y="150" class="mono">✓ HTML bytes ready</text>
+  <text x="58" y="174" class="danger">✕ not yet parsed or painted</text>
+  <text x="58" y="212" class="label">ON CLICK</text>
+  <text x="58" y="234" class="text">skip the network, but still</text>
+  <text x="58" y="256" class="text">RENDER now: parse · script · paint</text>
+
+  <!-- PRERENDER -->
+  <rect x="420" y="60" width="340" height="228" rx="4" class="a"/>
+  <text x="438" y="88" class="acc">PRERENDER</text>
+  <line x1="438" y1="100" x2="742" y2="100" class="a" stroke-dasharray="4 4"/>
+  <text x="438" y="126" class="text">render the whole page in a hidden tab</text>
+  <text x="438" y="150" class="acc">✓ HTML parsed · CSS · JS run</text>
+  <text x="438" y="174" class="acc">✓ laid out + painted, invisibly</text>
+  <text x="438" y="212" class="label">ON CLICK</text>
+  <text x="438" y="234" class="acc">nothing left to do —</text>
+  <text x="438" y="256" class="acc">swap the finished page in ≈ 0 ms</text>
+
+  <text x="40" y="330" class="label">PREFETCH BUYS THE NETWORK · PRERENDER BUYS NETWORK + RENDER · CLICK = INSTANT</text>
+</svg>

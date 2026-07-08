@@ -1,0 +1,69 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-wthol">
+  <title id="t-wthol">Head-of-line blocking on TCP versus QUIC</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fd{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fa{fill:#b89be8}.fd{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">ONE PACKET DROPS · WHO HAS TO WAIT?</text>
+
+  <!-- TCP / WebSocket -->
+  <text x="40" y="70" class="danger">TCP / WEBSOCKET · one ordered pipe</text>
+  <line x1="120" y1="98" x2="700" y2="98" class="dg"/>
+  <!-- packets in the single pipe -->
+  <rect x="130" y="88" width="26" height="20" rx="2" class="dg"/>
+  <text x="143" y="103" text-anchor="middle" class="mono">1</text>
+  <rect x="166" y="88" width="26" height="20" rx="2" class="fd"/>
+  <text x="179" y="103" text-anchor="middle" class="fs">✕</text>
+  <rect x="202" y="88" width="26" height="20" rx="2" class="dg"/>
+  <text x="215" y="103" text-anchor="middle" class="mono">3</text>
+  <rect x="238" y="88" width="26" height="20" rx="2" class="dg"/>
+  <text x="251" y="103" text-anchor="middle" class="mono">4</text>
+  <rect x="274" y="88" width="26" height="20" rx="2" class="dg"/>
+  <text x="287" y="103" text-anchor="middle" class="mono">5</text>
+  <text x="179" y="128" text-anchor="middle" class="danger">drop</text>
+  <rect x="330" y="82" width="300" height="32" rx="4" class="dg" stroke-dasharray="4 4"/>
+  <text x="480" y="103" text-anchor="middle" class="danger">3 · 4 · 5 all held — must arrive in order</text>
+  <text x="40" y="152" class="text">One loss stalls EVERY message behind it.</text>
+
+  <!-- QUIC / WebTransport -->
+  <text x="40" y="200" class="acc">QUIC / WEBTRANSPORT · independent streams</text>
+
+  <!-- stream A (has the drop) -->
+  <text x="40" y="234" class="label">STREAM A</text>
+  <line x1="120" y1="232" x2="700" y2="232" class="dg"/>
+  <rect x="130" y="222" width="26" height="20" rx="2" class="dg"/>
+  <text x="143" y="237" text-anchor="middle" class="mono">1</text>
+  <rect x="166" y="222" width="26" height="20" rx="2" class="fd"/>
+  <text x="179" y="237" text-anchor="middle" class="fs">✕</text>
+  <rect x="202" y="222" width="26" height="20" rx="2" class="dg"/>
+  <text x="215" y="237" text-anchor="middle" class="mono">3</text>
+  <text x="270" y="237" class="danger">A waits (only A)</text>
+
+  <!-- stream B (keeps flowing) -->
+  <text x="40" y="278" class="label">STREAM B</text>
+  <line x1="120" y1="276" x2="700" y2="276" class="a"/>
+  <rect x="130" y="266" width="26" height="20" rx="2" class="a"/>
+  <text x="143" y="281" text-anchor="middle" class="acc">1</text>
+  <rect x="166" y="266" width="26" height="20" rx="2" class="a"/>
+  <text x="179" y="281" text-anchor="middle" class="acc">2</text>
+  <rect x="202" y="266" width="26" height="20" rx="2" class="a"/>
+  <text x="215" y="281" text-anchor="middle" class="acc">3</text>
+  <text x="270" y="281" class="acc">B keeps flowing → delivered</text>
+
+  <text x="40" y="344" class="label">TCP: EVERYONE WAITS · QUIC: ONLY THE HIT STREAM WAITS</text>
+</svg>

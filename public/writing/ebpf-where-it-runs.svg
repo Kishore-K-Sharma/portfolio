@@ -1,0 +1,74 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-ewr">
+  <title id="t-ewr">Where an eBPF program runs</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="380" class="fs"/>
+  <text x="40" y="34" class="label">WHERE AN eBPF PROGRAM RUNS — INSIDE THE KERNEL, SANDBOXED</text>
+
+  <!-- USERSPACE -->
+  <rect x="40" y="52" width="720" height="90" rx="4" class="s"/>
+  <text x="56" y="74" class="label">USERSPACE</text>
+  <rect x="540" y="84" width="200" height="44" rx="4" class="a"/>
+  <text x="640" y="104" text-anchor="middle" class="acc">USERSPACE TOOL</text>
+  <text x="640" y="120" text-anchor="middle" class="text">bpftrace · Pixie · Cilium</text>
+  <text x="360" y="112" class="text">reads results out of the map ▸</text>
+
+  <!-- boundary -->
+  <line x1="40" y1="156" x2="760" y2="156" class="s" stroke-dasharray="4 4"/>
+  <text x="40" y="150" class="label">syscall / kernel boundary — no reboot, no kernel module</text>
+
+  <!-- KERNEL -->
+  <rect x="40" y="170" width="720" height="172" rx="4" class="s"/>
+  <text x="56" y="192" class="label">KERNEL (ring 0)</text>
+
+  <!-- hooks -->
+  <text x="64" y="216" class="label">KERNEL HOOKS</text>
+  <rect x="64" y="224" width="150" height="30" rx="4" class="s"/>
+  <text x="139" y="243" text-anchor="middle" class="mono">kprobe · syscall</text>
+  <rect x="64" y="262" width="150" height="30" rx="4" class="s"/>
+  <text x="139" y="281" text-anchor="middle" class="mono">network · XDP</text>
+  <rect x="64" y="300" width="150" height="30" rx="4" class="s"/>
+  <text x="139" y="319" text-anchor="middle" class="mono">tracepoint</text>
+
+  <!-- eBPF program -->
+  <rect x="300" y="238" width="200" height="80" rx="4" class="a" stroke-dasharray="5 4"/>
+  <text x="400" y="270" text-anchor="middle" class="acc">eBPF PROGRAM</text>
+  <text x="400" y="292" text-anchor="middle" class="text">sandboxed · verified</text>
+  <text x="400" y="310" text-anchor="middle" class="text">JIT to native code</text>
+
+  <!-- map -->
+  <rect x="560" y="216" width="160" height="112" rx="4" class="a"/>
+  <text x="640" y="252" text-anchor="middle" class="acc">eBPF MAP</text>
+  <text x="640" y="276" text-anchor="middle" class="mono">key → value</text>
+  <text x="640" y="298" text-anchor="middle" class="text">shared with</text>
+  <text x="640" y="314" text-anchor="middle" class="text">userspace</text>
+
+  <!-- arrows: hooks -> program -->
+  <line x1="214" y1="239" x2="298" y2="262" class="a"/>
+  <line x1="214" y1="277" x2="298" y2="278" class="a"/>
+  <line x1="214" y1="315" x2="298" y2="294" class="a"/>
+  <text x="228" y="230" class="acc">event fires ▸</text>
+
+  <!-- program -> map -->
+  <line x1="500" y1="278" x2="558" y2="272" class="a"/>
+  <text x="506" y="264" class="acc">writes ▸</text>
+
+  <!-- map -> userspace -->
+  <line x1="640" y1="216" x2="640" y2="130" class="a"/>
+
+  <text x="40" y="368" class="label">ATTACH AT A HOOK · WRITE TO A MAP · USERSPACE READS THE MAP — ZERO CODE CHANGES TO THE APP</text>
+</svg>

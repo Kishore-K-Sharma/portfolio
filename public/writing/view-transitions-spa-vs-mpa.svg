@@ -1,0 +1,45 @@
+<svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-vtsm">
+  <title id="t-vtsm">Same-document vs cross-document view transitions</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="340" class="fs"/>
+  <text x="40" y="34" class="label">TWO WAYS TO DRIVE THE SAME SNAPSHOT-AND-CROSSFADE ENGINE</text>
+
+  <!-- same-document -->
+  <rect x="40" y="58" width="340" height="222" rx="4" class="s"/>
+  <text x="58" y="86" class="text" style="font-weight:700">SAME-DOCUMENT</text>
+  <line x1="58" y1="98" x2="362" y2="98" class="s" stroke-dasharray="4 4"/>
+  <text x="58" y="124" class="mono">startViewTransition(cb)</text>
+  <text x="58" y="150" class="text">JavaScript-driven</text>
+  <text x="58" y="174" class="text">you mutate the DOM in place</text>
+  <text x="58" y="198" class="text">needs one live document</text>
+  <line x1="58" y1="216" x2="362" y2="216" class="s" stroke-dasharray="4 4"/>
+  <text x="58" y="242" class="text">✓ SPA-style state changes</text>
+  <text x="58" y="266" class="label">ONE FUNCTION CALL</text>
+
+  <!-- cross-document -->
+  <rect x="420" y="58" width="340" height="222" rx="4" class="a"/>
+  <text x="438" y="86" class="acc">CROSS-DOCUMENT</text>
+  <line x1="438" y1="98" x2="742" y2="98" class="a" stroke-dasharray="4 4"/>
+  <text x="438" y="124" class="mono">@view-transition{navigation:auto}</text>
+  <text x="438" y="150" class="text">pure CSS opt-in</text>
+  <text x="438" y="174" class="text">real nav between separate pages</text>
+  <text x="438" y="198" class="text">no framework · no client router</text>
+  <line x1="438" y1="216" x2="742" y2="216" class="a" stroke-dasharray="4 4"/>
+  <text x="438" y="242" class="acc">✓ the MPA gets SPA-feel</text>
+  <text x="438" y="266" class="label">ONE CSS RULE</text>
+
+  <text x="40" y="324" class="label">SAME ENGINE BOTH SIDES · THE MULTI-PAGE WEB FINALLY GETS SPA-QUALITY MOTION</text>
+</svg>

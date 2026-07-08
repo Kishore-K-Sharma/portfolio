@@ -1,0 +1,47 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-pk1">
+  <title id="t-pk1">Shared secret versus public/private key pair</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">PASSWORD = A SHARED SECRET · PASSKEY = A KEY PAIR</text>
+
+  <!-- PASSWORD side -->
+  <rect x="40" y="58" width="340" height="248" rx="4" class="dg"/>
+  <text x="58" y="86" class="danger">PASSWORD</text>
+  <line x1="58" y1="98" x2="362" y2="98" class="dg" stroke-dasharray="4 4"/>
+  <text x="58" y="124" class="mono">you ──[ hunter2 ]──▶ server</text>
+  <text x="58" y="150" class="text">the secret travels the wire</text>
+  <text x="58" y="176" class="danger">✕ server stores a hash of it</text>
+  <text x="58" y="202" class="danger">✕ phishable — you can be tricked</text>
+  <text x="58" y="228" class="danger">✕ breachable — DB dump = leaked</text>
+  <text x="58" y="254" class="danger">✕ reused across a dozen sites</text>
+  <text x="58" y="292" class="danger">THE SECRET IS EVERYWHERE</text>
+
+  <!-- PASSKEY side -->
+  <rect x="420" y="58" width="340" height="248" rx="4" class="a"/>
+  <text x="438" y="86" class="acc">PASSKEY</text>
+  <line x1="438" y1="98" x2="742" y2="98" class="a" stroke-dasharray="4 4"/>
+  <text x="438" y="124" class="mono">private key ─┤ stays on device</text>
+  <text x="438" y="150" class="mono">public key ──▶ server (only this)</text>
+  <text x="438" y="176" class="acc">✓ private key never leaves you</text>
+  <text x="438" y="202" class="acc">✓ public key is safe to publish</text>
+  <text x="438" y="228" class="acc">✓ nothing to phish or reuse</text>
+  <text x="438" y="254" class="acc">✓ DB dump = useless to a thief</text>
+  <text x="438" y="292" class="acc">THE SECRET NEVER MOVES</text>
+
+  <text x="40" y="344" class="label">A PASSWORD YOU MUST SHARE · A PASSKEY YOU NEVER DO</text>
+</svg>

@@ -1,0 +1,54 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-wcu">
+  <title id="t-wcu">What WebGPU compute shaders unlock in the browser</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">COMPUTE SHADERS · MASSIVELY PARALLEL MATH, STRAIGHT FROM JAVASCRIPT</text>
+
+  <!-- ML inference -->
+  <rect x="40" y="60" width="230" height="212" rx="4" class="a"/>
+  <text x="58" y="88" class="acc" style="font-weight:700">ML INFERENCE</text>
+  <line x1="58" y1="100" x2="252" y2="100" class="a" stroke-dasharray="4 4"/>
+  <text x="58" y="126" class="mono">transformers.js</text>
+  <text x="58" y="148" class="mono">ONNX Runtime Web</text>
+  <text x="58" y="170" class="mono">WebLLM</text>
+  <text x="58" y="204" class="text">run a real model in the tab —</text>
+  <text x="58" y="222" class="text">tokens generated on-device</text>
+  <text x="58" y="256" class="acc">✓ NO SERVER ROUND-TRIP</text>
+
+  <!-- Physics / simulation -->
+  <rect x="285" y="60" width="230" height="212" rx="4" class="a"/>
+  <text x="303" y="88" class="acc" style="font-weight:700">PHYSICS / SIM</text>
+  <line x1="303" y1="100" x2="497" y2="100" class="a" stroke-dasharray="4 4"/>
+  <text x="303" y="126" class="mono">particle systems</text>
+  <text x="303" y="148" class="mono">fluid + cloth</text>
+  <text x="303" y="170" class="mono">n-body / collisions</text>
+  <text x="303" y="204" class="text">thousands of bodies stepped</text>
+  <text x="303" y="222" class="text">in parallel each frame</text>
+  <text x="303" y="256" class="acc">✓ NO SERVER ROUND-TRIP</text>
+
+  <!-- Data / image processing -->
+  <rect x="530" y="60" width="230" height="212" rx="4" class="a"/>
+  <text x="548" y="88" class="acc" style="font-weight:700">DATA / IMAGE</text>
+  <line x1="548" y1="100" x2="742" y2="100" class="a" stroke-dasharray="4 4"/>
+  <text x="548" y="126" class="mono">image + video filters</text>
+  <text x="548" y="148" class="mono">crunching big arrays</text>
+  <text x="548" y="170" class="mono">encode / transform</text>
+  <text x="548" y="204" class="text">pixel and column math done</text>
+  <text x="548" y="222" class="text">on the GPU, not the CPU</text>
+  <text x="548" y="256" class="acc">✓ NO SERVER ROUND-TRIP</text>
+
+  <text x="40" y="344" class="label">THE BROWSER IS NOW A FIRST-CLASS GPU COMPUTE TARGET, NOT JUST A CANVAS</text>
+</svg>

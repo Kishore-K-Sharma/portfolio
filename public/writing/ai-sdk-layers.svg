@@ -1,0 +1,55 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-layers">
+  <title id="t-layers">One AI SDK API, many model providers</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">ONE API ON YOUR SIDE · MANY MODELS ON THE OTHER</text>
+
+  <!-- your app -->
+  <rect x="40" y="146" width="140" height="68" rx="4" class="s"/>
+  <text x="110" y="178" text-anchor="middle" class="text" style="font-weight:700">YOUR APP</text>
+  <text x="110" y="198" text-anchor="middle" class="label">ONE INTERFACE</text>
+
+  <!-- app -> sdk -->
+  <line x1="180" y1="180" x2="256" y2="180" class="a"/>
+  <text x="218" y="172" text-anchor="middle" class="acc">call</text>
+
+  <!-- AI SDK -->
+  <rect x="260" y="72" width="250" height="216" rx="4" class="a"/>
+  <text x="278" y="100" class="acc">AI SDK</text>
+  <line x1="278" y1="112" x2="492" y2="112" class="a" stroke-dasharray="4 4"/>
+  <text x="278" y="140" class="text">· streaming</text>
+  <text x="278" y="172" class="text">· tool calling</text>
+  <text x="278" y="204" class="text">· structured output</text>
+  <text x="278" y="236" class="text">· provider abstraction</text>
+  <text x="278" y="272" class="acc">NORMALIZES MESSAGES + PARAMS</text>
+
+  <!-- sdk -> providers fan out -->
+  <line x1="510" y1="150" x2="586" y2="120" class="a"/>
+  <line x1="510" y1="180" x2="586" y2="180" class="a"/>
+  <line x1="510" y1="210" x2="586" y2="240" class="a"/>
+
+  <!-- providers -->
+  <rect x="590" y="96" width="170" height="48" rx="4" class="s"/>
+  <text x="675" y="125" text-anchor="middle" class="mono">OpenAI</text>
+
+  <rect x="590" y="156" width="170" height="48" rx="4" class="s"/>
+  <text x="675" y="185" text-anchor="middle" class="mono">Anthropic</text>
+
+  <rect x="590" y="216" width="170" height="48" rx="4" class="s"/>
+  <text x="675" y="245" text-anchor="middle" class="mono">Google</text>
+
+  <text x="40" y="344" class="label">SWAP THE BACKEND ON ONE LINE · THE APP CODE NEVER CHANGES</text>
+</svg>
