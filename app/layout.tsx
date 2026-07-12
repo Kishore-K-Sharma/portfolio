@@ -246,6 +246,38 @@ export default async function RootLayout({
           "System Design",
           "API Architecture",
         ],
+        // Structured Occupation — the signal Google uses to place a person in a
+        // professional/job entity panel. `skills` is a comma-delimited string
+        // (schema.org accepts text); `responsibilities` describes the scope of
+        // the role in plain language. `estimatedSalary` is intentionally omitted
+        // — no defensible figure, and a fabricated one would be a quality risk.
+        hasOccupation: {
+          "@type": "Occupation",
+          name: "Lead Full Stack Engineer",
+          occupationLocation: {
+            "@type": "City",
+            name: "Noida, Uttar Pradesh, India",
+          },
+          skills:
+            "Java, Spring Boot, Node.js, NestJS, React, Angular, React Native, Microservices, Distributed Systems, AWS, System Design, API Architecture",
+          responsibilities: [
+            "Own features end-to-end: schema design, service implementation, and the UI that consumes them",
+            "Architect scalable, resilient backend systems and clean API boundaries",
+            "Lead delivery across telecom, fintech, govtech and edtech engagements",
+            "Provide technical guidance and mentorship to engineering teams",
+          ],
+        },
+      },
+      {
+        // ProfilePage wrapper — Google's spec for "this page is primarily about
+        // one person." mainEntity points back at the #person node so the whole
+        // homepage is attributed to the identity, not just the inline markup.
+        "@type": "ProfilePage",
+        "@id": `${baseUrl}/#profilepage`,
+        url: baseUrl,
+        name: "Kishore K Sharma — Lead Full Stack Engineer",
+        mainEntity: { "@id": `${baseUrl}/#person` },
+        isPartOf: { "@id": `${baseUrl}/#website` },
       },
       {
         "@type": "WebSite",
