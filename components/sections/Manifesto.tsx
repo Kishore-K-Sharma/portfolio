@@ -1,8 +1,7 @@
-"use client";
-
 import portfolioData from "@/data/portfolio.json";
 import { Section } from "@/components/editorial/Section";
 import { Reveal } from "@/components/editorial/Reveal";
+import { RevealHeading } from "@/components/editorial/RevealHeading";
 import { MetricCounter } from "@/components/editorial/MetricCounter";
 
 export function Manifesto() {
@@ -13,11 +12,9 @@ export function Manifesto() {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
         {/* Left: voice */}
         <div className="md:col-span-7">
-          <Reveal>
-            <h2 className="font-display text-display text-foreground text-balance leading-[1] tracking-[-0.03em]">
-              I take features <span className="font-display-soft italic text-accent">all the way through</span>.
-            </h2>
-          </Reveal>
+          <RevealHeading className="font-display text-display text-foreground text-balance leading-[1] tracking-[-0.03em]">
+            I take features <span className="font-display-soft italic text-accent">all the way through</span>.
+          </RevealHeading>
 
           <ul className="mt-12 space-y-8 max-w-[60ch]">
             {manifesto.map((line, i) => (

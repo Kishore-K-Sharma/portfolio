@@ -97,9 +97,9 @@ export default async function AboutPage() {
         </header>
 
         <section className="mb-16">
-          <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground mb-5">
+          <h2 className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground mb-5">
             /linkedin
-          </p>
+          </h2>
           <LinkedInCard
             url={personal.linkedin}
             name={personal.name}
@@ -109,9 +109,9 @@ export default async function AboutPage() {
         </section>
 
         <section className="mb-16">
-          <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground mb-5">
+          <h2 className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground mb-5">
             /elsewhere
-          </p>
+          </h2>
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-3 max-w-[640px] font-mono text-[0.85rem]">
             <SocialRow label="GitHub" handle="@Kishore-K-Sharma" href={personal.social.github} />
             <SocialRow label="X" handle="@kishoreksharmaa" href={personal.social.x} />
@@ -125,9 +125,9 @@ export default async function AboutPage() {
         </section>
 
         <section className="mb-16">
-          <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground mb-5">
+          <h2 className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground mb-5">
             /manifesto
-          </p>
+          </h2>
           <ul className="space-y-5 max-w-[64ch]">
             {manifesto.map((line, i) => (
               <li key={i} className="text-body text-foreground/85 leading-relaxed text-pretty">
@@ -138,9 +138,9 @@ export default async function AboutPage() {
         </section>
 
         <section className="mb-16">
-          <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground mb-6">
+          <h2 className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground mb-6">
             /experience
-          </p>
+          </h2>
           <ol className="space-y-10">
             {experience.map((job) => (
               <li key={`${job.company}-${job.startDate}`} className="border-l-2 border-subtle/60 pl-6">
@@ -178,9 +178,9 @@ export default async function AboutPage() {
         </section>
 
         <section className="mb-16">
-          <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground mb-6">
+          <h2 className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground mb-6">
             /education
-          </p>
+          </h2>
           <ol className="space-y-8">
             {education.map((ed) => (
               <li key={`${ed.institution}-${ed.startDate}`} className="border-l-2 border-subtle/60 pl-6">
@@ -205,9 +205,9 @@ export default async function AboutPage() {
 
         {awards && awards.length > 0 && (
           <section className="mb-16">
-            <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground mb-5">
+            <h2 className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground mb-5">
               /awards
-            </p>
+            </h2>
             <ul className="space-y-2 text-[0.92rem] text-foreground/85">
               {awards.map((a, i) => (
                 <li key={i} className="flex items-baseline gap-3">
@@ -221,9 +221,9 @@ export default async function AboutPage() {
 
         {certifications && certifications.length > 0 && (
           <section className="mb-16">
-            <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground mb-5">
+            <h2 className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground mb-5">
               /certifications
-            </p>
+            </h2>
             <p className="font-mono text-[0.78rem] text-muted-foreground mb-4">
               {certifications.length} certifications across cloud, DevOps, full-stack, and
               data fundamentals.

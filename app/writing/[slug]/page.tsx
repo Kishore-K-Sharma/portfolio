@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { listSlugs, loadNote, loadNoteMeta, relatedNotes } from "@/lib/notes";
 import type { NoteMeta } from "@/lib/notes";
+import { workForNote } from "@/lib/related";
 import { categoryLabel } from "@/config/categories";
 import { ShareBar } from "@/components/notes/ShareBar";
 import { ReadingProgress } from "@/components/notes/ReadingProgress";
@@ -64,7 +65,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       siteName: "Kishore K Sharma",
       locale: "en_IN",
       publishedTime: note.date,
-      modifiedTime: note.date,
+      modifiedTime: note.updated ?? note.date,
       authors: ["Kishore K Sharma"],
       tags,
       section: tags[0],
@@ -85,6 +86,7 @@ export default async function NotePage(props: Props) {
   if (!note || note.draft) notFound();
 
   const { prev, next } = relatedNotes(note.slug);
+  const relatedWork = workForNote(note);
   const nonce = (await headers()).get("x-nonce") ?? undefined;
   const url = `${siteConfig.baseUrl}/writing/${note.slug}`;
   const ogImage = `${siteConfig.baseUrl}/writing/${note.slug}/opengraph-image`;
@@ -111,7 +113,7 @@ export default async function NotePage(props: Props) {
     author,
     publisher: author,
     datePublished: note.date,
-    dateModified: note.date,
+    dateModified: note.updated ?? note.date,
     url,
     inLanguage: "en",
     keywords: tags.join(", "),
@@ -237,6 +239,27 @@ export default async function NotePage(props: Props) {
         <ShareBar url={url} title={note.title} description={note.description} />
 
         <AuthorCard />
+
+        {relatedWork.length > 0 && (
+          <section className="mt-16 pt-8 border-t border-subtle/60">
+            <p className="font-mono text-[0.7rem] uppercase tracking-widest text-muted-foreground mb-4">
+              /seen in production
+            </p>
+            <ul className="space-y-3">
+              {relatedWork.map((work) => (
+                <li key={work.slug}>
+                  <Link
+                    href={`/work/${work.slug}`}
+                    className="group flex items-baseline gap-3 text-foreground hover:text-accent transition-colors"
+                  >
+                    <span aria-hidden className="font-mono text-[0.72rem] text-muted-foreground group-hover:text-accent">→</span>
+                    <span className="text-body-lg text-pretty">{work.title}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {(prev || next) && (
           <nav

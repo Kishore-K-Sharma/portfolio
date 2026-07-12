@@ -3,6 +3,7 @@ import Link from "next/link";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { listWorkSlugs, loadWork, loadWorkMeta } from "@/lib/work";
+import { notesForWork } from "@/lib/related";
 import { safeJsonLd } from "@/lib/json-ld";
 import { siteConfig } from "@/config/site";
 
@@ -30,6 +31,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   return {
     title: work.title,
     description: work.summary,
+    keywords: work.stack,
+    authors: [{ name: "Kishore K Sharma", url: siteConfig.baseUrl }],
+    creator: "Kishore K Sharma",
     alternates: { canonical: url },
     openGraph: {
       title: work.title,
@@ -52,16 +56,34 @@ export default async function WorkPage(props: Props) {
 
   const nonce = (await headers()).get("x-nonce") ?? undefined;
   const url = `${siteConfig.baseUrl}/work/${work.slug}`;
+  const datePublished = `${work.startDate}-01`;
+  const relatedNotes = notesForWork(work);
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    headline: work.title,
-    description: work.summary,
-    author: { "@type": "Person", name: "Kishore K Sharma", url: siteConfig.baseUrl },
-    datePublished: `${work.startDate}-01`,
-    url,
-    keywords: work.stack.join(", "),
-    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    "@graph": [
+      {
+        "@type": "Article",
+        headline: work.title,
+        description: work.summary,
+        author: { "@type": "Person", name: "Kishore K Sharma", url: siteConfig.baseUrl },
+        datePublished,
+        dateModified: work.updated ? `${work.updated}` : datePublished,
+        url,
+        image: `${url}/opengraph-image`,
+        keywords: work.stack.join(", "),
+        // Quantified outcomes surfaced as structured facts, not just visual chips.
+        about: work.outcomes.map((o) => ({ "@type": "Thing", name: `${o.label}: ${o.value}` })),
+        mainEntityOfPage: { "@type": "WebPage", "@id": url },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.baseUrl },
+          { "@type": "ListItem", position: 2, name: "Work", item: `${siteConfig.baseUrl}/work` },
+          { "@type": "ListItem", position: 3, name: work.title, item: url },
+        ],
+      },
+    ],
   };
 
   return (
@@ -148,6 +170,27 @@ export default async function WorkPage(props: Props) {
             ))}
           </ul>
         </section>
+
+        {relatedNotes.length > 0 && (
+          <section className="mt-16 pt-8 border-t border-subtle/60">
+            <p className="font-mono text-[0.7rem] uppercase tracking-widest text-muted-foreground mb-4">
+              /related writing
+            </p>
+            <ul className="space-y-3">
+              {relatedNotes.map((note) => (
+                <li key={note.slug}>
+                  <Link
+                    href={`/writing/${note.slug}`}
+                    className="group flex items-baseline gap-3 text-foreground hover:text-accent transition-colors"
+                  >
+                    <span aria-hidden className="font-mono text-[0.72rem] text-muted-foreground group-hover:text-accent">→</span>
+                    <span className="text-body-lg text-pretty">{note.title}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <footer className="mt-12 pt-8 border-t border-subtle/60">
           <div className="flex flex-wrap items-center gap-3">

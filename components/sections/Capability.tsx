@@ -1,8 +1,7 @@
-"use client";
-
 import portfolioData from "@/data/portfolio.json";
 import { Section } from "@/components/editorial/Section";
 import { Reveal } from "@/components/editorial/Reveal";
+import { RevealHeading } from "@/components/editorial/RevealHeading";
 
 const STACK_GROUPS: Array<{
   key: keyof typeof portfolioData.skills;
@@ -23,11 +22,9 @@ export function Capability() {
 
   return (
     <Section id="capability" index="02" eyebrow="Capability · operating envelope">
-      <Reveal>
-        <h2 className="font-display text-display text-foreground text-balance max-w-[20ch] leading-[1.02] tracking-[-0.03em]">
-          The stack I reach for, and <span className="font-display-soft italic text-accent">why</span>.
-        </h2>
-      </Reveal>
+      <RevealHeading className="font-display text-display text-foreground text-balance max-w-[20ch] leading-[1.02] tracking-[-0.03em]">
+        The stack I reach for, and <span className="font-display-soft italic text-accent">why</span>.
+      </RevealHeading>
       <Reveal delay={0.1}>
         <p className="mt-6 max-w-[60ch] text-body-lg text-muted-foreground text-pretty">
           A capability map, not a skill checklist. Grouped by what they do, not by where they sit on a resume.

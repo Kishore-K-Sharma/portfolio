@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "next-themes";
 import portfolioData from "@/data/portfolio.json";
 
 type Cmd = {
@@ -16,12 +17,15 @@ export function CommandPalette() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [cursor, setCursor] = useState(0);
+  const [output, setOutput] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { resolvedTheme, setTheme } = useTheme();
 
   const close = useCallback(() => {
     setOpen(false);
     setQuery("");
     setCursor(0);
+    setOutput(null);
   }, []);
 
   const go = useCallback(
@@ -42,7 +46,9 @@ export function CommandPalette() {
       { id: "nav-cap", label: "open capability", hint: "scroll · skills", group: "navigate", run: () => go("capability") },
       { id: "nav-proof", label: "open proof", hint: "scroll · testimonials + awards", group: "navigate", run: () => go("proof") },
       { id: "nav-contact", label: "open contact", hint: "scroll · get in touch", group: "navigate", run: () => go("contact") },
-      { id: "sys-whoami", label: "whoami", hint: portfolioData.personal.title, group: "system", run: () => go("manifesto") },
+      { id: "sys-whoami", label: "whoami", hint: portfolioData.personal.title, group: "system", run: () => setOutput(`${portfolioData.personal.name} · ${portfolioData.personal.title} — schema → service → screen`) },
+      { id: "sys-theme", label: "theme toggle", hint: `now: ${resolvedTheme ?? "system"}`, group: "system", run: () => { const next = resolvedTheme === "dark" ? "light" : "dark"; setTheme(next); setOutput(`theme → ${next}`); } },
+      { id: "sys-trace", label: "trace request", hint: "watch the live request trace", group: "system", run: () => go("work") },
       { id: "sys-cat", label: "cat about", hint: "read manifesto", group: "system", run: () => go("manifesto") },
       { id: "sys-ls", label: "ls projects", hint: "list case studies", group: "system", run: () => go("work") },
       { id: "sys-grep", label: "grep skills java", hint: "jump to capability", group: "system", run: () => go("capability") },
@@ -50,7 +56,7 @@ export function CommandPalette() {
       { id: "ext-rss", label: "subscribe rss", hint: "↗ /writing/rss.xml", group: "external", run: () => { window.open("/writing/rss.xml", "_blank", "noopener,noreferrer"); close(); } },
       { id: "open-contact", label: "open contact form", hint: "say hi via the form", group: "external", run: () => go("contact") },
     ],
-    [go, close]
+    [go, close, resolvedTheme, setTheme]
   );
 
   const filtered = useMemo(() => {
@@ -142,11 +148,18 @@ export function CommandPalette() {
                     filtered[cursor]?.run();
                   }
                 }}
-                placeholder="Type a command — try whoami, ls projects, grep skills java"
+                placeholder="Type a command — try whoami, theme toggle, trace request"
                 className="flex-1 bg-transparent outline-none font-mono text-[0.9rem] placeholder:text-muted-foreground/60"
               />
               <span className="kbd">esc</span>
             </div>
+
+            {output && (
+              <div className="px-4 py-2.5 border-b border-subtle/70 font-mono text-[0.8rem] text-foreground flex items-start gap-2">
+                <span className="text-edtech" aria-hidden>›</span>
+                <span aria-live="polite">{output}</span>
+              </div>
+            )}
 
             <ul className="max-h-[50vh] overflow-y-auto py-2">
               {filtered.length === 0 && (

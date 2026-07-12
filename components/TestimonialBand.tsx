@@ -57,6 +57,8 @@ export function TestimonialBand() {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="space-y-5"
+            aria-live="polite"
+            aria-atomic="true"
           >
             <blockquote className="text-foreground text-[1.05rem] md:text-[1.15rem] leading-[1.55] tracking-[-0.005em] text-pretty max-w-[60ch]">
               <span className="font-display-soft italic text-accent text-[1.4em] leading-none align-top mr-1">
@@ -83,7 +85,6 @@ export function TestimonialBand() {
             <button
               onClick={goPrev}
               aria-label="Previous testimonial"
-              data-cursor-label="prev"
               className="inline-flex items-center justify-center w-10 h-10 rounded-md border border-subtle/60 text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors"
             >
               <ChevronLeft size={14} />
@@ -91,7 +92,6 @@ export function TestimonialBand() {
             <button
               onClick={goNext}
               aria-label="Next testimonial"
-              data-cursor-label="next"
               className="inline-flex items-center justify-center w-10 h-10 rounded-md border border-subtle/60 text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors"
             >
               <ChevronRight size={14} />
@@ -101,14 +101,13 @@ export function TestimonialBand() {
           {/* Pagination dots — all 9 selectable */}
           <div
             className="flex items-center gap-1.5 flex-wrap justify-end"
-            role="tablist"
+            role="group"
             aria-label="Select testimonial"
           >
             {TESTIMONIALS.map((tx, i) => (
               <button
                 key={tx.name}
-                role="tab"
-                aria-selected={i === idx}
+                aria-current={i === idx ? "true" : undefined}
                 aria-label={`Show testimonial from ${tx.name}`}
                 onClick={() => setIdx(i)}
                 className="group flex items-center justify-center py-2 px-1 -my-2"

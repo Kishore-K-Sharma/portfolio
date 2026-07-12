@@ -5,6 +5,7 @@ import Link from "next/link";
 import portfolioData from "@/data/portfolio.json";
 import { Section } from "@/components/editorial/Section";
 import { Reveal } from "@/components/editorial/Reveal";
+import { RevealHeading } from "@/components/editorial/RevealHeading";
 import { RequestTrace } from "@/components/RequestTrace";
 import { DOMAIN_META, type DomainId } from "@/lib/domains";
 
@@ -44,11 +45,9 @@ export function CaseStudies() {
 
   return (
     <Section id="work" index="03" eyebrow="Selected work · 2019 → present">
-      <Reveal>
-        <h2 className="font-display text-display text-foreground text-balance max-w-[22ch] leading-[1.02] tracking-[-0.03em]">
-          Four verticals. One <span className="font-display-soft italic text-accent">discipline</span>.
-        </h2>
-      </Reveal>
+      <RevealHeading className="font-display text-display text-foreground text-balance max-w-[22ch] leading-[1.02] tracking-[-0.03em]">
+        Four verticals. One <span className="font-display-soft italic text-accent">discipline</span>.
+      </RevealHeading>
 
       <Reveal delay={0.1}>
         <p className="mt-6 max-w-[58ch] text-body-lg text-muted-foreground text-pretty">
@@ -188,9 +187,7 @@ export function CaseStudies() {
                 <Reveal delay={0.2}>
                   <Link
                     href={`/work/${lead.slug}`}
-                    className="mt-8 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-foreground text-background text-[0.85rem] hover:opacity-90 transition-opacity"
-                    data-cursor-label="open · case study"
-                  >
+                    className="mt-8 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-foreground text-background text-[0.85rem] hover:opacity-90 transition-opacity"                  >
                     Read full case study <span aria-hidden>→</span>
                   </Link>
                 </Reveal>
@@ -260,9 +257,7 @@ export function CaseStudies() {
                   {job.slug ? (
                     <Link
                       href={`/work/${job.slug}`}
-                      className="block group"
-                      data-cursor-label="open · case study"
-                    >
+                      className="block group"                    >
                       {inner}
                     </Link>
                   ) : (
@@ -280,9 +275,7 @@ export function CaseStudies() {
         <div className="mt-12 flex justify-end">
           <Link
             href="/work"
-            className="font-mono text-[0.78rem] text-muted-foreground hover:text-foreground transition-colors"
-            data-cursor-label="open · all cases"
-          >
+            className="font-mono text-[0.78rem] text-muted-foreground hover:text-foreground transition-colors"          >
             all cases →
           </Link>
         </div>

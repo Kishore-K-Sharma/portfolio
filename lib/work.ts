@@ -10,6 +10,8 @@ export interface WorkFrontmatter {
   role: string;
   startDate: string;
   endDate: string;
+  /** Optional ISO date the case study was last revised — powers dateModified. */
+  updated?: string;
   domain: "telecom" | "fintech" | "edtech" | "govtech";
   summary: string;
   /** Quantified outcomes — appear in the case-study header band. */
@@ -61,6 +63,7 @@ function metaFrom(slug: string, fm: Partial<WorkFrontmatter>): WorkMeta | null {
     role: fm.role,
     startDate: fm.startDate,
     endDate: fm.endDate,
+    updated: fm.updated,
     domain: fm.domain,
     summary: fm.summary,
     outcomes: fm.outcomes ?? [],

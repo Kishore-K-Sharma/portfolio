@@ -1,19 +1,16 @@
-"use client";
-
 import portfolioData from "@/data/portfolio.json";
 import { Section } from "@/components/editorial/Section";
 import { Reveal } from "@/components/editorial/Reveal";
+import { RevealHeading } from "@/components/editorial/RevealHeading";
 
 export function Education() {
   const { education, languages } = portfolioData;
 
   return (
     <Section id="education" index="05" eyebrow="Foundations" narrow>
-      <Reveal>
-        <h2 className="font-display text-display-sm text-foreground text-balance max-w-[26ch] leading-[1.05] tracking-[-0.025em]">
-          Where the <span className="font-display-soft italic text-accent">groundwork</span> was laid.
-        </h2>
-      </Reveal>
+      <RevealHeading as="h2" className="font-display text-display-sm text-foreground text-balance max-w-[26ch] leading-[1.05] tracking-[-0.025em]">
+        Where the <span className="font-display-soft italic text-accent">groundwork</span> was laid.
+      </RevealHeading>
 
       <ol className="mt-14">
         {education.map((e, idx) => (

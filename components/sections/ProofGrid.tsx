@@ -1,15 +1,26 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import portfolioData from "@/data/portfolio.json";
 import { Section } from "@/components/editorial/Section";
 import { Reveal } from "@/components/editorial/Reveal";
+import { RevealHeading } from "@/components/editorial/RevealHeading";
 import { Modal } from "@/components/Modal";
 
 const FEATURED_CERT_COUNT = 6;
 
-export function ProofGrid() {
-  const { testimonials, awards, certifications, articles } = portfolioData;
+export interface LatestNote {
+  slug: string;
+  title: string;
+  description: string;
+  date: string;
+  category: string;
+  readMin: number;
+}
+
+export function ProofGrid({ latestNotes = [] }: { latestNotes?: LatestNote[] }) {
+  const { testimonials, awards, certifications } = portfolioData;
   const [activeCert, setActiveCert] = useState<typeof certifications[number] | null>(null);
   const [showAllCerts, setShowAllCerts] = useState(false);
 
@@ -27,11 +38,9 @@ export function ProofGrid() {
 
   return (
     <Section id="proof" index="04" eyebrow="Proof · what others say & ship-credentials">
-      <Reveal>
-        <h2 className="font-display text-display text-foreground text-balance max-w-[20ch] leading-[1.02] tracking-[-0.03em]">
-          Credibility, <span className="font-display-soft italic text-accent">documented</span>.
-        </h2>
-      </Reveal>
+      <RevealHeading className="font-display text-display text-foreground text-balance max-w-[20ch] leading-[1.02] tracking-[-0.03em]">
+        Credibility, <span className="font-display-soft italic text-accent">documented</span>.
+      </RevealHeading>
       <Reveal delay={0.1}>
         <p className="mt-6 max-w-[60ch] text-body-lg text-muted-foreground text-pretty">
           Recognition from the people I&apos;ve shipped with — managers, peers, and direct reports — alongside the awards and credentials behind the work.
@@ -78,26 +87,32 @@ export function ProofGrid() {
 
         <div className="md:col-span-7">
           <Reveal>
-            <p className="eyebrow mb-6">Writing</p>
+            <div className="flex items-baseline justify-between mb-6">
+              <p className="eyebrow">Writing</p>
+              <Link
+                href="/writing"
+                className="font-mono text-[0.72rem] text-muted-foreground hover:text-accent transition-colors"
+              >
+                all writing →
+              </Link>
+            </div>
           </Reveal>
           <ul className="space-y-4">
-            {articles.map((a) => (
-              <Reveal key={a.title} as="li">
-                <a
-                  href={a.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+            {latestNotes.map((n) => (
+              <Reveal key={n.slug} as="li">
+                <Link
+                  href={`/writing/${n.slug}`}
                   className="group block py-4 border-t border-subtle/50 hover:border-foreground/30 transition-colors"
                 >
                   <div className="flex items-baseline justify-between gap-4 mb-2">
-                    <span className="font-mono text-[0.7rem] text-muted-foreground">{a.platform}</span>
-                    <span className="font-mono text-[0.7rem] text-muted-foreground">{a.date}</span>
+                    <span className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-accent">{n.category}</span>
+                    <span className="font-mono text-[0.7rem] text-muted-foreground">{n.readMin} min</span>
                   </div>
                   <h4 className="font-display text-heading-sm text-foreground group-hover:text-accent transition-colors text-balance">
-                    {a.title} <span aria-hidden className="opacity-0 group-hover:opacity-100 transition-opacity ml-1">↗</span>
+                    {n.title} <span aria-hidden className="opacity-0 group-hover:opacity-100 transition-opacity ml-1">→</span>
                   </h4>
-                  <p className="mt-2 text-[0.9rem] text-muted-foreground text-pretty">{a.description}</p>
-                </a>
+                  <p className="mt-2 text-[0.9rem] text-muted-foreground text-pretty line-clamp-2">{n.description}</p>
+                </Link>
               </Reveal>
             ))}
           </ul>

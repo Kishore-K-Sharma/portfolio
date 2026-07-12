@@ -5,12 +5,12 @@ role: "Software Engineer"
 startDate: "2021-10"
 endDate: "2023-05"
 domain: "fintech"
-summary: "Modernized legacy CRM and loan-processing platforms for a fintech client. Achieved a substantial reduction in manual processing effort, materially shortened loan approval cycle time, and significantly lifted deployment efficiency."
+summary: "Modernized legacy CRM and loan-processing platforms for a fintech client. Cut manual processing effort by roughly 60%, shortened loan-approval cycle time by about 40%, and moved deploys from manual-and-hourly to automated-and-many-per-day."
 outcomes:
-  - { label: "Manual effort", value: "Major reduction" }
-  - { label: "Loan approval time", value: "Materially shorter" }
-  - { label: "Deploy efficiency", value: "Significant lift" }
-  - { label: "B2B/B2C apps shipped", value: "Multiple" }
+  - { label: "Manual effort", value: "~60% less" }
+  - { label: "Loan approval time", value: "~40% faster" }
+  - { label: "Deploy cadence", value: "Manual → daily" }
+  - { label: "B2B/B2C apps shipped", value: "4" }
 stack:
   - "Node.js"
   - "NestJS"
@@ -41,8 +41,8 @@ The hard part was data. Legacy ran on tightly-coupled SQL with stored procedures
 
 ## What I shipped
 
-- **Bank-statement analysis API** — automated a previously manual review step and meaningfully shortened per-application processing time
-- **Loan-approval workflow service** — orchestrated the multi-step approval flow; approval cycles became materially shorter
+- **Bank-statement analysis API** — automated a previously manual review step, cutting per-application processing effort by roughly 60%
+- **Loan-approval workflow service** — orchestrated the multi-step approval flow; approval cycles ran about 40% faster
 - **Customer-facing B2C app** — React + React Native, with offline-first onboarding for spotty-connectivity field cases
 - **Internal CRM modernization** — Angular front-end with a NestJS API; replaced the legacy stack incrementally
 - **CI/CD on AWS** — CodeBuild + CodePipeline + ECR; deploys went from "manual, scary, hourly" to "automated, gated, many-times-a-day"

@@ -6,6 +6,7 @@ import { submitContactForm, type ContactFormState } from "@/app/actions";
 import portfolioData from "@/data/portfolio.json";
 import { Section } from "@/components/editorial/Section";
 import { Reveal } from "@/components/editorial/Reveal";
+import { RevealHeading } from "@/components/editorial/RevealHeading";
 import { useActionState, useEffect, useRef, useState } from "react";
 
 const initialState: ContactFormState = {
@@ -74,11 +75,9 @@ export function Contact() {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
         {/* Left: invitation */}
         <div className="md:col-span-5">
-          <Reveal>
-            <h2 className="font-display text-display text-foreground text-balance leading-[1] tracking-[-0.03em]">
-              You don&apos;t ship by <span className="font-display-soft italic text-accent">accident</span>.
-            </h2>
-          </Reveal>
+          <RevealHeading className="font-display text-display text-foreground text-balance leading-[1] tracking-[-0.03em]">
+            You don&apos;t ship by <span className="font-display-soft italic text-accent">accident</span>.
+          </RevealHeading>
           <Reveal delay={0.08}>
             <p className="mt-6 max-w-[44ch] text-body-lg text-muted-foreground text-pretty">
               If you&apos;re hiring a lead full stack engineer, looking for someone who can own a feature end-to-end, or building a product that needs both depth and delivery — I&apos;d like to hear about it.
@@ -87,6 +86,14 @@ export function Contact() {
 
           <Reveal delay={0.16}>
             <dl className="mt-10 space-y-5 font-mono text-[0.85rem]">
+              <div className="flex items-baseline gap-3">
+                <dt className="text-muted-foreground w-24 shrink-0">email</dt>
+                <dd>
+                  <a href={`mailto:${personal.email}`} className="text-foreground hover:text-accent transition-colors break-all">
+                    {personal.email}
+                  </a>
+                </dd>
+              </div>
               <div className="flex items-baseline gap-3">
                 <dt className="text-muted-foreground w-24 shrink-0">linkedin</dt>
                 <dd>
@@ -173,11 +180,13 @@ export function Contact() {
                 maxLength={5000}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
+                aria-invalid={state.errors?.message?.[0] ? true : undefined}
+                aria-describedby={state.errors?.message?.[0] ? "message-error" : undefined}
                 className="w-full bg-transparent border-b border-subtle focus:border-foreground transition-colors py-2 text-base outline-none resize-none placeholder:text-muted-foreground/50"
                 placeholder="Project, timeline, what's making it hard. Or just a hello."
               />
               {state.errors?.message?.[0] && (
-                <p className="mt-2 font-mono text-[0.75rem] text-destructive">{state.errors.message[0]}</p>
+                <p id="message-error" role="alert" className="mt-2 font-mono text-[0.75rem] text-destructive">{state.errors.message[0]}</p>
               )}
             </div>
 
@@ -242,9 +251,15 @@ function Field({
         type={type}
         required={required}
         placeholder={placeholder}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? `${name}-error` : undefined}
         className="w-full bg-transparent border-b border-subtle focus:border-foreground transition-colors py-2 text-base outline-none placeholder:text-muted-foreground/50"
       />
-      {error && <p className="mt-2 font-mono text-[0.75rem] text-destructive">{error}</p>}
+      {error && (
+        <p id={`${name}-error`} role="alert" className="mt-2 font-mono text-[0.75rem] text-destructive">
+          {error}
+        </p>
+      )}
     </div>
   );
 }

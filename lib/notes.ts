@@ -12,6 +12,8 @@ export interface NoteFrontmatter {
   title: string;
   description: string;
   date: string; // ISO YYYY-MM-DD
+  /** Optional ISO date the post was last meaningfully revised. Powers dateModified. */
+  updated?: string;
   tags?: string[];
   /** One of the slugs from config/categories. Defaults to "engineering". */
   category?: CategorySlug;
@@ -26,6 +28,7 @@ export interface NoteMeta {
   title: string;
   description: string;
   date: string;
+  updated?: string;
   tags: string[];
   category: CategorySlug;
   readMin: number;
@@ -78,6 +81,7 @@ export function loadNoteMeta(slug: string): NoteMeta | null {
     title: fm.title,
     description: fm.description,
     date: fm.date,
+    updated: fm.updated,
     tags: fm.tags ?? [],
     category: normalizeCategory(fm.category),
     draft: fm.draft ?? false,

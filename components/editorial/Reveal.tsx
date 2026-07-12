@@ -1,16 +1,51 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
-import { type ReactNode } from "react";
+import { createElement, useEffect, useRef, type ReactNode } from "react";
 
-const variants: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-  },
-};
+type Tag = "div" | "span" | "p" | "h1" | "h2" | "h3" | "li";
+
+// One shared IntersectionObserver for every reveal on the page. Previously each
+// Reveal mounted its own framer-motion node + observer; on content-heavy pages
+// that was hundreds of observers and motion runtimes. This collapses the reveal
+// to a single observer that adds `.reveal-in` to whatever it's watching — the
+// CSS (see globals.css) decides how each element transitions in.
+let sharedObserver: IntersectionObserver | null = null;
+
+function getObserver(): IntersectionObserver | null {
+  if (typeof IntersectionObserver === "undefined") return null;
+  if (!sharedObserver) {
+    sharedObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-in");
+            sharedObserver!.unobserve(entry.target);
+          }
+        }
+      },
+      { rootMargin: "0px 0px -80px 0px" },
+    );
+  }
+  return sharedObserver;
+}
+
+/** Registers an element with the shared reveal observer. Returns a ref callback. */
+export function useRevealRef<T extends HTMLElement>() {
+  const ref = useRef<T | null>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = getObserver();
+    // No IntersectionObserver (SSR / very old browser): reveal immediately.
+    if (!obs) {
+      el.classList.add("reveal-in");
+      return;
+    }
+    obs.observe(el);
+    return () => obs.unobserve(el);
+  }, []);
+  return ref;
+}
 
 export function Reveal({
   children,
@@ -21,19 +56,16 @@ export function Reveal({
   children: ReactNode;
   delay?: number;
   className?: string;
-  as?: "div" | "span" | "p" | "h1" | "h2" | "h3" | "li";
+  as?: Tag;
 }) {
-  const Comp = motion[as as keyof typeof motion] as typeof motion.div;
-  return (
-    <Comp
-      className={className}
-      variants={variants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ delay }}
-    >
-      {children}
-    </Comp>
+  const ref = useRevealRef<HTMLElement>();
+  return createElement(
+    as,
+    {
+      ref,
+      className: className ? `reveal ${className}` : "reveal",
+      style: delay ? { transitionDelay: `${delay}s` } : undefined,
+    },
+    children,
   );
 }

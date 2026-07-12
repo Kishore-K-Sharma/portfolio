@@ -115,7 +115,8 @@ export function Modal({ isOpen, onClose, certificate }: ModalProps) {
                   alt={certificate.title}
                   fill
                   className="object-contain rounded-lg"
-                  quality={100}
+                  sizes="(max-width: 768px) 90vw, 640px"
+                  quality={82}
                 />
               </div>
             ) : (

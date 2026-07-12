@@ -63,6 +63,16 @@ export function Hero() {
           <span>{personal.experienceYears} yrs</span>
         </motion.div>
 
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-5 font-mono text-[0.8rem] md:text-[0.9rem] text-foreground"
+        >
+          {personal.name}
+          <span className="text-muted-foreground"> · {personal.title}</span>
+        </motion.p>
+
         <h1 className="font-display text-display-xl text-foreground leading-[0.9] tracking-[-0.045em] text-balance">
           {headline.map((word, i) => (
             <span key={i} className="inline-block overflow-hidden align-baseline pr-[0.18em]">
