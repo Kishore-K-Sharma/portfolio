@@ -1,0 +1,46 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-dwu">
+  <title id="t-dwu">When to use durable execution versus a queue with retries and idempotency</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">PICK THE MACHINERY THE JOB DESERVES</text>
+
+  <!-- queue side -->
+  <rect x="40" y="60" width="345" height="240" rx="4" class="s"/>
+  <text x="58" y="88" class="text" style="font-weight:700">QUEUE + RETRIES + IDEMPOTENCY</text>
+  <line x1="58" y1="100" x2="367" y2="100" class="s" stroke-dasharray="4 4"/>
+  <text x="58" y="128" class="text">one-step jobs · fire-and-forget</text>
+  <text x="58" y="154" class="mono">resize an image</text>
+  <text x="58" y="178" class="mono">send one email</text>
+  <text x="58" y="202" class="mono">sync one record</text>
+  <text x="58" y="234" class="text">✓ simple · ✓ boring · ✓ enough</text>
+  <text x="58" y="278" class="label">STILL THE RIGHT DEFAULT</text>
+
+  <!-- durable side -->
+  <rect x="415" y="60" width="345" height="240" rx="4" class="a"/>
+  <text x="433" y="88" class="acc">DURABLE EXECUTION</text>
+  <line x1="433" y1="100" x2="742" y2="100" class="a" stroke-dasharray="4 4"/>
+  <text x="433" y="128" class="text">multi-step · long-lived · must-complete</text>
+  <text x="433" y="154" class="acc">payments · provisioning</text>
+  <text x="433" y="178" class="acc">onboarding · agent loops</text>
+  <text x="433" y="210" class="text">✓ survives crashes mid-flow</text>
+  <text x="433" y="234" class="text">✓ sleep(30 days) costs nothing</text>
+  <text x="433" y="278" class="acc">WHEN THE FLOW MUST FINISH</text>
+
+  <text x="40" y="326" class="danger">THE BILL: AN ENGINE TO OPERATE + DETERMINISM DISCIPLINE IN WORKFLOW CODE</text>
+  <text x="40" y="352" class="label">ONE-STEP WORK: KEEP THE QUEUE · MULTI-STEP MUST-COMPLETE: GET AN ENGINE</text>
+</svg>

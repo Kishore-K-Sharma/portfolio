@@ -1,0 +1,62 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-dcm">
+  <title id="t-dcm">A five-step order flow crashes after step three: DIY recovery versus a durable engine</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">ONE ORDER FLOW · FIVE STEPS · THE POD DIES AFTER STEP 3</text>
+
+  <!-- step row -->
+  <rect x="40" y="56" width="128" height="48" rx="4" class="s"/>
+  <text x="54" y="76" class="mono">1 CHARGE</text>
+  <text x="54" y="94" class="text">✓ done</text>
+  <line x1="168" y1="80" x2="186" y2="80" class="s"/>
+
+  <rect x="186" y="56" width="128" height="48" rx="4" class="s"/>
+  <text x="200" y="76" class="mono">2 RESERVE</text>
+  <text x="200" y="94" class="text">✓ done</text>
+  <line x1="314" y1="80" x2="332" y2="80" class="s"/>
+
+  <rect x="332" y="56" width="128" height="48" rx="4" class="s"/>
+  <text x="346" y="76" class="mono">3 SHIP</text>
+  <text x="346" y="94" class="text">✓ done</text>
+
+  <text x="469" y="84" text-anchor="middle" class="danger" style="font-weight:700">✕</text>
+  <text x="469" y="48" text-anchor="middle" class="danger">CRASH</text>
+
+  <rect x="478" y="56" width="128" height="48" rx="4" class="dg" stroke-dasharray="4 4"/>
+  <text x="492" y="76" class="mono">4 EMAIL</text>
+  <text x="492" y="94" class="danger">never ran</text>
+  <line x1="606" y1="80" x2="624" y2="80" class="dg" stroke-dasharray="4 4"/>
+
+  <rect x="624" y="56" width="128" height="48" rx="4" class="dg" stroke-dasharray="4 4"/>
+  <text x="638" y="76" class="mono">5 CLOSE</text>
+  <text x="638" y="94" class="danger">never ran</text>
+
+  <!-- DIY recovery -->
+  <rect x="40" y="136" width="720" height="86" rx="4" class="dg"/>
+  <text x="58" y="162" class="danger">WITHOUT AN ENGINE · YOU BUILD THE RECOVERY</text>
+  <text x="58" y="186" class="mono">status='SHIPMENT_CREATED' · retry cron every 60s · "where was I?" query</text>
+  <text x="58" y="208" class="text">the state machine lives in a table, a cron, and your head — rebuilt for every flow</text>
+
+  <!-- durable engine -->
+  <rect x="40" y="242" width="720" height="86" rx="4" class="a"/>
+  <text x="58" y="268" class="acc">WITH A DURABLE ENGINE · THE CODE RECOVERS</text>
+  <text x="58" y="292" class="acc">replay the journal → steps 1–3 return recorded results → resume at step 4</text>
+  <text x="58" y="314" class="text">the same straight-line function, picked up mid-body on a fresh machine</text>
+
+  <text x="40" y="352" class="label">DIY: YOU REMEMBER WHERE YOU WERE · DURABLE: THE JOURNAL REMEMBERS FOR YOU</text>
+</svg>

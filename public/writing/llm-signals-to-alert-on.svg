@@ -1,0 +1,51 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-signals">
+  <title id="t-signals">Four families of LLM signals worth alerting on — cost, latency, behavior, and quality, each with an example alert</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">FOUR SIGNALS · THE FAILURES THAT NEVER THROW A 500</text>
+
+  <!-- COST -->
+  <rect x="40" y="56" width="345" height="120" rx="4" class="a"/>
+  <text x="58" y="82" class="acc">COST</text>
+  <text x="58" y="106" class="text">per-request spend · token drift</text>
+  <text x="58" y="130" class="mono">cost/req &gt; 2× 7-day baseline</text>
+  <text x="58" y="154" class="label">CATCHES THE PROMPT EDIT THAT DOUBLED INPUT TOKENS</text>
+
+  <!-- LATENCY -->
+  <rect x="415" y="56" width="345" height="120" rx="4" class="s"/>
+  <text x="433" y="82" class="text" style="font-weight:700">LATENCY</text>
+  <text x="433" y="106" class="text">llm span time vs tool time</text>
+  <text x="433" y="130" class="mono">tool p95 &gt; llm p95</text>
+  <text x="433" y="154" class="label">THE MODEL ISN'T SLOW — A TOOL IS</text>
+
+  <!-- BEHAVIOR -->
+  <rect x="40" y="196" width="345" height="120" rx="4" class="dg"/>
+  <text x="58" y="222" class="danger">BEHAVIOR</text>
+  <text x="58" y="246" class="text">loop depth · tool error rate</text>
+  <text x="58" y="270" class="mono">step_count &gt; 8 → runaway agent</text>
+  <text x="58" y="294" class="label">CATCHES THE AGENT THAT LOOPED 14× BEFORE ANSWERING</text>
+
+  <!-- QUALITY -->
+  <rect x="415" y="196" width="345" height="120" rx="4" class="s"/>
+  <text x="433" y="222" class="text" style="font-weight:700">QUALITY</text>
+  <text x="433" y="246" class="text">eval scores · user feedback</text>
+  <text x="433" y="270" class="mono">thumbs_down rate up on model v2</text>
+  <text x="433" y="294" class="label">FILTERABLE BY MODEL + PROMPT VERSION</text>
+
+  <text x="40" y="348" class="label">ALERT ON SPEND · ON THE SLOW SPAN · ON RUNAWAY LOOPS · ON DROPPING QUALITY</text>
+</svg>

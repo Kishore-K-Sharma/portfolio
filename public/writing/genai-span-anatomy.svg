@@ -1,0 +1,51 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-span-anat">
+  <title id="t-span-anat">Anatomy of one GenAI span — standard vendor-neutral attributes, with prompt and completion content flagged as opt-in</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .sm{stroke:#b3b3bd;fill:none;stroke-width:1;stroke-dasharray:4 4}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.sm{stroke:#4a4a55}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">ONE gen_ai SPAN · SAME SHAPE FOR OPENAI · ANTHROPIC · LOCAL MODEL</text>
+
+  <!-- span header -->
+  <rect x="40" y="52" width="720" height="34" rx="4" class="a"/>
+  <text x="58" y="74" class="acc">SPAN  gen_ai.operation.name = "chat"</text>
+
+  <!-- standard attributes box -->
+  <rect x="40" y="102" width="430" height="220" rx="4" class="s"/>
+  <text x="58" y="126" class="label">STANDARD ATTRIBUTES · VENDOR-NEUTRAL</text>
+  <text x="58" y="154" class="mono">gen_ai.request.model      "gpt-4o"</text>
+  <text x="58" y="178" class="mono">gen_ai.usage.input_tokens 2,800</text>
+  <text x="58" y="202" class="mono">gen_ai.usage.output_tokens  200</text>
+  <text x="58" y="226" class="mono">gen_ai.response.finish_reason "stop"</text>
+  <text x="58" y="250" class="mono">gen_ai.request.temperature  0.2</text>
+  <text x="58" y="278" class="acc">cost.usd = tokens × price table = $0.021</text>
+  <text x="58" y="302" class="label">BOUNDED · LOW-CARDINALITY · SAFE TO INDEX</text>
+
+  <!-- opt-in content box -->
+  <rect x="490" y="102" width="270" height="220" rx="4" class="dg"/>
+  <text x="508" y="126" class="danger">OPT-IN CONTENT · OFF BY DEFAULT</text>
+  <text x="508" y="156" class="mono">gen_ai.prompt</text>
+  <text x="508" y="176" class="text">full user + system text</text>
+  <text x="508" y="204" class="mono">gen_ai.completion</text>
+  <text x="508" y="224" class="text">full model answer</text>
+  <line x1="508" y1="244" x2="742" y2="244" class="sm"/>
+  <text x="508" y="268" class="danger">PII + PAYLOAD BLOAT</text>
+  <text x="508" y="292" class="text">sample it · redact it ·</text>
+  <text x="508" y="310" class="text">or log hash + length only</text>
+
+  <text x="40" y="348" class="label">METRICS + FINISH REASONS ALWAYS · RAW PROMPTS ONLY WHEN YOU DELIBERATELY TURN THEM ON</text>
+</svg>

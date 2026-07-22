@@ -1,0 +1,70 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-pikc">
+  <title id="t-pikc">The indirect prompt injection kill chain</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fdg{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fdg{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">INDIRECT INJECTION · THE AGENT NEVER SEES THE ATTACKER</text>
+
+  <!-- Step 1 -->
+  <rect x="40" y="64" width="150" height="96" rx="4" class="dg"/>
+  <text x="52" y="86" class="danger">1 · PLANT</text>
+  <text x="52" y="110" class="text">attacker hides a</text>
+  <text x="52" y="128" class="text">instruction inside an</text>
+  <text x="52" y="146" class="mono">email · page · PDF</text>
+
+  <!-- Step 2 -->
+  <rect x="230" y="64" width="150" height="96" rx="4" class="s"/>
+  <text x="242" y="86" class="label">2 · READ</text>
+  <text x="242" y="110" class="text">agent fetches the</text>
+  <text x="242" y="128" class="text">content into its</text>
+  <text x="242" y="146" class="mono">context window</text>
+
+  <!-- Step 3 -->
+  <rect x="420" y="64" width="150" height="96" rx="4" class="dg"/>
+  <text x="432" y="86" class="danger">3 · OBEY</text>
+  <text x="432" y="110" class="text">model can't tell data</text>
+  <text x="432" y="128" class="text">from orders — follows</text>
+  <text x="432" y="146" class="danger">the hidden text</text>
+
+  <!-- Step 4 -->
+  <rect x="610" y="64" width="150" height="96" rx="4" class="dg"/>
+  <text x="622" y="86" class="danger">4 · ACT</text>
+  <text x="622" y="110" class="text">agent calls a tool</text>
+  <text x="622" y="128" class="mono">send() · fetch()</text>
+  <text x="622" y="146" class="text">as instructed</text>
+
+  <!-- arrows between steps -->
+  <line x1="190" y1="112" x2="228" y2="112" class="dg"/>
+  <polygon points="228,112 220,108 220,116" class="fdg"/>
+  <line x1="380" y1="112" x2="418" y2="112" class="dg"/>
+  <polygon points="418,112 410,108 410,116" class="fdg"/>
+  <line x1="570" y1="112" x2="608" y2="112" class="dg"/>
+  <polygon points="608,112 600,108 600,116" class="fdg"/>
+
+  <!-- down arrow to outcome -->
+  <line x1="685" y1="160" x2="685" y2="232" class="dg"/>
+  <polygon points="685,232 681,224 689,224" class="fdg"/>
+
+  <!-- outcome banner -->
+  <rect x="40" y="232" width="720" height="72" rx="4" class="dg"/>
+  <text x="58" y="258" class="danger">5 · EXFILTRATE</text>
+  <text x="58" y="282" class="text">private data leaves the boundary — mailed out, POSTed to an attacker URL,</text>
+  <text x="58" y="300" class="text">or smuggled inside a markdown image the client silently fetches.</text>
+
+  <text x="40" y="344" class="label">UNTRUSTED CONTENT BECAME A COMMAND · THE TOOL CALL MADE IT REAL</text>
+</svg>

@@ -1,0 +1,51 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-a2a">
+  <title id="t-a2a">The A2A delegation lifecycle</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">DISCOVER · DELEGATE · WORK · RETURN</text>
+
+  <!-- client -->
+  <rect x="40" y="70" width="150" height="220" rx="4" class="s"/>
+  <text x="115" y="96" text-anchor="middle" class="text" style="font-weight:700">CLIENT AGENT</text>
+  <line x1="56" y1="108" x2="174" y2="108" class="s" stroke-dasharray="4 4"/>
+  <text x="115" y="150" text-anchor="middle" class="mono">1. read</text>
+  <text x="115" y="168" text-anchor="middle" class="mono">Agent Card</text>
+  <text x="115" y="212" text-anchor="middle" class="mono">2. create</text>
+  <text x="115" y="230" text-anchor="middle" class="mono">task</text>
+
+  <!-- remote -->
+  <rect x="500" y="70" width="260" height="220" rx="4" class="a"/>
+  <text x="630" y="96" text-anchor="middle" class="acc">REMOTE AGENT</text>
+  <line x1="516" y1="108" x2="744" y2="108" class="a" stroke-dasharray="4 4"/>
+  <text x="518" y="140" class="label">TASK LIFECYCLE</text>
+  <text x="518" y="164" class="mono">submitted → working</text>
+  <text x="518" y="188" class="mono">→ input-required?</text>
+  <text x="518" y="212" class="mono">→ completed</text>
+  <text x="518" y="252" class="text">its own model · tools · context</text>
+  <text x="518" y="272" class="label">OPAQUE PEER</text>
+
+  <!-- arrows between -->
+  <line x1="190" y1="158" x2="498" y2="140" class="a"/>
+  <text x="345" y="132" text-anchor="middle" class="acc">GET card + create task →</text>
+
+  <line x1="498" y1="200" x2="192" y2="200" class="s"/>
+  <text x="345" y="194" text-anchor="middle" class="label">← STATUS MESSAGES (STREAM)</text>
+
+  <line x1="498" y1="240" x2="192" y2="252" class="a"/>
+  <text x="345" y="272" text-anchor="middle" class="acc">← return artifact</text>
+
+  <text x="40" y="344" class="label">CARD FOR DISCOVERY · TASK FOR WORK · MESSAGES FOR PROGRESS · ARTIFACT FOR RESULT</text>
+</svg>

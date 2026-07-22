@@ -1,0 +1,52 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-layers">
+  <title id="t-layers">MCP is vertical, A2A is horizontal</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">TWO AXES · TWO PROTOCOLS</text>
+
+  <!-- central agent -->
+  <rect x="330" y="150" width="140" height="60" rx="4" class="a"/>
+  <text x="400" y="176" text-anchor="middle" class="acc">YOUR AGENT</text>
+  <text x="400" y="196" text-anchor="middle" class="text">model + loop</text>
+
+  <!-- peer agents (horizontal, A2A) -->
+  <rect x="40" y="155" width="150" height="50" rx="4" class="s"/>
+  <text x="115" y="178" text-anchor="middle" class="text" style="font-weight:700">RESEARCH AGENT</text>
+  <text x="115" y="196" text-anchor="middle" class="label">PEER</text>
+
+  <rect x="610" y="155" width="150" height="50" rx="4" class="s"/>
+  <text x="685" y="178" text-anchor="middle" class="text" style="font-weight:700">CODING AGENT</text>
+  <text x="685" y="196" text-anchor="middle" class="label">PEER</text>
+
+  <line x1="190" y1="180" x2="328" y2="180" class="a"/>
+  <line x1="472" y1="180" x2="608" y2="180" class="a"/>
+  <text x="400" y="128" text-anchor="middle" class="acc">A2A: agent ↔ agent (horizontal)</text>
+
+  <!-- MCP servers (vertical, below) -->
+  <rect x="150" y="285" width="140" height="46" rx="4" class="s"/>
+  <text x="220" y="313" text-anchor="middle" class="mono">tools</text>
+  <rect x="330" y="285" width="140" height="46" rx="4" class="s"/>
+  <text x="400" y="313" text-anchor="middle" class="mono">database</text>
+  <rect x="510" y="285" width="140" height="46" rx="4" class="s"/>
+  <text x="580" y="313" text-anchor="middle" class="mono">APIs</text>
+
+  <line x1="380" y1="210" x2="220" y2="283" class="s"/>
+  <line x1="400" y1="210" x2="400" y2="283" class="s"/>
+  <line x1="420" y1="210" x2="580" y2="283" class="s"/>
+  <text x="400" y="258" text-anchor="middle" class="label">MCP: AGENT ↔ TOOLS (VERTICAL)</text>
+
+  <text x="40" y="352" class="label">MCP PLUGS CAPABILITIES IN · A2A DELEGATES TO PEERS · A REAL AGENT SPEAKS BOTH</text>
+</svg>
