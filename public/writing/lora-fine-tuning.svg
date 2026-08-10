@@ -1,0 +1,73 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-lora">
+  <title id="t-lora">LoRA: freeze the base weights, train a tiny low-rank adapter</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="45" y="32" class="label">LoRA · FREEZE THE BILLIONS, TRAIN THE FEW-MB ADAPTER</text>
+
+  <!-- frozen base W -->
+  <rect x="50" y="60" width="180" height="150" rx="4" class="s"/>
+  <text x="140" y="86" text-anchor="middle" class="danger">FROZEN BASE</text>
+  <text x="140" y="140" text-anchor="middle" class="text" style="font-size:44px;font-weight:700">W</text>
+  <text x="140" y="170" text-anchor="middle" class="mono">billions of params</text>
+  <text x="140" y="192" text-anchor="middle" class="danger">not trained</text>
+  <!-- lock glyph -->
+  <path d="M203 78 v-4 a6 6 0 0 1 12 0 v4" class="dg"/>
+  <rect x="199" y="78" width="20" height="15" rx="2" class="dg"/>
+
+  <text x="252" y="140" text-anchor="middle" class="text" style="font-size:26px">+</text>
+
+  <!-- LoRA adapter -->
+  <rect x="278" y="60" width="200" height="150" rx="4" class="a"/>
+  <text x="378" y="86" text-anchor="middle" class="acc" style="font-weight:700">LoRA ADAPTER</text>
+  <!-- A and B low-rank matrices -->
+  <rect x="308" y="104" width="26" height="66" class="a"/>
+  <text x="321" y="184" text-anchor="middle" class="acc">A</text>
+  <text x="350" y="142" text-anchor="middle" class="text">×</text>
+  <rect x="366" y="118" width="66" height="26" class="a"/>
+  <text x="399" y="112" text-anchor="middle" class="acc">B</text>
+  <text x="378" y="200" text-anchor="middle" class="mono">rank r · trains · few MB · &lt;1%</text>
+
+  <text x="500" y="140" text-anchor="middle" class="text" style="font-size:26px">=</text>
+
+  <!-- output -->
+  <rect x="524" y="60" width="246" height="150" rx="4" class="s"/>
+  <text x="647" y="86" text-anchor="middle" class="label">OUTPUT</text>
+  <text x="647" y="122" text-anchor="middle" class="mono" style="font-size:13px">y = W·x + (B·A)·x</text>
+  <text x="647" y="150" text-anchor="middle" class="text">frozen W  +  adapter Δ</text>
+  <text x="647" y="182" text-anchor="middle" class="acc">main knobs: rank r · alpha</text>
+
+  <!-- hot-swap row -->
+  <text x="45" y="248" class="label">ONE BASE, MANY ADAPTERS — HOT-SWAP PER REQUEST</text>
+
+  <rect x="50" y="262" width="130" height="50" rx="4" class="s"/>
+  <text x="115" y="284" text-anchor="middle" class="text" style="font-weight:700">BASE (shared)</text>
+  <text x="115" y="302" text-anchor="middle" class="mono">loaded once</text>
+
+  <line x1="180" y1="287" x2="222" y2="287" class="a"/>
+
+  <rect x="224" y="262" width="150" height="50" rx="4" class="a"/>
+  <text x="299" y="291" text-anchor="middle" class="acc">adapter: sql-gen</text>
+
+  <rect x="392" y="262" width="150" height="50" rx="4" class="a"/>
+  <text x="467" y="291" text-anchor="middle" class="acc">adapter: support</text>
+
+  <rect x="560" y="262" width="180" height="50" rx="4" class="a"/>
+  <text x="650" y="291" text-anchor="middle" class="acc">adapter: summarize</text>
+
+  <text x="45" y="344" class="label">QLoRA · TRAIN THE ADAPTER OVER A 4-BIT QUANTIZED BASE → FITS ON A SINGLE GPU</text>
+</svg>

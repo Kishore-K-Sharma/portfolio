@@ -1,0 +1,62 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-pl">
+  <title id="t-pl">The pipeline: schema compiles to a cached grammar, decode guarantees structure, validation guarantees values</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="30" class="label">SCHEMA IS THE CONTRACT · STRUCTURE BY DECODE, VALUES BY VALIDATION</text>
+
+  <!-- TOP ROW L->R -->
+  <rect x="40" y="60" width="200" height="72" rx="4" class="a"/>
+  <text x="56" y="82" class="label">STAGE 1 · CONTRACT</text>
+  <text x="56" y="106" class="text" style="font-weight:700">JSON Schema</text>
+  <text x="56" y="124" class="mono">required keys · enums · types</text>
+
+  <line x1="240" y1="96" x2="292" y2="96" class="s"/>
+  <rect x="292" y="60" width="200" height="72" rx="4" class="s"/>
+  <text x="308" y="82" class="label">STAGE 2 · ONE-TIME</text>
+  <text x="308" y="106" class="text" style="font-weight:700">compile → grammar/FSM</text>
+  <text x="308" y="124" class="mono">cached per schema</text>
+
+  <line x1="492" y1="96" x2="544" y2="96" class="s"/>
+  <rect x="544" y="60" width="216" height="72" rx="4" class="a"/>
+  <text x="560" y="82" class="label">STAGE 3</text>
+  <text x="560" y="106" class="text" style="font-weight:700">constrained decode</text>
+  <text x="560" y="124" class="mono">mask illegal tokens each step</text>
+
+  <!-- drop down -->
+  <line x1="652" y1="132" x2="652" y2="196" class="a"/>
+
+  <!-- BOTTOM ROW R->L -->
+  <rect x="544" y="196" width="216" height="72" rx="4" class="a"/>
+  <text x="560" y="218" class="label">STAGE 4</text>
+  <text x="560" y="242" class="text" style="font-weight:700">valid JSON</text>
+  <text x="560" y="260" class="mono">structure guaranteed</text>
+
+  <line x1="544" y1="232" x2="492" y2="232" class="s"/>
+  <rect x="292" y="196" width="200" height="72" rx="4" class="s"/>
+  <text x="308" y="218" class="label">STAGE 5 · BOUNDARY</text>
+  <text x="308" y="242" class="text" style="font-weight:700">validate values</text>
+  <text x="308" y="260" class="mono">zod / pydantic</text>
+
+  <line x1="292" y1="232" x2="240" y2="232" class="s"/>
+  <rect x="40" y="196" width="200" height="72" rx="4" class="a"/>
+  <text x="56" y="218" class="label">STAGE 6</text>
+  <text x="56" y="242" class="text" style="font-weight:700">typed object</text>
+  <text x="56" y="260" class="mono">into your app</text>
+
+  <text x="40" y="316" class="text">Decode guarantees the <tspan class="acc">shape</tspan>. Validation guarantees the <tspan class="acc">values</tspan>. Treat the model like an unreliable upstream service.</text>
+</svg>

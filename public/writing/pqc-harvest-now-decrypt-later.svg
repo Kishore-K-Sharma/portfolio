@@ -1,0 +1,59 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-hndl">
+  <title id="t-hndl">Harvest now, decrypt later: capture ciphertext today, decrypt it once a quantum computer exists</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">HARVEST NOW, DECRYPT LATER · THE ATTACK IS SPLIT ACROSS TIME</text>
+
+  <!-- timeline spine -->
+  <line x1="70" y1="150" x2="730" y2="150" class="s"/>
+  <path d="M730 150 l-9 -4 v8 z" class="s" fill="#1a1a24"/>
+
+  <!-- tick: today -->
+  <line x1="150" y1="142" x2="150" y2="158" class="s"/>
+  <text x="150" y="128" text-anchor="middle" class="acc">TODAY</text>
+
+  <!-- tick: future -->
+  <line x1="650" y1="142" x2="650" y2="158" class="s"/>
+  <text x="650" y="128" text-anchor="middle" class="danger">SOMEDAY</text>
+
+  <!-- capture box (today) -->
+  <rect x="46" y="176" width="210" height="96" rx="4" class="s"/>
+  <text x="62" y="200" class="label">STEP 1 · CHEAP, EXISTS NOW</text>
+  <text x="62" y="224" class="text" style="font-weight:700">CAPTURE CIPHERTEXT</text>
+  <text x="62" y="246" class="mono">record TLS off the wire</text>
+  <text x="62" y="263" class="mono">write to cold storage</text>
+  <line x1="150" y1="158" x2="150" y2="176" class="s"/>
+
+  <!-- waiting gap -->
+  <text x="400" y="196" text-anchor="middle" class="label">YEARS PASS — DATA SITS IN STORAGE</text>
+  <line x1="270" y1="215" x2="530" y2="215" class="dg" stroke-dasharray="4 5"/>
+
+  <!-- decrypt box (someday) -->
+  <rect x="544" y="176" width="210" height="96" rx="4" class="dg"/>
+  <text x="560" y="200" class="label">STEP 2 · WHEN A CRQC EXISTS</text>
+  <text x="560" y="224" class="danger" style="font-weight:700">DECRYPT THE ARCHIVE</text>
+  <text x="560" y="246" class="mono">Shor recovers session keys</text>
+  <text x="560" y="263" class="mono">read all of it, retroactively</text>
+  <line x1="650" y1="158" x2="650" y2="176" class="dg"/>
+
+  <!-- callout -->
+  <rect x="46" y="300" width="708" height="44" rx="4" class="a"/>
+  <text x="62" y="320" class="acc">ALREADY LOST TODAY:</text>
+  <text x="230" y="320" class="text">any secret whose confidentiality must outlive the quantum computer's arrival.</text>
+  <text x="62" y="337" class="text">Sent under RSA / ECDH now = captured now, decrypted later. The breach is just pending.</text>
+</svg>

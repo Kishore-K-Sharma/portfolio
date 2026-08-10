@@ -1,0 +1,72 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-pvc">
+  <title id="t-pvc">Parsing free text fails many ways; constrained decoding is valid by construction</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="30" class="label">TWO WAYS TO GET JSON OUT OF A MODEL</text>
+
+  <!-- TOP LANE: post-hoc parse -->
+  <text x="40" y="58" class="danger">POST-HOC PARSE · "reply in JSON" then hope</text>
+
+  <rect x="40" y="70" width="118" height="52" rx="4" class="s"/>
+  <text x="99" y="92" text-anchor="middle" class="text">prompt:</text>
+  <text x="99" y="110" text-anchor="middle" class="mono">"reply in JSON"</text>
+
+  <line x1="158" y1="96" x2="186" y2="96" class="s"/>
+  <rect x="186" y="70" width="86" height="52" rx="4" class="s"/>
+  <text x="229" y="100" text-anchor="middle" class="text">LLM</text>
+
+  <line x1="272" y1="96" x2="300" y2="96" class="s"/>
+  <rect x="300" y="70" width="118" height="52" rx="4" class="s"/>
+  <text x="359" y="92" text-anchor="middle" class="text">free text</text>
+  <text x="359" y="110" text-anchor="middle" class="mono">blob of chars</text>
+
+  <line x1="418" y1="96" x2="446" y2="96" class="dg"/>
+  <rect x="446" y="70" width="118" height="52" rx="4" class="dg"/>
+  <text x="505" y="100" text-anchor="middle" class="danger">JSON.parse()</text>
+
+  <!-- failure modes -->
+  <rect x="592" y="44" width="176" height="136" rx="4" class="dg"/>
+  <text x="608" y="64" class="label">FAILS ON</text>
+  <text x="608" y="86" class="danger">``` json fences</text>
+  <text x="608" y="106" class="danger">"Sure! here's the…"</text>
+  <text x="608" y="126" class="danger">trailing comma ,}</text>
+  <text x="608" y="146" class="danger">missing / wrong type</text>
+  <text x="608" y="166" class="danger">truncated output</text>
+  <line x1="564" y1="96" x2="592" y2="112" class="dg"/>
+
+  <!-- BOTTOM LANE: constrained decode -->
+  <text x="40" y="228" class="acc">CONSTRAINED DECODE · valid by construction</text>
+
+  <rect x="40" y="240" width="118" height="52" rx="4" class="s"/>
+  <text x="99" y="262" text-anchor="middle" class="text">JSON Schema</text>
+  <text x="99" y="280" text-anchor="middle" class="mono">the contract</text>
+
+  <line x1="158" y1="266" x2="186" y2="266" class="a"/>
+  <rect x="186" y="240" width="150" height="52" rx="4" class="a"/>
+  <text x="261" y="264" text-anchor="middle" class="acc">constrained</text>
+  <text x="261" y="281" text-anchor="middle" class="acc">decode</text>
+
+  <line x1="336" y1="266" x2="364" y2="266" class="a"/>
+  <rect x="364" y="240" width="140" height="52" rx="4" class="a"/>
+  <text x="434" y="270" text-anchor="middle" class="acc">valid JSON  ✓</text>
+
+  <rect x="536" y="228" width="232" height="76" rx="4" class="a"/>
+  <text x="552" y="258" class="text">every token is masked to</text>
+  <text x="552" y="278" class="text">keep output legal —</text>
+  <text x="552" y="296" class="acc">parse can never fail</text>
+</svg>

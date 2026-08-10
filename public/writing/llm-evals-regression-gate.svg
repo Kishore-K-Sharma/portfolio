@@ -1,0 +1,70 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-evgate">
+  <title id="t-evgate">The regression gate: a prompt or model change runs the eval suite, is scored against a baseline, then merges or blocks on a threshold</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fa{fill:#6028d9}
+    .fdg{fill:#c14545}
+    .fac{fill:#6028d9;opacity:0.08}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fa{fill:#b89be8}.fdg{fill:#d97a7a}
+      .fac{fill:#b89be8;opacity:0.14}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="30" class="label">REGRESSION GATE · LIKE A TEST GATE, BUT PROBABILISTIC</text>
+
+  <!-- PR -->
+  <rect x="40" y="60" width="150" height="90" rx="4" class="s"/>
+  <text x="115" y="98" text-anchor="middle" class="text" style="font-weight:700">PR</text>
+  <text x="115" y="120" text-anchor="middle" class="text">prompt or</text>
+  <text x="115" y="138" text-anchor="middle" class="text">model change</text>
+
+  <!-- Eval suite -->
+  <rect x="245" y="60" width="150" height="90" rx="4" class="s"/>
+  <text x="320" y="98" text-anchor="middle" class="acc">EVAL SUITE</text>
+  <text x="320" y="120" text-anchor="middle" class="text">run the versioned</text>
+  <text x="320" y="138" text-anchor="middle" class="text">case set</text>
+
+  <!-- Score vs baseline -->
+  <rect x="450" y="60" width="160" height="90" rx="4" class="fac"/>
+  <rect x="450" y="60" width="160" height="90" rx="4" class="a"/>
+  <text x="530" y="98" text-anchor="middle" class="acc">SCORE vs BASELINE</text>
+  <text x="530" y="120" text-anchor="middle" class="text">win-rate /</text>
+  <text x="530" y="138" text-anchor="middle" class="text">pass-rate</text>
+
+  <line x1="190" y1="105" x2="243" y2="105" class="a"/>
+  <polygon points="243,105 233,100 233,110" class="fa"/>
+  <line x1="395" y1="105" x2="448" y2="105" class="a"/>
+  <polygon points="448,105 438,100 438,110" class="fa"/>
+
+  <!-- Merge branch -->
+  <rect x="650" y="46" width="110" height="62" rx="4" class="a"/>
+  <text x="705" y="72" text-anchor="middle" class="acc">MERGE</text>
+  <text x="705" y="94" text-anchor="middle" class="text">≥ threshold</text>
+
+  <!-- Block branch -->
+  <rect x="650" y="130" width="110" height="62" rx="4" class="dg"/>
+  <text x="705" y="156" text-anchor="middle" class="danger">BLOCK</text>
+  <text x="705" y="178" text-anchor="middle" class="text">dropped below</text>
+
+  <path d="M 610 92 L 630 92 L 630 70 L 648 70" class="a"/>
+  <polygon points="648,70 638,65 638,75" class="fa"/>
+  <path d="M 610 120 L 630 120 L 630 158 L 648 158" class="dg"/>
+  <polygon points="648,158 638,153 638,163" class="fdg"/>
+
+  <!-- Bottom banner -->
+  <rect x="40" y="228" width="720" height="96" rx="4" class="s"/>
+  <text x="58" y="256" class="acc">THE GATE IS A THRESHOLD, NOT A BOOLEAN</text>
+  <text x="58" y="282" class="text">Some cases will always be flaky, and a green run isn't 100%. Set a bar against the baseline —</text>
+  <text x="58" y="302" class="text">"win-rate must not drop, pass-rate stays above 90%" — and block the merge when the candidate falls under it.</text>
+</svg>

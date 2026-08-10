@@ -1,0 +1,92 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-rings">
+  <title id="t-rings">Two ring buffers in one shared mmap region straddling the user and kernel boundary</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .facc{fill:#6028d9;opacity:0.10}
+    .fsh{fill:#6028d9;opacity:0.045}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .facc{fill:#b89be8;opacity:0.18}.fsh{fill:#b89be8;opacity:0.08}.fs{fill:#1a1a24}
+    }
+  </style>
+  <defs>
+    <marker id="ah-a" markerWidth="9" markerHeight="8" refX="7" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 z" fill="#6028d9"/></marker>
+    <marker id="ah-n" markerWidth="9" markerHeight="8" refX="7" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 z" fill="#5c5c66"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="32" class="label">SHARED RING BUFFERS · APP FILLS THE SQ · KERNEL FILLS THE CQ · NOTHING COPIED</text>
+
+  <!-- user / kernel vertical boundary -->
+  <line x1="400" y1="52" x2="400" y2="344" class="s" stroke-dasharray="6 5"/>
+  <text x="392" y="66" text-anchor="end" class="label">USER ◂</text>
+  <text x="408" y="66" class="label">▸ KERNEL</text>
+
+  <!-- shared mmap region (straddles the boundary) -->
+  <rect x="210" y="78" width="380" height="252" rx="6" class="fsh"/>
+  <rect x="210" y="78" width="380" height="252" rx="6" class="a" stroke-dasharray="3 3"/>
+  <text x="400" y="100" text-anchor="middle" class="acc">SHARED mmap REGION — one page, both sides read/write</text>
+
+  <!-- SQ ring -->
+  <text x="226" y="126" class="text" style="font-weight:700">SQ · submission queue</text>
+  <text x="574" y="126" text-anchor="end" class="label">head ▸consume   ▸append tail</text>
+  <rect x="226" y="134" width="348" height="40" rx="3" class="s"/>
+  <line x1="284" y1="134" x2="284" y2="174" class="s"/>
+  <line x1="342" y1="134" x2="342" y2="174" class="s"/>
+  <line x1="400" y1="134" x2="400" y2="174" class="s"/>
+  <line x1="458" y1="134" x2="458" y2="174" class="s"/>
+  <line x1="516" y1="134" x2="516" y2="174" class="s"/>
+  <rect x="227" y="135" width="56" height="38" class="facc"/>
+  <rect x="285" y="135" width="56" height="38" class="facc"/>
+  <rect x="343" y="135" width="56" height="38" class="facc"/>
+  <text x="255" y="159" text-anchor="middle" class="mono" style="font-size:10px">SQE</text>
+  <text x="313" y="159" text-anchor="middle" class="mono" style="font-size:10px">SQE</text>
+  <text x="371" y="159" text-anchor="middle" class="mono" style="font-size:10px">SQE</text>
+
+  <!-- CQ ring -->
+  <text x="226" y="236" class="text" style="font-weight:700">CQ · completion queue</text>
+  <text x="574" y="236" text-anchor="end" class="label">tail append◂   reap◂ head</text>
+  <rect x="226" y="244" width="348" height="40" rx="3" class="s"/>
+  <line x1="284" y1="244" x2="284" y2="284" class="s"/>
+  <line x1="342" y1="244" x2="342" y2="284" class="s"/>
+  <line x1="400" y1="244" x2="400" y2="284" class="s"/>
+  <line x1="458" y1="244" x2="458" y2="284" class="s"/>
+  <line x1="516" y1="244" x2="516" y2="284" class="s"/>
+  <rect x="459" y="245" width="56" height="38" class="facc"/>
+  <rect x="517" y="245" width="56" height="38" class="facc"/>
+  <text x="487" y="269" text-anchor="middle" class="mono" style="font-size:10px">CQE</text>
+  <text x="545" y="269" text-anchor="middle" class="mono" style="font-size:10px">CQE</text>
+
+  <!-- APPLICATION box -->
+  <rect x="40" y="150" width="120" height="96" rx="5" class="s"/>
+  <text x="100" y="192" text-anchor="middle" class="text" style="font-weight:700">APPLICATION</text>
+  <text x="100" y="212" text-anchor="middle" class="label">user space</text>
+
+  <!-- KERNEL box -->
+  <rect x="640" y="150" width="120" height="96" rx="5" class="s"/>
+  <text x="700" y="192" text-anchor="middle" class="text" style="font-weight:700">KERNEL</text>
+  <text x="700" y="212" text-anchor="middle" class="label">executes async</text>
+
+  <!-- flow arrows -->
+  <!-- 1: app writes SQE -->
+  <path d="M162 168 L222 150" class="a" marker-end="url(#ah-a)"/>
+  <text x="168" y="140" class="acc" style="font-size:10px">① writes SQE</text>
+  <!-- 2: kernel reads SQ -->
+  <path d="M578 150 L636 168" class="s" marker-end="url(#ah-n)"/>
+  <text x="600" y="140" class="label">② reads SQ</text>
+  <!-- 3: kernel writes CQE -->
+  <path d="M636 232 L578 262" class="a" marker-end="url(#ah-a)"/>
+  <text x="590" y="308" class="acc" style="font-size:10px">③ writes CQE</text>
+  <!-- 4: app reaps CQE -->
+  <path d="M222 262 L162 232" class="s" marker-end="url(#ah-n)"/>
+  <text x="150" y="308" class="label">④ reaps CQE</text>
+</svg>

@@ -1,0 +1,59 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-levers">
+  <title id="t-levers">Three levers for adapting an LLM: prompting, RAG, and fine-tuning compose</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="45" y="34" class="label">THREE LEVERS FOR ADAPTING ONE LLM · THEY COMPOSE</text>
+
+  <!-- lever 1: prompting -->
+  <rect x="45" y="64" width="215" height="150" rx="4" class="s"/>
+  <text x="63" y="90" class="label">LEVER 1</text>
+  <text x="63" y="116" class="text" style="font-size:15px;font-weight:700">PROMPTING</text>
+  <text x="63" y="140" class="mono">system prompt + few-shot</text>
+  <text x="63" y="170" class="label">CHANGES</text>
+  <text x="63" y="190" class="acc" style="font-weight:700">steering (within ability)</text>
+  <text x="63" y="206" class="mono">cheapest · instant · no train</text>
+
+  <!-- lever 2: RAG -->
+  <rect x="292" y="64" width="215" height="150" rx="4" class="s"/>
+  <text x="310" y="90" class="label">LEVER 2</text>
+  <text x="310" y="116" class="text" style="font-size:15px;font-weight:700">RAG</text>
+  <text x="310" y="140" class="mono">retrieve from ext. store</text>
+  <text x="310" y="170" class="label">CHANGES</text>
+  <text x="310" y="190" class="acc" style="font-weight:700">knowledge (at inference)</text>
+  <text x="310" y="206" class="mono">fresh · private · citable</text>
+
+  <!-- lever 3: fine-tuning -->
+  <rect x="540" y="64" width="215" height="150" rx="4" class="s"/>
+  <text x="558" y="90" class="label">LEVER 3</text>
+  <text x="558" y="116" class="text" style="font-size:15px;font-weight:700">FINE-TUNING</text>
+  <text x="558" y="140" class="mono">update the weights</text>
+  <text x="558" y="170" class="label">CHANGES</text>
+  <text x="558" y="190" class="acc" style="font-weight:700">behavior (baked in)</text>
+  <text x="558" y="206" class="mono">skills · style · format</text>
+
+  <!-- connectors to base -->
+  <line x1="152" y1="214" x2="152" y2="270" class="s"/>
+  <line x1="399" y1="214" x2="399" y2="270" class="s"/>
+  <line x1="647" y1="214" x2="647" y2="270" class="s"/>
+
+  <!-- base model bar -->
+  <rect x="45" y="270" width="710" height="44" rx="4" class="a"/>
+  <text x="400" y="297" text-anchor="middle" class="text" style="font-weight:700">ONE BASE MODEL · general-purpose LLM</text>
+
+  <text x="45" y="344" class="label">PULL ALL THREE AT ONCE — KNOWLEDGE (RAG) + BEHAVIOR (FINE-TUNE) + STEERING (PROMPT)</text>
+</svg>

@@ -1,0 +1,65 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-atm">
+  <title id="t-atm">Agent sandbox threat model: hostile code contained, blocked from everything that matters</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fdgc{fill:#c14545;opacity:0.12}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fdgc{fill:#d97a7a;opacity:0.16}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="32" class="label">AGENT SANDBOX THREAT MODEL · ASSUME THE CODE IS HOSTILE</text>
+
+  <!-- sandbox boundary -->
+  <rect x="40" y="118" width="260" height="130" rx="6" class="dg"/>
+  <rect x="40" y="118" width="260" height="130" rx="6" class="fdgc"/>
+  <text x="58" y="142" class="label">SANDBOX BOUNDARY</text>
+  <text x="58" y="170" class="danger">UNTRUSTED CODE</text>
+  <text x="58" y="192" class="text">LLM-generated ·</text>
+  <text x="58" y="210" class="text">attacker-steered</text>
+  <text x="58" y="234" class="mono">exec · shell · interpreter</text>
+
+  <!-- must-not-reach targets -->
+  <rect x="520" y="52" width="240" height="46" rx="4" class="s"/>
+  <text x="540" y="72" class="text" style="font-weight:700">HOST KERNEL</text>
+  <text x="540" y="90" class="mono">no escape to the host</text>
+
+  <rect x="520" y="112" width="240" height="46" rx="4" class="s"/>
+  <text x="540" y="132" class="text" style="font-weight:700">SECRETS &amp; CREDENTIALS</text>
+  <text x="540" y="150" class="mono">cloud keys · tokens · env</text>
+
+  <rect x="520" y="172" width="240" height="46" rx="4" class="s"/>
+  <text x="540" y="192" class="text" style="font-weight:700">NETWORK</text>
+  <text x="540" y="210" class="mono">no egress · no exfiltration</text>
+
+  <rect x="520" y="232" width="240" height="46" rx="4" class="s"/>
+  <text x="540" y="252" class="text" style="font-weight:700">OTHER TENANTS</text>
+  <text x="540" y="270" class="mono">no cross-sandbox reach</text>
+
+  <!-- blocked arrows -->
+  <line x1="300" y1="150" x2="500" y2="75" class="dg" stroke-dasharray="5 4"/>
+  <line x1="300" y1="168" x2="500" y2="135" class="dg" stroke-dasharray="5 4"/>
+  <line x1="300" y1="188" x2="500" y2="195" class="dg" stroke-dasharray="5 4"/>
+  <line x1="300" y1="208" x2="500" y2="255" class="dg" stroke-dasharray="5 4"/>
+
+  <!-- block marks -->
+  <g class="dg">
+    <line x1="393" y1="106" x2="407" y2="120"/><line x1="407" y1="106" x2="393" y2="120"/>
+    <line x1="393" y1="145" x2="407" y2="159"/><line x1="407" y1="145" x2="393" y2="159"/>
+    <line x1="393" y1="191" x2="407" y2="205"/><line x1="407" y1="191" x2="393" y2="205"/>
+    <line x1="393" y1="224" x2="407" y2="238"/><line x1="407" y1="224" x2="393" y2="238"/>
+  </g>
+
+  <text x="40" y="304" class="acc">THE BOUNDARY IS THE PRODUCT</text>
+  <text x="40" y="326" class="text">a successful hijack still reaches nothing worth reaching</text>
+</svg>

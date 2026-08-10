@@ -1,0 +1,81 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-gm">
+  <title id="t-gm">A grammar masks illegal tokens to negative infinity before sampling</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="30" class="label">ONE DECODING STEP · MASK ILLEGAL TOKENS TO −∞</text>
+
+  <!-- FSM state -->
+  <rect x="40" y="54" width="228" height="104" rx="4" class="a"/>
+  <text x="58" y="76" class="label">GRAMMAR / FSM STATE</text>
+  <text x="58" y="102" class="text">emitted so far:  <tspan class="acc">{</tspan></text>
+  <text x="58" y="126" class="text">legal next token:</text>
+  <text x="58" y="146" class="acc">a string key, or  }</text>
+
+  <!-- token table -->
+  <text x="308" y="52" class="label">TOKEN</text>
+  <text x="470" y="52" class="label" text-anchor="end">LOGIT</text>
+  <text x="640" y="52" class="label" text-anchor="end">AFTER MASK</text>
+
+  <!-- keep: " -->
+  <text x="308" y="80" class="acc">"</text>
+  <text x="470" y="80" class="mono" text-anchor="end">2.1</text>
+  <text x="640" y="80" class="acc" text-anchor="end">2.1</text>
+  <line x1="300" y1="90" x2="660" y2="90" class="s" stroke-width="0.5"/>
+
+  <!-- keep: } -->
+  <text x="308" y="110" class="acc">}</text>
+  <text x="470" y="110" class="mono" text-anchor="end">0.4</text>
+  <text x="640" y="110" class="acc" text-anchor="end">0.4</text>
+  <line x1="300" y1="120" x2="660" y2="120" class="s" stroke-width="0.5"/>
+
+  <!-- mask: foo (highest logit!) -->
+  <text x="308" y="140" class="danger">foo</text>
+  <text x="470" y="140" class="mono" text-anchor="end">3.8</text>
+  <text x="640" y="140" class="danger" text-anchor="end">−∞</text>
+  <line x1="300" y1="150" x2="660" y2="150" class="s" stroke-width="0.5"/>
+
+  <!-- mask: Sure -->
+  <text x="308" y="170" class="danger">Sure</text>
+  <text x="470" y="170" class="mono" text-anchor="end">1.9</text>
+  <text x="640" y="170" class="danger" text-anchor="end">−∞</text>
+  <line x1="300" y1="180" x2="660" y2="180" class="s" stroke-width="0.5"/>
+
+  <!-- mask: [ -->
+  <text x="308" y="200" class="danger">[</text>
+  <text x="470" y="200" class="mono" text-anchor="end">1.2</text>
+  <text x="640" y="200" class="danger" text-anchor="end">−∞</text>
+  <line x1="300" y1="210" x2="660" y2="210" class="s" stroke-width="0.5"/>
+
+  <!-- mask: 42 -->
+  <text x="308" y="230" class="danger">42</text>
+  <text x="470" y="230" class="mono" text-anchor="end">0.7</text>
+  <text x="640" y="230" class="danger" text-anchor="end">−∞</text>
+
+  <!-- sample -->
+  <line x1="668" y1="80" x2="700" y2="80" class="a"/>
+  <rect x="672" y="250" width="96" height="60" rx="4" class="a"/>
+  <text x="720" y="274" text-anchor="middle" class="label">SAMPLE</text>
+  <text x="720" y="296" text-anchor="middle" class="acc">picks  "</text>
+
+  <text x="40" y="196" class="danger">note: "foo" had the</text>
+  <text x="40" y="214" class="danger">highest logit — the</text>
+  <text x="40" y="232" class="danger">model wanted it, the</text>
+  <text x="40" y="250" class="danger">grammar forbade it.</text>
+
+  <text x="40" y="330" class="text">The model literally cannot emit a syntactically invalid character.</text>
+</svg>

@@ -1,0 +1,97 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-bva">
+  <title id="t-bva">Brute force compares against every vector; ANN walks a graph and touches a handful</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fdot{fill:#1a1a24}
+    .fadot{fill:#6028d9}
+    .fddot{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fdot{fill:#e8e4d8}.fadot{fill:#b89be8}.fddot{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="32" class="label">FINDING THE NEAREST NEIGHBORS · TWO STRATEGIES</text>
+
+  <!-- divider -->
+  <line x1="400" y1="56" x2="400" y2="330" class="s" stroke-dasharray="3 5"/>
+
+  <!-- LEFT: brute force -->
+  <text x="40" y="74" class="danger">BRUTE FORCE · FLAT</text>
+  <text x="40" y="92" class="text">compare query to ALL N vectors</text>
+
+  <!-- query node left -->
+  <circle cx="70" cy="200" r="8" class="dg"/>
+  <text x="52" y="230" class="mono">query</text>
+
+  <!-- grid of all points, lines from query to every one -->
+  <line x1="70" y1="200" x2="150" y2="120" class="dg"/>
+  <line x1="70" y1="200" x2="215" y2="118" class="dg"/>
+  <line x1="70" y1="200" x2="290" y2="132" class="dg"/>
+  <line x1="70" y1="200" x2="345" y2="120" class="dg"/>
+  <line x1="70" y1="200" x2="160" y2="180" class="dg"/>
+  <line x1="70" y1="200" x2="235" y2="178" class="dg"/>
+  <line x1="70" y1="200" x2="305" y2="188" class="dg"/>
+  <line x1="70" y1="200" x2="355" y2="178" class="dg"/>
+  <line x1="70" y1="200" x2="150" y2="250" class="dg"/>
+  <line x1="70" y1="200" x2="225" y2="258" class="dg"/>
+  <line x1="70" y1="200" x2="300" y2="248" class="dg"/>
+  <line x1="70" y1="200" x2="350" y2="262" class="dg"/>
+
+  <circle cx="150" cy="120" r="5" class="fddot"/>
+  <circle cx="215" cy="118" r="5" class="fddot"/>
+  <circle cx="290" cy="132" r="5" class="fddot"/>
+  <circle cx="345" cy="120" r="5" class="fddot"/>
+  <circle cx="160" cy="180" r="5" class="fddot"/>
+  <circle cx="235" cy="178" r="5" class="fddot"/>
+  <circle cx="305" cy="188" r="5" class="fddot"/>
+  <circle cx="355" cy="178" r="5" class="fddot"/>
+  <circle cx="150" cy="250" r="5" class="fddot"/>
+  <circle cx="225" cy="258" r="5" class="fddot"/>
+  <circle cx="300" cy="248" r="5" class="fddot"/>
+  <circle cx="350" cy="262" r="5" class="fddot"/>
+
+  <text x="40" y="312" class="danger">EXACT · 100% recall</text>
+  <text x="40" y="330" class="mono">work per query = O(N·d) · linear</text>
+
+  <!-- RIGHT: ANN graph -->
+  <text x="440" y="74" class="acc">ANN · GRAPH TRAVERSAL</text>
+  <text x="440" y="92" class="text">walk edges, touch only a few nodes</text>
+
+  <!-- background sparse nodes (untouched) -->
+  <circle cx="470" cy="130" r="4" class="fdot" opacity="0.35"/>
+  <circle cx="540" cy="115" r="4" class="fdot" opacity="0.35"/>
+  <circle cx="620" cy="128" r="4" class="fdot" opacity="0.35"/>
+  <circle cx="700" cy="140" r="4" class="fdot" opacity="0.35"/>
+  <circle cx="750" cy="205" r="4" class="fdot" opacity="0.35"/>
+  <circle cx="470" cy="270" r="4" class="fdot" opacity="0.35"/>
+  <circle cx="560" cy="280" r="4" class="fdot" opacity="0.35"/>
+  <circle cx="720" cy="262" r="4" class="fdot" opacity="0.35"/>
+
+  <!-- query node right -->
+  <circle cx="455" cy="205" r="8" class="a"/>
+  <text x="438" y="235" class="mono">query</text>
+
+  <!-- traversal path -->
+  <line x1="455" y1="205" x2="540" y2="175" class="a"/>
+  <line x1="540" y1="175" x2="615" y2="195" class="a"/>
+  <line x1="615" y1="195" x2="675" y2="205" class="a"/>
+
+  <circle cx="540" cy="175" r="6" class="fadot"/>
+  <circle cx="615" cy="195" r="6" class="fadot"/>
+  <circle cx="675" cy="205" r="7" class="fadot"/>
+  <text x="690" y="209" class="mono">target</text>
+
+  <text x="440" y="312" class="acc">APPROXIMATE · ~95–99% recall</text>
+  <text x="440" y="330" class="mono">work per query ≈ O(log N) · sub-linear</text>
+</svg>

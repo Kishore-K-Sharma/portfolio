@@ -1,0 +1,72 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-hybrid">
+  <title id="t-hybrid">Hybrid key exchange: a classical and a post-quantum secret combined through one KDF</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">HYBRID KEY EXCHANGE · X25519MLKEM768 IN ONE TLS 1.3 HANDSHAKE</text>
+
+  <!-- classical path -->
+  <rect x="40" y="70" width="250" height="74" rx="4" class="s"/>
+  <text x="58" y="94" class="label">CLASSICAL PATH</text>
+  <text x="58" y="116" class="text" style="font-weight:700">X25519 ECDHE</text>
+  <text x="58" y="136" class="mono">elliptic-curve Diffie-Hellman</text>
+
+  <!-- shared secret A -->
+  <rect x="330" y="76" width="150" height="62" rx="4" class="s"/>
+  <text x="405" y="102" text-anchor="middle" class="label">SHARED SECRET A</text>
+  <text x="405" y="124" text-anchor="middle" class="mono">classical</text>
+  <line x1="290" y1="107" x2="330" y2="107" class="s"/>
+  <path d="M330 107 l-9 -4 v8 z" class="s" fill="#1a1a24"/>
+
+  <!-- pq path -->
+  <rect x="40" y="216" width="250" height="74" rx="4" class="a"/>
+  <text x="58" y="240" class="label">POST-QUANTUM PATH</text>
+  <text x="58" y="262" class="acc" style="font-weight:700">ML-KEM-768</text>
+  <text x="58" y="282" class="mono">FIPS 203 · encapsulation</text>
+
+  <!-- shared secret B -->
+  <rect x="330" y="222" width="150" height="62" rx="4" class="a"/>
+  <text x="405" y="248" text-anchor="middle" class="label">SHARED SECRET B</text>
+  <text x="405" y="270" text-anchor="middle" class="acc">post-quantum</text>
+  <line x1="290" y1="253" x2="330" y2="253" class="a"/>
+  <path d="M330 253 l-9 -4 v8 z" class="a" fill="#6028d9"/>
+
+  <!-- KDF -->
+  <rect x="540" y="130" width="140" height="100" rx="4" class="s"/>
+  <text x="610" y="170" text-anchor="middle" class="label">KDF</text>
+  <text x="610" y="192" text-anchor="middle" class="text" style="font-weight:700">concat</text>
+  <text x="610" y="210" text-anchor="middle" class="text">+ hash</text>
+
+  <!-- secret A to KDF -->
+  <path d="M480 107 H510 V170 H540" class="s"/>
+  <path d="M540 170 l-9 -4 v8 z" class="s" fill="#1a1a24"/>
+  <!-- secret B to KDF -->
+  <path d="M480 253 H510 V190 H540" class="a"/>
+  <path d="M540 190 l-9 -4 v8 z" class="a" fill="#6028d9"/>
+
+  <!-- session key -->
+  <rect x="700" y="150" width="70" height="60" rx="4" class="s"/>
+  <text x="735" y="176" text-anchor="middle" class="label">SESSION</text>
+  <text x="735" y="192" text-anchor="middle" class="text" style="font-weight:700">KEY</text>
+  <line x1="680" y1="180" x2="700" y2="180" class="s"/>
+  <path d="M700 180 l-9 -4 v8 z" class="s" fill="#1a1a24"/>
+
+  <!-- callout -->
+  <rect x="40" y="312" width="730" height="34" rx="4" class="a"/>
+  <text x="58" y="333" class="acc">SAFE IF EITHER HOLDS:</text>
+  <text x="235" y="333" class="text">a quantum break of X25519 is covered by ML-KEM · an ML-KEM flaw is covered by X25519. Both must fall.</text>
+</svg>

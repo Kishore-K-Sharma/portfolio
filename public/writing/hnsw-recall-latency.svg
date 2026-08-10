@@ -1,0 +1,77 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-rl">
+  <title id="t-rl">Recall versus latency trade off along a curve; efSearch slides you along it at query time</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:2}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fadot{fill:#6028d9}
+    .fddot{fill:#c14545}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fadot{fill:#b89be8}.fddot{fill:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="30" class="label">RECALL vs LATENCY · efSearch IS THE QUERY-TIME DIAL</text>
+
+  <!-- axes -->
+  <line x1="90" y1="70" x2="90" y2="290" class="s"/>
+  <line x1="90" y1="290" x2="470" y2="290" class="s"/>
+  <text x="30" y="80" class="label">RECALL</text>
+  <text x="30" y="95" class="label">%</text>
+  <text x="390" y="312" class="label">LATENCY →</text>
+
+  <!-- y gridlines -->
+  <text x="58" y="120" class="mono">99</text>
+  <text x="58" y="200" class="mono">95</text>
+  <text x="58" y="285" class="mono">85</text>
+
+  <!-- the curve: steep then flattening -->
+  <path d="M100,278 C 150,250 175,150 230,128 C 300,100 380,96 455,92" class="a"/>
+
+  <!-- low ef point -->
+  <circle cx="120" cy="240" r="6" class="fddot"/>
+  <text x="108" y="228" class="danger">low ef</text>
+  <text x="98" y="262" class="mono">fast · lower recall</text>
+
+  <!-- high ef point -->
+  <circle cx="430" cy="94" r="6" class="fadot"/>
+  <text x="360" y="82" class="acc">high ef</text>
+  <text x="300" y="118" class="mono">slow · higher recall</text>
+
+  <!-- knee callout -->
+  <circle cx="235" cy="126" r="5" class="s"/>
+  <text x="215" y="152" class="text">knee: best value</text>
+
+  <!-- slider under axis -->
+  <line x1="100" y1="330" x2="455" y2="330" class="a"/>
+  <circle cx="250" cy="330" r="7" class="fadot"/>
+  <text x="100" y="352" class="mono">efSearch —— turn it per query ——></text>
+
+  <!-- right panel: knobs -->
+  <line x1="520" y1="60" x2="520" y2="330" class="s" stroke-dasharray="3 5"/>
+  <text x="545" y="80" class="label">THE THREE KNOBS</text>
+
+  <rect x="545" y="96" width="230" height="52" rx="4" class="s"/>
+  <text x="560" y="118" class="text" style="font-weight:700">M</text>
+  <text x="560" y="138" class="mono">edges/node · build-time</text>
+
+  <rect x="545" y="160" width="230" height="52" rx="4" class="s"/>
+  <text x="560" y="182" class="text" style="font-weight:700">efConstruction</text>
+  <text x="560" y="202" class="mono">graph quality · build-time</text>
+
+  <rect x="545" y="224" width="230" height="52" rx="4" class="a"/>
+  <text x="560" y="246" class="acc" style="font-weight:700">efSearch</text>
+  <text x="560" y="266" class="mono">recall/latency · QUERY-TIME</text>
+
+  <text x="545" y="304" class="danger">cost: the graph + vectors</text>
+  <text x="545" y="322" class="danger">live in RAM — many GB</text>
+</svg>

@@ -1,0 +1,74 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-sar">
+  <title id="t-sar">The target accepts the longest agreeing prefix of drafted tokens, rejects at the first mismatch, and substitutes its own token there</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fac{fill:#6028d9;opacity:0.12}
+    .fdg{fill:#c14545;opacity:0.12}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fac{fill:#b89be8;opacity:0.16}.fdg{fill:#d97a7a;opacity:0.16}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="34" class="label">ACCEPT THE LONGEST AGREEING PREFIX · REJECT AT FIRST MISMATCH</text>
+
+  <!-- drafted row -->
+  <text x="40" y="76" class="acc">DRAFTED</text>
+  <text x="40" y="94" class="label">what the small model guessed</text>
+
+  <!-- 5 draft cells -->
+  <g>
+    <rect x="150" y="60" width="96" height="46" rx="4" class="fac"/><rect x="150" y="60" width="96" height="46" rx="4" class="a"/>
+    <rect x="256" y="60" width="96" height="46" rx="4" class="fac"/><rect x="256" y="60" width="96" height="46" rx="4" class="a"/>
+    <rect x="362" y="60" width="96" height="46" rx="4" class="fac"/><rect x="362" y="60" width="96" height="46" rx="4" class="a"/>
+    <rect x="468" y="60" width="96" height="46" rx="4" class="fdg"/><rect x="468" y="60" width="96" height="46" rx="4" class="dg"/>
+    <rect x="574" y="60" width="96" height="46" rx="4" class="s"/>
+  </g>
+  <text x="198" y="88" text-anchor="middle" class="acc">"the"</text>
+  <text x="304" y="88" text-anchor="middle" class="acc">"cat"</text>
+  <text x="410" y="88" text-anchor="middle" class="acc">"sat"</text>
+  <text x="516" y="88" text-anchor="middle" class="danger">"on"</text>
+  <text x="622" y="88" text-anchor="middle" class="label">"the"</text>
+
+  <!-- target row -->
+  <text x="40" y="176" class="text" style="font-weight:700">TARGET</text>
+  <text x="40" y="194" class="label">what the big model would pick</text>
+  <g>
+    <rect x="150" y="160" width="96" height="46" rx="4" class="s"/>
+    <rect x="256" y="160" width="96" height="46" rx="4" class="s"/>
+    <rect x="362" y="160" width="96" height="46" rx="4" class="s"/>
+    <rect x="468" y="160" width="96" height="46" rx="4" class="fdg"/><rect x="468" y="160" width="96" height="46" rx="4" class="dg"/>
+    <rect x="574" y="160" width="96" height="46" rx="4" class="s"/>
+  </g>
+  <text x="198" y="188" text-anchor="middle" class="mono">"the"</text>
+  <text x="304" y="188" text-anchor="middle" class="mono">"cat"</text>
+  <text x="410" y="188" text-anchor="middle" class="mono">"sat"</text>
+  <text x="516" y="188" text-anchor="middle" class="danger">"by"</text>
+  <text x="622" y="188" text-anchor="middle" class="label">—</text>
+
+  <!-- match markers -->
+  <text x="198" y="132" text-anchor="middle" class="acc">✓</text>
+  <text x="304" y="132" text-anchor="middle" class="acc">✓</text>
+  <text x="410" y="132" text-anchor="middle" class="acc">✓</text>
+  <text x="516" y="132" text-anchor="middle" class="danger">✗</text>
+
+  <!-- outcome band -->
+  <rect x="150" y="240" width="318" height="40" rx="4" class="a"/>
+  <text x="309" y="265" text-anchor="middle" class="acc">3 ACCEPTED  (prefix agrees)</text>
+
+  <rect x="468" y="240" width="96" height="40" rx="4" class="dg"/>
+  <text x="516" y="259" text-anchor="middle" class="danger">REJECT</text>
+  <text x="516" y="274" text-anchor="middle" class="danger">→ "by"</text>
+
+  <text x="150" y="308" class="text">Keep the target's correct token at the break, drop the rest, resume drafting after it.</text>
+  <text x="150" y="332" class="acc">Output distribution is identical to the target alone — lossless, not an approximation.</text>
+</svg>

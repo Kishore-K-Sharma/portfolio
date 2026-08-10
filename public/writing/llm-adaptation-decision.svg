@@ -1,0 +1,67 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-decide">
+  <title id="t-decide">Decision tree: is it a knowledge, behavior, or steering problem?</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="30" class="label">NAME THE PROBLEM · THEN THE TOOL PICKS ITSELF</text>
+
+  <!-- central hub -->
+  <rect x="320" y="52" width="160" height="46" rx="23" class="s"/>
+  <text x="400" y="72" text-anchor="middle" class="text" style="font-weight:700">OUTPUT STILL WRONG?</text>
+  <text x="400" y="89" text-anchor="middle" class="label">(always try prompting first)</text>
+
+  <!-- branch lines from hub -->
+  <line x1="352" y1="98" x2="180" y2="148" class="s"/>
+  <line x1="448" y1="98" x2="628" y2="148" class="s"/>
+  <text x="248" y="120" class="acc">missing facts?</text>
+  <text x="470" y="120" class="acc">wrong behavior?</text>
+
+  <!-- LEFT: knowledge path -->
+  <rect x="62" y="150" width="216" height="50" rx="4" class="s"/>
+  <text x="170" y="172" text-anchor="middle" class="text" style="font-weight:700">MISSING FACTS / KNOWLEDGE</text>
+  <text x="170" y="190" text-anchor="middle" class="mono">stale · private · large · cited</text>
+
+  <line x1="170" y1="200" x2="170" y2="246" class="a"/>
+  <text x="178" y="228" class="label">YES</text>
+
+  <rect x="62" y="246" width="216" height="62" rx="4" class="a"/>
+  <text x="170" y="270" text-anchor="middle" class="acc" style="font-weight:700">RAG</text>
+  <text x="170" y="290" text-anchor="middle" class="text">knowledge in a store you</text>
+  <text x="170" y="304" text-anchor="middle" class="text">update, audit &amp; cite</text>
+
+  <!-- RIGHT: behavior path -->
+  <rect x="520" y="150" width="240" height="50" rx="4" class="s"/>
+  <text x="640" y="172" text-anchor="middle" class="text" style="font-weight:700">WRONG TONE / FORMAT / SKILL</text>
+  <text x="640" y="190" text-anchor="middle" class="mono">can a prompt fix it?</text>
+
+  <line x1="580" y1="200" x2="520" y2="246" class="s"/>
+  <line x1="700" y1="200" x2="700" y2="246" class="a"/>
+  <text x="452" y="228" class="label">YES</text>
+  <text x="708" y="228" class="label">NO</text>
+
+  <rect x="410" y="246" width="150" height="62" rx="4" class="s"/>
+  <text x="485" y="270" text-anchor="middle" class="text" style="font-weight:700">KEEP PROMPTING</text>
+  <text x="485" y="290" text-anchor="middle" class="mono">tune instructions</text>
+  <text x="485" y="304" text-anchor="middle" class="mono">+ examples</text>
+
+  <rect x="600" y="246" width="200" height="62" rx="4" class="a"/>
+  <text x="700" y="270" text-anchor="middle" class="acc" style="font-weight:700">FINE-TUNE (LoRA)</text>
+  <text x="700" y="290" text-anchor="middle" class="text">a few hundred good</text>
+  <text x="700" y="304" text-anchor="middle" class="text">examples bake it in</text>
+
+  <text x="40" y="344" class="label">SERIOUS SYSTEMS COMBINE ALL THREE — FINE-TUNED BEHAVIOR + RAG KNOWLEDGE + A TIGHT PROMPT</text>
+</svg>

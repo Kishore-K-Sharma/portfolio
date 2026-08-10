@@ -1,0 +1,82 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t-cost">
+  <title id="t-cost">Syscall cost: one boundary crossing per operation versus one per batch</title>
+  <style>
+    .text{fill:#1a1a24;font-family:Inter,system-ui,sans-serif;font-size:12.5px}
+    .label{fill:#5c5c66;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em}
+    .mono{fill:#1a1a24;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .acc{fill:#6028d9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .danger{fill:#c14545;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px}
+    .s{stroke:#1a1a24;fill:none;stroke-width:1.25}
+    .a{stroke:#6028d9;fill:none;stroke-width:1.5}
+    .dg{stroke:#c14545;fill:none;stroke-width:1.25}
+    .fdg{fill:#c14545;opacity:0.10}
+    .facc{fill:#6028d9;opacity:0.08}
+    .fs{fill:#f5f1e6}
+    @media (prefers-color-scheme: dark){
+      .text{fill:#e8e4d8}.label{fill:#9c9ca6}.mono{fill:#e8e4d8}.acc{fill:#b89be8}.danger{fill:#d97a7a}
+      .s{stroke:#e8e4d8}.a{stroke:#b89be8}.dg{stroke:#d97a7a}
+      .fdg{fill:#d97a7a;opacity:0.16}.facc{fill:#b89be8;opacity:0.14}.fs{fill:#1a1a24}
+    }
+  </style>
+
+  <rect x="0" y="0" width="800" height="360" class="fs"/>
+  <text x="40" y="32" class="label">SYSCALL COST · ONE CROSSING PER OP  vs  ONE CROSSING PER BATCH</text>
+
+  <!-- panel divider -->
+  <line x1="400" y1="52" x2="400" y2="340" class="s" stroke-dasharray="2 4" opacity="0.5"/>
+
+  <!-- user / kernel boundary line -->
+  <line x1="40" y1="252" x2="760" y2="252" class="s" stroke-dasharray="6 5"/>
+  <text x="46" y="246" class="label">USER SPACE ▲</text>
+  <text x="46" y="272" class="label">KERNEL ▼</text>
+
+  <!-- ================= LEFT: classic ================= -->
+  <text x="40" y="72" class="text" style="font-weight:700">CLASSIC — read() / write() / epoll</text>
+
+  <!-- op boxes -->
+  <rect x="52"  y="94" width="52" height="34" rx="3" class="dg"/>
+  <rect x="118" y="94" width="52" height="34" rx="3" class="dg"/>
+  <rect x="184" y="94" width="52" height="34" rx="3" class="dg"/>
+  <rect x="250" y="94" width="52" height="34" rx="3" class="dg"/>
+  <text x="78"  y="115" text-anchor="middle" class="mono">op1</text>
+  <text x="144" y="115" text-anchor="middle" class="mono">op2</text>
+  <text x="210" y="115" text-anchor="middle" class="mono">op3</text>
+  <text x="276" y="115" text-anchor="middle" class="mono">op4</text>
+
+  <!-- 4 crossings -->
+  <line x1="78"  y1="128" x2="78"  y2="246" class="dg"/>
+  <line x1="144" y1="128" x2="144" y2="246" class="dg"/>
+  <line x1="210" y1="128" x2="210" y2="246" class="dg"/>
+  <line x1="276" y1="128" x2="276" y2="246" class="dg"/>
+  <path d="M78 252 l-4 -8 l8 0 z"  class="danger"/>
+  <path d="M144 252 l-4 -8 l8 0 z" class="danger"/>
+  <path d="M210 252 l-4 -8 l8 0 z" class="danger"/>
+  <path d="M276 252 l-4 -8 l8 0 z" class="danger"/>
+  <text x="330" y="186" class="danger">4 × syscall</text>
+
+  <text x="40" y="292" class="text">4 ops → 4 mode transitions</text>
+  <rect x="40" y="304" width="330" height="40" rx="4" class="fdg"/>
+  <text x="54" y="329" class="danger">each crossing pays KPTI + retpoline cost</text>
+
+  <!-- ================= RIGHT: io_uring ================= -->
+  <text x="420" y="72" class="text" style="font-weight:700">io_uring — batched submit</text>
+
+  <!-- SQ batch container -->
+  <rect x="440" y="90" width="200" height="98" rx="4" class="facc"/>
+  <rect x="440" y="90" width="200" height="98" rx="4" class="a"/>
+  <text x="452" y="108" class="acc">SUBMISSION QUEUE</text>
+  <line x1="456" y1="122" x2="624" y2="122" class="a" opacity="0.55"/>
+  <line x1="456" y1="140" x2="624" y2="140" class="a" opacity="0.55"/>
+  <line x1="456" y1="158" x2="624" y2="158" class="a" opacity="0.55"/>
+  <line x1="456" y1="176" x2="624" y2="176" class="a" opacity="0.55"/>
+  <text x="632" y="146" text-anchor="end" class="mono" style="font-size:10px">op1..opN</text>
+
+  <!-- single crossing -->
+  <line x1="540" y1="188" x2="540" y2="246" class="a"/>
+  <path d="M540 252 l-4 -8 l8 0 z" class="acc"/>
+  <text x="560" y="222" class="acc">1 × io_uring_enter()</text>
+
+  <text x="420" y="292" class="text">N ops → 1 syscall</text>
+  <rect x="420" y="304" width="340" height="40" rx="4" class="facc"/>
+  <text x="434" y="329" class="acc">0 syscalls in SQPOLL mode — kernel polls the SQ</text>
+</svg>
